@@ -12,9 +12,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\dev\libs\Bullet\bullet-2.82-r2704\Demos\BasicDemo\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\libs\RakNet\RakNet-master\Source\_FindFirst.cpp">
       <Filter>RakNet</Filter>
     </ClCompile>
@@ -345,7 +342,19 @@
     <ClCompile Include="..\..\..\libs\RakNet\RakNet-master\Source\WSAStartupSingleton.cpp">
       <Filter>RakNet</Filter>
     </ClCompile>
-    <ClCompile Include="src\network.cpp">
+    <ClCompile Include="src\world.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\netcompmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ball.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -812,19 +821,25 @@
     <ClInclude Include="..\..\..\libs\RakNet\RakNet-master\Source\XBox360Includes.h">
       <Filter>RakNet</Filter>
     </ClInclude>
-    <ClInclude Include="src\server.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\network.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\messages.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\networkcomponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\entity.h">
+    <ClInclude Include="src\network.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\world.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\netcompmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -172,7 +172,11 @@
      <Compile Include="Assets\RakNet\UnsignedIntPointer.cs" />
      <Compile Include="Assets\RakNet\UnsignedShortPointer.cs" />
      <Compile Include="Assets\RakNet\uint24_t.cs" />
-     <Compile Include="Assets\Scripts\RakNetTest.cs" />
+     <Compile Include="Assets\Scripts\Client.cs" />
+     <Compile Include="Assets\Scripts\EnemyBall.cs" />
+     <Compile Include="Assets\Scripts\Messages.cs" />
+     <Compile Include="Assets\Scripts\NetworkComponent.cs" />
+     <Compile Include="Assets\Scripts\PlayerBall.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

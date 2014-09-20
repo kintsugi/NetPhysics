@@ -433,8 +433,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\..\..\libs\RakNet\RakNet-master\Source\VitaIncludes.cpp" />
     <ClCompile Include="..\..\..\libs\RakNet\RakNet-master\Source\WSAStartupSingleton.cpp" />
     <ClCompile Include="..\..\..\libs\RakNet\RakNet-master\Source\_FindFirst.cpp" />
-    <ClCompile Include="C:\dev\libs\Bullet\bullet-2.82-r2704\Demos\BasicDemo\main.cpp" />
-    <ClCompile Include="src\network.cpp" />
+    <ClCompile Include="src\ball.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\netcompmanager.cpp" />
+    <ClCompile Include="src\server.cpp" />
+    <ClCompile Include="src\world.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:/dev/libs/Bullet/BulletBuild/src/BulletCollision/BulletCollision.vcxproj">
@@ -608,11 +611,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\..\..\libs\RakNet\RakNet-master\Source\WSAStartupSingleton.h" />
     <ClInclude Include="..\..\..\libs\RakNet\RakNet-master\Source\XBox360Includes.h" />
     <ClInclude Include="..\..\..\libs\RakNet\RakNet-master\Source\_FindFirst.h" />
-    <ClInclude Include="src\entity.h" />
+    <ClInclude Include="src\ball.h" />
     <ClInclude Include="src\messages.h" />
+    <ClInclude Include="src\netcompmanager.h" />
     <ClInclude Include="src\network.h" />
     <ClInclude Include="src\networkcomponent.h" />
     <ClInclude Include="src\server.h" />
+    <ClInclude Include="src\world.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\libs\RakNet\RakNet-master\Source\CMakeLists.txt" />
