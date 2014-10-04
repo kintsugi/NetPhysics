@@ -1,7 +1,9 @@
 #include <iostream>
-#include "RakPeerInterface.h"
-#include "btBulletDynamicsCommon.h"
+#include <string>
+#include "engine.h"
 
-int main() {
-
+int main(int argc, char* argv[]) {
+	Engine engine;
+	return 0;
 }
+		

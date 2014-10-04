@@ -450,9 +450,18 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\VitaIncludes.cpp" />
     <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\WSAStartupSingleton.cpp" />
     <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\_FindFirst.cpp" />
+    <ClCompile Include="src\bulletphysicsobject.cpp" />
+    <ClCompile Include="src\componenttypehandle.cpp" />
+    <ClCompile Include="src\engine.cpp" />
+    <ClCompile Include="src\gameobject.cpp" />
+    <ClCompile Include="src\gameobjectmanager.cpp" />
+    <ClCompile Include="src\handlemanager.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\networkmanager.cpp" />
+    <ClCompile Include="src\physicscomponent.cpp" />
+    <ClCompile Include="src\physicsmanager.cpp" />
+    <ClCompile Include="src\physicssystem.cpp" />
     <ClCompile Include="src\server.cpp" />
-    <ClCompile Include="src\world.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\AutopatcherPatchContext.h" />
@@ -609,11 +618,22 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\WSAStartupSingleton.h" />
     <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\XBox360Includes.h" />
     <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\_FindFirst.h" />
+    <ClInclude Include="src\bulletphysicsobject.h" />
+    <ClInclude Include="src\componenttypehandle.h" />
+    <ClInclude Include="src\engine.h" />
+    <ClInclude Include="src\gameobject.h" />
+    <ClInclude Include="src\gameobjectmanager.h" />
+    <ClInclude Include="src\handle.h" />
+    <ClInclude Include="src\handlemanager.h" />
     <ClInclude Include="src\messages.h" />
-    <ClInclude Include="src\netcompmanager.h" />
     <ClInclude Include="src\networkcomponent.h" />
+    <ClInclude Include="src\networkmanager.h" />
+    <ClInclude Include="src\physicscomponent.h" />
+    <ClInclude Include="src\physicsmanager.h" />
+    <ClInclude Include="src\player.h" />
+    <ClInclude Include="src\playermanager.h" />
     <ClInclude Include="src\server.h" />
-    <ClInclude Include="src\world.h" />
+    <ClInclude Include="src\physicssystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CMakeLists.txt" />

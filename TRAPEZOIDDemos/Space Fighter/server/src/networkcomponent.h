@@ -4,6 +4,7 @@
 #include <memory>
 #include "NetworkIDObject.h"
 #include "BitStream.h"
+#include "handle.h"
 
 /*
 	Class for handling inbound and outbound data for an entity between the client and the server.
@@ -13,17 +14,21 @@ class NetworkComponent : public RakNet::NetworkIDObject {
 public:
 	/*
 		@param peer pointer to the server instance of RakNet
-		@param guid the guid of the client
+		@param manager pointer to a NetworkIDManager object for this object
+		@param guid the guid of the owning client.
 	*/
-	NetworkComponent(RakNet::RakPeerInterface* peer, RakNet::NetworkIDManager* manager, RakNet::RakNetGUID connection) : out(peer), guid(connection){
-		SetNetworkIDManager(manager);
+	NetworkComponent(RakNet::RakPeerInterface* peer, RakNet::NetworkIDManager* manager) : RakNet(peer){
+		SetNetworkIDManager(manager); test = 0;
 	}
-	RakNet::RakNetGUID getGUID() {return guid;}
-	RakNet::RakPeerInterface* getRakNetInstance() {return out;}
+
+	RakNet::RakPeerInterface* getRakNetInstance() {return RakNet;}
 	std::unique_ptr<RakNet::BitStream> in;
+	Handle getHandle() {return handle;}
+	void setHandle(Handle newHandle)  {handle = newHandle;}
+	int test;
 private:
-	RakNet::RakPeerInterface* out;
-	RakNet::RakNetGUID guid;
+	Handle handle;
+	RakNet::RakPeerInterface* RakNet;
 };
 
 

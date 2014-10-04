@@ -3,10 +3,14 @@
 #include "BitStream.h"
 #include "networkcomponent.h"
 
-Server::Server(int port) : serverPort(port), maxClients(20) {
+void Server::startServer(){
+	std::cout << "Enter server port: ";
+	std::cin >> port;
+	std::cout << "Enter maximum players or press enter for 20: ";
+	std::cin >> maxClients;
 	//Get instance of RakNet
 	peer = RakNet::RakPeerInterface::GetInstance();
-	RakNet::SocketDescriptor sd(serverPort, 0);
+	RakNet::SocketDescriptor sd(port, 0);
 	//Start server with maximum connections of maxClients
 	RakNet::StartupResult r = peer->Startup(maxClients, &sd, 1);
 	if (r != RakNet::StartupResult::RAKNET_STARTED)
@@ -20,48 +24,24 @@ Server::Server(int port) : serverPort(port), maxClients(20) {
 	lastTime = currentTime;
 }
 
-void Server::update() {
+void Server::updateServer() {
 	//Calculate the dt between last server tick
 	//TODO calculate server fps
 	RakNet::Packet *packet;
 	lastTime = currentTime;
 	currentTime = RakNet::GetTimeUS();
-	double dt = ((double)currentTime - lastTime)/1000000.0f;
+	
 	//Handle incoming packets
 	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive())
-		packetHandler(packet);
-	gameWorld.update((float)dt);
+		currentPackets.push_back(packet);
 }
 
-void Server::packetHandler(RakNet::Packet *packet) {
-
-	switch (packet->data[0]) {
-		case ID_NEW_INCOMING_CONNECTION:
-			std::cout << std::endl << "A client has connected. System Address: '" << packet->systemAddress.ToString() << "'";
-		case ID_DISCONNECTION_NOTIFICATION:
-			break;
-		case NETWORK_COMPONENT_MESSAGE:	
-			updateNetworkComponent(packet);
-			break;
-	}
+std::vector<RakNet::Packet*> Server::getPackets() {
+	std::vector<RakNet::Packet*> ret = currentPackets;
+	currentPackets.clear();
+	return ret;
 }
 
-//WARNING: C# client and server interactions untested
-void Server::updateNetworkComponent(RakNet::Packet *packet) {
-	RakNet::NetworkID networkComponentNetworkID;
-	//get the guid of the client
-	RakNet::RakNetGUID componentGUID = packet->guid;
-	//Create the bitstream
-	RakNet::BitStream in(packet->data, packet->length, false);
-	//Skip the messageID
-	in.IgnoreBytes(sizeof(RakNet::MessageID));
-	//Read the networkComponent ID
-	//TODO test this since client sends it as a C# ulong not as a NetworkObjectID
-	in.Read(networkComponentNetworkID);
-	//Find the corresponding NetworkComponent and update the in bitstream
-	NetworkComponent* netcomp = networkIDManager.GET_OBJECT_FROM_ID<NetworkComponent*>(networkComponentNetworkID);
-	if (netcomp->getGUID().operator==(componentGUID)) {
-		std::unique_ptr<RakNet::BitStream> newIn(new RakNet::BitStream(packet->data, packet->length, true));
-		netcomp->in = std::move(newIn);
-	}
+double Server::getDeltaTime() {
+	return ((double)currentTime - lastTime) / 1000000.0f;
 }

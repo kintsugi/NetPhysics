@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 
 /*
  * Ship Builder Module.
  * Manages the creation of ships using cubical construction.
  * Works correctly if each block has an area of 1unit^3.
- * TODO Write algorithm so at the end of construction there are no floating blocks
- * i.e. every block is connected to the bridge.
+ * TODO Improve floating block detection algortithm.
+ * 
  */
 
 public class ShipBuilder : MonoBehaviour {
 
 	//Ship parent object
-	public GameObject ship;
+	public GameObject shipBase;
 	//Prefabs
-	public GameObject thrusterPrefab;
 	public GameObject armorPlatePrefab;
+	public GameObject shipBasePrefab;
+	public GameObject thrusterPrefab;
 	//Mouse Settings
 	public float xMouseSensitivity = 2;
 	public float yMouseSensitivity = 2;
@@ -32,13 +35,15 @@ public class ShipBuilder : MonoBehaviour {
 	//Scale of which one cubic unit is in unity units
 	float scale = 1;
 	//Numeric identifier of the selected part.
-	ShipData.Part activePart = ShipData.Part.NONE;
+	ShipPart.Type activePart = ShipPart.Type.NONE;
 	//Reference to the game object that is to be placed.
 	GameObject activePartObject = null;
 	//Reference to the previous hit in the screen space to world space raycast.
 	RaycastHit lastHit;
-	void Start () {
-		radius = Vector3.Distance(ship.transform.position, Camera.main.transform.position);
+	//Save and Load File Names
+	String save = "New Ship", load = "";
+	void OnEnable () {
+		radius = Vector3.Distance(shipBase.transform.position, Camera.main.transform.position);
 	}
 	
 	void Update () {
@@ -50,14 +55,23 @@ public class ShipBuilder : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		if (GUI.Button(new Rect(10, 20, 100, 20), "Thruster")) {
-			activePart = ShipData.Part.THRUSTER;
+		save = GUI.TextField(new UnityEngine.Rect(UnityEngine.Screen.width - 160, 20, 150, 20), save);
+		load = GUI.TextField(new UnityEngine.Rect(UnityEngine.Screen.width - 160, 50, 150, 20), load);
+		if (GUI.Button(new UnityEngine.Rect(10, 20, 100, 20), "Thruster")) {
+			activePart = ShipPart.Type.THRUSTER;
 			Destroy(activePartObject); activePartObject = null;
 		}
-		if (GUI.Button(new Rect(10, 50, 100, 20), "Armor Plate")) {
-			activePart = ShipData.Part.ARMOR_PLATE;
+		if (GUI.Button(new UnityEngine.Rect(10, 50, 100, 20), "Armor Plate")) {
+			activePart = ShipPart.Type.ARMOR_PLATE;
 			Destroy(activePartObject); activePartObject = null;
 		}
+		if (GUI.Button(new UnityEngine.Rect(UnityEngine.Screen.width - 220, 20, 50, 20), "Save"))
+			ShipFile.Save(shipBase, save);
+		if (GUI.Button(new UnityEngine.Rect(UnityEngine.Screen.width - 220, 50, 50, 20), "Load")) {
+			ShipFile.Load(load);
+		}
+		if (GUI.Button(new UnityEngine.Rect(10, UnityEngine.Screen.height - 30, 100, 20), "Exit"))
+			UnityEngine.Application.LoadLevel(0);
 	}
 
 	void UpdateViewPoint() {
@@ -87,7 +101,7 @@ public class ShipBuilder : MonoBehaviour {
 		//Update position using parametric equations of a sphere
 		Camera.main.transform.position = new Vector3(radius * Mathf.Cos(theta) * Mathf.Sin(phi), radius * Mathf.Cos(phi), radius * Mathf.Sin(theta) * Mathf.Sin(phi));
 		//Update rotation
-		Camera.main.transform.LookAt(ship.transform);
+		Camera.main.transform.LookAt(shipBase.transform);
 	}
 
 	void Builder() {
@@ -96,11 +110,11 @@ public class ShipBuilder : MonoBehaviour {
 		//if theres a selected part and the raycast hits an object that us not an active part
 		//Only cast the ray when the left mouse button is not down to not interfere with camera movement.
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info) && !Input.GetMouseButton(0)) {
-			if (info.transform.gameObject.tag != "Active Part" && activePart != ShipData.Part.NONE) {
+			if (info.transform.gameObject.GetComponent<ShipPart>().state != ShipPart.State.ACTIVE && activePart != ShipPart.Type.NONE) {
 				switch (activePart) {
-					case ShipData.Part.THRUSTER:
+					case ShipPart.Type.THRUSTER:
 						PlaceThruster(info); break;
-					case ShipData.Part.ARMOR_PLATE:
+					case ShipPart.Type.ARMOR_PLATE:
 						PlaceArmorPlate(info); 
 						break;
 				}
@@ -112,8 +126,10 @@ public class ShipBuilder : MonoBehaviour {
 		//When there is no active part and the left mouse button is pressed, delete the part that was clicked on
 		if (Input.GetMouseButtonUp(0)) {
 			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out info)) {
-				if (info.transform.gameObject.tag != "Ship Bridge" && (info.transform.gameObject.tag != "Active Part")) {
-					ManualDelete(info);
+				if (info.transform.gameObject.GetComponent<ShipPart>().type != ShipPart.Type.BRIDGE && (info.transform.gameObject.GetComponent<ShipPart>().state != ShipPart.State.ACTIVE)) {
+					//TODO: Write better floating block detection algorithm.
+					//ManualDelete(info);
+					Destroy(info.transform.gameObject);
 				}
 			}
 		}
@@ -123,52 +139,68 @@ public class ShipBuilder : MonoBehaviour {
 		}
 		//If middle mouse button was clicked, reset the active part
 		if (Input.GetMouseButtonUp(2)) {
-			Destroy(activePartObject); activePartObject = null; activePart = ShipData.Part.NONE;
+			Destroy(activePartObject); activePartObject = null; activePart = ShipPart.Type.NONE;
 		}
 
+	}
+
+	void BuildShipFromData(ShipData data) {
+		if (data != null) {
+			Destroy(shipBase);
+			shipBase = Instantiate(shipBasePrefab) as GameObject;
+			foreach(ShipData.PartData part in data.parts) {
+				switch (part.type) {
+					case ShipPart.Type.ARMOR_PLATE:
+						Debug.Log("armor");
+						PlacePartFromData(armorPlatePrefab, part); break;
+					case ShipPart.Type.THRUSTER:
+						Debug.Log("thruster");
+						PlacePartFromData(thrusterPrefab, part); break;
+				}
+
+			}
+		}
+	}
+
+	void PlacePartFromData(GameObject partPrefab, ShipData.PartData part) {
+		Vector3 position = part.pos.V3; Quaternion rotation = part.rot.Q;
+		GameObject newPartObject = Instantiate(partPrefab, position, rotation) as GameObject;
+		newPartObject.GetComponentInChildren<Transform>().localScale = part.scale.V3;
+		newPartObject.GetComponentInChildren<BoxCollider>().center = part.colliderCenter.V3;
+		newPartObject.GetComponentInChildren<BoxCollider>().center = part.colliderSize.V3;
+		//No transparency
+		Color opaque = newPartObject.GetComponentInChildren<Renderer>().material.color;
+		opaque.a = 255f;
+		newPartObject.GetComponentInChildren<Renderer>().material.color = opaque;
+		newPartObject.transform.parent = shipBase.transform;
 	}
 
 	void PlaceActivePart() {
 		if (activePartObject != null) {
 			GameObject placedPart = Instantiate(activePartObject) as GameObject;
-			placedPart.transform.parent = ship.transform; placedPart.tag = "Placed Part";
-			Color opaque = placedPart.GetComponent<Renderer>().material.color;
+			placedPart.transform.parent = shipBase.transform;
+			placedPart.GetComponentInChildren<ShipPart>().state = ShipPart.State.PLACED;
+			Color opaque = placedPart.GetComponentInChildren<Renderer>().material.color;
 			opaque.a = 255f;
-			placedPart.GetComponent<Renderer>().material.color = opaque;
+			placedPart.GetComponentInChildren<Renderer>().material.color = opaque;
 			Destroy(activePartObject); activePartObject = null;
-		}
-	}
-
-	void PlaceThruster(RaycastHit info) {
-		//Thrusters can not be placed onto thrusters
-		if (info.transform.gameObject.GetComponent<ShipPart>().tag != "Thruster") {
-			//Cannot place the thruster if it is blocked by a armor plate
-			//Create the part preemptively
-			createActivePart(thrusterPrefab, info);
-			//Raycast to see if it hits an armor plate in its upwardly direction
-			RaycastHit thrusterCheck = new RaycastHit();
-			if (Physics.Raycast(activePartObject.transform.position, activePartObject.transform.up, out thrusterCheck)) {
-				if (thrusterCheck.transform.gameObject.GetComponent<ShipPart>().tag == "Armor Plate") {
-					Destroy(activePartObject); activePartObject = null;
-				}
-			}
 		}
 	}
 
 	void PlaceArmorPlate(RaycastHit info) {
 		//Armor plates can not be placed onto thrusters
-		if (info.transform.gameObject.GetComponent<ShipPart>().tag != "Thruster") {
+		if (info.transform.gameObject.GetComponent<ShipPart>().type != ShipPart.Type.THRUSTER) {
 			//Cannot place Armor Plate so that it would block a thruster
 			//Create the part preemptively
 			createActivePart(armorPlatePrefab, info);
 			//Check through every part that is a thruster, then raycast in its upwardly direction.
-			//If it hits an armor plate, delete the ac
-			Transform[] allParts = ship.GetComponentsInChildren<Transform>();
+			//If it hits an armor plate, delete the active object
+			Transform[] allParts = shipBase.GetComponentsInChildren<Transform>();
 			RaycastHit armorPlateCheck = new RaycastHit();
 			foreach (Transform part in allParts) {
-				if (part.gameObject.GetComponent<ShipPart>().tag == "Thruster") {
+				if (part.gameObject.GetComponentInChildren<ShipPart>().type == ShipPart.Type.THRUSTER) {
 					if (Physics.Raycast(part.position, part.transform.up, out armorPlateCheck)) {
-						if (armorPlateCheck.transform.gameObject.GetComponent<ShipPart>().tag == "Armor Plate") {
+						if (armorPlateCheck.transform.gameObject.GetComponent<ShipPart>().type == ShipPart.Type.ARMOR_PLATE) {
 							Destroy(activePartObject); activePartObject = null;
 						}
 					}
@@ -176,6 +208,38 @@ public class ShipBuilder : MonoBehaviour {
 			}
 			
 		}
+	}
+
+	void PlaceThruster(RaycastHit info) {
+		//Thrusters can not be placed onto thrusters
+		if (info.transform.gameObject.GetComponent<ShipPart>().type != ShipPart.Type.THRUSTER) {
+			//Cannot place the thruster if it is blocked by a armor plate
+			//Create the part preemptively
+			createActivePart(thrusterPrefab, info);
+			//Raycast to see if it hits an armor plate in its upwardly direction
+			RaycastHit thrusterCheck = new RaycastHit();
+			if (Physics.Raycast(activePartObject.transform.position, activePartObject.transform.up, out thrusterCheck)) {
+				if (thrusterCheck.transform.gameObject.GetComponent<ShipPart>().type == ShipPart.Type.ARMOR_PLATE) {
+					Destroy(activePartObject); activePartObject = null;
+				}
+			}
+		}
+	}
+
+	void PlaceThruster(ShipData.PartData part) {
+		Vector3 position = part.pos.V3, scale = part.scale.V3,
+		colliderCenter = part.colliderCenter.V3,
+		colliderSize = part.colliderSize.V3;
+		Quaternion rotation = part.rot.Q;
+		GameObject thruster = Instantiate(thrusterPrefab, position, rotation) as GameObject;
+		thruster.GetComponentInChildren<BoxCollider>().center = colliderCenter;
+		thruster.GetComponentInChildren<BoxCollider>().size = colliderSize;
+		thruster.GetComponentInChildren<ShipPart>().type = ShipPart.Type.THRUSTER;
+		thruster.GetComponentInChildren<ShipPart>().state = ShipPart.State.PLACED;
+		Color opaque = thruster.GetComponentInChildren<Renderer>().material.color;
+		opaque.a = 255f;
+		thruster.GetComponentInChildren<Renderer>().material.color = opaque;
+		thruster.transform.parent = shipBase.transform;
 	}
 
 	void createActivePart(GameObject part, RaycastHit info) {
