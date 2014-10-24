@@ -1,0 +1,655 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{0A71E36F-1C5E-4C9C-BD9C-C505C9E9BD41}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>server</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">spacefighterserver</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">spacefighterserver</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\dev\libs\Bullet\BulletBuild\Demos\BasicDemo\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">AppBasicDemo.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">spacefighterserver</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\dev\libs\Bullet\BulletBuild\Demos\BasicDemo\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">AppBasicDemo.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">spacefighterserver</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>C:\dev\libs\Bullet\BulletBuild\lib\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\src\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>C:\dev\libs\Bullet\BulletBuild\lib\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\src\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\dev\libs\RakNet\RakNet-master\Source;C:\dev\libs\Bullet\bullet-2.82-r2704\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_DEBUG;BT_USE_DOUBLE_PRECISION;_IRR_STATIC_LIB_;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_DEBUG;BT_USE_DOUBLE_PRECISION;_IRR_STATIC_LIB_;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\dev\libs\Bullet\bullet-2.82-r2704\Glut;C:\dev\libs\Bullet\bullet-2.82-r2704\src;C:\dev\libs\Bullet\bullet-2.82-r2704\Demos\OpenGL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\dev\libs\Bullet\bullet-2.82-r2704\Glut;C:\dev\libs\Bullet\bullet-2.82-r2704\src;C:\dev\libs\Bullet\bullet-2.82-r2704\Demos\OpenGL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+      <Command>setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -E copy_if_different C:/dev/libs/Bullet/bullet-2.82-r2704/GLUT32.DLL C:/dev/libs/Bullet/BulletBuild/Demos/BasicDemo
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalOptions> /machine:X86 /debug %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;BulletDynamics_Debug.lib;BulletCollision_Debug.lib;LinearMath_Debug.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>C:/dev/libs/Bullet/BulletBuild/Demos/BasicDemo/Debug/AppBasicDemo.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/dev/libs/Bullet/BulletBuild/Demos/BasicDemo/Debug/AppBasicDemo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\dev\libs\RakNet\RakNet-master\Source;C:\dev\libs\Bullet\bullet-2.82-r2704\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BT_USE_DOUBLE_PRECISION;_IRR_STATIC_LIB_;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BT_USE_DOUBLE_PRECISION;_IRR_STATIC_LIB_;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\dev\libs\Bullet\bullet-2.82-r2704\Glut;C:\dev\libs\Bullet\bullet-2.82-r2704\src;C:\dev\libs\Bullet\bullet-2.82-r2704\Demos\OpenGL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\dev\libs\Bullet\bullet-2.82-r2704\Glut;C:\dev\libs\Bullet\bullet-2.82-r2704\src;C:\dev\libs\Bullet\bullet-2.82-r2704\Demos\OpenGL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+      <Command>setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -E copy_if_different C:/dev/libs/Bullet/bullet-2.82-r2704/GLUT32.DLL C:/dev/libs/Bullet/BulletBuild/Demos/BasicDemo
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>ws2_32.lib;BulletDynamics.lib;BulletCollision.lib;LinearMath.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ImportLibrary>C:/dev/libs/Bullet/BulletBuild/Demos/BasicDemo/Release/AppBasicDemo.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/dev/libs/Bullet/BulletBuild/Demos/BasicDemo/Release/AppBasicDemo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\dev\libs\RakNet\RakNet-master\Source;C:\dev\libs\Bullet\bullet-2.82-r2704\Glut;C:\dev\libs\Bullet\bullet-2.82-r2704\src;C:\dev\libs\Bullet\bullet-2.82-r2704\Demos\OpenGL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BT_USE_DOUBLE_PRECISION;_IRR_STATIC_LIB_;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BT_USE_DOUBLE_PRECISION;_IRR_STATIC_LIB_;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\dev\libs\Bullet\bullet-2.82-r2704\Glut;C:\dev\libs\Bullet\bullet-2.82-r2704\src;C:\dev\libs\Bullet\bullet-2.82-r2704\Demos\OpenGL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\dev\libs\Bullet\bullet-2.82-r2704\Glut;C:\dev\libs\Bullet\bullet-2.82-r2704\src;C:\dev\libs\Bullet\bullet-2.82-r2704\Demos\OpenGL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+      <Command>setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -E copy_if_different C:/dev/libs/Bullet/bullet-2.82-r2704/GLUT32.DLL C:/dev/libs/Bullet/BulletBuild/Demos/BasicDemo
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\..\lib\MinSizeRel\OpenGLSupport_MinsizeRel.lib;..\..\lib\MinSizeRel\BulletDynamics_MinsizeRel.lib;..\..\lib\MinSizeRel\BulletCollision_MinsizeRel.lib;..\..\lib\MinSizeRel\LinearMath_MinsizeRel.lib;C:\dev\libs\Bullet\bullet-2.82-r2704\Glut\glut32.lib;opengl32.lib;glu32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ImportLibrary>C:/dev/libs/Bullet/BulletBuild/Demos/BasicDemo/MinSizeRel/AppBasicDemo.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/dev/libs/Bullet/BulletBuild/Demos/BasicDemo/MinSizeRel/AppBasicDemo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\dev\libs\RakNet\RakNet-master\Source;C:\dev\libs\Bullet\bullet-2.82-r2704\Glut;C:\dev\libs\Bullet\bullet-2.82-r2704\src;C:\dev\libs\Bullet\bullet-2.82-r2704\Demos\OpenGL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BT_USE_DOUBLE_PRECISION;_IRR_STATIC_LIB_;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BT_USE_DOUBLE_PRECISION;_IRR_STATIC_LIB_;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\dev\libs\Bullet\bullet-2.82-r2704\Glut;C:\dev\libs\Bullet\bullet-2.82-r2704\src;C:\dev\libs\Bullet\bullet-2.82-r2704\Demos\OpenGL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\dev\libs\Bullet\bullet-2.82-r2704\Glut;C:\dev\libs\Bullet\bullet-2.82-r2704\src;C:\dev\libs\Bullet\bullet-2.82-r2704\Demos\OpenGL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+      <Command>setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -E copy_if_different C:/dev/libs/Bullet/bullet-2.82-r2704/GLUT32.DLL C:/dev/libs/Bullet/BulletBuild/Demos/BasicDemo
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalOptions> /machine:X86 /debug %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\..\lib\RelWithDebInfo\OpenGLSupport_RelWithDebugInfo.lib;..\..\lib\RelWithDebInfo\BulletDynamics_RelWithDebugInfo.lib;..\..\lib\RelWithDebInfo\BulletCollision_RelWithDebugInfo.lib;..\..\lib\RelWithDebInfo\LinearMath_RelWithDebugInfo.lib;C:\dev\libs\Bullet\bullet-2.82-r2704\Glut\glut32.lib;opengl32.lib;glu32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>C:/dev/libs/Bullet/BulletBuild/Demos/BasicDemo/RelWithDebInfo/AppBasicDemo.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/dev/libs/Bullet/BulletBuild/Demos/BasicDemo/RelWithDebInfo/AppBasicDemo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/dev/libs/Bullet/BulletBuild/src/BulletCollision/BulletCollision.vcxproj">
+      <Project>A0CBF613-37DE-4A12-9B05-4621DE21FC0C</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/dev/libs/Bullet/BulletBuild/src/BulletDynamics/BulletDynamics.vcxproj">
+      <Project>7FA41B0B-FF59-471A-A829-80B3C6EBF0AE</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/dev/libs/Bullet/BulletBuild/src/LinearMath/LinearMath.vcxproj">
+      <Project>7BE577A2-48F6-4EF6-9A8B-3DD46C5F6B53</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/dev/libs/Bullet/BulletBuild/Demos/OpenGL/OpenGLSupport.vcxproj">
+      <Project>D4195859-29C8-4031-8224-2A2C69563750</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/dev/libs/Bullet/BulletBuild/ZERO_CHECK.vcxproj">
+      <Project>C6F722F1-F84E-49DB-9ABA-9BFA3F32A46D</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Base64Encoder.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\BitStream.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CCRakNetSlidingWindow.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CCRakNetUDT.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CheckSum.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CloudClient.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CloudCommon.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CloudServer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CommandParserInterface.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ConnectionGraph2.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ConsoleServer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DataCompressor.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DirectoryDeltaTransfer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DR_SHA1.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_BytePool.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_ByteQueue.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_HuffmanEncodingTree.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_Table.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DynDNS.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\EmailSender.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\EpochTimeToString.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\FileList.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\FileListTransfer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\FileOperations.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\FormatString.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\FullyConnectedMesh2.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Getche.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Gets.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\GetTime.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\gettimeofday.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\GridSectorizer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\HTTPConnection.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\HTTPConnection2.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\IncrementalReadInterface.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Itoa.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\LinuxStrings.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\LocklessTypes.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\LogCommandParser.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\MessageFilter.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NatPunchthroughClient.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NatPunchthroughServer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NatTypeDetectionClient.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NatTypeDetectionCommon.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NatTypeDetectionServer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NetworkIDManager.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NetworkIDObject.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PacketConsoleLogger.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PacketFileLogger.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PacketizedTCP.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PacketLogger.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PacketOutputWindowLogger.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PluginInterface2.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PS4Includes.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Rackspace.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakMemoryOverride.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetCommandParser.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket2.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket2_360_720.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket2_Berkley.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket2_Berkley_NativeClient.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket2_NativeClient.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket2_PS3_PS4.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket2_PS4.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket2_Vita.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket2_WindowsStore8.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket2_Windows_Linux.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket2_Windows_Linux_360.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetStatistics.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetTransport2.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetTypes.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakPeer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakSleep.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakString.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakThread.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakWString.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Rand.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RandSync.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ReadyEvent.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RelayPlugin.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ReliabilityLayer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ReplicaManager3.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Router2.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RPC4Plugin.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SecureHandshake.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SendToThread.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SignaledEvent.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SimpleMutex.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SocketLayer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\StatisticsHistory.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\StringCompressor.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\StringTable.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SuperFastHash.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\TableSerializer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\TCPInterface.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\TeamBalancer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\TeamManager.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\TelnetTransport.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ThreadsafePacketLogger.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\TwoWayAuthentication.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\UDPForwarder.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\UDPProxyClient.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\UDPProxyCoordinator.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\UDPProxyServer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\VariableDeltaSerializer.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\VariableListDeltaTracker.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\VariadicSQLParser.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\VitaIncludes.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\WSAStartupSingleton.cpp" />
+    <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\_FindFirst.cpp" />
+    <ClCompile Include="src\bulletphysicsobject.cpp" />
+    <ClCompile Include="src\clientmanager.cpp" />
+    <ClCompile Include="src\componenttypehandle.cpp" />
+    <ClCompile Include="src\engine.cpp" />
+    <ClCompile Include="src\gameobject.cpp" />
+    <ClCompile Include="src\gameobjectmanager.cpp" />
+    <ClCompile Include="src\handlemanager.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\messenger.cpp" />
+    <ClCompile Include="src\networkcomponent.cpp" />
+    <ClCompile Include="src\networkmanager.cpp" />
+    <ClCompile Include="src\physicscomponent.cpp" />
+    <ClCompile Include="src\physicsmanager.cpp" />
+    <ClCompile Include="src\physicssystem.cpp" />
+    <ClCompile Include="src\serversystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\AutopatcherPatchContext.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\AutopatcherRepositoryInterface.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Base64Encoder.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\BitStream.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CCRakNetSlidingWindow.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CCRakNetUDT.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CheckSum.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CloudClient.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CloudCommon.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CloudServer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CommandParserInterface.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ConnectionGraph2.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ConsoleServer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DataCompressor.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DirectoryDeltaTransfer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DR_SHA1.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_BinarySearchTree.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_BPlusTree.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_BytePool.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_ByteQueue.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_Hash.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_Heap.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_HuffmanEncodingTree.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_HuffmanEncodingTreeFactory.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_HuffmanEncodingTreeNode.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_LinkedList.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_List.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_Map.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_MemoryPool.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_Multilist.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_OrderedChannelHeap.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_OrderedList.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_Queue.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_QueueLinkedList.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_RangeList.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_Table.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_ThreadsafeAllocatingQueue.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_Tree.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DS_WeightedGraph.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\DynDNS.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\EmailSender.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\EmptyHeader.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\EpochTimeToString.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Export.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\FileList.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\FileListNodeContext.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\FileListTransfer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\FileListTransferCBInterface.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\FileOperations.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\FormatString.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\FullyConnectedMesh2.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Getche.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Gets.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\GetTime.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\gettimeofday.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\GridSectorizer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\HTTPConnection.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\HTTPConnection2.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\IncrementalReadInterface.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\InternalPacket.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Itoa.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Kbhit.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\LinuxStrings.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\LocklessTypes.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\LogCommandParser.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\MessageFilter.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\MessageIdentifiers.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\MTUSize.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NativeFeatureIncludes.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NativeFeatureIncludesOverrides.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NativeTypes.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NatPunchthroughClient.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NatPunchthroughServer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NatTypeDetectionClient.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NatTypeDetectionCommon.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NatTypeDetectionServer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NetworkIDManager.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\NetworkIDObject.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PacketConsoleLogger.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PacketFileLogger.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PacketizedTCP.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PacketLogger.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PacketOutputWindowLogger.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PacketPool.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PacketPriority.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PluginInterface2.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PS3Includes.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\PS4Includes.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Rackspace.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakAlloca.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakAssert.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakMemoryOverride.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetCommandParser.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetDefines.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetDefinesOverrides.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSmartPtr.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetSocket2.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetStatistics.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetTime.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetTransport2.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetTypes.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNetVersion.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakPeer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakPeerInterface.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakSleep.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakString.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakThread.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakWString.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Rand.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RandSync.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ReadyEvent.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RefCountedObj.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RelayPlugin.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ReliabilityLayer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ReplicaEnums.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ReplicaManager3.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\Router2.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RPC4Plugin.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SecureHandshake.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SendToThread.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SignaledEvent.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SimpleMutex.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SimpleTCPServer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SingleProducerConsumer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SocketDefines.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SocketIncludes.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SocketLayer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\StatisticsHistory.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\StringCompressor.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\StringTable.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\SuperFastHash.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\TableSerializer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\TCPInterface.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\TeamBalancer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\TeamManager.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\TelnetTransport.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ThreadPool.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\ThreadsafePacketLogger.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\TransportInterface.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\TwoWayAuthentication.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\UDPForwarder.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\UDPProxyClient.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\UDPProxyCommon.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\UDPProxyCoordinator.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\UDPProxyServer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\VariableDeltaSerializer.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\VariableListDeltaTracker.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\VariadicSQLParser.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\VitaIncludes.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\WindowsIncludes.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\WSAStartupSingleton.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\XBox360Includes.h" />
+    <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\_FindFirst.h" />
+    <ClInclude Include="src\bulletphysicsobject.h" />
+    <ClInclude Include="src\clientcomponent.h" />
+    <ClInclude Include="src\clientmanager.h" />
+    <ClInclude Include="src\componenttypehandle.h" />
+    <ClInclude Include="src\engine.h" />
+    <ClInclude Include="src\gameobject.h" />
+    <ClInclude Include="src\gameobjectfilter.h" />
+    <ClInclude Include="src\gameobjectmanager.h" />
+    <ClInclude Include="src\handle.h" />
+    <ClInclude Include="src\handlemanager.h" />
+    <ClInclude Include="src\subscriber.h" />
+    <ClInclude Include="src\networkmessages.h" />
+    <ClInclude Include="src\messenger.h" />
+    <ClInclude Include="src\networkcomponent.h" />
+    <ClInclude Include="src\networkmanager.h" />
+    <ClInclude Include="src\physicscomponent.h" />
+    <ClInclude Include="src\physicsmanager.h" />
+    <ClInclude Include="src\serversystem.h" />
+    <ClInclude Include="src\physicssystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNet.vcproj" />
+    <None Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNet_vc8.vcproj" />
+    <None Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\RakNet_vc9.vcproj" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
