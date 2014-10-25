@@ -1,7 +1,9 @@
 #pragma once
 
 #include "SpaceFighter_client.h"
+#include "AllowWindowsPlatformTypes.h"
 #include "BitStream.h"
+#include "HideWindowsPlatformTypes.h"
 #include "Handle.h"
 
 class HandleManager;

@@ -21,14 +21,14 @@ to communicate data to each other.
 */
 class Messenger {
 public:
-	Messenger(HandleManager* handleManager);
+	Messenger(HandleManager &handleManager);
 	/*
 	Sends a message to all subscribers.
 	@param handleManager a pointer to the handleManager object containing the
 	program handles.
 	@param msg the message being posted.
 	*/
-	void postMessage(HandleManager* handleManager, Message* msg);
+	void postMessage(HandleManager &handleManager, Message* msg);
 	/*
 	Adds the message to the inbox container.
 	@param msg the message to store.

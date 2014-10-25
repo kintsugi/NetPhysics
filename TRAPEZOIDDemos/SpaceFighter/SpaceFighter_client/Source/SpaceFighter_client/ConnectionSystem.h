@@ -17,12 +17,12 @@ public:
 	void receivePackets();
 	void connect();
 	void connect(FString ipAddress, int port);
-	TArray<TSharedPtr<RakNet::BitStream>> getStreams();
+	TArray<TSharedPtr<RakNet::Packet>> getPackets();
 	RakNet::RakPeerInterface* getRakNetInstance();
 private:
 	//Pointer to the generated instance of RakPeerInterface
 	RakNet::RakPeerInterface *peer;
 	FString ipAddress;
 	int port;
-	TArray<TSharedPtr<RakNet::BitStream>> receivedStreams;
+	TArray<TSharedPtr<RakNet::Packet>> packetContainer;
 };

@@ -1,16 +1,16 @@
 #include "gameobjectmanager.h"
 #include "handlemanager.h"
 
-void GameObjectManager::update(HandleManager* handleManager) {
+void GameObjectManager::update(HandleManager &handleManager) {
 	for (auto iter = container.begin(); iter != container.end();) {
-		if (!handleManager->get(iter->getHandle()))
+		if (!handleManager.get(iter->getHandle()))
 			iter = container.erase(iter);
 		else
 			iter++;
 	}
 }
 
-GameObject* GameObjectManager::createGameObject(HandleManager* handleManager) {
+GameObject* GameObjectManager::createGameObject(HandleManager &handleManager) {
 	container.push_back(GameObject(handleManager));
 	return &container.back();
 }

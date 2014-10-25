@@ -23,7 +23,7 @@ public:
 	RakNet::RakPeerInterface* getRakNetInstance();
 
 	//Gets the packets received since the last update
-	std::vector<std::shared_ptr<RakNet::BitStream>> getStreams();
+	std::vector<std::shared_ptr<RakNet::Packet>> getPackets();
 
 	//Returns time since last update, used as clock for whole program
 	double getDeltaTime();
@@ -35,7 +35,7 @@ private:
 	int port;
 	//maximum number of clients, only read at init, does not change during runtime
 	int maxClients;
-	std::vector<std::shared_ptr<RakNet::BitStream>> receivedStreams;
+	std::vector<std::shared_ptr<RakNet::Packet>> packetContainer;
 	//Current time the server is on.
 	RakNet::TimeUS currentTime;
 	//Previous time.

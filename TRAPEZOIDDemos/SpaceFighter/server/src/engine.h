@@ -3,13 +3,18 @@
 
 #include <vector>
 #include <iostream>
-#include "serversystem.h"
+
+//Manager includes
 #include "gameobjectmanager.h"
 #include "physicsmanager.h"
-#include "physicssystem.h"
 #include "networkmanager.h"
 #include "clientmanager.h"
 
+//System includes
+#include "serversystem.h"
+#include "physicssystem.h"
+#include "networksystem.h"
+#include "clientsystem.h"
 
 /*
 	Main system class. Handles and updates all managers and server.
@@ -30,8 +35,11 @@ private:
 	//Systems
 	ServerSystem serverSystem;
 	PhysicsSystem physicsSystem;
+	NetworkSystem networkSystem;
+	ClientSystem clientSystem;
 
-	void handleStreams(std::vector<std::shared_ptr<RakNet::BitStream>> inStreams);
+	//Utility functions
+	void handlePackets(std::vector<std::shared_ptr<RakNet::Packet>> inBitStreams);
 };
 
 #endif

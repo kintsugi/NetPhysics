@@ -9,10 +9,10 @@ std::vector<Handle> ComponentTypeHandle::getHandles() {
 	return container;
 }
 
-bool ComponentTypeHandle::removeComponent(HandleManager *handleManager, Handle handle) {
+bool ComponentTypeHandle::removeComponent(HandleManager &handleManager, Handle handle) {
 	for (auto iter = container.begin(); iter != container.end(); iter++) {
 		if (handle == *iter) {
-			handleManager->remove(handle);
+			handleManager.remove(handle);
 			container.erase(iter);
 			return true;
 		}
@@ -20,9 +20,9 @@ bool ComponentTypeHandle::removeComponent(HandleManager *handleManager, Handle h
 	return false;
 }
 
-void ComponentTypeHandle::removeAllComponents(HandleManager* handleManager) {
+void ComponentTypeHandle::removeAllComponents(HandleManager &handleManager) {
 	for (auto iter = container.begin(); iter != container.end(); iter++)
-		handleManager->remove(*iter);
+		handleManager.remove(*iter);
 	container.clear();
 }
 

@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include "BitStream.h"
+#include "stream.h"
 #include "handle.h"
 
 class HandleManager;
@@ -15,21 +16,47 @@ class HandleManager;
 class NetworkComponent {
 public:
 	/*
-		@param peer pointer to the server instance of RakNet
-		@param manager pointer to a NetworkIDManager object for this object
-		@param guid the guid of the owning client.
+	@param peer pointer to the server instance of RakNet
+	@param manager pointer to a NetworkIDManager object for this object
+	@param formatter virtual class that determines how to format BitStreams. Uses default if NULL
 	*/
-	NetworkComponent(HandleManager* handleManager, RakNet::RakPeerInterface* peer);
+	NetworkComponent(HandleManager& handleManager, RakNet::RakPeerInterface* peer);
+	NetworkComponent(HandleManager& handleManager, RakNet::RakPeerInterface* peer, StreamFormatter* formatter);
 
-	void addStream(std::shared_ptr<RakNet::BitStream> inStream);
-	std::vector<std::shared_ptr<RakNet::BitStream>> getReceivedStreams();
+	/*
+	Sets the formatter the object uses to format BitStreams.
+	@param formatter pointer to either a StreamFormatter base or abstract class
+	*/
+	void setFormatter(StreamFormatter* formatter);
+
+	/*
+	Takes a BitStream, formats it with the StreamFormatter and adds it to the streams container
+	@param inBS the BitStream to add.
+	*/
+	void addBitStream(std::shared_ptr<RakNet::BitStream> inBS);
+
 	
-	RakNet::RakPeerInterface* getRakNetInstance();
+	//returns the streams container.
+	std::vector<Stream> getAllStreams();
+
+	//Returns all streams of StreamType type. Can use an int.
+	std::vector<Stream> getStreamsOfType(StreamType type);
+
+	//Clears the streams container
+	void removeAllStreams();
+
+	//Erases all streams of StreamType type. Can use an int.
+	void removeStreamsOfType(StreamType type);
+	
+	//Returns the instance of RakPeer 
+	RakNet::RakPeerInterface* getRakPeerInstance();
+
 	Handle getHandle();
 private:
 	Handle handle;
-	RakNet::RakPeerInterface* RakNetInstance;
-	std::vector<std::shared_ptr<RakNet::BitStream>> receivedStreams;
+	RakNet::RakPeerInterface* RakPeerInstance;
+	StreamFormatter* formatter;
+	std::vector<Stream> streams;
 };
 
 

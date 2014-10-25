@@ -22,7 +22,7 @@ class ASpaceFighterEngine : public AActor
 	ConnectionSystem connectionSystem;
 
 	//Utility functions
-	void handleStreams(TArray<TSharedPtr<RakNet::BitStream>> packets);
+	void handlePackets(TArray<TSharedPtr<RakNet::Packet>> packets);
 	
 };
 

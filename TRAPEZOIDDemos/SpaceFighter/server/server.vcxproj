@@ -452,6 +452,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\_FindFirst.cpp" />
     <ClCompile Include="src\bulletphysicsobject.cpp" />
     <ClCompile Include="src\clientmanager.cpp" />
+    <ClCompile Include="src\clientsystem.cpp" />
     <ClCompile Include="src\componenttypehandle.cpp" />
     <ClCompile Include="src\engine.cpp" />
     <ClCompile Include="src\gameobject.cpp" />
@@ -461,10 +462,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="src\messenger.cpp" />
     <ClCompile Include="src\networkcomponent.cpp" />
     <ClCompile Include="src\networkmanager.cpp" />
+    <ClCompile Include="src\networksystem.cpp" />
     <ClCompile Include="src\physicscomponent.cpp" />
     <ClCompile Include="src\physicsmanager.cpp" />
     <ClCompile Include="src\physicssystem.cpp" />
     <ClCompile Include="src\serversystem.cpp" />
+    <ClCompile Include="src\stream.cpp" />
+    <ClCompile Include="src\streamformatter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\AutopatcherPatchContext.h" />
@@ -624,6 +628,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="src\bulletphysicsobject.h" />
     <ClInclude Include="src\clientcomponent.h" />
     <ClInclude Include="src\clientmanager.h" />
+    <ClInclude Include="src\clientsystem.h" />
     <ClInclude Include="src\componenttypehandle.h" />
     <ClInclude Include="src\engine.h" />
     <ClInclude Include="src\gameobject.h" />
@@ -631,6 +636,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="src\gameobjectmanager.h" />
     <ClInclude Include="src\handle.h" />
     <ClInclude Include="src\handlemanager.h" />
+    <ClInclude Include="src\networksystem.h" />
+    <ClInclude Include="src\stream.h" />
+    <ClInclude Include="src\streamformatter.h" />
     <ClInclude Include="src\subscriber.h" />
     <ClInclude Include="src\networkmessages.h" />
     <ClInclude Include="src\messenger.h" />

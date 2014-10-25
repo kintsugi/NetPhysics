@@ -16,13 +16,13 @@ public:
 	Iterates through the container polling if any component has expired.
 	@param handleManager a pointer to the HandleManager object the members of container are in.
 	*/
-	void update(HandleManager *handleManager);
+	void update(HandleManager &handleManager);
 	/*
 	Creates a NetworkComponent and returns a handle to it.
 	@param handleManager a pointer to the HandleManager object to store the object
 	@return the handle of the newly created object.
 	*/
-	Handle createComponent(HandleManager* handleManager, RakNet::RakPeerInterface* peer);
+	Handle createComponent(HandleManager &handleManager, RakNet::RakPeerInterface* peer);
 private:
 	std::vector<NetworkComponent> container;
 };

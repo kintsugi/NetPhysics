@@ -1,6 +1,7 @@
 #include "SpaceFighter_client.h"
 #include "SpaceFighterEngine.h"
 #include "Messenger.h"
+#include "BitStream.h"
 
 
 ASpaceFighterEngine::ASpaceFighterEngine(const class FPostConstructInitializeProperties& PCIP) : Super(PCIP) {
@@ -15,11 +16,10 @@ void ASpaceFighterEngine::BeginPlay() {
 
 void ASpaceFighterEngine::Tick(float dt) {
 	Super::Tick(dt);
-	handleStreams(connectionSystem.getStreams());
+	handlePackets(connectionSystem.getPackets());
 }
 
-void ASpaceFighterEngine::handleStreams(TArray<TSharedPtr<RakNet::BitStream>> packets) {
-	for (auto iter = packets.CreateIterator(); iter; iter++) {
-
+void ASpaceFighterEngine::handlePackets(TArray<TSharedPtr<RakNet::Packet>> inBitStreams) {
+	for (auto iter = inBitStreams.CreateIterator(); iter; iter++) {
 	}
 }

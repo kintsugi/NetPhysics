@@ -17,7 +17,7 @@
 class GameObject {
 friend class GameObjectManager;
 public:
-	GameObject(HandleManager* handleManager);
+	GameObject(HandleManager& handleManager);
 
 	bool hasComponents(const GameObjectFilter filter) const;
 
@@ -32,7 +32,7 @@ public:
 
 	//TODO comment
 	template<class T>
-	T* getComponent(HandleManager *handleManager, const Handle handle);
+	T* getComponent(HandleManager &handleManager, const Handle handle);
 
 	/*
 	Returns a pointer to the handle of the component.
@@ -41,23 +41,23 @@ public:
 	@return the pointer to the component. NULL if no component in this object
 	*/
 	template<class T>
-	std::vector<T*> getComponents(HandleManager *handleManager, const HandleType type);
+	std::vector<T*> getComponents(HandleManager &handleManager, const HandleType type);
 	
-	bool removeComponent(HandleManager *handleManager, const Handle handle);
+	bool removeComponent(HandleManager &handleManager, const Handle handle);
 
 	/*
 	Removes the components from the gameobject and the manager
 	@param handleManager the HandleManager that contains the handle
 	@param type the type of component to remove.
 	*/
-	bool removeComponents(HandleManager* handleManager, const HandleType type);
+	bool removeComponents(HandleManager &handleManager, const HandleType type);
 
 	/*
 	Remove the handle of the object and all handles of its component from the handle manager
 	Note: when a gameobject of component does not have a valid handle, its manager deletes it next update.
 	All subsequent calls to the data the handle pointed to will be null
 	*/
-	void removeSelf(HandleManager *handleManager);
+	void removeSelf(HandleManager &handleManager);
 
 	//Sets the handle of the GameObject. Object must be created first before its handle is set.
 	void setHandle(Handle handle);
@@ -74,12 +74,12 @@ private:
 };
 
 template<class T>
-T* GameObject::getComponent(HandleManager *handleManager, const Handle handle) {
+T* GameObject::getComponent(HandleManager &handleManager, const Handle handle) {
 	auto got = components.find(handle.type);
 	if (got != components.end()) {
 		int index = got->second.getHandleIndex(handle);
 		if (index != -1)
-			return (T*)handleManager->get(got->second.getHandles()[index]);
+			return (T*)handleManager.get(got->second.getHandles()[index]);
 		else
 			return NULL;
 	}
@@ -87,14 +87,14 @@ T* GameObject::getComponent(HandleManager *handleManager, const Handle handle) {
 }
 
 template<class T>
-std::vector<T*> GameObject::getComponents(HandleManager *handleManager, const HandleType type) {
+std::vector<T*> GameObject::getComponents(HandleManager &handleManager, const HandleType type) {
 	std::vector<T*> ret;
 	auto got = components.find(handle.type);
 	if (got != components.end()) {
 		std::vector<Handle> handles = got->second.getHandles();
 		std::vector<T*> ret;
 		for (auto iter = handles.begin; iter != handles.end(); iter++)
-			ret.push_back((T*)handleManager->get(*iter));
+			ret.push_back((T*)handleManager.get(*iter));
 	}
 	return ret;
 }

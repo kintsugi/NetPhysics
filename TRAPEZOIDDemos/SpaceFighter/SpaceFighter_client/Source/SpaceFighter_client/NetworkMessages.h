@@ -1,6 +1,6 @@
-#ifndef MESSAGES_H_INCLUDED
-#define MESSAGES_H_INCLUDED
+#pragma once
 
+#include "SpaceFighter_client.h"
 #include "MessageIdentifiers.h"
 
 enum NetworkMessage {
@@ -8,6 +8,5 @@ enum NetworkMessage {
 	INVALID_MESSAGE = ID_USER_PACKET_ENUM + 1,
 	//For updating a network component. Order sensitive (Message, networkID, ...)
 	NETWORK_COMPONENT_MESSAGE,
+	TEST,
 };
-
-#endif

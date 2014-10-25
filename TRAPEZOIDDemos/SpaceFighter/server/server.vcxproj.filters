@@ -42,6 +42,12 @@
     <Filter Include="Source Files\Utility">
       <UniqueIdentifier>{784a13ef-2681-4bae-b933-e47594415794}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{1b84a8bf-3410-4b04-ba2e-08e242bca547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{a0d3dd23-1ee1-4d68-a3ba-9a274f8a8903}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\_FindFirst.cpp">
@@ -374,12 +380,6 @@
     <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\WSAStartupSingleton.cpp">
       <Filter>RakNet</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\networkmanager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
@@ -401,9 +401,6 @@
     <ClCompile Include="src\gameobject.cpp">
       <Filter>Source Files\Game Object</Filter>
     </ClCompile>
-    <ClCompile Include="src\componenttypehandle.cpp">
-      <Filter>Source Files\Game Object</Filter>
-    </ClCompile>
     <ClCompile Include="src\physicssystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
@@ -418,6 +415,27 @@
     </ClCompile>
     <ClCompile Include="src\clientmanager.cpp">
       <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stream.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\streamformatter.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networksystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\clientsystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\componenttypehandle.cpp">
+      <Filter>Source Files\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -883,9 +901,6 @@
     <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\XBox360Includes.h">
       <Filter>RakNet</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\gameobjectmanager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
@@ -916,12 +931,6 @@
     <ClInclude Include="src\gameobject.h">
       <Filter>Header Files\Game Object</Filter>
     </ClInclude>
-    <ClInclude Include="src\gameobjectfilter.h">
-      <Filter>Header Files\Game Object</Filter>
-    </ClInclude>
-    <ClInclude Include="src\componenttypehandle.h">
-      <Filter>Header Files\Game Object</Filter>
-    </ClInclude>
     <ClInclude Include="src\bulletphysicsobject.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
@@ -939,6 +948,27 @@
     </ClInclude>
     <ClInclude Include="src\clientmanager.h">
       <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stream.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\streamformatter.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networksystem.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\clientsystem.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gameobjectfilter.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\componenttypehandle.h">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -43,12 +43,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NetworkComponent.cpp" />
     <ClInclude Include="..\..\Source\SpaceFighter_client\Handle.h" />
     <ClInclude Include="..\..\Source\SpaceFighter_client\HandleManager.h" />
+    <ClInclude Include="..\..\Source\SpaceFighter_client\NetworkMessages.h" />
     <ClInclude Include="..\..\Source\SpaceFighter_client\Messenger.h" />
+    <ClInclude Include="..\..\Source\SpaceFighter_client\NetworkComponent.h" />
     <ClInclude Include="..\..\Source\SpaceFighter_client\Subscriber.h" />
-    <ClInclude Include="NetworkComponent.h" />
     <None Include="..\..\SpaceFighter_client.uproject" />
     <None Include="..\..\Source\SpaceFighter_client.Target.cs" />
     <None Include="..\..\Source\SpaceFighter_clientEditor.Target.cs" />
@@ -59,6 +59,7 @@
     <ClInclude Include="..\..\Source\SpaceFighter_client\ConnectionSystem.h" />
     <ClCompile Include="..\..\Source\SpaceFighter_client\HandleManager.cpp" />
     <ClCompile Include="..\..\Source\SpaceFighter_client\Messenger.cpp" />
+    <ClCompile Include="..\..\Source\SpaceFighter_client\NetworkComponent.cpp" />
     <ClCompile Include="..\..\Source\SpaceFighter_client\SpaceFighterEngine.cpp" />
     <ClInclude Include="..\..\Source\SpaceFighter_client\SpaceFighterEngine.h" />
     <None Include="..\..\Source\SpaceFighter_client\SpaceFighter_client.Build.cs" />

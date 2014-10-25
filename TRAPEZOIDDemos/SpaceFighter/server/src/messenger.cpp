@@ -1,15 +1,15 @@
 #include "messenger.h"
 #include "handlemanager.h"
 
-Messenger::Messenger(HandleManager* handleManager) {
-	handle = handleManager->add(this, MESSENGER);
+Messenger::Messenger(HandleManager &handleManager) {
+	handle = handleManager.add(this, MESSENGER);
 }
 
-void Messenger::postMessage(HandleManager* handleManager, Message* msg)  {
+void Messenger::postMessage(HandleManager &handleManager, Message* msg)  {
 	auto range = subscribers.equal_range(msg->type);
 	if (range.first != subscribers.end() && range.second != subscribers.end()) {
 		for (auto iter = range.first; iter != range.second; iter++) {
-			Messenger* subscriber = (Messenger*)handleManager->get(iter->second.getSubscriberHandle());
+			Messenger* subscriber = (Messenger*)handleManager.get(iter->second.getSubscriberHandle());
 			if (subscriber != NULL)
 				subscriber->receiveMessage(msg);
 			else 

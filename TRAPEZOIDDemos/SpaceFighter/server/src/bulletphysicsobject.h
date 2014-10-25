@@ -9,10 +9,10 @@
 struct BulletPhysicsObject {
 	BulletPhysicsObject() {}
 	BulletPhysicsObject(BulletPhysicsObject& copy);
-	std::unique_ptr<btCollisionShape> collisionShape;
-	std::unique_ptr<btDefaultMotionState> motionState;
-	std::unique_ptr<btScalar> mass;
-	std::unique_ptr<btVector3> localInertia;
+	std::shared_ptr<btCollisionShape> collisionShape;
+	std::shared_ptr<btDefaultMotionState> motionState;
+	btScalar mass;
+	btVector3 localInertia;
 };
 
 

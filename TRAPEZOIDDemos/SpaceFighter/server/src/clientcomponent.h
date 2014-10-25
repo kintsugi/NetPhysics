@@ -12,10 +12,12 @@
 */
 class ClientComponent {
 public:
-	ClientComponent(HandleManager* handleManager, RakNet::RakNetGUID newClientGUID) : 
+	ClientComponent(HandleManager &handleManager, RakNet::RakNetGUID newClientGUID) : 
 		clientGUID(newClientGUID),
-		handle(handleManager->add(this, CLIENT_COMPONENT)) {}
+		handle(handleManager.add(this, CLIENT_COMPONENT)) {}
+
 	RakNet::RakNetGUID getClientGUID() {return clientGUID;}
+
 	Handle getHandle() {return handle;}
 private:
 	Handle handle;

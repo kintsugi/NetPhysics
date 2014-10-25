@@ -2,6 +2,8 @@
 #include <memory>
 #include "BitStream.h"
 #include "networkcomponent.h"
+#include "networkmessages.h"
+#include <iostream>
 
 void ServerSystem::startServer(bool userInputDetails) {
 	if (userInputDetails) {
@@ -31,7 +33,12 @@ void ServerSystem::update() {
 	//Handle incoming packets
 	RakNet::Packet *packet;
 	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
-		receivedStreams.push_back(std::shared_ptr<RakNet::BitStream>(new RakNet::BitStream(packet->data, packet->length, true)));
+		//DeallocatePacket() needs to be called. Copying the packet does not ensure that the
+		//data pointer will not be deleted, so the contents of it must be copied.
+		std::shared_ptr<RakNet::Packet> copy(new RakNet::Packet(*packet));
+		copy->data = new unsigned char(*packet->data);
+		packetContainer.push_back(copy);
+		std::cout << std::endl << packet->guid.ToString();
 	}
 	//Calculate the dt between last server tick
 	lastTime = currentTime;
@@ -42,10 +49,10 @@ RakNet::RakPeerInterface* ServerSystem::getRakNetInstance() {
 	return peer;
 }
 
-std::vector<std::shared_ptr<RakNet::BitStream>> ServerSystem::getStreams() {
+std::vector<std::shared_ptr<RakNet::Packet>> ServerSystem::getPackets() {
 	update();
-	auto ret = receivedStreams;
-	receivedStreams.clear();
+	auto ret = packetContainer;
+	packetContainer.clear();
 	return ret;
 }
 

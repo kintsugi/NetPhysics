@@ -13,11 +13,11 @@ class HandleManager;
 class PhysicsComponent {
 friend class PhysicsSystem;
 public:
-	PhysicsComponent(HandleManager* handleManager, BulletPhysicsObject& obj);
+	PhysicsComponent(HandleManager& handleManager, BulletPhysicsObject& obj);
 	~PhysicsComponent();
 	//@return pointer to the rigidbody in the simulation
 	btRigidBody* getRigidBody() const { return rigidBody; }
-	//@retyrb pointer to the world the rigid body is in. Null is not placed in a world.
+	//@ret pointer to the world the rigid body is in. Null is not placed in a world.
 	btDiscreteDynamicsWorld* getWorld() const { return dynamicsWorld; }
 	Handle getHandle() const;
 private:

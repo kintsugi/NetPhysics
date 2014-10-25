@@ -22,7 +22,7 @@ public:
 	void update(float dt);
 	/*
 	Creates the WorldObjectComponent in the simulation and returns the pointer
-	@param obj reference to the physicsObject to create in the similation
+	@param obj reference to the physicsObject to create in the simulation
 	@return pointer to the worldObject Component. Assign to required entities.
 	*/
 	void addToSystem(PhysicsComponent *component);

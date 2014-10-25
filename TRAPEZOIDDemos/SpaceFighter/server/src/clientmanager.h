@@ -11,8 +11,8 @@ class HandleManager;
 class ClientManager {
 public:
 	ClientManager() {}
-	void update(HandleManager* handleManager);
-	Handle createComponent(HandleManager* handleManager, RakNet::RakNetGUID guid);
+	void update(HandleManager &handleManager);
+	Handle createComponent(HandleManager &handleManager, RakNet::RakNetGUID guid);
 
 private:
 	std::vector<ClientComponent> container;

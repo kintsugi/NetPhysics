@@ -17,14 +17,14 @@ public:
 	Iterates through the container polling if any game object has expired
 	@param handleManager a pointer to the HandleManager object the members of container are in.
 	*/
-	void update(HandleManager *handleManager);
+	void update(HandleManager &handleManager);
 
 	/*
 	Creates an empty GameObject in container and returns a pointer to it
 	@param handleManager a pointer to the HandleManager object to store the object
 	@return a pointer to the newly created GameObject
 	*/
-	GameObject* createGameObject(HandleManager *handleManager);
+	GameObject* createGameObject(HandleManager &handleManager);
 	
 	/*
 	Filters through container, returning a vector of the GameObject that meet the requirements.

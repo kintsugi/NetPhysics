@@ -1,8 +1,8 @@
 #include "gameobject.h"
 #include "handlemanager.h"
 
-GameObject::GameObject(HandleManager* handleManager) : messenger(handleManager) {
-	handleManager->add(this, GAME_OBJECT);
+GameObject::GameObject(HandleManager &handleManager) : messenger(handleManager) {
+	handleManager.add(this, GAME_OBJECT);
 }
 
 bool GameObject::hasComponents(const GameObjectFilter filter) const {
@@ -34,7 +34,7 @@ ComponentTypeHandle* GameObject::getComponentTypeHandle(const HandleType type) {
 	return NULL;
 }
 
-bool GameObject::removeComponent(HandleManager *handleManager, const Handle handle) {
+bool GameObject::removeComponent(HandleManager &handleManager, const Handle handle) {
 	auto got = components.find(handle.type);
 	if (got != components.end()) {
 		got->second.removeComponent(handleManager, handle);
@@ -43,7 +43,7 @@ bool GameObject::removeComponent(HandleManager *handleManager, const Handle hand
 	return false;
 }
 
-bool GameObject::removeComponents(HandleManager* handleManager, const HandleType type) {
+bool GameObject::removeComponents(HandleManager &handleManager, const HandleType type) {
 	auto got = components.find(handle.type);
 	if (got != components.end()) {
 		got->second.removeAllComponents(handleManager);
@@ -52,8 +52,8 @@ bool GameObject::removeComponents(HandleManager* handleManager, const HandleType
 	return false;
 }
 
-void GameObject::removeSelf(HandleManager* handleManager) {
-	handleManager->remove(handle);
+void GameObject::removeSelf(HandleManager &handleManager) {
+	handleManager.remove(handle);
 	for (auto iter = components.begin(); iter != components.end(); iter++)
 		iter->second.removeAllComponents(handleManager);
 }

@@ -9,8 +9,13 @@ ConnectionSystem::ConnectionSystem(): ipAddress(TEXT("localhost")), port(60000) 
 void ConnectionSystem::receivePackets() {
 	//Handle incoming packets
 	RakNet::Packet *packet;
-	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive())
-		receivedStreams.Add(TSharedPtr<RakNet::BitStream>(new RakNet::BitStream(packet->data, packet->length, true)));
+	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
+		//DeallocatePacket() needs to be called. Copying the packet does not ensure that the
+		//data pointer will not be deleted, so the contents of it must be copied.
+		TSharedPtr<RakNet::Packet> copy(new RakNet::Packet(*packet));
+		copy->data = new unsigned char(*packet->data);
+		packetContainer.Add(copy);
+	}
 }
 
 void ConnectionSystem::connect() {
@@ -24,10 +29,10 @@ void ConnectionSystem::connect(FString ipAddress, int port) {
 	peer->Connect(TCHAR_TO_ANSI(*ipAddress), port, 0, 0);
 }
 
-TArray<TSharedPtr<RakNet::BitStream>> ConnectionSystem::getStreams() {
+TArray<TSharedPtr<RakNet::Packet>> ConnectionSystem::getPackets() {
 	receivePackets();
-	auto ret = receivedStreams;
-	receivedStreams.Reset();
+	auto ret = packetContainer;
+	packetContainer.Reset();
 	return ret;
 }
 
