@@ -1,6 +1,5 @@
 #include "engine.h"
 #include "networkmessages.h"
-
 #include <memory>
 #include "RakNetTypes.h"
 
@@ -36,19 +35,24 @@ void Engine::update() {
 	physicsSystem.update((float)dt);
 	gameStateSystem.update(managerRegister);
 
+	NetworkComponent* testComp = new NetworkComponent(handleManager, networkIDManager, serverSystem.getRakNetInstance(), new TestFormatter());
+	std::shared_ptr<RakNet::BitStream> testBS(new RakNet::BitStream());
+	testBS->Write((RakNet::MessageID)NETWORK_COMPONENT_MESSAGE);
+	testBS->Write("Hello World");
+	testComp->addBitStream(testBS);
+	Stream<TestStreamData> testStream = testComp->popStream<TestStreamData>();
 	//Handle incoming packets.
 	handlePackets(serverSystem.getPackets());
 }
 
-void Engine::handlePackets(std::vector<std::shared_ptr<RakNet::Packet>> packets) {
+void Engine::handlePackets(std::vector<PacketToBitStream> packets) {
 	for (auto iter = packets.begin(); iter != packets.end(); iter++) {
-		//Read the first bytes as a NetworkMessage to determine action
-		RakNet::Packet* packet = iter->get();
-		switch (packet->data[0]) {
+		
+		switch (iter->messageID) {
 			case ID_NEW_INCOMING_CONNECTION: {
 				clientSystem.initializeClient(managerRegister,
 											  serverSystem.getRakNetInstance(), 
-											  packet->guid);
+											  iter->guid);
 				break;
 			}
 			case NETWORK_COMPONENT_MESSAGE: {
@@ -57,4 +61,13 @@ void Engine::handlePackets(std::vector<std::shared_ptr<RakNet::Packet>> packets)
 			}
 		}
 	}	
+}
+
+void* TestFormatter::format(std::shared_ptr<RakNet::BitStream> inStream) {
+	inStream->ResetReadPointer();
+	TestStreamData* ret = new TestStreamData();
+	inStream->Read(ret->messageID);
+	inStream->ResetReadPointer();
+	ret->bitStream = inStream;
+	return ret;
 }

@@ -6,23 +6,27 @@
 #include "AllowWindowsPlatformTypes.h"
 #include "RakPeerInterface.h"
 #include "HideWindowsPlatformTypes.h"
+#include "PacketToBitStream.h"
+#include "NetworkMessages.h"
+
+
 
 /*
 	Manager for connecting and communicating to the server.
 */
-class ConnectionSystem
-{
+class ConnectionSystem {
 public:
 	ConnectionSystem();
-	void receivePackets();
+	void update();
 	void connect();
 	void connect(FString ipAddress, int port);
-	TArray<TSharedPtr<RakNet::Packet>> getPackets();
+	TArray<PacketToBitStream> getPackets();
 	RakNet::RakPeerInterface* getRakNetInstance();
 private:
 	//Pointer to the generated instance of RakPeerInterface
 	RakNet::RakPeerInterface *peer;
 	FString ipAddress;
 	int port;
-	TArray<TSharedPtr<RakNet::Packet>> packetContainer;
+	TArray<PacketToBitStream> packetContainer;
 };
+

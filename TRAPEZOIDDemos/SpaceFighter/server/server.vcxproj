@@ -466,14 +466,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="src\networkcomponent.cpp" />
     <ClCompile Include="src\networkmanager.cpp" />
     <ClCompile Include="src\networksystem.cpp" />
+    <ClCompile Include="src\packettobitstream.cpp" />
     <ClCompile Include="src\physicscomponent.cpp" />
     <ClCompile Include="src\physicsmanager.cpp" />
     <ClCompile Include="src\physicssystem.cpp" />
     <ClCompile Include="src\playerstatecomponent.cpp" />
     <ClCompile Include="src\playerstatemanager.cpp" />
     <ClCompile Include="src\serversystem.cpp" />
-    <ClCompile Include="src\stream.cpp" />
-    <ClCompile Include="src\streamformatter.cpp" />
     <ClCompile Include="src\timercomponent.cpp" />
     <ClCompile Include="src\timermanager.cpp" />
   </ItemGroup>
@@ -643,6 +642,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="src\gameobjectmanager.h" />
     <ClInclude Include="src\gamestatesystem.h" />
     <ClInclude Include="src\managerregister.h" />
+    <ClInclude Include="src\packettobitstream.h" />
     <ClInclude Include="src\playerstatecomponent.h" />
     <ClInclude Include="src\handle.h" />
     <ClInclude Include="src\handlemanager.h" />

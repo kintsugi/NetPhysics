@@ -2,6 +2,7 @@
 #include "SpaceFighterEngine.h"
 #include "NetworkMessages.h"
 #include "TestActor.h"
+#include "NativeTypes.h"
 
 ASpaceFighterEngine::ASpaceFighterEngine(const class FPostConstructInitializeProperties& PCIP) : Super(PCIP) {
 	PrimaryActorTick.bCanEverTick = true;
@@ -15,21 +16,18 @@ void ASpaceFighterEngine::BeginPlay() {
 
 void ASpaceFighterEngine::Tick(float dt) {
 	Super::Tick(dt);
+	connectionSystem.update();
 	networkManager.update(handleManager);
 	handlePackets(connectionSystem.getPackets());
 }
 
-void ASpaceFighterEngine::handlePackets(TArray<TSharedPtr<RakNet::Packet>> packets) {
+void ASpaceFighterEngine::handlePackets(TArray<PacketToBitStream> packets) {
 	for (auto iter = packets.CreateIterator(); iter; iter++) {
-		RakNet::Packet* packet = iter->Get();
-		switch (packet->data[0]) {
+		switch (iter->messageID) {
 		case START_PLAYER: {
-			RakNet::BitStream bsIn(packet->data, packet->length, false);
-			NetworkMessage msg;
-			bsIn.Read(msg);
+			iter->bitStream->IgnoreBytes(sizeof(RakNet::MessageID));
 			RakNet::NetworkID networkID;
-			uint32 l = sizeof(RakNet::MessageID) + sizeof(RakNet::NetworkID);
-			bsIn.Read(networkID);
+			iter->bitStream->Read(networkID);
 			spawnNetworkActor<ATestActor>(networkID);
 			break;
 		}

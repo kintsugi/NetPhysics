@@ -11,44 +11,41 @@ NetworkComponent::NetworkComponent(HandleManager& handleManager,
 	SetNetworkIDManager(&networkIDManager);
 }
 
-NetworkComponent::NetworkComponent(HandleManager& handleManager, RakNet::NetworkIDManager &networkIDManager, RakNet::RakPeerInterface* peer, StreamFormatter* newFormatter) :
-	handle(handleManager.add(this, NETWORK_COMPONENT)),
-	RakPeerInstance(peer),
-	formatter(newFormatter)
+NetworkComponent::NetworkComponent(HandleManager& handleManager,
+								   RakNet::NetworkIDManager &networkIDManager,
+								   RakNet::RakPeerInterface* peer,
+								   std::shared_ptr<StreamFormatter> newFormatter)
+	: handle(handleManager.add(this, NETWORK_COMPONENT)),
+	  RakPeerInstance(peer),
+	  formatter(newFormatter)
 {
 	SetNetworkIDManager(&networkIDManager);
 }
 
-void NetworkComponent::setFormatter(StreamFormatter* newFormatter) {
+void NetworkComponent::setFormatter(std::shared_ptr<StreamFormatter> newFormatter) {
 	formatter = newFormatter;
 }
 
+std::shared_ptr<StreamFormatter> NetworkComponent::getFormatter() {
+	return formatter;
+}
+
 void NetworkComponent::addBitStream(std::shared_ptr<RakNet::BitStream> inBS) {
-	streams.push_back(Stream(inBS, formatter));
+	inBitStreams.push_back(inBS);
 }
 
-std::vector<Stream> NetworkComponent::getAllStreams() const {
-	return streams;
+std::vector<std::shared_ptr<RakNet::BitStream>> NetworkComponent::getBitStreams() {
+	return inBitStreams;
 }
 
-std::vector<Stream> NetworkComponent::getStreamsOfType(StreamType type) {
-	std::vector<Stream> ret;
-	for (auto iter = streams.begin(); iter != streams.end(); iter++) {
-		if (iter->getStreamData()->type == type)
-			ret.push_back(*iter);
-	}
+std::shared_ptr<RakNet::BitStream> NetworkComponent::popBitStream() {
+	std::shared_ptr<RakNet::BitStream> ret = inBitStreams.back();
+	inBitStreams.pop_back();
 	return ret;
 }
 
-void NetworkComponent::removeAllStreams() {
-	streams.clear();
-}
-
-void NetworkComponent::removeStreamsOfType(StreamType type) {
-	for (auto iter = streams.begin(); iter != streams.end(); iter++) {
-		if (iter->getStreamData()->type == type)
-			iter = streams.erase(iter);
-	}
+void NetworkComponent::clearBitStreams() {
+	inBitStreams.clear();
 }
 
 RakNet::RakPeerInterface* NetworkComponent::getRakPeerInstance() const {

@@ -35,9 +35,7 @@ void ServerSystem::update() {
 	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 		//DeallocatePacket() needs to be called. Copying the packet does not ensure that the
 		//data pointer will not be deleted, so the contents of it must be copied.
-		std::shared_ptr<RakNet::Packet> copy(new RakNet::Packet(*packet));
-		copy->data = new unsigned char(*packet->data);
-		packetContainer.push_back(copy);
+		packetContainer.push_back(PacketToBitStream(packet));
 	}
 	//Calculate the dt between last server tick
 	lastTime = currentTime;
@@ -48,7 +46,7 @@ RakNet::RakPeerInterface* ServerSystem::getRakNetInstance() {
 	return peer;
 }
 
-std::vector<std::shared_ptr<RakNet::Packet>> ServerSystem::getPackets() {
+std::vector<PacketToBitStream> ServerSystem::getPackets() {
 	auto ret = packetContainer;
 	packetContainer.clear();
 	return ret;

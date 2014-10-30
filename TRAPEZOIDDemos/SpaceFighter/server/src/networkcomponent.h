@@ -22,7 +22,9 @@ public:
 	@param peer pointer to the server instance of RakNet
 	@param manager pointer to a NetworkIDManager object for this object
 	*/
-	NetworkComponent(HandleManager& handleManager, RakNet::NetworkIDManager &networkIDManager, RakNet::RakPeerInterface* peer);
+	NetworkComponent(HandleManager& handleManager,
+					 RakNet::NetworkIDManager &networkIDManager,
+					 RakNet::RakPeerInterface* peer);
 
 	/*
 	@param handleManager reference to a handleManager to manage this object
@@ -30,32 +32,52 @@ public:
 	@param manager pointer to a NetworkIDManager object for this object
 	@param formatter virtual class that determines how to format BitStreams. Uses default if NULL
 	*/
-	NetworkComponent(HandleManager& handleManager, RakNet::NetworkIDManager &networkIDManager, RakNet::RakPeerInterface* peer, StreamFormatter* newFormatter);
+	NetworkComponent(HandleManager& handleManager,
+					 RakNet::NetworkIDManager &networkIDManager,
+					 RakNet::RakPeerInterface* peer,
+					 std::shared_ptr<StreamFormatter> newFormatter);
 
 	/*
 	Sets the formatter the object uses to format BitStreams.
 	@param newFormatter pointer to either a StreamFormatter base or abstract class
 	*/
-	void setFormatter(StreamFormatter* newFormatter);
+	void setFormatter(std::shared_ptr<StreamFormatter> newFormatter);
+
+	//Returns a pointer to the StreamFormatter of this object. NULL if it has not been set.
+	std::shared_ptr<StreamFormatter> getFormatter();
 
 	/*
-	Takes a BitStream, formats it with the StreamFormatter and adds it to member streams
+	Adds a BitStream to the container.
 	@param inBS the BitStream to add.
 	*/
 	void addBitStream(std::shared_ptr<RakNet::BitStream> inBS);
 	
-	//returns the streams container.
-	std::vector<Stream> getAllStreams() const;
+	//Returns the inBitStreams vector.
+	std::vector<std::shared_ptr<RakNet::BitStream>> getBitStreams();
 
-	//Returns all streams of StreamType type. Can use an int.
-	std::vector<Stream> getStreamsOfType(StreamType type);
+	//Returns the last index of the inBitStreams vector and removes it. NULL if empty. 
+	std::shared_ptr<RakNet::BitStream> popBitStream();
 
-	//Clears the streams container
-	void removeAllStreams();
-
-	//Erases all streams of StreamType type. Can use an int.
-	void removeStreamsOfType(StreamType type);
+	//Clears the inBitStreams vector.
+	void clearBitStreams();
 	
+	/*
+	Returns a vector of Stream objects specialized to type T using the
+	StreamFormatter object pointed to in member formatter. Has size 0 if
+	inBitStreams has size 0 or if the StreamFormatter has not been set.
+	*/
+	template<class T>
+	std::vector<Stream<T>> getStreams();
+
+	/*
+	Returns a Stream object specialized to type T using the StreamFormatter 
+	object pointed to in member formatter. Uses the first index of the
+	inBitStreams vector and removes it. Stream::StreamPtr will be null if
+	inBitStreams has size 0 or if the StreamFormatter has not been set..
+	*/
+	template<class T>
+	Stream<T> popStream();
+
 	//Returns the instance of RakPeer 
 	RakNet::RakPeerInterface* getRakPeerInstance() const;
 
@@ -68,10 +90,26 @@ private:
 	//pointer to the server instance of RakPeerInterface
 	RakNet::RakPeerInterface* RakPeerInstance;
 	//pointer to the formatter used to format BitStreams into Streams
-	StreamFormatter* formatter;
-	//Container of received Stream objects.
-	std::vector<Stream> streams;
+	std::shared_ptr<StreamFormatter> formatter;
+	std::vector<std::shared_ptr<RakNet::BitStream>> inBitStreams;
 };
 
+template<class T>
+std::vector<Stream<T>> NetworkComponent::getStreams() {
+	std::vector<Stream<T>> ret;
+	if (formatter) {
+		for (auto iter = inBitStreams.begin(), iter != inBitStreams.end(); iter++)
+			ret.push_back(Stream<T>(*iter, formatter));
+	}
+	return ret;
+}
+
+template<class T>
+Stream<T> NetworkComponent::popStream() {
+	if (formatter)
+		return Stream<T>(popBitStream(), formatter);
+	else
+		return Stream<T>();
+}
 
 #endif

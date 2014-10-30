@@ -7,7 +7,7 @@
 
 class StreamFormatter {
 public:
-	virtual StreamData* format(std::shared_ptr<RakNet::BitStream> inStream);
+	virtual void* format(std::shared_ptr<RakNet::BitStream> inStream) = 0;
 };
 
 #endif

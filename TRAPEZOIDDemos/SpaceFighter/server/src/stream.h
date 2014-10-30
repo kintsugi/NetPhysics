@@ -4,20 +4,10 @@
 #include <memory>
 #include <vector>
 #include "BitStream.h"
-#include "handle.h"
-
-class StreamFormatter;
-
-enum StreamType {
-	DEFAULT_TYPE,
-};
-
-struct StreamData {
-	StreamType type;
-	std::shared_ptr<RakNet::BitStream> formattedBitStream;
-};
+#include "streamformatter.h"
 
 /*
+	comment deprecated
 	Container for BitStreams meant for NetworkComponents.
 	BitStreams for NetworkComponents have a MessageID of NETWORK_COMPONENT_MESSAGE
 	followed by a Handle object.
@@ -28,13 +18,16 @@ struct StreamData {
 	You can also change the StreamData struct by casting another struct to it
 	and then casting it back.
 */
+template<class T>
 class Stream {
 public:
-	Stream(std::shared_ptr<RakNet::BitStream> inBitStream, StreamFormatter* formatter);
-	~Stream();
-	StreamData* getStreamData();
+	Stream() : streamPtr(NULL) {}
+	Stream(std::shared_ptr<RakNet::BitStream> inBitStream, std::shared_ptr<StreamFormatter> formatter) : 
+		streamPtr((T*)formatter->format(inBitStream)) {}
+
+	std::shared_ptr<T> getStream();
 private:
-	StreamData* streamData;
+	std::shared_ptr<T> streamPtr;
 };
 
 

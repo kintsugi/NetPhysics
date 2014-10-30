@@ -71,10 +71,12 @@ void GameStateSystem::initializePlayer(ManagerRegister& managerRegister, GameObj
 	//Get the guid and networkID to construct the bitstream.
 	RakNet::RakNetGUID clientGUID = clientComponent->getClientGUID();
 	RakNet::NetworkID networkID = networkComponent->GetNetworkID();
-	std::cout << networkID;
+
+	//Write a START_PLAYER message
 	RakNet::BitStream bsOut;
 	bsOut.Write((RakNet::MessageID)START_PLAYER);
 	bsOut.Write(networkID);
+	//Send and set the state to initialized
 	managerRegister.peer->Send(&bsOut, PacketPriority::HIGH_PRIORITY, RELIABLE_ORDERED, 0, clientGUID, false);
 	playerStateComponent->setState(INITIALIZED);
 }

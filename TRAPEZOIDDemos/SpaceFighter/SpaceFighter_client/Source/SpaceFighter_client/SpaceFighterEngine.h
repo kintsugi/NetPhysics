@@ -37,7 +37,7 @@ public:
 	NetworkSystem networkSystem;
 
 	//Utility functions
-	void handlePackets(TArray<TSharedPtr<RakNet::Packet>> packets);
+	void handlePackets(TArray<PacketToBitStream> packets);
 
 	template <class T>
 	T* spawnNetworkActor(RakNet::NetworkID networkID);

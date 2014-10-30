@@ -51,7 +51,17 @@ private:
 	GameStateSystem gameStateSystem;
 
 	//Utility functions
-	void handlePackets(std::vector<std::shared_ptr<RakNet::Packet>> packets);
+	void handlePackets(std::vector<PacketToBitStream> packets);
+};
+
+struct TestStreamData {
+	RakNet::MessageID messageID;
+	std::shared_ptr<RakNet::BitStream> bitStream;
+};
+
+class TestFormatter : public StreamFormatter {
+public:
+	void* format(std::shared_ptr<RakNet::BitStream> inStream);
 };
 
 #endif

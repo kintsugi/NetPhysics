@@ -3,18 +3,15 @@
 #include "AllowWindowsPlatformTypes.h"
 #include "BitStream.h"
 #include "HideWindowsPlatformTypes.h"
+#include "NetworkMessages.h"
 
 ConnectionSystem::ConnectionSystem(): ipAddress(TEXT("localhost")), port(60000) {}
 
-void ConnectionSystem::receivePackets() {
+void ConnectionSystem::update() {
 	//Handle incoming packets
 	RakNet::Packet *packet;
 	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
-		//DeallocatePacket() needs to be called. Copying the packet does not ensure that the
-		//data pointer will not be deleted, so the contents of it must be copied.
-		TSharedPtr<RakNet::Packet> copy(new RakNet::Packet(*packet));
-		copy->data = new unsigned char(*packet->data);
-		packetContainer.Add(copy);
+		packetContainer.Add(PacketToBitStream(packet));
 	}
 }
 
@@ -29,8 +26,7 @@ void ConnectionSystem::connect(FString ipAddress, int port) {
 	peer->Connect(TCHAR_TO_ANSI(*ipAddress), port, 0, 0);
 }
 
-TArray<TSharedPtr<RakNet::Packet>> ConnectionSystem::getPackets() {
-	receivePackets();
+TArray<PacketToBitStream> ConnectionSystem::getPackets() {
 	auto ret = packetContainer;
 	packetContainer.Reset();
 	return ret;

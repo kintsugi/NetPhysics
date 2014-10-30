@@ -4,12 +4,13 @@
 #include <memory>
 #include "RakNetTypes.h"
 #include "NetworkIDManager.h"
+#include "packettobitstream.h"
 
 //Handles messages to Network Components
 class NetworkSystem {
 public:
 	NetworkSystem() {};
-	void sendToNetworkComponent(RakNet::NetworkIDManager &networkIDManager, std::shared_ptr<RakNet::Packet> packet);
+	void sendToNetworkComponent(RakNet::NetworkIDManager &networkIDManager, PacketToBitStream& packet);
 };
 
 #endif

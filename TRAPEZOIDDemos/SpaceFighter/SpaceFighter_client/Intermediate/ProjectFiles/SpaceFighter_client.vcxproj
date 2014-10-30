@@ -49,9 +49,10 @@
     <ClCompile Include="..\..\Source\SpaceFighter_client\GameObjectManager.cpp" />
     <ClCompile Include="..\..\Source\SpaceFighter_client\NetworkManager.cpp" />
     <ClCompile Include="..\..\Source\SpaceFighter_client\NetworkSystem.cpp" />
-    <ClCompile Include="..\..\Source\SpaceFighter_client\Stream.cpp" />
+    <ClCompile Include="..\..\Source\SpaceFighter_client\PacketToBitStream.cpp" />
     <ClCompile Include="..\..\Source\SpaceFighter_client\StreamFormatter.cpp" />
     <ClCompile Include="..\..\Source\SpaceFighter_client\TestActor.cpp" />
+    <ClInclude Include="..\..\Source\SpaceFighter_client\PacketToBitStream.h" />
     <ClInclude Include="..\..\Source\SpaceFighter_client\TestActor.h" />
     <None Include="..\..\SpaceFighter_client.uproject" />
     <None Include="..\..\Source\SpaceFighter_client.Target.cs" />
