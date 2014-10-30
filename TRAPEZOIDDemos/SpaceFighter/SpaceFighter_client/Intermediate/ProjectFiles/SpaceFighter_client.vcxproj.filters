@@ -1,20 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <None Include="..\..\SpaceFighter_client.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{A1DCE531-18E4-423E-A534-A181365D3C42}</UniqueIdentifier>
+      <UniqueIdentifier>{2A9148DC-DCF4-451C-9B2F-98BCDF314CD0}</UniqueIdentifier>
     </Filter>
-    <None Include="..\..\Source\SpaceFighter_client.Target.cs">
-      <Filter>Source</Filter>
-    </None>
-    <None Include="..\..\Source\SpaceFighter_clientEditor.Target.cs">
-      <Filter>Source</Filter>
-    </None>
     <Filter Include="Config">
-      <UniqueIdentifier>{8E0AA8A4-5A51-48D4-BFFA-2402F58DB473}</UniqueIdentifier>
+      <UniqueIdentifier>{4E5F67A9-6DAF-4193-8D98-EFDEF008EF2C}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorUserSettings.ini">
       <Filter>Config</Filter>
     </None>
     <None Include="..\..\Config\DefaultEngine.ini">
@@ -24,13 +20,13 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\SpaceFighter_client">
-      <UniqueIdentifier>{A5B4D758-9F5F-4DAF-B6B6-27F073794593}</UniqueIdentifier>
+      <UniqueIdentifier>{0ACB6DC3-6F3E-4950-9971-A1FE06595FC0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\SpaceFighter_client\Resources">
-      <UniqueIdentifier>{3FC99948-BF3C-4DBE-BAC3-9A814316F847}</UniqueIdentifier>
+      <UniqueIdentifier>{D0724EEA-5D31-4005-8C57-BCC946420AE9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\SpaceFighter_client\Resources\Windows">
-      <UniqueIdentifier>{F14A9CF2-ECCE-40CB-A3E3-762A5440D095}</UniqueIdentifier>
+      <UniqueIdentifier>{54EDC1AD-C179-4354-9D97-26A24AC7F3BF}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\SpaceFighter_client\Resources\Windows\SpaceFighter_client.ico">
       <Filter>Source\SpaceFighter_client\Resources\Windows</Filter>
@@ -39,94 +35,177 @@
       <Filter>Source\SpaceFighter_client\Resources\Windows</Filter>
     </ResourceCompile>
     <None Include="..\..\Source\SpaceFighter_client\SpaceFighter_client.Build.cs">
-      <Filter>Source\SpaceFighter_client\src\Engine</Filter>
+      <Filter>Source\SpaceFighter_client\Build</Filter>
     </None>
+    <None Include="..\..\Source\SpaceFighter_client.Target.cs">
+      <Filter>Source\SpaceFighter_client\Build</Filter>
+    </None>
+    <None Include="..\..\Source\SpaceFighter_clientEditor.Target.cs">
+      <Filter>Source\SpaceFighter_client\Build</Filter>
+    </None>
+    <Filter Include="Source\SpaceFighter_client\include\Actors">
+      <UniqueIdentifier>{74fec18b-0ecd-43de-8886-df9399fc2fc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SpaceFighter_client\src\Actors">
+      <UniqueIdentifier>{bb2756db-5e15-4d11-aa9c-696afe3a98cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SpaceFighter_client\src\Systems">
+      <UniqueIdentifier>{0e83b40a-ebee-4dec-b91b-7150b60e3329}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source\SpaceFighter_client\src">
-      <UniqueIdentifier>{0c5e00f4-90a0-4503-bde9-1bf697d1d031}</UniqueIdentifier>
+      <UniqueIdentifier>{2ee4bc01-ff41-4b3e-8e23-ef0f37fec5b3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\SpaceFighter_client\include">
-      <UniqueIdentifier>{f64b15b6-d587-4d0b-9638-1099b024f039}</UniqueIdentifier>
+      <UniqueIdentifier>{12e367b7-3ec5-43f8-be4b-e6b66f9c37ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\SpaceFighter_client\include\Systems">
-      <UniqueIdentifier>{d86ecc1d-8c54-459c-b3d4-5a6e4434b923}</UniqueIdentifier>
+    <Filter Include="Source\SpaceFighter_client\include\System">
+      <UniqueIdentifier>{4b51f599-75bc-4188-bf4e-2ab1c25cfc7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\SpaceFighter_client\include\Components">
-      <UniqueIdentifier>{c26b7958-ba46-438f-b698-6bbb0aef8f43}</UniqueIdentifier>
+    <Filter Include="Source\SpaceFighter_client\include\Game Object">
+      <UniqueIdentifier>{d4f13f59-46c8-474b-b394-75ab4da42c81}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\SpaceFighter_client\include\Managers">
-      <UniqueIdentifier>{3621803c-b5de-4b54-b862-0e1e3fd090c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\SpaceFighter_client\include\Utility">
-      <UniqueIdentifier>{3ffbf774-0f5d-45e9-b688-5d47f2e9490a}</UniqueIdentifier>
+    <Filter Include="Source\SpaceFighter_client\include\Manager">
+      <UniqueIdentifier>{1cafbcdc-0e33-488d-ab5a-e178a27b40e1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\SpaceFighter_client\include\Engine">
-      <UniqueIdentifier>{33a90f86-7bbc-4e84-9355-03f61d38b89b}</UniqueIdentifier>
+      <UniqueIdentifier>{40fbd158-ee23-4667-8bfb-d00ed29ec56a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\SpaceFighter_client\src\Systems">
-      <UniqueIdentifier>{5fa9fe89-db5b-4836-baa2-7ef7c5bebbaf}</UniqueIdentifier>
+    <Filter Include="Source\SpaceFighter_client\include\Utility">
+      <UniqueIdentifier>{4f3ddd34-ad33-474d-be1b-d45c506a3c82}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\SpaceFighter_client\src\Managers">
-      <UniqueIdentifier>{612a36e5-492b-45d7-bbd9-06e75d0f3962}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\SpaceFighter_client\src\Components">
-      <UniqueIdentifier>{fc734d5b-364f-43e9-8b5e-3c7ad0c12d06}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\SpaceFighter_client\src\Utility">
-      <UniqueIdentifier>{c0f308f8-4021-42d4-8e2b-c223987151d2}</UniqueIdentifier>
+    <Filter Include="Source\SpaceFighter_client\include\Component">
+      <UniqueIdentifier>{6a92a867-fdfa-4dfb-a2c1-f073ec21ef14}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\SpaceFighter_client\src\Engine">
-      <UniqueIdentifier>{aeca17d6-9915-4114-b37d-79e17a6349e1}</UniqueIdentifier>
+      <UniqueIdentifier>{2b586477-83c9-40b5-8d6d-20e8ef5e373e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SpaceFighter_client\src\GameObject">
+      <UniqueIdentifier>{6045042c-c272-4415-be5a-ac28770b83b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SpaceFighter_client\src\Component">
+      <UniqueIdentifier>{0d5c0b33-554d-4c4c-83c8-1edc516135a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SpaceFighter_client\src\Manager">
+      <UniqueIdentifier>{6947eae3-61ea-4dbd-826f-e0a1788cdd74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SpaceFighter_client\src\Utility">
+      <UniqueIdentifier>{c5e53e11-6c32-44d5-898b-e62a964ea4c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SpaceFighter_client\Build">
+      <UniqueIdentifier>{c69ca9f7-b1da-4693-8eda-0f1ed209e7a0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\SpaceFighter_client\SpaceFighterEngine.cpp">
-      <Filter>Source\SpaceFighter_client\src\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceFighter_client\SpaceFighter_client.cpp">
-      <Filter>Source\SpaceFighter_client\src\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceFighter_client\ConnectionSystem.cpp">
-      <Filter>Source\SpaceFighter_client\src\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceFighter_client\Messenger.cpp">
-      <Filter>Source\SpaceFighter_client\src\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceFighter_client\NetworkComponent.cpp">
-      <Filter>Source\SpaceFighter_client\src\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceFighter_client\HandleManager.cpp">
-      <Filter>Source\SpaceFighter_client\src\Managers</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Source\SpaceFighter_client\ConnectionSystem.h">
-      <Filter>Source\SpaceFighter_client\include\Systems</Filter>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\ComponentTypeHandle.h">
+      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceFighter_client\NetworkComponent.h">
-      <Filter>Source\SpaceFighter_client\include\Components</Filter>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\GameObjectFilter.h">
+      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\Handle.h">
+      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\SpaceFighter_client\HandleManager.h">
-      <Filter>Source\SpaceFighter_client\include\Managers</Filter>
+      <Filter>Source\SpaceFighter_client\include\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\SpaceFighter_client\Messenger.h">
+      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\ConnectionSystem.h">
+      <Filter>Source\SpaceFighter_client\include\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\GameObject.h">
+      <Filter>Source\SpaceFighter_client\include\Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\NetworkComponent.h">
+      <Filter>Source\SpaceFighter_client\include\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\NetworkManager.h">
+      <Filter>Source\SpaceFighter_client\include\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\NetworkMessages.h">
+      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\SpaceFighter_client.h">
+      <Filter>Source\SpaceFighter_client\include\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\SpaceFighterEngine.h">
+      <Filter>Source\SpaceFighter_client\include\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\NetworkSystem.h">
+      <Filter>Source\SpaceFighter_client\include\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\Stream.h">
+      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\StreamFormatter.h">
       <Filter>Source\SpaceFighter_client\include\Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\SpaceFighter_client\Subscriber.h">
       <Filter>Source\SpaceFighter_client\include\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceFighter_client\SpaceFighterEngine.h">
-      <Filter>Source\SpaceFighter_client\include\Engine</Filter>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\GameObjectManager.h">
+      <Filter>Source\SpaceFighter_client\include\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceFighter_client\SpaceFighter_client.h">
-      <Filter>Source\SpaceFighter_client\include\Engine</Filter>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\TestActor.h">
+      <Filter>Source\SpaceFighter_client\include\Actors</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceFighter_client\Handle.h">
-      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
+    <ClInclude Include="..\..\Source\SpaceFighter_client\NetworkObject.h">
+      <Filter>Source\SpaceFighter_client\include\Game Object</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceFighter_client\NetworkMessages.h">
-      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\ComponentTypeHandle.cpp">
+      <Filter>Source\SpaceFighter_client\src\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\ConnectionSystem.cpp">
+      <Filter>Source\SpaceFighter_client\src\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\GameObject.cpp">
+      <Filter>Source\SpaceFighter_client\src\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\HandleManager.cpp">
+      <Filter>Source\SpaceFighter_client\src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\Messenger.cpp">
+      <Filter>Source\SpaceFighter_client\src\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\NetworkComponent.cpp">
+      <Filter>Source\SpaceFighter_client\src\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\NetworkSystem.cpp">
+      <Filter>Source\SpaceFighter_client\src\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\NetworkManager.cpp">
+      <Filter>Source\SpaceFighter_client\src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\SpaceFighter_client.cpp">
+      <Filter>Source\SpaceFighter_client\src\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\SpaceFighterEngine.cpp">
+      <Filter>Source\SpaceFighter_client\src\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\Stream.cpp">
+      <Filter>Source\SpaceFighter_client\src\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\StreamFormatter.cpp">
+      <Filter>Source\SpaceFighter_client\src\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\GameObjectManager.cpp">
+      <Filter>Source\SpaceFighter_client\src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\TestActor.cpp">
+      <Filter>Source\SpaceFighter_client\src\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\NetworkObject.cpp">
+      <Filter>Source\SpaceFighter_client\src\GameObject</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\SpaceFighter_client.uproject">
+      <Filter>Source\SpaceFighter_client\Build</Filter>
+    </None>
   </ItemGroup>
 </Project>

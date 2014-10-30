@@ -3,12 +3,18 @@
 #include "Platform.h"
 
 enum HandleType : uint32 {
+	//Universal handle types.
 	UNASSIGNED_TYPE,
+	MESSENGER,
+	SUBSCRIBER,
+	//Server only handle types.
 	GAME_OBJECT,
 	NETWORK_COMPONENT,
 	PHYSICS_COMPONENT,
-	MESSENGER,
-	SUBSCRIBER,
+	CLIENT_COMPONENT,
+	PLAYER_STATE_COMPONENT,
+	//Client only types.
+	NETWORK_OBJECT,
 };
 
 struct Handle {

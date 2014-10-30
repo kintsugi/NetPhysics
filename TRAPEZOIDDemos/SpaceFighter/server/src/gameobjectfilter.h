@@ -10,7 +10,7 @@
 */
 class GameObjectFilter {
 public:
-	GameObjectFilter() {};
+	GameObjectFilter() {}
 	GameObjectFilter(const HandleType type) { filterList.push_back(type); }
 	GameObjectFilter(const std::vector<HandleType> types) : filterList(types) {}
 	void addToFilter(const HandleType type){ filterList.push_back(type); }

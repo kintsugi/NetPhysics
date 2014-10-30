@@ -38,7 +38,6 @@ void ServerSystem::update() {
 		std::shared_ptr<RakNet::Packet> copy(new RakNet::Packet(*packet));
 		copy->data = new unsigned char(*packet->data);
 		packetContainer.push_back(copy);
-		std::cout << std::endl << packet->guid.ToString();
 	}
 	//Calculate the dt between last server tick
 	lastTime = currentTime;
@@ -50,7 +49,6 @@ RakNet::RakPeerInterface* ServerSystem::getRakNetInstance() {
 }
 
 std::vector<std::shared_ptr<RakNet::Packet>> ServerSystem::getPackets() {
-	update();
 	auto ret = packetContainer;
 	packetContainer.clear();
 	return ret;

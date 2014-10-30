@@ -12,7 +12,6 @@ class HandleManager;
 */
 class ComponentTypeHandle {
 public:
-	ComponentTypeHandle() {}
 	ComponentTypeHandle(Handle newHandle) { addHandle(newHandle); }
 	ComponentTypeHandle(std::vector<Handle> newContainer) : container(newContainer) {}
 	void addHandle(Handle handle);

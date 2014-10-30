@@ -2,20 +2,22 @@
 #define CLIENT_MANAGER_H_INCLUDED
 
 #include <vector>
+#include <memory>
 #include "RakPeerInterface.h"
 #include "handle.h"
 #include "clientcomponent.h"
+
+typedef std::shared_ptr<ClientComponent> ClientComponentPtr;
 
 class HandleManager;
 
 class ClientManager {
 public:
-	ClientManager() {}
 	void update(HandleManager &handleManager);
-	Handle createComponent(HandleManager &handleManager, RakNet::RakNetGUID guid);
+	Handle createComponent(HandleManager &handleManager, RakNet::RakPeerInterface* peer, RakNet::RakNetGUID guid);
 
 private:
-	std::vector<ClientComponent> container;
+	std::vector<ClientComponentPtr> container;
 };
 
 #endif

@@ -61,7 +61,7 @@ void* HandleManager::get(const Handle handle) const
 bool HandleManager::get(const Handle handle, void*& out) const
 {
 	//Attempt to find the value with the key handle.id
-	std::unordered_map<uint32, HandleEntry>::const_iterator got = entries.find(handle.key);
+	auto got = entries.find(handle.key);
 	if (got == entries.end())
 		return false;
 	//If found and matches the handle.type, assign member entry to out

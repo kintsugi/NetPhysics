@@ -7,11 +7,12 @@
 #include "handlemanager.h"
 #include "physicscomponent.h"
 
+typedef std::shared_ptr<PhysicsComponent> PhysicsComponentPtr;
+
 struct BulletPhysicsObject;
 
 class PhysicsManager {
 public:
-	PhysicsManager() {}
 
 	//Checks component validity flags to see if it should delete the component.
 	void update(HandleManager &handleManager);
@@ -24,7 +25,7 @@ public:
 	Handle createComponent(HandleManager &handleManager, BulletPhysicsObject& obj);
 
 private:
-	std::vector<PhysicsComponent> container;
+	std::vector<PhysicsComponentPtr> container;
 };
 
 #endif

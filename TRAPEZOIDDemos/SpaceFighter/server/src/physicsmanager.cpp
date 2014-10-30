@@ -4,7 +4,7 @@
 
 void PhysicsManager::update(HandleManager &handleManager) {
 	for (auto iter = container.begin(); iter != container.end();) {
-		if (!handleManager.get(iter->getHandle()))
+		if (!handleManager.get((*iter)->getHandle()))
 			iter = container.erase(iter);
 		else
 			iter++;
@@ -12,6 +12,6 @@ void PhysicsManager::update(HandleManager &handleManager) {
 }
 
 Handle PhysicsManager::createComponent(HandleManager &handleManager, BulletPhysicsObject& obj) {
-	container.push_back(PhysicsComponent(handleManager, obj));
-	return container.back().getHandle();
+	container.push_back(PhysicsComponentPtr(new PhysicsComponent(handleManager, obj)));
+	return container.back()->getHandle();
 }

@@ -5,24 +5,38 @@
 #include "handlemanager.h"
 #include "handle.h"
 
+
 /*
-	PlayerComponent encapsulates data relating the client connected to their game
-	entities. Allows for easy access to a client's game state through their
-	network component.
+	Component encapsulating the client connection data.
 */
 class ClientComponent {
 public:
-	ClientComponent(HandleManager &handleManager, RakNet::RakNetGUID newClientGUID) : 
-		clientGUID(newClientGUID),
-		handle(handleManager.add(this, CLIENT_COMPONENT)) {}
 
-	RakNet::RakNetGUID getClientGUID() {return clientGUID;}
+	/*
+	@param handleManager reference to a handleManager to manage this object
+	@param peer the instance of RakNetInterface the client is connected to
+	@param newClientGUID the RakNetGUID of the client's system
+	*/
+	ClientComponent(HandleManager &handleManager, RakNet::RakPeerInterface *peer, const RakNet::RakNetGUID newClientGUID);
 
-	Handle getHandle() {return handle;}
+	//Returns the RakNetGUID of the client
+	RakNet::RakNetGUID getClientGUID() const;
+
+	//Polls and returns the connection state of the client
+	RakNet::ConnectionState getConnectionState() const;
+
+	//Returns the handle of this component.
+	Handle getHandle() const;
+
 private:
+	//Handle of this object
 	Handle handle;
+	//client identifier
 	RakNet::RakNetGUID clientGUID;
-	//TODO design container/system for client state data
+	//pointer to the instance of RakPeerInterface the client is connected to.
+	RakNet::RakPeerInterface* RakPeerInstance;
+	
+	
 };
 
 

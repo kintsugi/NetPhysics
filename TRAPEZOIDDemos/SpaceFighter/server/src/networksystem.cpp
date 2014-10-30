@@ -2,15 +2,16 @@
 #include "handlemanager.h"
 #include "networkcomponent.h"
 
-void NetworkSystem::sendToNetworkComponent(HandleManager &handleManager, std::shared_ptr<RakNet::Packet> packet) {
+void NetworkSystem::sendToNetworkComponent(RakNet::NetworkIDManager &networkIDManager, std::shared_ptr<RakNet::Packet> packet) {
 	//Create a BitStream from the packet.
 	std::shared_ptr<RakNet::BitStream> inBS(new RakNet::BitStream(packet->data, packet->length, true));
 	//Read the Handle
 	inBS->IgnoreBytes(sizeof(RakNet::MessageID));
-	Handle networkComponentHandle;
-	inBS->Read(networkComponentHandle);
+	RakNet::NetworkID networkID;
+	inBS->Read(networkID);
 	//Validate the handle and then retrieve the object from the HandleManager.
-	NetworkComponent* netComp = (NetworkComponent*)handleManager.get(networkComponentHandle);
+	NetworkComponent* netComp = networkIDManager.GET_OBJECT_FROM_ID<NetworkComponent*>(networkID);
 	//Add the BitStream to the component.
-	netComp->addBitStream(inBS);
+	if (netComp)
+		netComp->addBitStream(inBS);
 }

@@ -3,17 +3,17 @@
 #include "handlemanager.h"
 
 PhysicsComponent::PhysicsComponent(HandleManager& handleManager, BulletPhysicsObject& obj)
-	:	bulletPhysicsObject(obj),
+	:	bulletPhysicsObject(new BulletPhysicsObject(obj)),
 		handle(handleManager.add(this, PHYSICS_COMPONENT)),
 		dynamicsWorld(NULL), 
 		rigidBody(NULL)
 {
 	//creates the rigidbody with the data stored in member physicsComponent
 	rigidBody = new btRigidBody(btRigidBody::btRigidBodyConstructionInfo(
-		bulletPhysicsObject.mass,
-		bulletPhysicsObject.motionState.get(),
-		bulletPhysicsObject.collisionShape.get(),
-		bulletPhysicsObject.localInertia));
+		*bulletPhysicsObject->mass,
+		bulletPhysicsObject->motionState.get(),
+		bulletPhysicsObject->collisionShape.get(),
+		*bulletPhysicsObject->localInertia));
 	rigidBody->setActivationState(DISABLE_DEACTIVATION);
 }
 

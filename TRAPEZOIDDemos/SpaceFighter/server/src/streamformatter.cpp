@@ -3,7 +3,7 @@
 StreamData* StreamFormatter::format(std::shared_ptr<RakNet::BitStream> inBitStream) {
 	inBitStream->ResetReadPointer();
 	StreamData* ret = new StreamData();
-	inBitStream->IgnoreBytes(sizeof(RakNet::MessageID) + sizeof(Handle));
+	inBitStream->IgnoreBytes(sizeof(RakNet::MessageID) + sizeof(RakNet::NetworkID));
 	inBitStream->Read(ret->type);
 	RakNet::BitSize_t remainingBits = inBitStream->GetNumberOfUnreadBits();
 	ret->formattedBitStream = std::shared_ptr<RakNet::BitStream>(new RakNet::BitStream());

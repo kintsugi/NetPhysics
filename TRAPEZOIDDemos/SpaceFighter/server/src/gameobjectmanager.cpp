@@ -3,7 +3,7 @@
 
 void GameObjectManager::update(HandleManager &handleManager) {
 	for (auto iter = container.begin(); iter != container.end();) {
-		if (!handleManager.get(iter->getHandle()))
+		if (!handleManager.get((*iter)->getHandle()))
 			iter = container.erase(iter);
 		else
 			iter++;
@@ -11,15 +11,15 @@ void GameObjectManager::update(HandleManager &handleManager) {
 }
 
 GameObject* GameObjectManager::createGameObject(HandleManager &handleManager) {
-	container.push_back(GameObject(handleManager));
-	return &container.back();
+	container.push_back(GameObjectPtr(new GameObject(handleManager)));
+	return container.back().get();
 }
 
-std::vector<Handle> GameObjectManager::getGameObjects(const GameObjectFilter filter) {
-	std::vector<Handle> ret;
+std::vector<GameObject*> GameObjectManager::getGameObjects(const GameObjectFilter filter) {
+	std::vector<GameObject*> ret;
 	for (auto iter = container.begin(); iter != container.end();iter++) {
-		if (iter->hasComponents(filter))
-			ret.push_back(iter->getHandle());
+		if ((*iter)->hasComponents(filter))
+			ret.push_back(iter->get());
 	}
 	return ret;
 }

@@ -1,9 +1,9 @@
 #include "gameobject.h"
 #include "handlemanager.h"
 
-GameObject::GameObject(HandleManager &handleManager) : messenger(handleManager) {
-	handleManager.add(this, GAME_OBJECT);
-}
+GameObject::GameObject(HandleManager &handleManager) : 
+	messenger(handleManager), 
+	handle(handleManager.add(this, GAME_OBJECT)) {}
 
 bool GameObject::hasComponents(const GameObjectFilter filter) const {
 	//if there is an handle type in the filter that is not in the map, return false

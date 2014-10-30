@@ -22,7 +22,7 @@ public:
 	Handle getHandle() const;
 private:
 	Handle handle;
-	BulletPhysicsObject bulletPhysicsObject;
+	std::shared_ptr<BulletPhysicsObject> bulletPhysicsObject;
 	btRigidBody* rigidBody;
 	btDiscreteDynamicsWorld* dynamicsWorld;
 };

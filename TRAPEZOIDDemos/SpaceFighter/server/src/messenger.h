@@ -23,6 +23,7 @@ struct Message {
 class Messenger {
 public:
 	Messenger(HandleManager& handleManager);
+
 	/*
 	Sends a message to all subscribers.
 	@param handleManager a pointer to the handleManager object containing the
@@ -30,16 +31,19 @@ public:
 	@param msg the message being posted.
 	*/
 	void postMessage(HandleManager& handleManager, Message* msg);
+
 	/*
 	Adds the message to the inbox container.
 	@param msg the message to store.
 	*/
 	void receiveMessage(Message* msg);
+
 	/*
 	Returns and clears the inbox container.
 	@return the message container.
 	*/
 	std::vector<Message*> getInbox();
+
 	/*
 	Adds the messenger object described by subscriber to the subscriber list.
 	Any messages posted afterwards that meet the desired type will be sent to
@@ -50,6 +54,7 @@ public:
 	@param messageType the type of message to subscribe to.
 	*/
 	void subscribe(Handle messengerHandle, const int messageType);
+
 	Handle getHandle() const;
 private:
 	Handle handle;

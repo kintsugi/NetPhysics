@@ -5,13 +5,14 @@
 #include "gameobject.h"
 #include "gameobjectfilter.h"
 
+typedef std::shared_ptr<GameObject> GameObjectPtr;
+
 class HandleManager;
 /*
 	Factory for GameObjects. Handles allocation, deletion, and retrieval.
 */
 class GameObjectManager {
 public:
-	GameObjectManager() {}
 
 	/*
 	Iterates through the container polling if any game object has expired
@@ -31,9 +32,9 @@ public:
 	@param filter The GameObjectFilter describing the requirements of the returned object.
 	@return a vector of handles to the GameObjects that match the filter.
 	*/
-	std::vector<Handle> getGameObjects(const GameObjectFilter filter);
+	std::vector<GameObject*> getGameObjects(const GameObjectFilter filter);
 private:
-	std::list<GameObject> container;
+	std::list<GameObjectPtr> container;
 };
 
 #endif

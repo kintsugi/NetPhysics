@@ -2,9 +2,9 @@
 #define CLIENT_SYSTEM_H_INCLUDED
 
 #include "RakNetTypes.h"
-#include "gameobjectmanager.h"
-#include "clientmanager.h"
 #include "gameobjectfilter.h"
+
+class ManagerRegister;
 
 class ClientSystem {
 public:
@@ -14,9 +14,8 @@ public:
 	the client's, effectively adding him to the system.
 	@param clientSystemAddress the clients systemAddress.
 	*/
-	void InitializeClient(HandleManager& handleManager,
-						  GameObjectManager &gameObjectManager,
-						  ClientManager& clientManager,
+	void initializeClient(ManagerRegister &managerRegister,
+						  RakNet::RakPeerInterface* peer,
 						  RakNet::RakNetGUID guid);
 private:
 	GameObjectFilter filter;

@@ -6,7 +6,7 @@
 
 class HandleManager {
 public:
-	HandleManager() : nextAvailableKey(0){}
+	HandleManager() : nextAvailableKey(0) {}
 
 	//Clears the entries container
 	void reset();

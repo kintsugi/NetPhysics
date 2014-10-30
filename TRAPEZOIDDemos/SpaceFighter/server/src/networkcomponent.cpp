@@ -1,21 +1,33 @@
 #include "networkcomponent.h"
 #include "handlemanager.h"
 
-NetworkComponent::NetworkComponent(HandleManager& handleManager, RakNet::RakPeerInterface* peer) :
-	handle(handleManager.add(this, NETWORK_COMPONENT)),
-	RakPeerInstance(peer),
-	formatter(NULL) {}
+NetworkComponent::NetworkComponent(HandleManager& handleManager,
+								   RakNet::NetworkIDManager &networkIDManager,
+								   RakNet::RakPeerInterface* peer)
+	: handle(handleManager.add(this, NETWORK_COMPONENT)),
+	  RakPeerInstance(peer),
+	  formatter(NULL)
+{
+	SetNetworkIDManager(&networkIDManager);
+}
 
-NetworkComponent::NetworkComponent(HandleManager& handleManager, RakNet::RakPeerInterface* peer, StreamFormatter* newFormatter) :
+NetworkComponent::NetworkComponent(HandleManager& handleManager, RakNet::NetworkIDManager &networkIDManager, RakNet::RakPeerInterface* peer, StreamFormatter* newFormatter) :
 	handle(handleManager.add(this, NETWORK_COMPONENT)),
 	RakPeerInstance(peer),
-	formatter(newFormatter){}
+	formatter(newFormatter)
+{
+	SetNetworkIDManager(&networkIDManager);
+}
+
+void NetworkComponent::setFormatter(StreamFormatter* newFormatter) {
+	formatter = newFormatter;
+}
 
 void NetworkComponent::addBitStream(std::shared_ptr<RakNet::BitStream> inBS) {
 	streams.push_back(Stream(inBS, formatter));
 }
 
-std::vector<Stream> NetworkComponent::getAllStreams() {
+std::vector<Stream> NetworkComponent::getAllStreams() const {
 	return streams;
 }
 
@@ -39,10 +51,10 @@ void NetworkComponent::removeStreamsOfType(StreamType type) {
 	}
 }
 
-RakNet::RakPeerInterface* NetworkComponent::getRakPeerInstance() {
+RakNet::RakPeerInterface* NetworkComponent::getRakPeerInstance() const {
 	return RakPeerInstance;
 }
 
-Handle NetworkComponent::getHandle() {
+Handle NetworkComponent::getHandle() const {
 	return handle;
 }

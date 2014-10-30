@@ -34,6 +34,10 @@ public:
 	template<class T>
 	T* getComponent(HandleManager &handleManager, const Handle handle);
 
+	//Gets the first component in the ComponentTypeHandle. Use when you only need one of the component.
+	template<class T>
+	T* getComponent(HandleManager &handleManager, const HandleType type);
+
 	/*
 	Returns a pointer to the handle of the component.
 	@param handleManager the HandleManager containing the component
@@ -87,12 +91,20 @@ T* GameObject::getComponent(HandleManager &handleManager, const Handle handle) {
 }
 
 template<class T>
+T* GameObject::getComponent(HandleManager &handleManager, const HandleType type) {
+	auto got = components.find(type);
+	if (got != components.end()) {
+		return (T*)handleManager.get(got->second.getHandles()[0]);
+	}
+	return NULL;
+}
+
+template<class T>
 std::vector<T*> GameObject::getComponents(HandleManager &handleManager, const HandleType type) {
 	std::vector<T*> ret;
-	auto got = components.find(handle.type);
+	auto got = components.find(type);
 	if (got != components.end()) {
 		std::vector<Handle> handles = got->second.getHandles();
-		std::vector<T*> ret;
 		for (auto iter = handles.begin; iter != handles.end(); iter++)
 			ret.push_back((T*)handleManager.get(*iter));
 	}
