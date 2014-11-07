@@ -1,6 +1,7 @@
 #ifndef PLAYER_STATE_COMPONENT_H_INCLUDED
 #define PLAYER_STATE_COMPONENT_H_INCLUDED
 
+#include "component.h"
 #include "handle.h"
 
 class HandleManager;
@@ -8,9 +9,10 @@ class HandleManager;
 enum PlayerState {
 	UNINITIALIZED,
 	INITIALIZED,
+	HAS_OBJECT,
 };
 
-class PlayerStateComponent {
+class PlayerStateComponent : public Component {
 public:
 	/*
 	@param handleManager reference to a handleManager to manage this object
@@ -24,11 +26,7 @@ public:
 	//Sets the player's state.
 	void setState(const PlayerState newState);
 
-	//Gets this object's handle.
-	Handle getHandle() const;
 private:
-	//Handle of this object.
-	Handle handle;
 
 	//Player's current state
 	PlayerState state;

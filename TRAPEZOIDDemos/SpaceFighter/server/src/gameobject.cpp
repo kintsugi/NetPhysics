@@ -1,5 +1,6 @@
 #include "gameobject.h"
 #include "handlemanager.h"
+#include "component.h"
 
 GameObject::GameObject(HandleManager &handleManager) : 
 	messenger(handleManager), 
@@ -7,7 +8,7 @@ GameObject::GameObject(HandleManager &handleManager) :
 
 bool GameObject::hasComponents(const GameObjectFilter filter) const {
 	//if there is an handle type in the filter that is not in the map, return false
-	std::vector<HandleType> filterList = filter.getFilterList();
+	XLib::Vector<HandleType> filterList = filter.getFilterList();
 	for (auto iter = filterList.begin(); iter != filterList.end(); iter++) {
 		if (components.count(*iter) == 0)
 			return false;
@@ -15,13 +16,15 @@ bool GameObject::hasComponents(const GameObjectFilter filter) const {
 	return true;
 }
 
-bool GameObject::addComponent(const Handle handle) {
+bool GameObject::addComponent(HandleManager &handleManager, const Handle handle) {
 	auto got = components.find(handle.type);
 	if (got != components.end()) {
 		got->second.addHandle(handle);
+		makeParent(handleManager, handle);
 		return true;
 	} else if (got == components.end()) {
 		components.insert(std::make_pair(handle.type, ComponentTypeHandle(handle)));
+		makeParent(handleManager, handle);
 		return true;
 	}
 	return false;
@@ -58,8 +61,10 @@ void GameObject::removeSelf(HandleManager &handleManager) {
 		iter->second.removeAllComponents(handleManager);
 }
 
-void GameObject::setHandle(Handle newHandle) {
-	handle = newHandle;
+void GameObject::makeParent(HandleManager &handleManager, const Handle childHandle) {
+	Component* baseComponent = (Component*)handleManager.get(childHandle);
+	if (baseComponent)
+		baseComponent->setParent(handle);
 }
 
 Handle GameObject::getHandle() const {

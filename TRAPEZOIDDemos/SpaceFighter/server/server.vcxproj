@@ -55,6 +55,16 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Import Project="platformmacros.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Import Project="platformmacros.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="platformmacros.props" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
@@ -85,7 +95,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LibraryPath>C:\dev\libs\Bullet\BulletBuild\lib\Debug;$(LibraryPath)</LibraryPath>
-    <IncludePath>.\src\;$(IncludePath)</IncludePath>
+    <IncludePath>.\src\SharedSrc\;.\src\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LibraryPath>C:\dev\libs\Bullet\BulletBuild\lib\Release;$(LibraryPath)</LibraryPath>
@@ -93,7 +103,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\dev\libs\RakNet\RakNet-master\Source;C:\dev\libs\Bullet\bullet-2.82-r2704\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\proj\TRAPEZOID\TRAPEZOIDDemos\SpaceFighter\server\src\SharedSrc;C:\dev\libs\RakNet\RakNet-master\Source;C:\dev\libs\Bullet\bullet-2.82-r2704\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -106,7 +116,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_DEBUG;BT_USE_DOUBLE_PRECISION;_IRR_STATIC_LIB_;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;SERVER;BT_USE_DOUBLE_PRECISION;_IRR_STATIC_LIB_;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
@@ -450,31 +460,37 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\VitaIncludes.cpp" />
     <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\WSAStartupSingleton.cpp" />
     <ClCompile Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\_FindFirst.cpp" />
-    <ClCompile Include="src\bulletphysicsobject.cpp" />
-    <ClCompile Include="src\clientcomponent.cpp" />
-    <ClCompile Include="src\clientmanager.cpp" />
-    <ClCompile Include="src\clientsystem.cpp" />
-    <ClCompile Include="src\componenttypehandle.cpp" />
-    <ClCompile Include="src\engine.cpp" />
-    <ClCompile Include="src\gameobject.cpp" />
-    <ClCompile Include="src\gameobjectmanager.cpp" />
-    <ClCompile Include="src\gamestatesystem.cpp" />
-    <ClCompile Include="src\handlemanager.cpp" />
+    <ClCompile Include="src\BulletPhysicsObject.cpp" />
+    <ClCompile Include="src\ClientComponent.cpp" />
+    <ClCompile Include="src\ClientManager.cpp" />
+    <ClCompile Include="src\ClientSystem.cpp" />
+    <ClCompile Include="src\ComponentTypeHandle.cpp" />
+    <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\GameObjectManager.cpp" />
+    <ClCompile Include="src\PacketHandlerSystem.cpp" />
+    <ClCompile Include="src\PhysicsComponent.cpp" />
+    <ClCompile Include="src\PhysicsManager.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\managerregister.cpp" />
-    <ClCompile Include="src\messenger.cpp" />
-    <ClCompile Include="src\networkcomponent.cpp" />
-    <ClCompile Include="src\networkmanager.cpp" />
-    <ClCompile Include="src\networksystem.cpp" />
-    <ClCompile Include="src\packettobitstream.cpp" />
-    <ClCompile Include="src\physicscomponent.cpp" />
-    <ClCompile Include="src\physicsmanager.cpp" />
-    <ClCompile Include="src\physicssystem.cpp" />
-    <ClCompile Include="src\playerstatecomponent.cpp" />
-    <ClCompile Include="src\playerstatemanager.cpp" />
-    <ClCompile Include="src\serversystem.cpp" />
-    <ClCompile Include="src\timercomponent.cpp" />
-    <ClCompile Include="src\timermanager.cpp" />
+    <ClCompile Include="src\PhysicsSystem.cpp" />
+    <ClCompile Include="src\PlayerInitSystem.cpp" />
+    <ClCompile Include="src\PlayerStateComponent.cpp" />
+    <ClCompile Include="src\PlayerStateManager.cpp" />
+    <ClCompile Include="src\ServerSystem.cpp" />
+    <ClCompile Include="src\SharedSrc\Component.cpp" />
+    <ClCompile Include="src\SharedSrc\ComponentManager.cpp" />
+    <ClCompile Include="src\SharedSrc\EngineRegister.cpp" />
+    <ClCompile Include="src\SharedSrc\HandleManager.cpp" />
+    <ClCompile Include="src\SharedSrc\Messenger.cpp" />
+    <ClCompile Include="src\SharedSrc\NetworkComponent.cpp" />
+    <ClCompile Include="src\SharedSrc\NetworkHandleManager.cpp" />
+    <ClCompile Include="src\SharedSrc\NetworkHandleObject.cpp" />
+    <ClCompile Include="src\SharedSrc\NetworkManager.cpp" />
+    <ClCompile Include="src\SharedSrc\NetworkMessage.cpp" />
+    <ClCompile Include="src\SharedSrc\NetworkSystem.cpp" />
+    <ClCompile Include="src\SharedSrc\PacketToBitstream.cpp" />
+    <ClCompile Include="src\TimerComponent.cpp" />
+    <ClCompile Include="src\TimerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\AutopatcherPatchContext.h" />
@@ -631,36 +647,43 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\WSAStartupSingleton.h" />
     <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\XBox360Includes.h" />
     <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\_FindFirst.h" />
-    <ClInclude Include="src\bulletphysicsobject.h" />
-    <ClInclude Include="src\clientcomponent.h" />
-    <ClInclude Include="src\clientmanager.h" />
-    <ClInclude Include="src\clientsystem.h" />
-    <ClInclude Include="src\componenttypehandle.h" />
-    <ClInclude Include="src\engine.h" />
-    <ClInclude Include="src\gameobject.h" />
-    <ClInclude Include="src\gameobjectfilter.h" />
-    <ClInclude Include="src\gameobjectmanager.h" />
-    <ClInclude Include="src\gamestatesystem.h" />
-    <ClInclude Include="src\managerregister.h" />
-    <ClInclude Include="src\packettobitstream.h" />
-    <ClInclude Include="src\playerstatecomponent.h" />
-    <ClInclude Include="src\handle.h" />
-    <ClInclude Include="src\handlemanager.h" />
-    <ClInclude Include="src\networksystem.h" />
-    <ClInclude Include="src\playerstatemanager.h" />
-    <ClInclude Include="src\stream.h" />
-    <ClInclude Include="src\streamformatter.h" />
-    <ClInclude Include="src\subscriber.h" />
-    <ClInclude Include="src\networkmessages.h" />
-    <ClInclude Include="src\messenger.h" />
-    <ClInclude Include="src\networkcomponent.h" />
-    <ClInclude Include="src\networkmanager.h" />
-    <ClInclude Include="src\physicscomponent.h" />
-    <ClInclude Include="src\physicsmanager.h" />
-    <ClInclude Include="src\serversystem.h" />
-    <ClInclude Include="src\physicssystem.h" />
-    <ClInclude Include="src\timercomponent.h" />
-    <ClInclude Include="src\timermanager.h" />
+    <ClInclude Include="src\BulletPhysicsObject.h" />
+    <ClInclude Include="src\ClientComponent.h" />
+    <ClInclude Include="src\ClientManager.h" />
+    <ClInclude Include="src\ClientSystem.h" />
+    <ClInclude Include="src\ComponentTypeHandle.h" />
+    <ClInclude Include="src\Engine.h" />
+    <ClInclude Include="src\GameObject.h" />
+    <ClInclude Include="src\GameObjectFilter.h" />
+    <ClInclude Include="src\GameObjectManager.h" />
+    <ClInclude Include="src\PacketHandlerSystem.h" />
+    <ClInclude Include="src\PhysicsComponent.h" />
+    <ClInclude Include="src\PhysicsManager.h" />
+    <ClInclude Include="src\PhysicsSystem.h" />
+    <ClInclude Include="src\PlayerInitSystem.h" />
+    <ClInclude Include="src\PlayerStateComponent.h" />
+    <ClInclude Include="src\PlayerStateManager.h" />
+    <ClInclude Include="src\ServerSystem.h" />
+    <ClInclude Include="src\SharedSrc\Component.h" />
+    <ClInclude Include="src\SharedSrc\ComponentManager.h" />
+    <ClInclude Include="src\SharedSrc\EngineRegister.h" />
+    <ClInclude Include="src\SharedSrc\Handle.h" />
+    <ClInclude Include="src\SharedSrc\HandleManager.h" />
+    <ClInclude Include="src\SharedSrc\Messenger.h" />
+    <ClInclude Include="src\SharedSrc\NetworkComponent.h" />
+    <ClInclude Include="src\SharedSrc\NetworkHandleManager.h" />
+    <ClInclude Include="src\SharedSrc\NetworkHandleObject.h" />
+    <ClInclude Include="src\SharedSrc\NetworkManager.h" />
+    <ClInclude Include="src\SharedSrc\NetworkMessage.h" />
+    <ClInclude Include="src\SharedSrc\NetworkSystem.h" />
+    <ClInclude Include="src\SharedSrc\PacketToBitstream.h" />
+    <ClInclude Include="src\SharedSrc\System.h" />
+    <ClInclude Include="src\SharedSrc\XLib.h" />
+    <ClInclude Include="src\Stream.h" />
+    <ClInclude Include="src\StreamFormatter.h" />
+    <ClInclude Include="src\Subscriber.h" />
+    <ClInclude Include="src\TimerComponent.h" />
+    <ClInclude Include="src\TimerManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\CMakeLists.txt" />

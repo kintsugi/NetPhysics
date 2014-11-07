@@ -1,6 +1,7 @@
 #ifndef CLIENT_COMPONENT_H_INCLUDED
 #define CLIENT_COMPONENT_H_INCLUDED
 
+#include "Component.h"
 #include "RakPeerInterface.h"
 #include "handlemanager.h"
 #include "handle.h"
@@ -9,7 +10,7 @@
 /*
 	Component encapsulating the client connection data.
 */
-class ClientComponent {
+class ClientComponent : public Component {
 public:
 
 	/*
@@ -25,12 +26,8 @@ public:
 	//Polls and returns the connection state of the client
 	RakNet::ConnectionState getConnectionState() const;
 
-	//Returns the handle of this component.
-	Handle getHandle() const;
-
 private:
-	//Handle of this object
-	Handle handle;
+
 	//client identifier
 	RakNet::RakNetGUID clientGUID;
 	//pointer to the instance of RakPeerInterface the client is connected to.

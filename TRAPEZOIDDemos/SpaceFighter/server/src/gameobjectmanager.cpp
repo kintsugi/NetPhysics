@@ -15,8 +15,8 @@ GameObject* GameObjectManager::createGameObject(HandleManager &handleManager) {
 	return container.back().get();
 }
 
-std::vector<GameObject*> GameObjectManager::getGameObjects(const GameObjectFilter filter) {
-	std::vector<GameObject*> ret;
+XLib::Vector<GameObject*> GameObjectManager::getGameObjects(const GameObjectFilter filter) {
+	XLib::Vector<GameObject*> ret;
 	for (auto iter = container.begin(); iter != container.end();iter++) {
 		if ((*iter)->hasComponents(filter))
 			ret.push_back(iter->get());

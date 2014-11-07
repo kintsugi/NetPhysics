@@ -1,7 +1,7 @@
 #ifndef GAME_OBJECT_H_INCLUDED
 #define GAME_OBJECT_H_INCLUDED
 
-#include <unordered_map>
+#include "xlib.h"
 #include "handle.h"
 #include "componenttypehandle.h"
 #include "gameobjectfilter.h"
@@ -11,11 +11,11 @@
 /*
 	GameObject class encapulates handles to components.
 	Access added components by using HandleManager::Get
-	Handle::m_type denotes the type of the component.
+	Handle::type denotes the type of the component.
 	A gameobject cannot have multiple of the same component, or things get weird.
 */
 class GameObject {
-friend class GameObjectManager;
+
 public:
 	GameObject(HandleManager& handleManager);
 
@@ -26,7 +26,7 @@ public:
 	@param handle the handle of the components
 	@param type the type of component to be added
 	*/
-	bool addComponent(const Handle handle);
+	bool addComponent(HandleManager &handleManager, const Handle handle);
 
 	ComponentTypeHandle* getComponentTypeHandle(const HandleType type);
 
@@ -45,7 +45,7 @@ public:
 	@return the pointer to the component. NULL if no component in this object
 	*/
 	template<class T>
-	std::vector<T*> getComponents(HandleManager &handleManager, const HandleType type);
+	XLib::Vector<T*> getComponents(HandleManager &handleManager, const HandleType type);
 	
 	bool removeComponent(HandleManager &handleManager, const Handle handle);
 
@@ -63,8 +63,7 @@ public:
 	*/
 	void removeSelf(HandleManager &handleManager);
 
-	//Sets the handle of the GameObject. Object must be created first before its handle is set.
-	void setHandle(Handle handle);
+	void makeParent(HandleManager &handleManager, const Handle handle);
 
 	//Returns the handle of the object
 	Handle getHandle() const;
@@ -73,7 +72,7 @@ public:
 private:
 	Handle handle;
 	Messenger messenger;
-	std::unordered_map<HandleType, ComponentTypeHandle> components;
+	XLib::UnorderedMap<HandleType, ComponentTypeHandle> components;
 	
 };
 
@@ -100,7 +99,7 @@ T* GameObject::getComponent(HandleManager &handleManager, const HandleType type)
 }
 
 template<class T>
-std::vector<T*> GameObject::getComponents(HandleManager &handleManager, const HandleType type) {
+XLib::Vector<T*> GameObject::getComponents(HandleManager &handleManager, const HandleType type) {
 	std::vector<T*> ret;
 	auto got = components.find(type);
 	if (got != components.end()) {

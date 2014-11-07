@@ -5,7 +5,7 @@ void ComponentTypeHandle::addHandle(Handle handle) {
 	container.push_back(handle);
 }
 
-std::vector<Handle> ComponentTypeHandle::getHandles() {
+XLib::Vector<Handle> ComponentTypeHandle::getHandles() {
 	return container;
 }
 

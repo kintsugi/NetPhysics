@@ -4,11 +4,11 @@
 
 PhysicsComponent::PhysicsComponent(HandleManager& handleManager, BulletPhysicsObject& obj)
 	:	bulletPhysicsObject(new BulletPhysicsObject(obj)),
-		handle(handleManager.add(this, PHYSICS_COMPONENT)),
+		Component(handleManager.add(this, PHYSICS_COMPONENT)),
 		dynamicsWorld(NULL), 
 		rigidBody(NULL)
 {
-	//creates the rigidbody with the data stored in member physicsComponent
+	//Creates the rigidbody with the data stored in member physicsComponent
 	rigidBody = new btRigidBody(btRigidBody::btRigidBodyConstructionInfo(
 		*bulletPhysicsObject->mass,
 		bulletPhysicsObject->motionState.get(),
@@ -19,8 +19,4 @@ PhysicsComponent::PhysicsComponent(HandleManager& handleManager, BulletPhysicsOb
 
 PhysicsComponent::~PhysicsComponent() {
 	dynamicsWorld->removeRigidBody(rigidBody); delete rigidBody;
-}
-
-Handle PhysicsComponent::getHandle() const {
-	return handle;
 }

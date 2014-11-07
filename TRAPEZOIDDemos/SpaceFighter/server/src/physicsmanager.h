@@ -1,8 +1,7 @@
 #ifndef PHYSICS_MANAGER_H_INCLUDED
 #define PHYSICS_MANAGER_H_INCLUDED
 
-#include <vector>
-#include <memory>
+#include "xlib.h"
 #include "handle.h"
 #include "handlemanager.h"
 #include "physicscomponent.h"
@@ -25,7 +24,7 @@ public:
 	Handle createComponent(HandleManager &handleManager, BulletPhysicsObject& obj);
 
 private:
-	std::vector<PhysicsComponentPtr> container;
+	XLib::Vector<PhysicsComponentPtr> container;
 };
 
 #endif

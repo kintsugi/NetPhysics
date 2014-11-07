@@ -1,7 +1,7 @@
 #ifndef GAME_OBJECT_MANAGER_H_INCLUDED
 #define GAME_OBJECT_MANAGER_H_INCLUDED
 
-#include <list>
+#include "xlib.h"
 #include "gameobject.h"
 #include "gameobjectfilter.h"
 
@@ -32,9 +32,9 @@ public:
 	@param filter The GameObjectFilter describing the requirements of the returned object.
 	@return a vector of handles to the GameObjects that match the filter.
 	*/
-	std::vector<GameObject*> getGameObjects(const GameObjectFilter filter);
+	XLib::Vector<GameObject*> getGameObjects(const GameObjectFilter filter);
 private:
-	std::list<GameObjectPtr> container;
+	XLib::Vector<GameObjectPtr> container;
 };
 
 #endif

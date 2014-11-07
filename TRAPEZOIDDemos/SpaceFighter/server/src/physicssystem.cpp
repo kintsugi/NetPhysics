@@ -1,3 +1,4 @@
+#include <iostream>
 #include "physicssystem.h"
 #include "physicscomponent.h"
 #include "btBulletDynamicsCommon.h"

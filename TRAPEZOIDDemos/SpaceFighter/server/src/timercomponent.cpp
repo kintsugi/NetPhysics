@@ -2,14 +2,14 @@
 #include "handlemanager.h"
 
 TimerComponent::TimerComponent(HandleManager &handleManager) :
-	handle(handleManager.add(this, TIMER_COMPONENT)),
+	Component(handleManager.add(this, TIMER_COMPONENT)),
 	mode(STOP_WATCH),
 	length(0),
 	elapsed(0),
 	isPaused(true) {}
 
 TimerComponent::TimerComponent(HandleManager &handleManager, double timerLength) : 
-	handle(handleManager.add(this, TIMER_COMPONENT)),
+	Component(handleManager.add(this, TIMER_COMPONENT)),
 	mode(COUNT_DOWN),
 	elapsed(0),
 	isPaused(true)
@@ -68,8 +68,4 @@ void TimerComponent::setLength(double timerLength) {
 
 void TimerComponent::addLength(double add) {
 	length += add < 0 ? 0 : add;
-}
-
-Handle TimerComponent::getHandle() {
-	return handle;
 }

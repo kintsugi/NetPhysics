@@ -1,12 +1,11 @@
 #ifndef ENGINE_H_INCLUDED
 #define ENGINE_H_INCLUDED
 
-#include <vector>
-#include <iostream>
-#include "managerregister.h"
+
+#include "engineregister.h"
 
 //Manager includes
-#include "NetworkIDManager.h"
+#include "networkhandlemanager.h"
 #include "gameobjectmanager.h"
 #include "physicsmanager.h"
 #include "networkmanager.h"
@@ -19,26 +18,31 @@
 #include "physicssystem.h"
 #include "networksystem.h"
 #include "clientsystem.h"
-#include "gamestatesystem.h"
+#include "playerinitsystem.h"
+#include "packethandlersystem.h"
 
 /*
-	Main system class. Handles and updates all managers and server.
+	Main program class. Handles and updates all managers and systems.
 */
 
 class Engine {
 public:
+
 	Engine();
 	void update();
+
 private:
-	ManagerRegister managerRegister;
+
+	//Engine register to encapsulate RakNet, managers, and system
+	EngineRegister engineRegister;
 
 	//Managers
 	HandleManager handleManager;
-	RakNet::NetworkIDManager networkIDManager;
+	NetworkHandleManager networkHandleManager;
 	GameObjectManager gameObjectManager;
 	PhysicsManager physicsManager;
 	NetworkManager networkManager;
-	ClientManager clientManager; 
+	ClientManager clientManager;
 	PlayerStateManager playerStateManager;
 	TimerManager timerManager;
 
@@ -48,20 +52,23 @@ private:
 	PhysicsSystem physicsSystem;
 	NetworkSystem networkSystem;
 	ClientSystem clientSystem;
-	GameStateSystem gameStateSystem;
+	PlayerInitSystem playerInitSystem;
+	PacketHandlerSystem packetHandlerSystem;
+
+	//init functions
+	void init();
+	void initManagers();
+	void initSystems();
+
+	//Managers must be updated before systems
+	void updateManagers(double dt);
+	void updateSystems(double dt);
 
 	//Utility functions
-	void handlePackets(std::vector<PacketToBitStream> packets);
-};
+	void handlePackets(XLib::Vector<PacketToBitStream> packets);
 
-struct TestStreamData {
-	RakNet::MessageID messageID;
-	std::shared_ptr<RakNet::BitStream> bitStream;
-};
-
-class TestFormatter : public StreamFormatter {
-public:
-	void* format(std::shared_ptr<RakNet::BitStream> inStream);
+	//False if the engine is not ready to start
+	bool postInitReady;
 };
 
 #endif

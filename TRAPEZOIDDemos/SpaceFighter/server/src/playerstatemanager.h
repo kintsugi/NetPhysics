@@ -1,8 +1,7 @@
 #ifndef PLAYER_STATE_MANAGER_H_INCLUDED
 #define PLAYER_STATE_MANAGER_H_INCLUDED
 
-#include <vector>
-#include <memory>
+#include "xlib.h"
 #include "handle.h"
 #include "playerstatecomponent.h"
 
@@ -16,7 +15,7 @@ public:
 	Handle createComponent(HandleManager &handleManager, PlayerState initialState);
 
 private:
-	std::vector<PlayerStateComponentPtr> container;
+	XLib::Vector<PlayerStateComponentPtr> container;
 };
 
 #endif

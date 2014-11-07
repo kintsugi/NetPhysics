@@ -1,6 +1,7 @@
 #ifndef TIMER_COMPONENT_H_INCLUDED
 #define TIMER_COMPONENT_H_INCLUDED
 
+#include "component.h"
 #include "handle.h"
 
 class HandleManager;
@@ -10,7 +11,7 @@ enum TimerMode {
 	STOP_WATCH,
 };
 
-class TimerComponent {
+class TimerComponent : public Component {
 public:
 
 	//starts timer in stop watch mode
@@ -33,11 +34,9 @@ public:
 	double getTimeLeft();
 	void setLength(double timerLength);
 	void addLength(double add);
-	
-	Handle getHandle();
 
 private:
-	Handle handle;
+
 	TimerMode mode;
 	double length;
 	double elapsed;

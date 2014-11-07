@@ -2,8 +2,7 @@
 #define SERVER_SYSTEM_H_INCLUDED
 
 #include <iostream>
-#include <memory>
-#include <vector>
+#include "xlib.h"
 #include "RakPeerInterface.h"
 #include "GetTime.h"
 #include "packettobitstream.h"
@@ -36,7 +35,7 @@ private:
 	int port;
 	//maximum number of clients, only read at init, does not change during runtime
 	int maxClients;
-	std::vector<PacketToBitStream> packetContainer;
+	XLib::Vector<PacketToBitStream> packetContainer;
 	//Current time the server is on.
 	RakNet::TimeUS currentTime;
 	//Previous time.

@@ -1,8 +1,7 @@
 #ifndef TIMER_MANAGER_H_INCLUDED
 #define TIMER_MANAGER_H_INCLUDED
 
-#include <vector>
-#include <memory>
+#include "xlib.h"
 #include "handle.h"
 #include "timercomponent.h"
 
@@ -16,7 +15,7 @@ public:
 	Handle createComponent(HandleManager &handleManager, double timerLength = -1);
 
 private:
-	std::vector<TimerComponentPtr> container;
+	XLib::Vector<TimerComponentPtr> container;
 };
 
 #endif

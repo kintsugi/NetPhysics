@@ -2,7 +2,7 @@
 #include <memory>
 #include "BitStream.h"
 #include "networkcomponent.h"
-#include "networkmessages.h"
+#include "networkmessage.h"
 #include <iostream>
 
 void ServerSystem::startServer(bool userInputDetails) {

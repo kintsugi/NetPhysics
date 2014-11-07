@@ -1,7 +1,6 @@
 #ifndef PHYSICS_SYSTEM_H_INCLUDED
 #define PHYSICS_SYSTEM_H_INCLUDED
 
-#include <vector>
 
 class btBroadphaseInterface;
 class btDefaultCollisionConfiguration;
