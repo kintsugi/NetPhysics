@@ -6,7 +6,7 @@
 NetworkComponent::NetworkComponent(HandleManager &handleManager,
 								   NetworkHandleManager &networkHandleManager,
 								   RakNet::RakPeerInterface* peer)
-	: Component(handleManager.add(this, NETWORK_COMPONENT)),
+	: Component(handleManager.add(this, NETWORK_COMPONENT_HANDLE)),
 	  NetworkHandleObject(this),
 	  RakPeerInstance(peer),
 	  formatter(NULL)
@@ -18,7 +18,7 @@ NetworkComponent::NetworkComponent(HandleManager &handleManager,
 								   NetworkHandleManager &networkHandleManager,
 								   RakNet::RakPeerInterface* peer,
 								   StreamFormatter* newFormatter)
-	: Component(handleManager.add(this, NETWORK_COMPONENT)),
+	: Component(handleManager.add(this, NETWORK_COMPONENT_HANDLE)),
 	  NetworkHandleObject(this),
 	  RakPeerInstance(peer),
 	  formatter(newFormatter) 

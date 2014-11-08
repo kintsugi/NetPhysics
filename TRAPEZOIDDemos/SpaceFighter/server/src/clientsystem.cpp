@@ -7,7 +7,7 @@
 #include "networkcomponent.h"
 #include "component.h"
 
-ClientSystem::ClientSystem() : filter(CLIENT_COMPONENT) {}
+ClientSystem::ClientSystem() : filter(CLIENT_COMPONENT_HANDLE) {}
 
 void ClientSystem::initializeClient(EngineRegister &engineRegister,
 									RakNet::RakNetGUID guid)

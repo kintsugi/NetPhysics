@@ -2,7 +2,7 @@
 #include "handlemanager.h"
 
 Messenger::Messenger(HandleManager &handleManager) {
-	handle = handleManager.add(this, MESSENGER);
+	handle = handleManager.add(this, MESSENGER_HANDLE);
 }
 
 void Messenger::postMessage(HandleManager &handleManager, Message* msg)  {

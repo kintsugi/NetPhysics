@@ -489,6 +489,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="src\SharedSrc\NetworkMessage.cpp" />
     <ClCompile Include="src\SharedSrc\NetworkSystem.cpp" />
     <ClCompile Include="src\SharedSrc\PacketToBitstream.cpp" />
+    <ClCompile Include="src\SharedSrc\TestEngineRegister.cpp" />
     <ClCompile Include="src\TimerComponent.cpp" />
     <ClCompile Include="src\TimerManager.cpp" />
   </ItemGroup>
@@ -678,6 +679,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="src\SharedSrc\NetworkSystem.h" />
     <ClInclude Include="src\SharedSrc\PacketToBitstream.h" />
     <ClInclude Include="src\SharedSrc\System.h" />
+    <ClInclude Include="src\SharedSrc\TestEngineRegister.h" />
     <ClInclude Include="src\SharedSrc\XLib.h" />
     <ClInclude Include="src\Stream.h" />
     <ClInclude Include="src\StreamFormatter.h" />

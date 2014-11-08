@@ -11,23 +11,23 @@ typedef unsigned int uint32;
 
 enum HandleType : uint32 {
 	//Universal handle types.
-	UNASSIGNED_TYPE,
-	MESSENGER,
-	SUBSCRIBER,
+	UNASSIGNED_HANDLE_TYPE,
+	MESSENGER_HANDLE,
+	SUBSCRIBER_HANDLE,
 	//Server only handle types.
 	GAME_OBJECT,
-	NETWORK_COMPONENT,
-	PHYSICS_COMPONENT,
-	CLIENT_COMPONENT,
-	PLAYER_STATE_COMPONENT,
-	TIMER_COMPONENT,
+	NETWORK_COMPONENT_HANDLE,
+	PHYSICS_COMPONENT_HANDLE,
+	CLIENT_COMPONENT_HANDLE,
+	PLAYER_STATE_COMPONENT_HANDLE,
+	TIMER_COMPONENT_HANDLE,
 	//Client only types.
-	NETWORK_OBJECT,
+	NETWORK_OBJECT_HANDLE,
 };
 
 struct Handle
 {
-	Handle() : key(0), type(UNASSIGNED_TYPE), ifActive(false) {}
+	Handle() : key(0), type(UNASSIGNED_HANDLE_TYPE), ifActive(false) {}
 
 	Handle(uint32 newID, HandleType newType) : key(newID), type(newType), ifActive(true) {}
 

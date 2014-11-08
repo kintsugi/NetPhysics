@@ -19,6 +19,7 @@ void Engine::update() {
 }
 
 void Engine::init() {
+
 	//ServerSystem + EngineRegister has to be started before calling initManagers/Systems().
 	serverSystem.startServer(false);
 	engineRegister.init(serverSystem.getRakNetInstance());

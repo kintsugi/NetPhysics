@@ -473,6 +473,9 @@
     <ClCompile Include="src\ComponentTypeHandle.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="src\SharedSrc\TestEngineRegister.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\libs\RakNet\RakNet-master\Source\_FindFirst.h">
@@ -1047,6 +1050,9 @@
     </ClInclude>
     <ClInclude Include="src\SharedSrc\NetworkHandleObject.h">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SharedSrc\TestEngineRegister.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

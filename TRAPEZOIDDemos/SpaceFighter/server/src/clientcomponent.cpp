@@ -1,7 +1,7 @@
 #include "clientcomponent.h"
 
 ClientComponent::ClientComponent(HandleManager &handleManager, RakNet::RakPeerInterface *peer, const RakNet::RakNetGUID newClientGUID) :
-	Component(handleManager.add(this, CLIENT_COMPONENT)),
+Component(handleManager.add(this, CLIENT_COMPONENT_HANDLE)),
 	RakPeerInstance(peer),
 	clientGUID(newClientGUID) {}
 

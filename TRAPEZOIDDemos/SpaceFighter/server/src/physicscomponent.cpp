@@ -4,7 +4,7 @@
 
 PhysicsComponent::PhysicsComponent(HandleManager& handleManager, BulletPhysicsObject& obj)
 	:	bulletPhysicsObject(new BulletPhysicsObject(obj)),
-		Component(handleManager.add(this, PHYSICS_COMPONENT)),
+	Component(handleManager.add(this, PHYSICS_COMPONENT_HANDLE)),
 		dynamicsWorld(NULL), 
 		rigidBody(NULL)
 {

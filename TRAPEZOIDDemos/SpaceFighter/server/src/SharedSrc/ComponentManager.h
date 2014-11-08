@@ -8,17 +8,19 @@
 #endif /* CLIENT */
 
 #include "XLib.h"
+#include "Handle.h"
 
-class EngineRegister;
 class Component;
-
+class HandleManager;
 
 class ComponentManager {
 public:
 
-	void virtual update(EngineRegister &engineRegister, float dt);
+	void update(HandleManager &handleManager);
+	Handle createComponent(Component* component);
 
 protected:
+
 	XLib::Vector<XLib::SharedPtr<Component>> container;
 };
 
