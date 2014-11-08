@@ -1,11 +1,12 @@
-#include "clientsystem.h"
-#include "engineRegister.h"
-#include "NetworkIDManager.h"
-#include "gameobjectmanager.h"
-#include "clientmanager.h"
-#include "playerstatemanager.h"
-#include "networkcomponent.h"
-#include "component.h"
+#include "ClientSystem.h"
+#include "EngineRegister.h"
+#include "HandleManager.h"
+#include "GameObjectManager.h"
+#include "ClientComponent.h"
+#include "PlayerStateComponent.h"
+#include "ComponentManager.h"
+#include "Component.h"
+#include "NetworkComponent.h"
 
 ClientSystem::ClientSystem() : filter(CLIENT_COMPONENT_HANDLE) {}
 
@@ -13,23 +14,31 @@ void ClientSystem::initializeClient(EngineRegister &engineRegister,
 									RakNet::RakNetGUID guid)
 {
 	//Set up managers from the register.
-	HandleManager* handleManager = engineRegister.getManager<HandleManager>(HANDLE_MANAGER);
-	GameObjectManager* gameObjectManager = engineRegister.getManager<GameObjectManager>(GAME_OBJECT_MANAGER);
-	ClientManager* clientManager = engineRegister.getManager<ClientManager>(CLIENT_MANAGER);
-	PlayerStateManager* playerStateManager = engineRegister.getManager<PlayerStateManager>(PLAYER_STATE_MANAGER);
+	HandleManager* handleManager = engineRegister.getHandleManager();
+	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
+	ComponentManager* clientComponentManager = engineRegister.getComponentManager(CLIENT_COMPONENT);
+	ComponentManager* platerStateComponentManager = engineRegister.getComponentManager(PLAYER_STATE_COMPONENT);
+	RakNet::RakPeerInterface *RakPeerInstance = engineRegister.getRakPeerInstance();
 
 	//Create a new game object for the client.
 	GameObject* clientGameObject = gameObjectManager->createGameObject(*handleManager);
+
 	//Add a ClientComponent & PlayerStateComponent.
-	clientGameObject->addComponent(*handleManager, clientManager->createComponent(*handleManager, engineRegister.getRakPeerInstance(), guid));
-	clientGameObject->addComponent(*handleManager, playerStateManager->createComponent(*handleManager, UNINITIALIZED));
+	ClientComponent* newClientComponent = new ClientComponent(*handleManager, RakPeerInstance, guid);
+	PlayerStateComponent* newPlayerStateComponent = new PlayerStateComponent(*handleManager, UNINITIALIZED);
+
+	Handle clientComponentHandle = clientComponentManager->createComponent(newClientComponent);
+	Handle playerStateComponent = platerStateComponentManager->createComponent(newPlayerStateComponent);
+
+	clientGameObject->addComponent(*handleManager, clientComponentHandle);
+	clientGameObject->addComponent(*handleManager, playerStateComponent);
 }
 
 void ClientSystem::removeClient(EngineRegister &engineRegister, NetworkKey networkKey) {
 	//Set up managers from the register.
-	HandleManager* handleManager = engineRegister.getManager<HandleManager>(HANDLE_MANAGER);
-	GameObjectManager* gameObjectManager = engineRegister.getManager<GameObjectManager>(GAME_OBJECT_MANAGER);
-	NetworkHandleManager* networkHandleManager = engineRegister.getManager<NetworkHandleManager>(NETWORK_HANDLE_MANAGER);
+	HandleManager* handleManager = engineRegister.getHandleManager();
+	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
+	NetworkHandleManager* networkHandleManager = engineRegister.getNetworkHandleManager();
 
 	//Retrieve the base component class from the networkIDManager (NetworkComponent functionality not needed)
 	NetworkComponent* networkComponent = networkHandleManager->get<NetworkComponent>(networkKey);

@@ -55,9 +55,18 @@
     <ResourceCompile Include="..\..\Source\SpaceFighter_client\Resources\Windows\SpaceFighter_client.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\server\src\SharedSrc\Component.h" />
+    <ClInclude Include="..\..\..\server\src\SharedSrc\ComponentManager.h" />
     <ClInclude Include="..\..\..\server\src\SharedSrc\EngineRegister.h" />
     <ClInclude Include="..\..\..\server\src\SharedSrc\Handle.h" />
     <ClInclude Include="..\..\..\server\src\SharedSrc\HandleManager.h" />
+    <ClInclude Include="..\..\..\server\src\SharedSrc\NetworkHandleManager.h" />
+    <ClInclude Include="..\..\..\server\src\SharedSrc\NetworkHandleObject.h" />
+    <ClInclude Include="..\..\..\server\src\SharedSrc\NetworkMessage.h" />
+    <ClInclude Include="..\..\..\server\src\SharedSrc\PacketToBitStream.h" />
+    <ClInclude Include="..\..\..\server\src\SharedSrc\Stream.h" />
+    <ClInclude Include="..\..\..\server\src\SharedSrc\StreamFormatter.h" />
+    <ClInclude Include="..\..\..\server\src\SharedSrc\System.h" />
     <ClInclude Include="..\..\..\server\src\SharedSrc\XLib.h" />
     <ClInclude Include="..\..\Source\SpaceFighter_client\ClientEngine.h" />
     <ClInclude Include="..\..\Source\SpaceFighter_client\EngineActor.h" />
@@ -65,11 +74,18 @@
     <ClInclude Include="..\..\Source\SpaceFighter_client\SpaceFighter_client.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\server\src\SharedSrc\Component.cpp" />
+    <ClCompile Include="..\..\..\server\src\SharedSrc\ComponentManager.cpp" />
     <ClCompile Include="..\..\..\server\src\SharedSrc\EngineRegister.cpp" />
     <ClCompile Include="..\..\..\server\src\SharedSrc\HandleManager.cpp" />
+    <ClCompile Include="..\..\..\server\src\SharedSrc\NetworkHandleManager.cpp" />
+    <ClCompile Include="..\..\..\server\src\SharedSrc\NetworkHandleObject.cpp" />
+    <ClCompile Include="..\..\..\server\src\SharedSrc\NetworkMessage.cpp" />
+    <ClCompile Include="..\..\..\server\src\SharedSrc\PacketToBitStream.cpp" />
     <ClCompile Include="..\..\Source\SpaceFighter_client\ClientEngine.cpp" />
     <ClCompile Include="..\..\Source\SpaceFighter_client\EngineActor.cpp" />
     <ClCompile Include="..\..\Source\SpaceFighter_client\SpaceFighterEngine.cpp" />
+    <ClCompile Include="..\..\Source\SpaceFighter_client\SpaceFighter_client.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{307CAEEF-5A9C-47ED-8602-F61D04863CC8}</ProjectGuid>

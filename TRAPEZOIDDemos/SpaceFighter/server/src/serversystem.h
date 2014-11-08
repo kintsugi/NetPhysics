@@ -2,7 +2,8 @@
 #define SERVER_SYSTEM_H_INCLUDED
 
 #include <iostream>
-#include "xlib.h"
+#include "System.h"
+#include "XLib.h"
 #include "RakPeerInterface.h"
 #include "GetTime.h"
 #include "packettobitstream.h"
@@ -10,7 +11,7 @@
 /*
 	Handles incoming connections and packets
 */
-class ServerSystem {
+class ServerSystem : public System {
 public:	
 	ServerSystem() : port(60000), maxClients(20) {};
 

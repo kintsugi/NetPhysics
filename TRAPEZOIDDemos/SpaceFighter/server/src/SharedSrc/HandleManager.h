@@ -2,7 +2,7 @@
 #define HANDLE_MANAGER_H_INCLUDED
 
 #ifdef CLIENT
-	#undef HANDLE_H_INCLUDED	
+	#undef HANDLE_MANAGER_H_INCLUDED	
 	#pragma once
 	#include "SpaceFighter_client.h"
 #endif /* CLIENT */

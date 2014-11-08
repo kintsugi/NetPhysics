@@ -1,5 +1,6 @@
 #pragma once
 
+#include "SpaceFighter_client.h"
 #include "ClientEngine.h"
 
 #include "GameFramework/Actor.h"
@@ -12,4 +13,4 @@ public:
 
 private:
 
-}
+};

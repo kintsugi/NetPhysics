@@ -34,11 +34,17 @@ private:
 template<class T>
 T* NetworkHandleManager::get(NetworkKey key) {
 	//Attempt to find the value with the key handle.id
+#ifdef SERVER
 	auto got = entries.find(key);
 
-	if(got != entries.end()) {
+	if(got != entries.end())
 		return (T*)got->second.entry;
-	}
+#endif /* SERVER */
+#ifdef CLIENT
+	NetworkHandleEntry* got = entries.Find(key);
+	if (got)
+		return (T*)got;
+#endif CLIENT
 	return false;
 }
 

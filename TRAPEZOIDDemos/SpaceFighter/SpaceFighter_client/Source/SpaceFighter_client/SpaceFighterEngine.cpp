@@ -1,4 +1,3 @@
-
 #include "SpaceFighter_client.h"
 #include "SpaceFighterEngine.h"
 

@@ -1,10 +1,24 @@
 #ifndef NETWORK_MESSAGE_H_INCLUDED
 #define NETWORK_MESSAGE_H_INCLUDED
 
-#include "RakPeerInterface.h"
-#include "PacketPriority.h"
-#include "MessageIdentifiers.h"
-#include "networkhandlemanager.h"
+
+#ifdef CLIENT
+	#undef NETWORK_MESSAGE_H_INCLUDED	
+	#pragma once
+	#include "SpaceFighter_client.h"
+#endif /* CLIENT */
+
+
+#ifdef CLIENT
+	#include "AllowWindowsPlatformTypes.h"
+#endif /* CLIENT */
+	#include "RakPeerInterface.h"
+	#include "PacketPriority.h"
+	#include "MessageIdentifiers.h"
+#ifdef CLIENT
+	#include "HideWindowsPlatformTypes.h"
+#endif /* CLIENT */
+#include "NetworkHandleManager.h"
 
 /*
 A message is interpreted based on its type.

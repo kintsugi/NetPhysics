@@ -1,15 +1,16 @@
 #ifndef NETWORK_SYSTEM_H_INCLUDED
 #define NETWORK_SYSTEM_H_INCLUDED
 
-#include "RakNetTypes.h"
-#include "NetworkIDManager.h"
-#include "PacketToBitStream.h"
+#include "System.h"
+
+struct PacketToBitStream;
+class NetworkHandleManager;
 
 //Handles messages to Network Components
-class NetworkSystem {
+class NetworkSystem : public System {
 public:
 	NetworkSystem() {};
-	void sendToNetworkComponent(RakNet::NetworkIDManager &networkIDManager, PacketToBitStream& packet);
+	void sendToNetworkComponent(NetworkHandleManager &networkHandleManager, PacketToBitStream& packet);
 };
 
 #endif

@@ -1,4 +1,8 @@
-#include "packettobitstream.h"
+#ifdef CLIENT
+	#include "SpaceFighter_client.h"
+#endif /* CLIENT */
+
+#include "PacketToBitStream.h"
 
 PacketToBitStream::PacketToBitStream(RakNet::Packet* packet) :
 	bitStream(new RakNet::BitStream(packet->data, packet->length, true)),

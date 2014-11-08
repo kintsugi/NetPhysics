@@ -1,5 +1,6 @@
 #pragma once
 
+#include "SpaceFighter_client.h"
 #include "XLib.h"
 #include "EngineRegister.h"
 #include "HandleManager.h"

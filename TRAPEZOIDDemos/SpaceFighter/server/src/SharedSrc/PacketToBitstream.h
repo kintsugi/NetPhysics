@@ -2,7 +2,13 @@
 #define PACKET_TO_BIT_STREAM_H_INCLUDED
 
 #include "XLib.h"
-#include "BitStream.h"
+#ifdef CLIENT
+	#include "AllowWindowsPlatformTypes.h"
+#endif /* CLIENT */
+	#include "BitStream.h"
+#ifdef CLIENT
+	#include "HideWindowsPlatformTypes.h"
+#endif /* CLIENT */
 #include "RakNetTypes.h"
 
 struct PacketToBitStream {

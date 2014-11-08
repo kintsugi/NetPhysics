@@ -1,21 +1,15 @@
 #include <iostream>
 #include <string>
-//#include "engine.h"
-#include "TestEngineRegister.h"
-#include "PlayerStateComponent.h"
-#include "ComponentManager.h"
+#include "engine.h"
+
 
 
 int main(int argc, char* argv[]) {
-	TestEngineRegister testReg;
-	testReg.init();
-	HandleManager* handleManager = testReg.getHandleManager();
-	ComponentManager* testCompManager = testReg.getComponentManager(PLAYER_STATE_COMPONENT);
-	Handle compHandle = testCompManager->createComponent(new PlayerStateComponent(*handleManager, UNINITIALIZED));
-	PlayerStateComponent* comp = (PlayerStateComponent*)handleManager->get(compHandle);
-	//Engine engine;
+
+	Engine engine;
+	engine.init();
 	while (1) {
-		//engine.update();
+		engine.update();
 	}
 }
 		

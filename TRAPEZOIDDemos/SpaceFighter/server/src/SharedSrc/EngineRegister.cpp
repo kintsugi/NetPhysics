@@ -2,35 +2,84 @@
 	#include "SpaceFighter_client.h"
 #endif /* CLIENT */
 
-#include "engineregister.h"
-
-EngineRegister::EngineRegister() {
+#include "EngineRegister.h"
 #ifdef SERVER
-
-	managerContainer.resize(NUM_MANAGER_TYPES);
-	systemContainer.resize(NUM_SYSTEM_TYPES);
-
+	#include "ServerSystem.h"
 #endif /* SERVER */
-#ifdef CLIENT
+#include "System.h"
 
-	managerContainer.InsertZeroed(0, NUM_MANAGER_TYPES);
+void EngineRegister::init() {
+#ifdef SERVER
+	componentManagerContainer.resize(NUM_COMPONENT_TYPES);
+	systemContainer.resize(NUM_SYSTEM_TYPES);
+	//Init Server System
+	initSystem(new ServerSystem(), SERVER_SYSTEM);
+	ServerSystem* serverSystem = (ServerSystem*)getSystem(SERVER_SYSTEM);
+	serverSystem->startServer(false);
+	rakPeerInstance = serverSystem->getRakNetInstance();
+#endif /* SERVER */
+	componentManagerContainer.InsertZeroed(0, NUM_COMPONENT_TYPES);
 	systemContainer.InsertZeroed(0, NUM_SYSTEM_TYPES);
+}
 
+void EngineRegister::update(double dt) {
+#ifdef SERVER
+	for (auto iter = componentManagerContainer.begin(); iter != componentManagerContainer.end(); iter++) {
+		iter->update(handleManager);
+	}
+	for (auto iter = systemContainer.begin(); iter != systemContainer.end(); iter++) {
+		if (*iter)
+			(*iter)->update(this, dt);
+	}
+#endif/* SERVER */
+#ifdef CLIENT
+	for (auto iter = componentManagerContainer.CreateIterator(); iter; iter++) {
+		iter->update(handleManager);
+	}
+	for (auto iter = systemContainer.CreateIterator(); iter; iter++) {
+		if (iter->Get())
+			(*iter)->update(this, dt);
+	}
 #endif /* CLIENT */
 }
 
-void EngineRegister::init(RakNet::RakPeerInterface* peer) {
-	rakPeerInstance = peer;
+HandleManager* EngineRegister::getHandleManager() {
+	return &handleManager;
 }
 
-void EngineRegister::addManager(void* manager, ManagerType type) {
-	managerContainer[type] = manager;
+NetworkHandleManager* EngineRegister::getNetworkHandleManager() {
+	return &networkHandleManager;
 }
 
-void EngineRegister::addSystem(void* system, SystemType type) {
-	systemContainer[type] = system;
+#ifdef SERVER
+GameObjectManager* EngineRegister::getGameObjectManager() {
+	return &gameObjectManager;
 }
+#endif /* SERVER */
 
 RakNet::RakPeerInterface* EngineRegister::getRakPeerInstance() {
 	return rakPeerInstance;
+}
+
+ComponentManager* EngineRegister::getComponentManager(ComponentType type) {
+	return &componentManagerContainer[type];
+}
+
+System* EngineRegister::getSystem(SystemType type) {
+#ifdef SERVER
+	return systemContainer[type].get();
+#endif /* SERVER */
+#ifdef CLIENT
+	return systemContainer[type].Get();
+#endif /* CLIENT */
+}
+
+void EngineRegister::initSystem(System* newSystem, SystemType type) {
+	systemContainer[type] = XLib::SharedPtr<System>(newSystem);
+}
+
+void EngineRegister::removeSystem(SystemType type) {
+#ifdef SERVER
+	systemContainer[type].reset();
+#endif /* SERVER */
 }

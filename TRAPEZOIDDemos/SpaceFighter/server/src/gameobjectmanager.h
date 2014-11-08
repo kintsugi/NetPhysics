@@ -1,11 +1,11 @@
 #ifndef GAME_OBJECT_MANAGER_H_INCLUDED
 #define GAME_OBJECT_MANAGER_H_INCLUDED
 
-#include "xlib.h"
+#include "XLib.h"
 #include "gameobject.h"
 #include "gameobjectfilter.h"
 
-typedef std::shared_ptr<GameObject> GameObjectPtr;
+typedef XLib::SharedPtr<GameObject> GameObjectPtr;
 
 class HandleManager;
 /*
@@ -33,7 +33,9 @@ public:
 	@return a vector of handles to the GameObjects that match the filter.
 	*/
 	XLib::Vector<GameObject*> getGameObjects(const GameObjectFilter filter);
+
 private:
+
 	XLib::Vector<GameObjectPtr> container;
 };
 

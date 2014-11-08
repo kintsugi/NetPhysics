@@ -1,5 +1,15 @@
-#include "networkmessage.h"
-#include "BitStream.h"
+#ifdef CLIENT
+#include "SpaceFighter_client.h"
+#endif /* CLIENT */
+
+#include "NetworkMessage.h"
+#ifdef CLIENT
+#include "AllowWindowsPlatformTypes.h"
+#endif /* CLIENT */
+	#include "BitStream.h"
+#ifdef CLIENT
+#include "HideWindowsPlatformTypes.h"
+#endif /* CLIENT */
 
 
 NetworkMessage::Package::Package(RakNet::RakPeerInterface* peer,

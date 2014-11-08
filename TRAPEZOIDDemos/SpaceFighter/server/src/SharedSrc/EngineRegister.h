@@ -1,5 +1,5 @@
-#ifndef ENGINE_REGISTER_H
-#define ENGINE_REGISTER_H
+#ifndef TEST_ENGINE_REGISTER_H_INCLUDED
+#define TEST_ENGINE_REGISTER_H_INCLUDED
 
 #ifdef CLIENT
 	#undef ENGINE_REGISTER_H	
@@ -7,67 +7,87 @@
 	#include "SpaceFighter_client.h"
 #endif /* CLIENT */
 
-#include "XLib.h"
+#ifdef CLIENT
+#include "AllowWindowsPlatformTypes.h"
+#endif /* CLIENT */
 #include "RakPeerInterface.h"
+#ifdef CLIENT
+#include "HideWindowsPlatformTypes.h"
+#endif /* CLIENT */
 
-enum ManagerType {
+#include "XLib.h"
+#include "HandleManager.h"
 #ifdef SERVER
-	GAME_OBJECT_MANAGER,
-	PHYSICS_MANAGER,
-	CLIENT_MANAGER,
-	PLAYER_STATE_MANAGER,
-	TIMER_MANAGER,
+	#include "GameObjectManager.h"
 #endif /* SERVER */
-	HANDLE_MANAGER,
-	NETWORK_HANDLE_MANAGER,
-	NETWORK_MANAGER,
-	NUM_MANAGER_TYPES,
+#include "NetworkHandleManager.h"
+#include "ComponentManager.h"
+
+enum ComponentType {
+#ifdef SERVER
+	CLIENT_COMPONENT,
+	PHYSICS_COMPONENT,
+	PLAYER_STATE_COMPONENT,
+	TIMER_COMPONENT,
+#endif /* SERVER */
+	NETWORK_COMPONENT,
+	NUM_COMPONENT_TYPES
 };
 
 enum SystemType {
 #ifdef SERVER
 	SERVER_SYSTEM,
+	CLIENT_SYSTEM,
 	PHYSICS_SYSTEM,
 	PLAYER_INIT_SYSTEM,
-	CLIENT_SYSTEM,
 #endif /* SERVER */
-	NETWORK_SYSTEM,
+#ifdef CLIENT
+	CONNECTION_SYSTEM,
+#endif /* CLIENT */
 	PACKET_HANDLER_SYSTEM,
+	NETWORK_SYSTEM,
 	NUM_SYSTEM_TYPES,
 };
 
+class System;
+
 class EngineRegister {
 public:
+	void init();
+	void update(double dt);
 
-	EngineRegister();
-
-	void init(RakNet::RakPeerInterface* peer);
-
-	void addManager(void* manager, ManagerType type);
-	void addSystem(void* system, SystemType type);
-
-	template <class T>
-	T* getManager(ManagerType type);
-
-	template <class T>
-	T* getSystem(SystemType type);
-
+	HandleManager* getHandleManager();
+	NetworkHandleManager* getNetworkHandleManager();
+#ifdef SERVER
+	GameObjectManager* getGameObjectManager();
+#endif /* SERVER */
 	RakNet::RakPeerInterface* getRakPeerInstance();
 
+	ComponentManager* getComponentManager(ComponentType type);
+	System* getSystem(SystemType type);
+
+	void initSystem(System* newSystem, SystemType type);
+	void removeSystem(SystemType type);
+
+
 private:
-	RakNet::RakPeerInterface* rakPeerInstance;
-	XLib::Vector<void*> managerContainer;
-	XLib::Vector<void*> systemContainer;
+
+	//Ptr to server instance of RakNet.
+	RakNet::RakPeerInterface *rakPeerInstance;
+	//"Data Indexers" for local and network data
+	HandleManager handleManager;
+	NetworkHandleManager networkHandleManager;
+
+#ifdef SERVER
+	//Game Object Manager
+	GameObjectManager gameObjectManager;
+#endif /* SERVER */
+
+	//Abstract base class containers for components and systems.
+	XLib::Vector<ComponentManager> componentManagerContainer;
+	XLib::Vector<XLib::SharedPtr<System>> systemContainer;
+
 };
 
-template <class T>
-T* EngineRegister::getManager(ManagerType type) {
-	return (T*)managerContainer[type];
-}
 
-template <class T>
-T* EngineRegister::getSystem(SystemType type) {
-	return (T*)systemContainer[type];
-}
-
-#endif /* ENGINE_REGISTER_H */
+#endif TEST_ENGINE_REGISTER_H_INCLUDED

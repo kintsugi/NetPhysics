@@ -1,13 +1,14 @@
 #ifndef CLIENT_SYSTEM_H_INCLUDED
 #define CLIENT_SYSTEM_H_INCLUDED
 
-#include "NetworkHandleManager.h"
+#include "System.h"
 #include "RakNetTypes.h"
 #include "GameObjectFilter.h"
+#include "NetworkHandleManager.h"
 
 class EngineRegister;
 
-class ClientSystem {
+class ClientSystem : public System {
 public:
 	ClientSystem();
 	/*

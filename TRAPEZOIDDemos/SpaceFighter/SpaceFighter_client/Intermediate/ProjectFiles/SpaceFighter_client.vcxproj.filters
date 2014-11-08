@@ -127,6 +127,33 @@
     <ClInclude Include="..\..\..\server\src\SharedSrc\EngineRegister.h">
       <Filter>Source\SpaceFighter_client\include\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\server\src\SharedSrc\NetworkHandleManager.h">
+      <Filter>Source\SpaceFighter_client\include\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\server\src\SharedSrc\NetworkHandleObject.h">
+      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\server\src\SharedSrc\System.h">
+      <Filter>Source\SpaceFighter_client\include\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\server\src\SharedSrc\Component.h">
+      <Filter>Source\SpaceFighter_client\include\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\server\src\SharedSrc\ComponentManager.h">
+      <Filter>Source\SpaceFighter_client\include\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\server\src\SharedSrc\PacketToBitStream.h">
+      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\server\src\SharedSrc\StreamFormatter.h">
+      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\server\src\SharedSrc\Stream.h">
+      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\server\src\SharedSrc\NetworkMessage.h">
+      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\SpaceFighter_client\SpaceFighterEngine.cpp">
@@ -143,6 +170,27 @@
     </ClCompile>
     <ClCompile Include="..\..\..\server\src\SharedSrc\EngineRegister.cpp">
       <Filter>Source\SpaceFighter_client\src\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\server\src\SharedSrc\NetworkHandleManager.cpp">
+      <Filter>Source\SpaceFighter_client\src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\server\src\SharedSrc\NetworkHandleObject.cpp">
+      <Filter>Source\SpaceFighter_client\src\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceFighter_client\SpaceFighter_client.cpp">
+      <Filter>Source\SpaceFighter_client\src\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\server\src\SharedSrc\Component.cpp">
+      <Filter>Source\SpaceFighter_client\src\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\server\src\SharedSrc\ComponentManager.cpp">
+      <Filter>Source\SpaceFighter_client\src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\server\src\SharedSrc\PacketToBitStream.cpp">
+      <Filter>Source\SpaceFighter_client\src\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\server\src\SharedSrc\NetworkMessage.cpp">
+      <Filter>Source\SpaceFighter_client\include\Utility</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

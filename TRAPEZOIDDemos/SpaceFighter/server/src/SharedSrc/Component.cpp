@@ -1,5 +1,5 @@
 #ifdef CLIENT
-#include "SpaceFighter_client.h"
+	#include "SpaceFighter_client.h"
 #endif
 
 #include "component.h"

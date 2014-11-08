@@ -1,6 +1,12 @@
 #ifndef COMPONENT_H_INCLUDED
 #define COMPONENT_H_INCLUDED
 
+#ifdef CLIENT
+	#undef MANAGER_H_INCLUDED	
+	#pragma once
+	#include "SpaceFighter_client.h"
+#endif /* CLIENT */
+
 #include "Handle.h"
 
 //Base class for components
