@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\ClientComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ClientSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\Component.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\ComponentManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\EngineRegister.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject.cpp">
+      <Filter>Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjectManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\HandleManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\Messenger.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\NetworkComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\NetworkHandleManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\NetworkHandleObject.cpp">
+      <Filter>Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\NetworkMessage.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\NetworkSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\PacketHandlerSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\PacketToBitStream.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PhysicsComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerStateComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TimerComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BulletPhysicsObject.cpp">
+      <Filter>Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\ServerSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Engine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\BulletPhysicsObject.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ClientComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ClientSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\Component.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\ComponentManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\EngineRegister.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjectFilter.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjectManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\Handle.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\HandleManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\Messenger.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\NetworkComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\NetworkHandleManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\NetworkHandleObject.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\NetworkMessage.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\PacketHandlerSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\NetworkSystem.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\PacketToBitStream.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PhysicsComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerStateComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\Stream.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\StreamFormatter.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\Subscriber.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\System.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TimerComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\XLib.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\ComponentType.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\SystemType.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\ComponentHandle.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\ServerSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{8d96b900-8258-40a6-8c2c-b12ff52e7812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Object">
+      <UniqueIdentifier>{2b7db6b8-c183-495d-bd3f-09b641e642da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{43180b09-92a6-404d-a08b-535faa59fc91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{299cdaa7-5db8-4dfb-91d0-c076533f28d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{033078e3-5fa3-4daa-a9f1-c1b91d647496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{79e1df7e-00fa-43e7-8b67-22cb83428ef2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
