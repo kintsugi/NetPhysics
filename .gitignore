@@ -156,10 +156,10 @@ $RECYCLE.BIN/
 .DS_Store
 
 #Unnecessary Unreal Engine Content
-Binaries/
-Config/
-Content/StarterContent/
-Intermediate/Build
-Intermediate/Shaders
-ThirdParty/
-Saved/
+NetPhysicsClient/Binaries/
+NetPhysicsClient/Config/
+NetPhysicsClient/Content/StarterContent/
+NetPhysicsClient/Intermediate/Build
+NetPhysicsClient/Intermediate/Shaders
+NetPhysicsClient/ThirdParty/
+NetPhysicsClient/Saved/
