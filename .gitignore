@@ -154,3 +154,12 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+
+#Unnecessary Unreal Engine Content
+Binaries/
+Config/
+Content/StarterContent/
+Intermediate/Build
+Intermediate/Shaders
+ThirdParty/
+Saved/
