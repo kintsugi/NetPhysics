@@ -9,7 +9,8 @@
 #ifdef CLIENT
 	#include "AllowWindowsPlatformTypes.h"
 #endif /* CLIENT */
-	#include "RakPeerInterface.h"
+	//For RakNet::AddressOrGUID
+	#include "RakNetTypes.h"
 	#include "PacketPriority.h"
 	#include "MessageIdentifiers.h"
 #ifdef CLIENT
@@ -17,13 +18,16 @@
 #endif /* CLIENT */
 #include "NetworkHandleManager.h"
 
+namespace RakNet {
+	class RakPeerInterface;
+}
+
 /*
 A message is interpreted based on its type.
 All enum members should have a description on the order of the message.
 "//<description>
 //<RakNet::MessageID>, <param1>, <param2>, ..."
 */
-
 namespace NetworkMessage {
 
 	enum ID {
@@ -55,22 +59,22 @@ namespace NetworkMessage {
 		RakNet::AddressOrGUID to;
 		bool broadcast;
 		uint32_t forceReceiptNumber;
-
 		int send(RakNet::BitStream &bsOut);
 	};
 
-	class Send {
-	public:
+	namespace Send {
 
-		static int networkComponentMessage(Package &package,
-										   RakNet::NetworkID networkID,
-										   RakNet::BitStream &bsOut);
+		int networkComponentMessage(Package &package,
+									RakNet::NetworkID networkID,
+									RakNet::BitStream &bsOut);
 
-		//No client implementation
-		static int clientInit(Package &package, NetworkKey networkKey);
+		//Functions only implemented on the server:
+		int clientInit(Package &package, 
+					   NetworkKey networkKey);
 
-		//No server implementation
-		static int clientDisconnect(Package &package, NetworkKey networkKey);
+
+		int clientDisconnect(Package &package,
+							 NetworkKey networkKey);
 	};
 }
 

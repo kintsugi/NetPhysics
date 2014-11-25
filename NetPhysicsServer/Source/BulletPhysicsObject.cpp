@@ -3,8 +3,7 @@
 BulletPhysicsObject::BulletPhysicsObject(btCollisionShape* newCollisionShape,
 										 btDefaultMotionState* newMotionState,
 										 btScalar& newMass,
-										 btVector3& newInertia)
-{
+										 btVector3& newInertia) {
 	collisionShape = XLib::SharedPtr<btCollisionShape>(newCollisionShape);
 	motionState = XLib::SharedPtr<btDefaultMotionState>(newMotionState);
 	mass = XLib::SharedPtr<btScalar>(new btScalar(newMass));

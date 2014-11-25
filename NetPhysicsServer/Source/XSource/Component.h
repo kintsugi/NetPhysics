@@ -11,20 +11,23 @@
 
 class HandleManager;
 
-//Base class for components
+/*
+	Base class for game object components
+*/
 class Component {
 public:
 
-	Component(ComponentType type, Handle newHandle);
+	Component(const ComponentType type, 
+			  const Handle newHandle);
 
-	Handle getHandle();
-	Handle getOwner();
+	Handle getHandle() const;
+	Handle getOwner() const;
 	void setOwner(Handle ownerHandle);
 	void destroy(HandleManager &handleManager);
 
 private:
 
-	ComponentHandle handle;
+	const ComponentHandle handle;
 	Handle owner;
 };
 

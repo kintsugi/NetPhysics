@@ -11,11 +11,12 @@
 #include "System.h"
 #include "PacketToBitStream.h"
 
-class EngineRegister;
+class Register;
 
 class PacketHandlerSystem : public System {
 public:
-	void handle(EngineRegister &engineRegister, XLib::Vector<PacketToBitStream> packets);
+	void handle(Register &engineRegister,
+				XLib::Vector<PacketToBitStream> packets);
 };
 
 #endif

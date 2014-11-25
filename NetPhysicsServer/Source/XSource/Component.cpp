@@ -7,13 +7,15 @@
 	#include "GameObject.h"
 #endif /* SERVER */
 
-Component::Component(ComponentType type, Handle newHandle) : handle(newHandle, type) {}
+Component::Component(ComponentType type,
+					 Handle newHandle) : 
+					 handle(newHandle, type) {}
 
-Handle Component::getHandle() {
+Handle Component::getHandle() const {
 	return handle;
 }
 
-Handle Component::getOwner() {
+Handle Component::getOwner() const {
 	return owner;
 }
 

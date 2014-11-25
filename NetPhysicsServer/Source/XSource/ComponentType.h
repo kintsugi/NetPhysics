@@ -1,7 +1,6 @@
 #ifndef COMPONENT_TYPE_H_INCLUDED
 #define COMPONENT_TYPE_H_INCLUDED
 
-
 #ifdef CLIENT
 	#undef COMPONENT_TYPE_H_INCLUDED	
 	#pragma once
@@ -14,6 +13,7 @@ enum ComponentType {
 	PHYSICS,
 	PLAYER_STATE,
 	TIMER,
+	SCRIPT,
 #endif /* SERVER */
 	NETWORK,
 	NUM_COMPONENT_TYPES

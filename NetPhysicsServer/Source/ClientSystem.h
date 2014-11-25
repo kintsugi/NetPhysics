@@ -6,7 +6,7 @@
 #include "GameObjectFilter.h"
 #include "NetworkHandleManager.h"
 
-class EngineRegister;
+class Register;
 
 class ClientSystem : public System {
 public:
@@ -16,12 +16,14 @@ public:
 	the client's, effectively adding him to the system.
 	@param clientSystemAddress the clients systemAddress.
 	*/
-	void initializeClient(EngineRegister &engineRegister, RakNet::RakNetGUID guid);
+	void initializeClient(Register &engineRegister,
+						  RakNet::RakNetGUID guid);
 
 	/*
 	TEMP: removes the owning clients game object
 	*/
-	void removeClient(EngineRegister &engineRegister, NetworkKey networkID);
+	void removeClient(Register &engineRegister,
+					  NetworkKey networkID);
 
 private:
 	GameObjectFilter filter;

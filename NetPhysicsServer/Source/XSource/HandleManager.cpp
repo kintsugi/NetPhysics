@@ -1,7 +1,9 @@
 #ifdef CLIENT
-	#include "NetPhysics_client.h"
+	#include "NetPhysicsClient.h"
 #endif
 #include "HandleManager.h"
+
+HandleManager::HandleManager() : nextAvailableKey(0) {}
 
 void HandleManager::reset()
 {
@@ -13,8 +15,8 @@ void HandleManager::reset()
 #endif /* CLIENT */
 }
 
-Handle HandleManager::add(void* dataPtr, const HandleType type)
-{
+Handle HandleManager::add(void* dataPtr,
+						  const HandleType type) {
 	uint32 key = generateKey();
 #ifdef SERVER
 	entries.insert(std::make_pair(key, HandleEntry(type, dataPtr)));
@@ -25,8 +27,8 @@ Handle HandleManager::add(void* dataPtr, const HandleType type)
 	return Handle(key, type);
 }
 
-bool HandleManager::update(const Handle handle, void* dataPtr)
-{
+bool HandleManager::update(const Handle handle,
+						   void* dataPtr) {
 #ifdef SERVER
 
 	//Attempt to find the value with the key handle.key
@@ -60,8 +62,7 @@ bool HandleManager::update(const Handle handle, void* dataPtr)
 	return false;
 }
 
-bool HandleManager::remove(const Handle handle)
-{
+bool HandleManager::remove(const Handle handle) {
 #ifdef SERVER
 
 	//Attempt to find the value with the key handle.id
@@ -84,7 +85,7 @@ bool HandleManager::remove(const Handle handle)
 	if (!got)
 		return false;
 	//If found and matches the handle.type, erase the value.
-	else if (got->type == handle.handleType) {
+	else if (got->type == handle.type) {
 		entries.Remove(handle.key);
 		return true;
 	}
@@ -94,8 +95,7 @@ bool HandleManager::remove(const Handle handle)
 	return false;
 }
 
-void* HandleManager::get(const Handle handle)
-{	
+void* HandleManager::get(const Handle handle) const {	
 	//The pointer to return
 	void* dataPtr = NULL;
 	if (!get(handle, dataPtr))
@@ -103,10 +103,9 @@ void* HandleManager::get(const Handle handle)
 	return dataPtr;
 }
 
-bool HandleManager::get(const Handle handle, void*& out)
-{
+bool HandleManager::get(const Handle handle,
+						void*& out) const {
 #ifdef SERVER
-
 	//Attempt to find the value with the key handle.id
 	auto got = entries.find(handle.key);
 	if (got == entries.end())
@@ -116,10 +115,8 @@ bool HandleManager::get(const Handle handle, void*& out)
 		out = got->second.entry;
 		return true;
 	}
-
 #endif /* SERVER */
 #ifdef CLIENT
-
 	//Attempt to find the value with the key handle.id
 	HandleEntry* got = entries.Find(handle.key);
 	if (!got)
@@ -129,7 +126,6 @@ bool HandleManager::get(const Handle handle, void*& out)
 		out = got->entry;
 		return true;
 	}
-
 #endif /* CLIENT */
 	//This point is reached if there were non matching types
 	return false;

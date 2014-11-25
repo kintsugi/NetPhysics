@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <None Include="..\..\NetPhysicsClient.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{2C9DB140-5F53-4922-8553-525D41193125}</UniqueIdentifier>
+      <UniqueIdentifier>{D60A8547-8D22-4A53-BAB2-A28A829AD582}</UniqueIdentifier>
     </Filter>
     <Filter Include="Config">
-      <UniqueIdentifier>{9DF138DC-D342-40E1-989C-3FC41D46EC08}</UniqueIdentifier>
+      <UniqueIdentifier>{F780DA4C-8F71-4611-A3FA-FA596C8CB168}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -15,10 +14,10 @@
       <Filter>Config</Filter>
     </None>
     <None Include="..\..\Source\NetPhysicsClient\Resources\Windows\NetPhysicsClient.ico">
-      <Filter>Resources\Windows</Filter>
+      <Filter>Source\Resources\Windows</Filter>
     </None>
     <ResourceCompile Include="..\..\Source\NetPhysicsClient\Resources\Windows\NetPhysicsClient.rc">
-      <Filter>Resources\Windows</Filter>
+      <Filter>Source\Resources\Windows</Filter>
     </ResourceCompile>
     <None Include="..\..\Source\NetPhysicsClient\NetPhysicsClient.Build.cs">
       <Filter>Build</Filter>
@@ -29,41 +28,144 @@
     <None Include="..\..\Source\NetPhysicsClientEditor.Target.cs">
       <Filter>Build</Filter>
     </None>
+    <Filter Include="Source\Resources">
+      <UniqueIdentifier>{5D86A1CD-713C-41D9-9D7E-687548AA9E2F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Resources\Windows">
+      <UniqueIdentifier>{1C6A1E5F-76A2-4111-B01E-39A7BAB3817E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Engine">
+      <UniqueIdentifier>{8e30528e-4f72-49d9-a9d0-52b6d7474c45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game Object">
+      <UniqueIdentifier>{182fdfbe-9bf9-4049-a549-cb88eca1474a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Actors">
+      <UniqueIdentifier>{d89d0973-3a62-460f-9176-a3ac7d076e27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Components">
+      <UniqueIdentifier>{f7778f44-2177-48eb-86ae-a4d0d655bd87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Managers">
+      <UniqueIdentifier>{970e0d6b-48a0-43c4-b538-b834abfe12fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Systems">
+      <UniqueIdentifier>{6e74de07-659b-4c69-9791-ea6bbe168f8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Utility">
+      <UniqueIdentifier>{49509b2d-1e60-4dcc-836e-c4760b506d64}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\NetPhysicsClient\EngineActor.h">
+      <Filter>Source\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\NetPhysicsClient\NetPhysicsClient.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\NetPhysicsClient\ClientEngine.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Component.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ComponentHandle.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ComponentManager.h">
+      <Filter>Source\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ComponentType.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Handle.h">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\HandleManager.h">
+      <Filter>Source\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Messenger.h">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkHandleManager.h">
+      <Filter>Source\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkHandleObject.h">
+      <Filter>Source\Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkMessage.h">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkSystem.h">
+      <Filter>Source\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\PacketHandlerSystem.h">
+      <Filter>Source\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\PacketToBitStream.h">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Stream.h">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\StreamFormatter.h">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Subscriber.h">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\System.h">
+      <Filter>Source\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\SystemType.h">
+      <Filter>Source\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\XLib.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\NetPhysicsClient\ConnectionSystem.h">
+      <Filter>Source\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Register.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\GameObject.h">
+      <Filter>Source\Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\GameObjectFilter.h">
+      <Filter>Source\Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\GameObjectManager.h">
+      <Filter>Source\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\NetPhysicsClient\ActorGameObject.h">
+      <Filter>Source\Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\NetPhysicsClient\TestActor.h">
+      <Filter>Source\Actors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Build">
-      <UniqueIdentifier>{7178e4d5-b284-4e2a-b9d2-534fa540553f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources">
-      <UniqueIdentifier>{72E1B3CC-8D7E-466A-9A96-ACD3B980A591}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Windows">
-      <UniqueIdentifier>{46DE3F38-F55E-4BFB-8066-2223DAD03B02}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Engine">
-      <UniqueIdentifier>{a41b73ef-1cf0-4413-910d-d30536502962}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\System">
-      <UniqueIdentifier>{56833e26-2d4e-450e-9a01-5ce514fcd55d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Game Object">
-      <UniqueIdentifier>{2cdf64cf-1919-4831-a655-5aeb4fda16eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Components">
-      <UniqueIdentifier>{c7b018bf-6910-4f68-a1c7-670f69380318}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Managers">
-      <UniqueIdentifier>{2f9b72dc-d1f8-45d9-be5d-b1caf1c9d0a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Utility">
-      <UniqueIdentifier>{86759c69-7952-4390-936f-b2eaa8dec415}</UniqueIdentifier>
+      <UniqueIdentifier>{985b665c-84f5-4836-8e9e-9070b99796ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\NetPhysicsClient.uproject">
+      <Filter>Build</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="..\..\Source\NetPhysicsClient\EngineActor.cpp">
-      <Filter>Source\Engine</Filter>
+      <Filter>Source\Actors</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\NetPhysicsClient\NetPhysicsClient.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\NetPhysicsClient\ClientEngine.cpp">
       <Filter>Source\Engine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\Component.cpp">
@@ -71,9 +173,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\ComponentManager.cpp">
       <Filter>Source\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\EngineRegister.cpp">
-      <Filter>Source\Engine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\HandleManager.cpp">
       <Filter>Source\Managers</Filter>
@@ -94,90 +193,28 @@
       <Filter>Source\Utility</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkSystem.cpp">
-      <Filter>Source\System</Filter>
+      <Filter>Source\Systems</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\PacketHandlerSystem.cpp">
-      <Filter>Source\System</Filter>
+      <Filter>Source\Systems</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\PacketToBitStream.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\ServerSystem.cpp">
-      <Filter>Source\System</Filter>
+    <ClCompile Include="..\..\Source\NetPhysicsClient\ConnectionSystem.cpp">
+      <Filter>Source\Systems</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Source\NetPhysicsClient\EngineActor.h">
+    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\Register.cpp">
       <Filter>Source\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\NetPhysicsClient\NetPhysicsClient.h">
-      <Filter>Source\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Component.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ComponentManager.h">
-      <Filter>Source\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\EngineRegister.h">
-      <Filter>Source\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Handle.h">
-      <Filter>Source\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\HandleManager.h">
-      <Filter>Source\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Messenger.h">
-      <Filter>Source\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkHandleManager.h">
-      <Filter>Source\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkHandleObject.h">
+    </ClCompile>
+    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\GameObject.cpp">
       <Filter>Source\Game Object</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkMessage.h">
-      <Filter>Source\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkSystem.h">
-      <Filter>Source\System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\PacketHandlerSystem.h">
-      <Filter>Source\System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\PacketToBitStream.h">
-      <Filter>Source\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Stream.h">
-      <Filter>Source\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\StreamFormatter.h">
-      <Filter>Source\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Subscriber.h">
-      <Filter>Source\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\System.h">
-      <Filter>Source\System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\XLib.h">
-      <Filter>Source\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkComponent.h">
+    </ClCompile>
+    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\GameObjectManager.cpp">
       <Filter>Source\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ComponentHandle.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ComponentType.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\SystemType.h">
-      <Filter>Source\System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ServerSystem.h">
-      <Filter>Source\System</Filter>
-    </ClInclude>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\NetPhysicsClient\TestActor.cpp">
+      <Filter>Source\Actors</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

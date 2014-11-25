@@ -2,9 +2,10 @@
 #include "HandleManager.h"
 #include "ComponentType.h"
 
-PlayerStateComponent::PlayerStateComponent(HandleManager &handleManager, PlayerState initialState) : 
-Component(PLAYER_STATE, handleManager.add(this, COMPONENT)),
-	state(initialState) {}
+PlayerStateComponent::PlayerStateComponent(HandleManager &handleManager,
+										   PlayerState initialState) : 
+										   Component(PLAYER_STATE, handleManager.add(this, COMPONENT)),
+										   state(initialState) {}
 
 PlayerState PlayerStateComponent::getState() const {
 	return state;

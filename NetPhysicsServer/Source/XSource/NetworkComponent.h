@@ -7,18 +7,11 @@
 	#include "NetPhysicsClient.h"
 #endif /* CLIENT */
 
-#ifdef CLIENT
-	#include "AllowWindowsPlatformTypes.h"
-#endif /* CLIENT */
-	#include "BitStream.h"
-#ifdef CLIENT
-	#include "HideWindowsPlatformTypes.h"
-#endif /* CLIENT */
-#include "XLib.h"
-#include "Component.h"
-#include "NetworkHandleObject.h"
-#include "Stream.h"
-#include "Handle.h"
+
+#include "XLib.h"					//Shared source between client/server
+#include "Component.h"				//Base class
+#include "NetworkHandleObject.h"	//Base class
+#include "Stream.h"					//Stream containers
 
 class HandleManager;
 
@@ -53,10 +46,10 @@ public:
 	Sets the formatter the object uses to format BitStreams.
 	@param newFormatter pointer to either a StreamFormatter base or abstract class
 	*/
-	void setFormatter(XLib::SharedPtr<StreamFormatter> newFormatter);
+	void setFormatter(const XLib::SharedPtr<StreamFormatter> newFormatter);
 
 	//Returns a pointer to the StreamFormatter of this object. NULL if it has not been set.
-	XLib::SharedPtr<StreamFormatter> getFormatter();
+	XLib::SharedPtr<StreamFormatter> getFormatter() const;
 
 	/*
 	Adds a BitStream to the container.
@@ -65,7 +58,7 @@ public:
 	void addBitStream(XLib::SharedPtr<RakNet::BitStream> inBS);
 	
 	//Returns the inBitStreams vector.
-	XLib::Vector<XLib::SharedPtr<RakNet::BitStream>> getBitStreams();
+	XLib::Vector<XLib::SharedPtr<RakNet::BitStream>> getBitStreams() const;
 
 	//Returns the last index of the inBitStreams vector and removes it. NULL if empty. 
 	XLib::SharedPtr<RakNet::BitStream> popBitStream();
@@ -79,7 +72,7 @@ public:
 	inBitStreams has size 0 or if the StreamFormatter has not been set.
 	*/
 	template<class T>
-	XLib::Vector<Stream<T>> getStreams();
+	XLib::Vector<Stream<T>> getStreams() const;
 
 	/*
 	Returns a Stream object specialized to type T using the StreamFormatter 
@@ -103,7 +96,7 @@ private:
 };
 
 template<class T>
-XLib::Vector<Stream<T>> NetworkComponent::getStreams() {
+XLib::Vector<Stream<T>> NetworkComponent::getStreams() const {
 	XLib::Vector<Stream<T>> ret;
 	if (formatter) {
 		for (auto iter = inBitStreams.begin(), iter != inBitStreams.end(); iter++) {
@@ -111,7 +104,7 @@ XLib::Vector<Stream<T>> NetworkComponent::getStreams() {
 			ret.push_back(Stream<T>(*iter, formatter));
 #endif /* SERVER */
 #ifdef CLIENT
-			ret.Add(Stream<T>(*iter), formatter));
+			ret.Add(Stream<T>(*iter, formatter));
 #endif /* CLIENT */
 		}
 	}

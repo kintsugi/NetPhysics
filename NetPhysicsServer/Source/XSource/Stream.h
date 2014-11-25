@@ -31,12 +31,16 @@
 template<class T>
 class Stream {
 public:
+
 	Stream() : streamPtr(NULL) {}
-	Stream(XLib::SharedPtr<RakNet::BitStream> inBitStream, XLib::SharedPtr<StreamFormatter> formatter) :
-		streamPtr((T*)formatter->format(inBitStream)) {}
+	Stream(XLib::SharedPtr<RakNet::BitStream> inBitStream,
+		   XLib::SharedPtr<StreamFormatter> formatter) :
+		   streamPtr((T*)formatter->format(inBitStream)) {}
 
 	XLib::SharedPtr<T> getStream();
+
 private:
+
 	XLib::SharedPtr<T> streamPtr;
 };
 

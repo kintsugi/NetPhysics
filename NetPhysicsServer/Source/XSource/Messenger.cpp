@@ -8,7 +8,8 @@ Messenger::Messenger(HandleManager &handleManager) {
 	handle = handleManager.add(this, MESSENGER);
 }
 
-void Messenger::postMessage(HandleManager &handleManager, Message* msg)  {
+void Messenger::postMessage(HandleManager &handleManager,
+							Message* msg) {
 #ifdef SERVER
 	auto range = subscribers.equal_range(msg->type);
 	if (range.first != subscribers.end() && range.second != subscribers.end()) {
@@ -35,9 +36,15 @@ XLib::Vector<Message*> Messenger::getInbox() {
 	inbox.clear();
 	return ret;
 #endif /* SERVER */
+#ifdef CLIENT
+	XLib::Vector<Message*> ret = inbox;
+	inbox.Reset();
+	return ret;
+#endif /* CLIENT */
 }
 
-void Messenger::subscribe(Handle messengerHandle, const int messageType) {
+void Messenger::subscribe(Handle messengerHandle,
+						  const int messageType) {
 #ifdef SERVER
 	subscribers.insert(std::make_pair(messageType, Subscriber(messengerHandle)));
 #endif /* SERVER */

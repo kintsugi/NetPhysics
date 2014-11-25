@@ -1,12 +1,16 @@
 #ifndef GAME_OBJECT_MANAGER_H_INCLUDED
 #define GAME_OBJECT_MANAGER_H_INCLUDED
 
+#ifdef CLIENT
+	#undef GAME_OBJECT_MANAGER_H_INCLUDED	
+	#pragma once
+	#include "NetPhysicsClient.h"
+#endif /* CLIENT */
+
 #include "XLib.h"
-#include "gameobject.h"
-#include "gameobjectfilter.h"
+#include "GameObjectFilter.h"
 
-typedef XLib::SharedPtr<GameObject> GameObjectPtr;
-
+class GameObject;
 class HandleManager;
 /*
 	Factory for GameObjects. Handles allocation, deletion, and retrieval.
@@ -21,11 +25,11 @@ public:
 	void update(HandleManager &handleManager);
 
 	/*
-	Creates an empty GameObject in container and returns a pointer to it
-	@param handleManager a pointer to the HandleManager object to store the object
-	@return a pointer to the newly created GameObject
+	Stores a pointer to a game object within the container.
+	@param gameObject a pointer to the object to be stored
+	@return a pointer to the newly stored GameObject
 	*/
-	GameObject* createGameObject(HandleManager &handleManager);
+	GameObject* createGameObject(GameObject* gameObject);
 	
 	/*
 	Filters through container, returning a vector of the GameObject that meet the requirements.
@@ -36,7 +40,7 @@ public:
 
 private:
 
-	XLib::Vector<GameObjectPtr> container;
+	XLib::Vector<XLib::SharedPtr<GameObject>> container;
 };
 
 #endif

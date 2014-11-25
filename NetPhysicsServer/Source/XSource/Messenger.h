@@ -16,7 +16,7 @@ class HandleManager;
 	integer that signifies it type as a tool of identification.
 */
 struct Message {
-	const int type;
+	int type;
 };
 
 /*
@@ -33,7 +33,8 @@ public:
 	program handles.
 	@param msg the message being posted.
 	*/
-	void postMessage(HandleManager& handleManager, Message* msg);
+	void postMessage(HandleManager& handleManager,
+					 Message* msg);
 
 	/*
 	Adds the message to the inbox container.
@@ -56,7 +57,8 @@ public:
 	@param subscriber a pointer to the messenger object that will subscribe to this object.
 	@param messageType the type of message to subscribe to.
 	*/
-	void subscribe(Handle messengerHandle, const int messageType);
+	void subscribe(Handle messengerHandle,
+				   const int messageType);
 
 	Handle getHandle() const;
 private:

@@ -10,9 +10,15 @@
 #include "Handle.h"
 #include "ComponentType.h"
 
+/*
+	Specializes a handle to specify a component type.
+*/
 struct ComponentHandle : public Handle {
-	ComponentHandle(Handle handle, ComponentType type) : Handle(handle), componentType(type) {}
-	ComponentType componentType;
+	ComponentHandle(const Handle handle, 
+					const ComponentType type) : 
+					Handle(handle), 
+					componentType(type) {}
+	const ComponentType componentType;
 };
 
 #endif /* COMPONENT_HANDLE_H_INCLUDED */

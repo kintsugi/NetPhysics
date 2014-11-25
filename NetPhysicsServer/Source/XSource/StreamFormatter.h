@@ -8,16 +8,14 @@
 #endif /* CLIENT */
 
 #include "XLib.h"
-#ifdef CLIENT
-	#include "AllowWindowsPlatformTypes.h"
-#endif /* CLIENT */
-	#include "BitStream.h"
-#ifdef CLIENT
-	#include "HideWindowsPlatformTypes.h"
-#endif /* CLIENT */
+
+namespace RakNet {
+	class BitStream;
+}
 
 class StreamFormatter {
 public:
+
 	virtual void* format(XLib::SharedPtr<RakNet::BitStream> inStream) = 0;
 };
 

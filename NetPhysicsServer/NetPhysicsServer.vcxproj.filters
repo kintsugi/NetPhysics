@@ -13,15 +13,6 @@
     <ClCompile Include="Source\XSource\ComponentManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Source\XSource\EngineRegister.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameObject.cpp">
-      <Filter>Game Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameObjectManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Source\XSource\HandleManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -64,11 +55,23 @@
     <ClCompile Include="Source\BulletPhysicsObject.cpp">
       <Filter>Game Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\XSource\ServerSystem.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Engine.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ServerSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\Register.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\GameObject.cpp">
+      <Filter>Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\GameObjectManager.cpp">
+      <Filter>Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ScriptSystem.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,18 +88,6 @@
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Source\XSource\ComponentManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\XSource\EngineRegister.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameObject.h">
-      <Filter>Game Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameObjectFilter.h">
-      <Filter>Game Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameObjectManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="Source\XSource\Handle.h">
@@ -122,9 +113,6 @@
     </ClInclude>
     <ClInclude Include="Source\XSource\PacketHandlerSystem.h">
       <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\XSource\NetworkSystem.h">
-      <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="Source\XSource\PacketToBitStream.h">
       <Filter>Utility</Filter>
@@ -162,11 +150,32 @@
     <ClInclude Include="Source\XSource\ComponentHandle.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="Source\XSource\ServerSystem.h">
-      <Filter>System</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Engine.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ServerSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\Register.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\NetworkSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\GameObject.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\GameObjectFilter.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\GameObjectManager.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ScriptComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ScriptSystem.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

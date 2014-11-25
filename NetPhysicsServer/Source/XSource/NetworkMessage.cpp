@@ -5,6 +5,7 @@
 #ifdef CLIENT
 	#include "AllowWindowsPlatformTypes.h"
 #endif /* CLIENT */
+	#include "RakPeerInterface.h"
 	#include "BitStream.h"
 #ifdef CLIENT
 	#include "HideWindowsPlatformTypes.h"
@@ -17,22 +18,27 @@ NetworkMessage::Package::Package(RakNet::RakPeerInterface* peer,
 										char orderingChannel /* = 0 */,
 										bool broadcast /* = false */,
 										uint32_t forceReceiptNumber /* = 0 */) :
-	peer(peer),
-	to(to),
-	priority(priority),
-	reliability(reliability),
-	orderingChannel(orderingChannel),
-	broadcast(broadcast),
-	forceReceiptNumber(forceReceiptNumber) {}
+										peer(peer),
+										to(to),
+										priority(priority),
+										reliability(reliability),
+										orderingChannel(orderingChannel),
+										broadcast(broadcast),
+										forceReceiptNumber(forceReceiptNumber) {}
 
 int NetworkMessage::Package::send(RakNet::BitStream &bsOut) {
-	return peer->Send(&bsOut, priority, reliability, orderingChannel, to, broadcast, forceReceiptNumber);
+	return peer->Send(&bsOut,
+					  priority,
+					  reliability,
+					  orderingChannel,
+					  to,
+					  broadcast,
+					  forceReceiptNumber);
 }
 
 int NetworkMessage::Send::networkComponentMessage(Package &package,
-										   RakNet::NetworkID networkID,
-										   RakNet::BitStream &bsOut) 
-{
+												  RakNet::NetworkID networkID,
+												  RakNet::BitStream &bsOut) {
 	//Construct a BitStream following order: MessageID, NetworkID, <data>
 	RakNet::BitStream bsForm;
 	bsForm.Write((RakNet::MessageID)(NETWORK_COMPONENT_MESSAGE));
@@ -42,7 +48,9 @@ int NetworkMessage::Send::networkComponentMessage(Package &package,
 	return package.send(bsForm);
 }
 
-int NetworkMessage::Send::clientInit(Package &package, NetworkKey networkKey) {
+#ifdef SERVER
+int NetworkMessage::Send::clientInit(Package &package,
+									 NetworkKey networkKey) {
 	//Construct a BitStream following order: MessageID, NetworkID
 	RakNet::BitStream bsOut;
 	bsOut.Write((RakNet::MessageID)(CLIENT_INIT));
@@ -51,3 +59,4 @@ int NetworkMessage::Send::clientInit(Package &package, NetworkKey networkKey) {
 	//Send
 	return package.send(bsOut);
 }
+#endif

@@ -28,7 +28,7 @@ public class NetPhysicsClient : ModuleRules
             string PlatformString = (Target.Platform == UnrealTargetPlatform.Win64) ? "x64" : "x86";
             string LibrariesPath = Path.Combine(ThirdPartyPath, "RakNet", "lib");
 
-            PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "RakNet.lib"));
+            PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "RakNetVS2013.lib"));
         }
         if (isLibrarySupported)
         {
@@ -46,10 +46,7 @@ public class NetPhysicsClient : ModuleRules
 
         //#define CLIENT
         Definitions.Add("CLIENT");
-        //#define PROJECT_HEADER_H
 
-        //Directory for shared source with the server project
-        PrivateIncludePaths.Add(Path.Combine(ModulePath, "../../../NetPhysicsServer/Source/XSource"));
         //Loads RakNet
         LoadRakNet(Target);
 

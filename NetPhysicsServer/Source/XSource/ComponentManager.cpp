@@ -1,11 +1,11 @@
 #ifdef CLIENT
-	#include "NetPhysics_client.h"
+	#include "NetPhysicsClient.h"
 #endif /* CLIENT */
 #include "Component.h"
 #include "ComponentManager.h"
 #include "HandleManager.h"
 
-ComponentManager::ComponentManager(ComponentType type) : managerType(type) {}
+ComponentManager::ComponentManager(const ComponentType type) : managerType(type) {}
 
 void ComponentManager::update(HandleManager &handleManager) {
 #ifdef SERVER
@@ -34,6 +34,6 @@ ComponentHandle ComponentManager::createComponent(Component* component) {
 #endif /* SERVER */
 #ifdef CLIENT
 	container.Add(XLib::SharedPtr<Component>(component));
-	return ComponentHandle(container.Last()->getHandle(), type);
+	return ComponentHandle(container.Last()->getHandle(), managerType);
 #endif
 }

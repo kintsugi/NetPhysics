@@ -7,24 +7,22 @@
 
 NetworkComponent::NetworkComponent(HandleManager &handleManager,
 								   NetworkHandleManager &networkHandleManager,
-								   RakNet::RakPeerInterface* peer)
-	: Component(NETWORK, handleManager.add(this, COMPONENT)),
-	  NetworkHandleObject(this),
-	  RakPeerInstance(peer),
-	  formatter(NULL)
-{
+								   RakNet::RakPeerInterface* peer) : 
+								   Component(NETWORK, handleManager.add(this, COMPONENT)),
+								   NetworkHandleObject(this),
+								   RakPeerInstance(peer),
+								   formatter(NULL) {
 	setNetworkHandleManager(networkHandleManager);
 }
 
 NetworkComponent::NetworkComponent(HandleManager &handleManager,
 								   NetworkHandleManager &networkHandleManager,
 								   RakNet::RakPeerInterface* peer,
-								   StreamFormatter* newFormatter)
-	: Component(NETWORK, handleManager.add(this, COMPONENT)),
-	  NetworkHandleObject(this),
-	  RakPeerInstance(peer),
-	  formatter(newFormatter) 
-{
+								   StreamFormatter* newFormatter) : 
+								   Component(NETWORK, handleManager.add(this, COMPONENT)),
+								   NetworkHandleObject(this),
+								   RakPeerInstance(peer),
+								   formatter(newFormatter) {
 	setNetworkHandleManager(networkHandleManager);
 }
 
@@ -32,7 +30,7 @@ void NetworkComponent::setFormatter(XLib::SharedPtr<StreamFormatter> newFormatte
 	formatter = newFormatter;
 }
 
-XLib::SharedPtr<StreamFormatter> NetworkComponent::getFormatter() {
+XLib::SharedPtr<StreamFormatter> NetworkComponent::getFormatter() const {
 	return formatter;
 }
 
@@ -45,7 +43,7 @@ void NetworkComponent::addBitStream(XLib::SharedPtr<RakNet::BitStream> inBS) {
 #endif /* CLIENT */
 }
 
-XLib::Vector<XLib::SharedPtr<RakNet::BitStream>> NetworkComponent::getBitStreams() {
+XLib::Vector<XLib::SharedPtr<RakNet::BitStream>> NetworkComponent::getBitStreams() const {
 	return inBitStreams;
 }
 

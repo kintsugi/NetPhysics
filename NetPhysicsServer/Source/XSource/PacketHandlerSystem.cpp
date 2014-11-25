@@ -1,5 +1,3 @@
-#include "PacketHandlerSystem.h"
-
 #ifdef CLIENT
 	#include "NetPhysicsClient.h"
 #endif /* CLIENT */
@@ -7,13 +5,15 @@
 	#include <iostream>
 	#include "ClientSystem.h"
 #endif /* SERVER */
-#include "EngineRegister.h"
+#include "PacketHandlerSystem.h"
+#include "Register.h"
 #include "MessageIdentifiers.h"
 #include "NetworkMessage.h"
 #include "NetworkSystem.h"
 #include "NetworkHandleManager.h"
 
-void PacketHandlerSystem::handle(EngineRegister &engineRegister, XLib::Vector<PacketToBitStream> packets) {
+void PacketHandlerSystem::handle(Register &engineRegister,
+								 XLib::Vector<PacketToBitStream> packets) {
 #ifdef SERVER
 	//Get systems and managers needed from register
 	NetworkHandleManager* networkHandleManager = engineRegister.getNetworkHandleManager();

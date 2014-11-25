@@ -1,17 +1,17 @@
 #ifndef ENGINE_H_INCLUDED
 #define ENGINE_H_INCLUDED
 
-
-#include "EngineRegister.h"
-
-//Manager includes
+#include "Register.h"
+//Time includes
+#include "RakNetTime.h"
+//Manager includes & forward declarations
 #include "networkhandlemanager.h"
 #include "gameobjectmanager.h"
-
 class HandleManager;
 class NetworkHandleManager;
 class GameObjectManager;
 
+//System forward declarations
 class ServerSystem;
 class PacketHandlerSystem;
 
@@ -21,14 +21,19 @@ class PacketHandlerSystem;
 class Engine {
 public:
 
-	Engine();
 	void init();
 	void update();
+
+	//Returns time since last update, used as clock for whole program.
+	double calculateDeltaTime();
+
+	//Does not calculate, only returns the value of dt.
+	double getDeltaTime();
 
 private:
 
 	//Engine register to encapsulate RakNet, managers, and system
-	EngineRegister engineRegister;
+	Register engineRegister;
 
 	//Ptrs to frequently used objects
 	HandleManager *handleManager;
@@ -39,9 +44,12 @@ private:
 	ServerSystem *serverSystem;
 	PacketHandlerSystem* packetHandlerSystem;
 
-	//Time since last update;
+	//Delta Time
 	double dt;
-
+	//Current time the engine is on.
+	RakNet::TimeUS currentTime;
+	//Previous time.
+	RakNet::TimeUS lastTime;
 };
 
 #endif

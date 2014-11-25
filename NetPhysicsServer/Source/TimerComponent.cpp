@@ -3,18 +3,18 @@
 #include "ComponentType.h"
 
 TimerComponent::TimerComponent(HandleManager &handleManager) :
-	Component(TIMER, handleManager.add(this, COMPONENT)),
-	mode(STOP_WATCH),
-	length(0),
-	elapsed(0),
-	isPaused(true) {}
+							   Component(TIMER, handleManager.add(this, COMPONENT)),
+							   mode(STOP_WATCH),
+							   length(0),
+							   elapsed(0),
+							   isPaused(true) {}
 
-TimerComponent::TimerComponent(HandleManager &handleManager, double timerLength) : 
-	Component(TIMER, handleManager.add(this, COMPONENT)),
-	mode(COUNT_DOWN),
-	elapsed(0),
-	isPaused(true)
-{
+TimerComponent::TimerComponent(HandleManager &handleManager,
+							   double timerLength) : 
+							   Component(TIMER, handleManager.add(this, COMPONENT)),
+							   mode(COUNT_DOWN),
+							   elapsed(0),
+							   isPaused(true) {
 	length = length < 0 ? 0 : timerLength;
 }
 

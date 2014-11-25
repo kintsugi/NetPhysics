@@ -15,15 +15,16 @@ class HandleManager;
 class ComponentManager {
 public:
 
-	ComponentManager(ComponentType type);
+	ComponentManager(const ComponentType type);
+
 	void update(HandleManager &handleManager);
-	ComponentType getManagerType();
+	ComponentType getManagerType() const;
 	ComponentHandle createComponent(Component* component);
 
 private:
-	ComponentType managerType;
-	XLib::Vector<XLib::SharedPtr<Component>> container;
 
+	const ComponentType managerType;
+	XLib::Vector<XLib::SharedPtr<Component>> container;
 };
 
 #endif /* MANAGER_H_INCLUDED */

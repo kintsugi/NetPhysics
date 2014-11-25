@@ -16,7 +16,8 @@ class NetworkHandleManager;
 class NetworkSystem : public System {
 public:
 	NetworkSystem() {};
-	void sendToNetworkComponent(NetworkHandleManager &networkHandleManager, PacketToBitStream& packet);
+	void sendToNetworkComponent(NetworkHandleManager &networkHandleManager,
+								PacketToBitStream& packet);
 };
 
 #endif

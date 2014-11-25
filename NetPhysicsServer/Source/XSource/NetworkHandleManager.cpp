@@ -3,13 +3,14 @@
 #endif
 #include "NetworkHandleManager.h"
 
-NetworkKey NetworkHandleManager::add(void* dataPtr, const NetworkHandleType type) {
+NetworkKey NetworkHandleManager::add(void* dataPtr,
+									 const NetworkHandleType type) {
 	NetworkKey key = generateKey();
 #ifdef SERVER
 	entries.insert(std::make_pair(key, NetworkHandleEntry(type, dataPtr)));
 #endif /* SERVER */
 #ifdef CLIENT
-	entries.Add(key,NetworkHandleEntry(type, dataPtr)));
+	entries.Add(key,NetworkHandleEntry(type, dataPtr));
 #endif /* CLIENT */
 	return key;
 }

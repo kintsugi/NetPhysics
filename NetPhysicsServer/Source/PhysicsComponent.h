@@ -15,7 +15,9 @@ class PhysicsComponent : public Component {
 friend class PhysicsSystem;
 public:
 
-	PhysicsComponent(HandleManager& handleManager, BulletPhysicsObject& obj);
+	PhysicsComponent(HandleManager& handleManager,
+					 BulletPhysicsObject& obj);
+
 	~PhysicsComponent();
 	//@return pointer to the rigidbody in the simulation
 	btRigidBody* getRigidBody() const { return rigidBody; }
