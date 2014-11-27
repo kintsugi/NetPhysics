@@ -10,16 +10,18 @@
 //ScriptComponent fuctionality
 #include "ScriptComponent.h"
 
-ScriptSystem::ScriptSystem() : System(BOTH), filter(SCRIPT) {}
+using namespace NetPhysics;
 
-void ScriptSystem::update(Register *engineRegister, const double dt) {
+ScriptSystem::ScriptSystem() : System(BOTH), filter(SCRIPT_COMPONENT) {}
+
+void ScriptSystem::update(Register &engineRegister, const double dt) {
 	//Get game objects that contain a script component and update it.
-	HandleManager* handleManager = engineRegister->getHandleManager();
-	GameObjectManager* gameObjectManager = engineRegister->getGameObjectManager();
+	HandleManager* handleManager = engineRegister.getHandleManager();
+	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
 	XLib::Vector<GameObject*> gameObjects = gameObjectManager->getGameObjects(filter);
 	ScriptComponent* scriptComponent = NULL;
 	for (auto iter = gameObjects.begin(); iter != gameObjects.end(); iter++) {
-		scriptComponent = (*iter)->getComponent<ScriptComponent>(*handleManager, SCRIPT);
+		scriptComponent = (*iter)->getComponent<ScriptComponent>(*handleManager, SCRIPT_COMPONENT);
 		if (scriptComponent) {
 			scriptComponent->update(dt);
 		}

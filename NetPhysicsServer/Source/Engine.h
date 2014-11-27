@@ -5,51 +5,52 @@
 //Time includes
 #include "RakNetTime.h"
 //Manager includes & forward declarations
-#include "networkhandlemanager.h"
-#include "gameobjectmanager.h"
-class HandleManager;
-class NetworkHandleManager;
-class GameObjectManager;
-
-//System forward declarations
-class ServerSystem;
-class PacketHandlerSystem;
+#include "NetworkHandleManager.h"
+#include "GameObjectManager.h"
 
 /*
 	Main program class. Handles and updates all managers and systems.
 */
-class Engine {
-public:
+namespace NetPhysics {
+	//Namespace Forward Declarations.
+	class HandleManager;
+	class NetworkHandleManager;
+	class GameObjectManager;
+	class ServerSystem;
+	class PacketHandlerSystem;
 
-	void init();
-	void update();
+	class Engine {
+	public:
 
-	//Returns time since last update, used as clock for whole program.
-	double calculateDeltaTime();
+		void init();
+		void update();
 
-	//Does not calculate, only returns the value of dt.
-	double getDeltaTime();
+		//Returns time since last update, used as clock for whole program.
+		double calculateDeltaTime();
 
-private:
+		//Does not calculate, only returns the value of dt.
+		double getDeltaTime();
 
-	//Engine register to encapsulate RakNet, managers, and system
-	Register engineRegister;
+	private:
 
-	//Ptrs to frequently used objects
-	HandleManager *handleManager;
-	NetworkHandleManager *networkHandleManager;
-	GameObjectManager *gameObjectManager;
+		//Engine register to encapsulate RakNet, managers, and system
+		Register engineRegister;
 
-	//Systems used every tick
-	ServerSystem *serverSystem;
-	PacketHandlerSystem* packetHandlerSystem;
+		//Ptrs to frequently used objects
+		HandleManager *handleManager;
+		NetworkHandleManager *networkHandleManager;
+		GameObjectManager *gameObjectManager;
 
-	//Delta Time
-	double dt;
-	//Current time the engine is on.
-	RakNet::TimeUS currentTime;
-	//Previous time.
-	RakNet::TimeUS lastTime;
-};
+		//Systems used every tick
+		ServerSystem *serverSystem;
+		PacketHandlerSystem* packetHandlerSystem;
 
+		//Delta Time
+		double dt;
+		//Current time the engine is on.
+		RakNet::TimeUS currentTime;
+		//Previous time.
+		RakNet::TimeUS lastTime;
+	};
+}
 #endif

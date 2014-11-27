@@ -3,21 +3,22 @@
 
 #include "XSource/Register.h"
 #include "XSource/GameObject.h"
+namespace NetPhysics {
+	class ActorGameObject : public GameObject, public AActor {
+	public:
 
-class ActorGameObject : public GameObject {
-public:
+		void ActorInit(NetPhysics::Register &engineRegister) {
+			handleManager = engineRegister.getHandleManager();
+			handle = handleManager->add(this, GAME_OBJECT);
+		}
+		virtual void networkUpdate() {}
 
-	void ActorInit(Register &engineRegister) {
-		handleManager = engineRegister.getHandleManager();
-		handle = handleManager->add(this, GAME_OBJECT);
-	}
-	virtual void networkUpdate() {}
+	protected:
 
-protected:
+		HandleManager* getHandleManager() { return handleManager; }
 
-	HandleManager* getHandleManager() {return handleManager;}
+	private:
 
-private:
-
-	HandleManager* handleManager;
-};
+		HandleManager* handleManager;
+	};
+}

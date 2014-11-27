@@ -12,23 +12,51 @@
 #include "PlayerStateComponent.h"
 #include "NetworkComponent.h"
 
-ClientSystem::ClientSystem() : filter(CLIENT) {}
+//For checking the connection state of a client
+#include "RakPeerInterface.h"
+#include "TimerComponent.h"
+
+using namespace NetPhysics;
+
+ClientSystem::ClientSystem() : System(REGISTER), filter(CLIENT_COMPONENT) {}
+
+void ClientSystem::update(Register &engineRegister) {
+	HandleManager* handleManager = engineRegister.getHandleManager();
+	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
+	RakNet::RakPeerInterface *rakPeerInstance = engineRegister.getRakPeerInstance();
+
+	//Poll the connection state of the client, if it not a secure connection, destroy it.
+	std::vector<GameObject*> gameObjects = gameObjectManager->getGameObjects(filter);
+	ClientComponent* clientComponent;
+	for (auto iter = gameObjects.begin(); iter != gameObjects.end(); iter++) {
+		clientComponent = (*iter)->getComponent<ClientComponent>(*handleManager, CLIENT_COMPONENT);
+		if (clientComponent) {
+			RakNet::ConnectionState ret = rakPeerInstance->GetConnectionState(clientComponent->getClientGUID());
+			if (ret == RakNet::ConnectionState::IS_DISCONNECTED ||
+				ret == RakNet::ConnectionState::IS_DISCONNECTING ||
+				ret == RakNet::ConnectionState::IS_NOT_CONNECTED ||
+				ret == RakNet::ConnectionState::IS_SILENTLY_DISCONNECTING) {
+				(*iter)->destroy(*handleManager);
+			}
+		}
+	}
+}
 
 void ClientSystem::initializeClient(Register &engineRegister,
 									RakNet::RakNetGUID guid) {
 	//Set up managers from the register.
 	HandleManager* handleManager = engineRegister.getHandleManager();
 	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
-	ComponentManager* clientComponentManager = engineRegister.getComponentManager(CLIENT);
-	ComponentManager* platerStateComponentManager = engineRegister.getComponentManager(PLAYER_STATE);
-	RakNet::RakPeerInterface *RakPeerInstance = engineRegister.getRakPeerInstance();
+	ComponentManager* clientComponentManager = engineRegister.getComponentManager(CLIENT_COMPONENT);
+	ComponentManager* platerStateComponentManager = engineRegister.getComponentManager(PLAYER_STATE_COMPONENT);
+	RakNet::RakPeerInterface *rakPeerInstance = engineRegister.getRakPeerInstance();
 
 	//Create a new game object for the client.
 	GameObject* clientGameObject = new GameObject(*handleManager);
 	gameObjectManager->createGameObject(clientGameObject);
 
 	//Add a ClientComponent & PlayerStateComponent.
-	ClientComponent* newClientComponent = new ClientComponent(*handleManager, RakPeerInstance, guid);
+	ClientComponent* newClientComponent = new ClientComponent(*handleManager, rakPeerInstance, guid);
 	PlayerStateComponent* newPlayerStateComponent = new PlayerStateComponent(*handleManager, UNINITIALIZED);
 	ComponentHandle clientComponentHandle = clientComponentManager->createComponent(newClientComponent);
 	ComponentHandle playerStateComponent = platerStateComponentManager->createComponent(newPlayerStateComponent);

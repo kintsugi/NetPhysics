@@ -1,23 +1,26 @@
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "NetPhysicsClient.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 #include "GameObject.h"
 #include "HandleManager.h"
 #include "Component.h"
 
-GameObject::GameObject(HandleManager &handleManager) : 
-					   handle(handleManager.add(this, GAME_OBJECT)) {}
+using namespace NetPhysics;
+
+GameObject::GameObject(HandleManager &handleManager) :
+								   handle(handleManager.add(this,
+														    GAME_OBJECT)) {}
 
 bool GameObject::addComponent(HandleManager &handleManager, const ComponentHandle componentHandle) {
 	//Game object cannot have two components of the same type.
 	if (componentHandle.type == COMPONENT && !hasComponent(componentHandle.componentType)) {
 		//Insert into map and set the components owner.
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 		components.insert(std::make_pair(componentHandle.componentType, componentHandle));
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 		components.Add(componentHandle.componentType, componentHandle);
-#endif
+#endif /* NET_PHYSICS_CLIENT */
 		Component* component = (Component*)handleManager.get(componentHandle);
 		component->setOwner(handle);
 		return true;
@@ -28,48 +31,48 @@ bool GameObject::addComponent(HandleManager &handleManager, const ComponentHandl
 void GameObject::removeComponent(HandleManager &handleManager,
 								 const ComponentType type) {
 	//Make sure the component of that type exists in this GameObject
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	auto got = components.find(type);
 	if (got != components.end()) {
 		Component* component = static_cast<Component*>(handleManager.get(got->second));
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	ComponentHandle* got = components.Find(type);
 	if (got) {
 		Component* component = static_cast<Component*>(handleManager.get(*got));
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 		//If the component still exists in memory, call Component::destroy()
 		if (component)
 			component->destroy(handleManager);
 		//Remove the component from the container.
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 		components.erase(got);
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 		components.Remove(type);
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 	}
 }
 
 bool GameObject::hasComponent(const ComponentType type) {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	auto got = components.find(type);
 	return got != components.end() ? true : false;
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	ComponentHandle* got = components.Find(type);
 	return got != NULL ? true : false;
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 }
 
 bool GameObject::hasComponents(const GameObjectFilter filter) {
 	XLib::Vector<ComponentType> filterList = filter.getFilterList();
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	for (auto iter = filterList.begin(); iter != filterList.end(); iter++) {
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 		for (auto iter = filterList.CreateIterator(); iter; iter++) {
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 		if (!hasComponent(*iter))
 			return false;
 	}
@@ -78,14 +81,14 @@ bool GameObject::hasComponents(const GameObjectFilter filter) {
 
 void GameObject::destroy(HandleManager &handleManager) {
 	//Call Component::destroy for all components
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	for (auto iter = components.begin(); iter != components.end(); iter++) {
 		Component* component = static_cast<Component*>(handleManager.get(iter->second));
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 		for (auto iter = components.CreateIterator(); iter; ++iter) {
 			Component* component = static_cast<Component*>(handleManager.get(iter.Value()));
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 		if (component)
 			component->destroy(handleManager);
 	}
@@ -95,27 +98,27 @@ void GameObject::destroy(HandleManager &handleManager) {
 
 bool GameObject::addChild(Handle child) {
 	if (!isChild(child)) {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 		children.push_back(child);
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 		children.Add(child);
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 	}
 	return false;
 }
 
 bool GameObject::removeChild(Handle child) {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	for (auto iter = children.begin(); iter != children.end(); iter++) {
 		if (child == *iter) {
 			children.erase(iter);
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	for (auto iter = children.CreateIterator(); iter; iter++) {
 		if (child == *iter) {
 			children.RemoveAt(iter.GetIndex());
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 			return true;
 		}
 	}
@@ -123,12 +126,12 @@ bool GameObject::removeChild(Handle child) {
 }
 
 void GameObject::removeChildren() {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	children.clear();
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	children.Reset();
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 
 }
 
@@ -137,12 +140,12 @@ XLib::Vector<Handle> GameObject::getChildren() {
 }
 
 bool GameObject::isChild(Handle child) {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	for (auto iter = children.begin(); iter != children.end(); iter++) {
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	for (auto iter = children.CreateIterator(); iter; iter++) {
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 		if (child == *iter) {
 			return true;
 		}

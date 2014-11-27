@@ -1,8 +1,10 @@
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "NetPhysicsClient.h"
 #endif
 #include "NetworkHandleObject.h"
 #include "NetworkHandleManager.h"
+
+using namespace NetPhysics;
 
 NetworkHandleObject::~NetworkHandleObject() {
 	if (owningManager) {
@@ -10,18 +12,17 @@ NetworkHandleObject::~NetworkHandleObject() {
 	}
 }
 
-void NetworkHandleObject::setNetworkHandleManager(NetworkHandleManager &networkHandleManager) {
-	owningManager = &networkHandleManager;
-	key = networkHandleManager.add(super, type);
-}
-
-
 NetworkKey NetworkHandleObject::getNetworkKey() {
 	return key;
 }
 
 NetworkHandleType NetworkHandleObject::getType() {
 	return type;
+}
+
+void NetworkHandleObject::setNetworkHandleManager(NetworkHandleManager &networkHandleManager) {
+	owningManager = &networkHandleManager;
+	key = networkHandleManager.add(super, type);
 }
 
 inline bool NetworkHandleObject::operator==(const NetworkHandleObject& comp) {

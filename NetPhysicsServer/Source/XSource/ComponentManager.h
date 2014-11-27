@@ -1,30 +1,34 @@
 #ifndef COMPONENT_MANAGER_H_INCLUDED
 #define COMPONENT_MANAGER_H_INCLUDED
 
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#undef COMPONENT_MANAGER_H_INCLUDED	
 	#pragma once
 	#include "NetPhysicsClient.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 #include "XLib.h"
 #include "ComponentHandle.h"
 
-class Component;
-class HandleManager;
+namespace NetPhysics {
+	class Component;
 
-class ComponentManager {
-public:
+	/*
+		Generic container for storing game object components.
+	*/
+	class ComponentManager {
+	public:
 
-	ComponentManager(const ComponentType type);
+		ComponentManager(const ComponentType type);
 
-	void update(HandleManager &handleManager);
-	ComponentType getManagerType() const;
-	ComponentHandle createComponent(Component* component);
+		void update(HandleManager &handleManager);
+		ComponentType getManagerType() const;
+		ComponentHandle createComponent(Component* component);
 
-private:
+	private:
 
-	const ComponentType managerType;
-	XLib::Vector<XLib::SharedPtr<Component>> container;
-};
+		const ComponentType managerType;
+		XLib::Vector<XLib::SharedPtr<Component>> container;
+	};
+}
 
-#endif /* MANAGER_H_INCLUDED */
+#endif /* COMPONENT_MANAGER_H_INCLUDED */

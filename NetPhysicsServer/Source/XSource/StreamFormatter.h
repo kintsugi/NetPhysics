@@ -1,22 +1,23 @@
 #ifndef STREAM_FORMATTER_H_INCLUDED
 #define STREAM_FORMATTER_H_INCLUDED
 
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#undef STREAM_FORMATTER_H_INCLUDED
 	#pragma once
 	#include "NetPhysicsClient.h"
-#endif /* CLIENT */
-
+#endif /* NET_PHYSICS_CLIENT */
 #include "XLib.h"
 
 namespace RakNet {
 	class BitStream;
 }
 
-class StreamFormatter {
-public:
+namespace NetPhysics {
+	class StreamFormatter {
+	public:
 
-	virtual void* format(XLib::SharedPtr<RakNet::BitStream> inStream) = 0;
-};
+		virtual void* format(XLib::SharedPtr<RakNet::BitStream> inStream) = 0;
+	};
+}
 
 #endif

@@ -1,41 +1,40 @@
 #ifndef NETWORK_HANDLE_OBJECT_H_INCLUDED
 #define NETWORK_HANDLE_OBJECT_H_INCLUDED
 
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#undef NETWORK_HANDLE_OBJECT_H_INCLUDED	
 	#pragma once
 	#include "NetPhysicsClient.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 
-typedef unsigned long long NetworkKey;
+namespace NetPhysics {
+	typedef unsigned long long NetworkKey;
+	class NetworkHandleManager;
 
-class NetworkHandleManager;
+	enum NetworkHandleType {
+		UNDEFINED_TYPE,
+	};
 
-enum NetworkHandleType {
-	UNDEFINED_TYPE,
-};
+	class NetworkHandleObject {
+	public:
 
-class NetworkHandleObject {
-public:
+		NetworkHandleObject(void *newSuper) : super(newSuper), type(UNDEFINED_TYPE), key(0) {}
+		NetworkHandleObject(void *super, NetworkHandleType newType) : type(UNDEFINED_TYPE), key(0) {}
+		~NetworkHandleObject();
 
-	NetworkHandleObject(void *newSuper) : super(newSuper), type(UNDEFINED_TYPE), key(0) {}
-	NetworkHandleObject(void *super, NetworkHandleType newType) : type(UNDEFINED_TYPE), key(0) {}
-	~NetworkHandleObject();
+		NetworkKey getNetworkKey();
+		NetworkHandleType getType();
+		void setNetworkHandleManager(NetworkHandleManager &networkHandleManager);
+		bool operator==(const NetworkHandleObject& comp);
+		bool operator!=(const NetworkHandleObject& comp);
 
-	void setNetworkHandleManager(NetworkHandleManager &networkHandleManager);
-	NetworkKey getNetworkKey();
-	NetworkHandleType getType();
+	private:
 
-	bool operator==(const NetworkHandleObject& comp);
-	bool operator!=(const NetworkHandleObject& comp);
-
-private:
-
-	NetworkHandleManager* owningManager;
-	void* super;
-	NetworkHandleType type;
-	NetworkKey key;
-
-};
+		NetworkHandleManager* owningManager;
+		void* super;
+		NetworkHandleType type;
+		NetworkKey key;
+	};
+}
 
 #endif

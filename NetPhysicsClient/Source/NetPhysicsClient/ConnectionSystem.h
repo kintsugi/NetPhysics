@@ -8,14 +8,18 @@ namespace RakNet {
 	class RakPeerInterface;
 }
 
-class ConnectionSystem : public System {
-public:
+namespace NetPhysics {
+	class ConnectionSystem : public System {
+	public:
 
-	void init();
-	RakNet::RakPeerInterface* getRakPeerInstance();
-	XLib::Vector<PacketToBitStream> getPackets();
+		~ConnectionSystem();
 
-private:
+		void init();
+		RakNet::RakPeerInterface* getRakPeerInstance();
+		XLib::Vector<PacketToBitStream> getPackets();
 
-	RakNet::RakPeerInterface *rakPeerInstance;
-};
+	private:
+
+		RakNet::RakPeerInterface *rakPeerInstance;
+	};
+}

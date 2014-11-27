@@ -45,7 +45,7 @@ public class NetPhysicsClient : ModuleRules
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 
         //#define CLIENT
-        Definitions.Add("CLIENT");
+        Definitions.Add("NET_PHYSICS_CLIENT");
 
         //Loads RakNet
         LoadRakNet(Target);

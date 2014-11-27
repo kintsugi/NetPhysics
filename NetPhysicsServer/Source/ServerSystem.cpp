@@ -4,6 +4,8 @@
 #include "networkcomponent.h"
 #include <iostream>
 
+using namespace NetPhysics;
+
 void ServerSystem::init() {
 	//Get instance of RakNet
 	rakPeerInstance = RakNet::RakPeerInterface::GetInstance();

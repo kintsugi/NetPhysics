@@ -1,49 +1,38 @@
 #ifndef STREAM_H_INCLUDED
 #define STREAM_H_INCLUDED
 
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#undef STREAM_H_INCLUDED	
 	#pragma once
 	#include "NetPhysicsClient.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 #include "XLib.h"
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "AllowWindowsPlatformTypes.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 	#include "BitStream.h"
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "HideWindowsPlatformTypes.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 #include "StreamFormatter.h"
 
-/*
-	comment deprecated
-	Container for BitStreams meant for NetworkComponents.
-	BitStreams for NetworkComponents have a MessageID of NETWORK_COMPONENT_MESSAGE
-	followed by a Handle object.
-	Designed to cut the fluff off the a BitStream so other systems can read
-	data without having to now what identifying variables are there.
-	You can change how the formatter handles the stream by passing
-	a subclass of StreamFormatter overloading the virtual function format
-	You can also change the StreamData struct by casting another struct to it
-	and then casting it back.
-*/
-template<class T>
-class Stream {
-public:
+namespace NetPhysics {
+	template<class T>
+	class Stream {
+	public:
 
-	Stream() : streamPtr(NULL) {}
-	Stream(XLib::SharedPtr<RakNet::BitStream> inBitStream,
-		   XLib::SharedPtr<StreamFormatter> formatter) :
-		   streamPtr((T*)formatter->format(inBitStream)) {}
+		Stream() : streamPtr(NULL) {}
+		Stream(XLib::SharedPtr<RakNet::BitStream> inBitStream,
+			   XLib::SharedPtr<StreamFormatter> formatter) :
+			   streamPtr((T*)formatter->format(inBitStream)) {}
 
-	XLib::SharedPtr<T> getStream();
+		XLib::SharedPtr<T> getStream();
 
-private:
+	private:
 
-	XLib::SharedPtr<T> streamPtr;
-};
-
+		XLib::SharedPtr<T> streamPtr;
+	};
+}
 
 
 #endif

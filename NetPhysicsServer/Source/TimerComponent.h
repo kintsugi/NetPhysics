@@ -1,48 +1,46 @@
 #ifndef TIMER_COMPONENT_H_INCLUDED
 #define TIMER_COMPONENT_H_INCLUDED
 
-#include "component.h"
-#include "handle.h"
+#include "Component.h"
 
-class HandleManager;
+namespace NetPhysics {
+	enum TimerMode {
+		COUNT_DOWN,
+		STOP_WATCH,
+	};
 
-enum TimerMode {
-	COUNT_DOWN,
-	STOP_WATCH,
-};
+	class TimerComponent : public Component {
+	public:
 
-class TimerComponent : public Component {
-public:
+		//starts timer in stop watch mode
+		TimerComponent(HandleManager &handleManager);
+		//Starts timer in countdown mode
+		TimerComponent(HandleManager &handleManager,
+					   double timerLength);
 
-	//starts timer in stop watch mode
-	TimerComponent(HandleManager &handleManager);
-	//Starts timer in countdown mode
-	TimerComponent(HandleManager &handleManager, 
-				   double timerLength);
+		void tick(double dt);
+		void setMode(TimerMode timerMode);
 
-	void update(double dt);
-	void setMode(TimerMode timerMode);
+		//All modes
+		void stop();
+		void play();
+		void pause();
+		bool isPlaying();
+		double getTimeElapsed();
 
-	//All modes
-	void stop();
-	void play();
-	void pause();
-	bool isPlaying();
-	double getTimeElapsed();
+		//Count down mode only
+		double getLength();
+		double getTimeLeft();
+		void setLength(double timerLength);
+		void addLength(double add);
 
-	//Count down mode only
-	double getLength();
-	double getTimeLeft();
-	void setLength(double timerLength);
-	void addLength(double add);
+	private:
 
-private:
-
-	TimerMode mode;
-	double length;
-	double elapsed;
-	bool isPaused;
-	
-};
+		TimerMode mode;
+		double length;
+		double elapsed;
+		bool isPaused;
+	};
+}
 
 #endif

@@ -6,28 +6,35 @@
 #include "GameObjectFilter.h"
 #include "NetworkHandleManager.h"
 
-class Register;
-
-class ClientSystem : public System {
-public:
-	ClientSystem();
-	/*
-	Creates a GameObject with a client component containing
-	the client's, effectively adding him to the system.
-	@param clientSystemAddress the clients systemAddress.
-	*/
-	void initializeClient(Register &engineRegister,
-						  RakNet::RakNetGUID guid);
+namespace NetPhysics {
 
 	/*
-	TEMP: removes the owning clients game object
+		System for initializing and remove a client's game object, as well as
+		checking if the client owning the game object has timed out.
 	*/
-	void removeClient(Register &engineRegister,
-					  NetworkKey networkID);
+	class ClientSystem : public System {
+	public:
+		ClientSystem();
 
-private:
-	GameObjectFilter filter;
-};
+		void update(Register &engineRegister);
 
+		/*
+		Creates a GameObject with a client component containing
+		the client's, effectively adding him to the system.
+		@param clientSystemAddress the clients systemAddress.
+		*/
+		void initializeClient(Register &engineRegister,
+							  ::RakNet::RakNetGUID guid);
+
+		/*
+		TEMP: removes the owning clients game object
+		*/
+		void removeClient(Register &engineRegister,
+						  NetworkKey networkID);
+
+	private:
+		GameObjectFilter filter;
+	};
+}
 
 #endif

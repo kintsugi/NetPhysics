@@ -1,18 +1,20 @@
 #include "ClientComponent.h"
 #include "HandleManager.h"
 #include "ComponentType.h"
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "AllowWindowsPlatformTypes.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 	#include "RakPeerInterface.h"
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "HideWindowsPlatformTypes.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 
-ClientComponent::ClientComponent(HandleManager &handleManager, 
+using namespace NetPhysics;
+
+ClientComponent::ClientComponent(HandleManager &handleManager,
 								 RakNet::RakPeerInterface *peer, 
 								 const RakNet::RakNetGUID newClientGUID) : 
-								 Component(CLIENT, handleManager.add(this, COMPONENT)), 
+								 Component(CLIENT_COMPONENT, handleManager.add(this, COMPONENT)),
 								 RakPeerInstance(peer),
 								 clientGUID(newClientGUID) {}
 

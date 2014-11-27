@@ -12,7 +12,8 @@
 #include "HideWindowsPlatformTypes.h"
 #include "XSource/GameObject.h"
 #include "XSource/GameObjectManager.h"
-#include "TestActor.h"
+
+using namespace NetPhysics;
 
 void ClientEngine::init(UWorld* world) {
 	engineRegister.init();
@@ -26,12 +27,6 @@ void ClientEngine::init(UWorld* world) {
 	connectionSystem = (ConnectionSystem*)engineRegister.getSystem(CONNECTION_SYSTEM);
 	packetHandlerSystem = (PacketHandlerSystem*)engineRegister.getSystem(PACKET_HANDLER_SYSTEM);
 	connectionSystem->getRakPeerInstance()->Connect("localhost", 60000, 0, 0);
-
-	//Test Code
-	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
-	ATestActor* testActor = world->SpawnActor<ATestActor>(ATestActor::StaticClass());
-	testActor->ActorInit(*handleManager);
-	gameObjectManager->createGameObject(testActor);
 }
 
 void ClientEngine::update(float dt) {

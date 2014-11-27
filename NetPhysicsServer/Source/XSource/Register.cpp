@@ -1,17 +1,17 @@
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "NetPhysicsClient.h"
 	#include "ConnectionSystem.h"
-#endif /* CLIENT */
-
+#endif /* NET_PHYSICS_CLIENT */
 #include "Register.h"
+#ifdef NET_PHYSICS_SERVER
+#include "ServerSystem.h"
+#endif /* NET_PHYSICS_SERVER */
 #include "System.h"
 
-#ifdef SERVER
-#include "ServerSystem.h"
-#endif /* SERVER */
+using namespace NetPhysics;
 
 void Register::init() {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	//Set max size for the system container
 	systemContainer.resize(NUM_SYSTEM_TYPES);
 
@@ -19,22 +19,22 @@ void Register::init() {
 	for (unsigned int i = 0; i < NUM_COMPONENT_TYPES; i++) {
 		componentManagerContainer.push_back(ComponentManager((ComponentType)i));
 	}
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	//initialize the component managers
 	for (unsigned int i = 0; i < NUM_COMPONENT_TYPES; i++) {
 		componentManagerContainer.Add(ComponentManager((ComponentType)i));
 	}
 	systemContainer.InsertZeroed(0, NUM_SYSTEM_TYPES);
-#endif CLIENT /* CLIENT */
+#endif NET_PHYSICS_CLIENT /* NET_PHYSICS_CLIENT */
 }
 
 void Register::update(const double dt) {
-#ifdef SERVER
+	//Update component managers and systems.
+#ifdef NET_PHYSICS_SERVER
 	for (auto iter = componentManagerContainer.begin(); iter != componentManagerContainer.end(); iter++) {
 		iter->update(handleManager);
 	}
-
 	for (auto iter = systemContainer.begin(); iter != systemContainer.end(); iter++) {
 		if (*iter) {
 			switch ((*iter)->mode) {
@@ -45,16 +45,16 @@ void Register::update(const double dt) {
 					(*iter)->update(dt);
 					break;
 				case REGISTER:
-					(*iter)->update(this);
+					(*iter)->update(*this);
 					break;
 				case BOTH:
-					(*iter)->update(this, dt);
+					(*iter)->update(*this, dt);
 					break;
 			}
 		}
 	}
-#endif/* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	for (auto iter = componentManagerContainer.CreateIterator(); iter; iter++) {
 		iter->update(handleManager);
 	}
@@ -69,15 +69,15 @@ void Register::update(const double dt) {
 				(*iter)->update(dt);
 				break;
 			case REGISTER:
-				(*iter)->update(this);
+				(*iter)->update(*this);
 				break;
 			case BOTH:
-				(*iter)->update(this, dt);
+				(*iter)->update(*this, dt);
 				break;
 			}
 		}
 	}
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 }
 
 HandleManager* Register::getHandleManager() {
@@ -93,24 +93,24 @@ GameObjectManager* Register::getGameObjectManager() {
 	return &gameObjectManager;
 }
 
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 void Register::setWorld(UWorld* world) {
 	world = world;
 }
 UWorld* Register::getWorld() {
 	return world;
 }
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 
 RakNet::RakPeerInterface* Register::getRakPeerInstance() {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	ServerSystem* serverSystem = (ServerSystem*)getSystem(SERVER_SYSTEM);
 	return serverSystem->getRakPeerInstance();
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	ConnectionSystem* connectionSystem = (ConnectionSystem*)getSystem(CONNECTION_SYSTEM);
 	return connectionSystem->getRakPeerInstance();
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 }
 
 ComponentManager* Register::getComponentManager(ComponentType type) {
@@ -118,12 +118,12 @@ ComponentManager* Register::getComponentManager(ComponentType type) {
 }
 
 System* Register::getSystem(SystemType type) {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	return systemContainer[type];
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	return systemContainer[type];
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 }
 
 void Register::addSystem(System* newSystem,
@@ -133,10 +133,10 @@ void Register::addSystem(System* newSystem,
 }
 
 void Register::removeSystem(SystemType type) {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	if (systemContainer[type]) {
 		delete systemContainer[type];
 		systemContainer[type] = NULL;
 	}
-#endif /* SERVER */
+#endif /* NET_PHYSICS_SERVER */
 }

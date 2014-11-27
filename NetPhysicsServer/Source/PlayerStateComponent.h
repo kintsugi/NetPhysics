@@ -1,36 +1,35 @@
 #ifndef PLAYER_STATE_COMPONENT_H_INCLUDED
 #define PLAYER_STATE_COMPONENT_H_INCLUDED
 
-#include "component.h"
-#include "handle.h"
+#include "Component.h"
+#include "Handle.h"
 
-class HandleManager;
+namespace NetPhysics {
+	enum PlayerState {
+		UNINITIALIZED,
+		INITIALIZED,
+		HAS_OBJECT,
+	};
 
-enum PlayerState {
-	UNINITIALIZED,
-	INITIALIZED,
-	HAS_OBJECT,
-};
+	class PlayerStateComponent : public Component {
+	public:
+		/*
+		@param handleManager reference to a handleManager to manage this object
+		@param initialState the initial state of the player
+		*/
+		PlayerStateComponent(HandleManager &handleManager,
+							 PlayerState initialState);
 
-class PlayerStateComponent : public Component {
-public:
-	/*
-	@param handleManager reference to a handleManager to manage this object
-	@param initialState the initial state of the player
-	*/
-	PlayerStateComponent(HandleManager &handleManager,
-						 PlayerState initialState);
+		//Returns the player's state.
+		PlayerState getState() const;
 
-	//Returns the player's state.
-	PlayerState getState() const;
+		//Sets the player's state.
+		void setState(const PlayerState newState);
 
-	//Sets the player's state.
-	void setState(const PlayerState newState);
+	private:
 
-private:
-
-	//Player's current state
-	PlayerState state;
-};
-
+		//Player's current state
+		PlayerState state;
+	};
+}
 #endif

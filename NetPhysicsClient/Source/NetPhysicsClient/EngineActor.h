@@ -17,5 +17,5 @@ public:
 
 private:
 
-	ClientEngine engine;
+	NetPhysics::ClientEngine engine;
 };

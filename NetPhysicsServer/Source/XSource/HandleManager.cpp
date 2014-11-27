@@ -1,36 +1,27 @@
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "NetPhysicsClient.h"
 #endif
 #include "HandleManager.h"
 
-HandleManager::HandleManager() : nextAvailableKey(0) {}
+using namespace NetPhysics;
 
-void HandleManager::reset()
-{
-#ifdef SERVER
-	entries.clear();
-#endif /* SERVER */
-#ifdef CLIENT
-	entries.Reset();
-#endif /* CLIENT */
-}
+HandleManager::HandleManager() : nextAvailableKey(0) {}
 
 Handle HandleManager::add(void* dataPtr,
 						  const HandleType type) {
 	uint32 key = generateKey();
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	entries.insert(std::make_pair(key, HandleEntry(type, dataPtr)));
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	entries.Add(key, HandleEntry(type, dataPtr));
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 	return Handle(key, type);
 }
 
 bool HandleManager::update(const Handle handle,
-						   void* dataPtr) {
-#ifdef SERVER
-
+									   void* dataPtr) {
+#ifdef NET_PHYSICS_SERVER
 	//Attempt to find the value with the key handle.key
 	auto got = entries.find(handle.key);
 	//If not found, return false
@@ -41,10 +32,8 @@ bool HandleManager::update(const Handle handle,
 		got->second.entry = dataPtr;
 		return true;
 	}
-
-#endif /* SERVER */ 
-#ifdef CLIENT
-
+#endif /* NET_PHYSICS_SERVER */ 
+#ifdef NET_PHYSICS_CLIENT
 	//Attempt to find the value with the key handle.key
 	//auto got = entries.find(handle.key);
 	HandleEntry* got = entries.Find(handle.key);
@@ -56,15 +45,13 @@ bool HandleManager::update(const Handle handle,
 		got->entry = dataPtr;
 		return true;
 	}
-
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 	//This point is reached if there were non matching types
 	return false;
 }
 
 bool HandleManager::remove(const Handle handle) {
-#ifdef SERVER
-
+#ifdef NET_PHYSICS_SERVER
 	//Attempt to find the value with the key handle.id
 	auto got = entries.find(handle.key);
 	//If not found, return false
@@ -75,10 +62,8 @@ bool HandleManager::remove(const Handle handle) {
 		entries.erase(got);
 		return true;
 	}
-
-#endif /* SERVER */
-#ifdef CLIENT
-
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	//Attempt to find the value with the key handle.key
 	HandleEntry* got = entries.Find(handle.key);
 	//If not found, return false
@@ -89,13 +74,12 @@ bool HandleManager::remove(const Handle handle) {
 		entries.Remove(handle.key);
 		return true;
 	}
-
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 	//This point is reached if there were non matching types
 	return false;
 }
 
-void* HandleManager::get(const Handle handle) const {	
+void* HandleManager::get(const Handle handle) const {
 	//The pointer to return
 	void* dataPtr = NULL;
 	if (!get(handle, dataPtr))
@@ -105,7 +89,7 @@ void* HandleManager::get(const Handle handle) const {
 
 bool HandleManager::get(const Handle handle,
 						void*& out) const {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	//Attempt to find the value with the key handle.id
 	auto got = entries.find(handle.key);
 	if (got == entries.end())
@@ -115,10 +99,10 @@ bool HandleManager::get(const Handle handle,
 		out = got->second.entry;
 		return true;
 	}
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	//Attempt to find the value with the key handle.id
-	HandleEntry* got = entries.Find(handle.key);
+	const HandleEntry* got = entries.Find(handle.key);
 	if (!got)
 		return false;
 	//If found and matches the handle.type, assign member entry to out
@@ -126,7 +110,7 @@ bool HandleManager::get(const Handle handle,
 		out = got->entry;
 		return true;
 	}
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 	//This point is reached if there were non matching types
 	return false;
 }

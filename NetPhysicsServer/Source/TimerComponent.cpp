@@ -2,8 +2,10 @@
 #include "HandleManager.h"
 #include "ComponentType.h"
 
+using namespace NetPhysics;
+
 TimerComponent::TimerComponent(HandleManager &handleManager) :
-							   Component(TIMER, handleManager.add(this, COMPONENT)),
+							   Component(TIMER_COMPONENT, handleManager.add(this, COMPONENT)),
 							   mode(STOP_WATCH),
 							   length(0),
 							   elapsed(0),
@@ -11,14 +13,14 @@ TimerComponent::TimerComponent(HandleManager &handleManager) :
 
 TimerComponent::TimerComponent(HandleManager &handleManager,
 							   double timerLength) : 
-							   Component(TIMER, handleManager.add(this, COMPONENT)),
+							   Component(TIMER_COMPONENT, handleManager.add(this, COMPONENT)),
 							   mode(COUNT_DOWN),
 							   elapsed(0),
 							   isPaused(true) {
 	length = length < 0 ? 0 : timerLength;
 }
 
-void TimerComponent::update(double dt) {
+void TimerComponent::tick(double dt) {
 	if(!isPaused)
 		elapsed += dt;
 }

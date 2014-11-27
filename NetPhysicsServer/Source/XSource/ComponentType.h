@@ -1,22 +1,24 @@
 #ifndef COMPONENT_TYPE_H_INCLUDED
 #define COMPONENT_TYPE_H_INCLUDED
 
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#undef COMPONENT_TYPE_H_INCLUDED	
 	#pragma once
 	#include "NetPhysicsClient.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 
-enum ComponentType {
-#ifdef SERVER
-	CLIENT,
-	PHYSICS,
-	PLAYER_STATE,
-	TIMER,
-	SCRIPT,
-#endif /* SERVER */
-	NETWORK,
-	NUM_COMPONENT_TYPES
-};
+namespace NetPhysics {
+	enum ComponentType {
+#ifdef NET_PHYSICS_SERVER
+		CLIENT_COMPONENT,
+		PHYSICS_COMPONENT,
+		PLAYER_STATE_COMPONENT,
+		TIMER_COMPONENT,
+		SCRIPT_COMPONENT,
+#endif /* NET_PHYSICS_SERVER */
+		NETWORK_COMPONENT,
+		NUM_COMPONENT_TYPES
+	};
+}
 
 #endif /* COMPONENT_TYPE_H_INCLUDED */

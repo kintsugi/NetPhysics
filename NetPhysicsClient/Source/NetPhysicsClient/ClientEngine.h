@@ -3,30 +3,30 @@
 #include "XSource/Register.h"
 
 class UWorld;
-class HandleManager;
-class NetworkHandleManager;
 
-//System forward declarations
-class ConnectionSystem;
-class PacketHandlerSystem;
+namespace NetPhysics {
+	class HandleManager;
+	class NetworkHandleManager;
+	class ConnectionSystem;
+	class PacketHandlerSystem;
+	class ClientEngine {
+	public:
 
-class ClientEngine {
-public:
+		void init(UWorld* world);
+		void update(float dt);
 
-	void init(UWorld* world);
-	void update(float dt);
+	private:
 
-private:
+		//Engine register to encapsulate RakNet, managers, and system
+		Register engineRegister;
 
-	//Engine register to encapsulate RakNet, managers, and system
-	Register engineRegister;
+		//Ptrs to frequently used objects
+		HandleManager *handleManager;
+		NetworkHandleManager *networkHandleManager;
 
-	//Ptrs to frequently used objects
-	HandleManager *handleManager;
-	NetworkHandleManager *networkHandleManager;
+		//Systems used every tick
+		ConnectionSystem* connectionSystem;
+		PacketHandlerSystem* packetHandlerSystem;
 
-	//Systems used every tick
-	ConnectionSystem* connectionSystem;
-	PacketHandlerSystem* packetHandlerSystem;
-
-};
+	};
+}

@@ -1,5 +1,7 @@
 #include "bulletphysicsobject.h"
 
+using namespace NetPhysics;
+
 BulletPhysicsObject::BulletPhysicsObject(btCollisionShape* newCollisionShape,
 										 btDefaultMotionState* newMotionState,
 										 btScalar& newMass,

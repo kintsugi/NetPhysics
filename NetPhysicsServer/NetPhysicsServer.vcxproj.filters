@@ -43,17 +43,11 @@
     <ClCompile Include="Source\XSource\PacketToBitStream.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PhysicsComponent.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
     <ClCompile Include="Source\PlayerStateComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="Source\TimerComponent.cpp">
       <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\BulletPhysicsObject.cpp">
-      <Filter>Game Object</Filter>
     </ClCompile>
     <ClCompile Include="Source\Engine.cpp">
       <Filter>Engine</Filter>
@@ -73,11 +67,20 @@
     <ClCompile Include="Source\ScriptSystem.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PhysicComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BulletPhysicsObject.cpp">
+      <Filter>Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PhysicSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TimerSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\BulletPhysicsObject.h">
-      <Filter>Game Object</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ClientComponent.h">
       <Filter>Component</Filter>
     </ClInclude>
@@ -116,9 +119,6 @@
     </ClInclude>
     <ClInclude Include="Source\XSource\PacketToBitStream.h">
       <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PhysicsComponent.h">
-      <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerStateComponent.h">
       <Filter>Component</Filter>
@@ -175,6 +175,18 @@
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Source\ScriptSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PhysicSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PhysicComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BulletPhysicsObject.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TimerSystem.h">
       <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>

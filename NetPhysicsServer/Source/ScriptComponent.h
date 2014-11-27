@@ -6,30 +6,30 @@
 //Assigning handle
 #include "HandleManager.h"
 
-//Forward Declarations
-class Register;
+namespace NetPhysics {
+	class ScriptComponent : public Component {
+	public:
 
-class ScriptComponent : public Component {
-public:
-	
-	ScriptComponent(HandleManager &handleManager, Register &engineRegister) : 
-					Component(SCRIPT, handleManager.add(this, COMPONENT)),
-					engineRegister(&engineRegister) {
-		start();
-	}
+		ScriptComponent(HandleManager &handleManager, Register &engineRegister) :
+						Component(SCRIPT_COMPONENT,
+								  handleManager.add(this,
+													COMPONENT)),
+						engineRegister(&engineRegister) {
+			start();
+		}
 
-	~ScriptComponent() {
-		destroy();
-	}
+		~ScriptComponent() {
+			destroy();
+		}
 
-	virtual void update(const double dt) = 0;
-	virtual void start() {}
-	virtual void destroy() {}
+		virtual void update(const double dt) = 0;
+		virtual void start() {}
+		virtual void destroy() {}
 
-protected:
+	protected:
 
-	Register* engineRegister;
-
-};
+		Register* engineRegister;
+	};
+}
 
 #endif /* SCRIPT_COMPONENT_H_INCLUDED */

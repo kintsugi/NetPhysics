@@ -1,26 +1,28 @@
 #ifndef PACKET_TO_BIT_STREAM_H_INCLUDED
 #define PACKET_TO_BIT_STREAM_H_INCLUDED
 
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#undef PACKET_TO_BIT_STREAM_H_INCLUDED	
 	#pragma once
 	#include "NetPhysicsClient.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 #include "XLib.h"
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "AllowWindowsPlatformTypes.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 	#include "BitStream.h"
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "HideWindowsPlatformTypes.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 #include "RakNetTypes.h"
 
-struct PacketToBitStream {
-	PacketToBitStream(RakNet::Packet* packet);
-	RakNet::RakNetGUID guid;
-	RakNet::MessageID messageID;
-	XLib::SharedPtr<RakNet::BitStream> bitStream;
-};
+namespace NetPhysics {
+	struct PacketToBitStream {
+		PacketToBitStream(RakNet::Packet* packet);
+		RakNet::RakNetGUID guid;
+		RakNet::MessageID messageID;
+		XLib::SharedPtr<RakNet::BitStream> bitStream;
+	};
+}
 
 #endif

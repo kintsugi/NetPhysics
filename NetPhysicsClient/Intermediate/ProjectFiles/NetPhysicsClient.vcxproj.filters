@@ -144,9 +144,6 @@
     <ClInclude Include="..\..\Source\NetPhysicsClient\ActorGameObject.h">
       <Filter>Source\Game Object</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\NetPhysicsClient\TestActor.h">
-      <Filter>Source\Actors</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Build">
@@ -212,9 +209,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\GameObjectManager.cpp">
       <Filter>Source\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\NetPhysicsClient\TestActor.cpp">
-      <Filter>Source\Actors</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

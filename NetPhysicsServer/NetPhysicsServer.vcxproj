@@ -109,7 +109,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;SERVER;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NET_PHYSICS_SERVER;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Development\Projects\NetPhysics\NetPhysicsServer\Source;C:\Development\Projects\NetPhysics\NetPhysicsServer\Source\XSource;C:\Development\Libraries\RakNet\Source;C:\Development\Libraries\BulletPhysics\bullet-2.82-r2704\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -149,7 +149,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;SERVER;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NET_PHYSICS_SERVER;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Development\Projects\NetPhysics\NetPhysicsServer\Source;C:\Development\Projects\NetPhysics\NetPhysicsServer\Source\XSource;C:\Development\Libraries\RakNet\Source;C:\Development\Libraries\BulletPhysics\bullet-2.82-r2704\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -173,11 +173,13 @@
     <ClCompile Include="Source\ClientSystem.cpp" />
     <ClCompile Include="Source\Engine.cpp" />
     <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\PhysicsComponent.cpp" />
+    <ClCompile Include="Source\PhysicComponent.cpp" />
+    <ClCompile Include="Source\PhysicSystem.cpp" />
     <ClCompile Include="Source\PlayerStateComponent.cpp" />
     <ClCompile Include="Source\ScriptSystem.cpp" />
     <ClCompile Include="Source\ServerSystem.cpp" />
     <ClCompile Include="Source\TimerComponent.cpp" />
+    <ClCompile Include="Source\TimerSystem.cpp" />
     <ClCompile Include="Source\XSource\Component.cpp" />
     <ClCompile Include="Source\XSource\ComponentManager.cpp" />
     <ClCompile Include="Source\XSource\GameObject.cpp" />
@@ -198,12 +200,14 @@
     <ClInclude Include="Source\ClientComponent.h" />
     <ClInclude Include="Source\ClientSystem.h" />
     <ClInclude Include="Source\Engine.h" />
-    <ClInclude Include="Source\PhysicsComponent.h" />
+    <ClInclude Include="Source\PhysicComponent.h" />
+    <ClInclude Include="Source\PhysicSystem.h" />
     <ClInclude Include="Source\PlayerStateComponent.h" />
     <ClInclude Include="Source\ScriptComponent.h" />
     <ClInclude Include="Source\ScriptSystem.h" />
     <ClInclude Include="Source\ServerSystem.h" />
     <ClInclude Include="Source\TimerComponent.h" />
+    <ClInclude Include="Source\TimerSystem.h" />
     <ClInclude Include="Source\XSource\Component.h" />
     <ClInclude Include="Source\XSource\ComponentHandle.h" />
     <ClInclude Include="Source\XSource\ComponentType.h" />

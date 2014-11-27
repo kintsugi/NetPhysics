@@ -1,14 +1,16 @@
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "NetPhysicsClient.h"
 #endif
 #include "NetworkComponent.h"
 #include "HandleManager.h"
 #include "ComponentType.h"
 
+using namespace NetPhysics;
+
 NetworkComponent::NetworkComponent(HandleManager &handleManager,
 								   NetworkHandleManager &networkHandleManager,
 								   RakNet::RakPeerInterface* peer) : 
-								   Component(NETWORK, handleManager.add(this, COMPONENT)),
+								   Component(NETWORK_COMPONENT, handleManager.add(this, COMPONENT)),
 								   NetworkHandleObject(this),
 								   RakPeerInstance(peer),
 								   formatter(NULL) {
@@ -19,7 +21,7 @@ NetworkComponent::NetworkComponent(HandleManager &handleManager,
 								   NetworkHandleManager &networkHandleManager,
 								   RakNet::RakPeerInterface* peer,
 								   StreamFormatter* newFormatter) : 
-								   Component(NETWORK, handleManager.add(this, COMPONENT)),
+								   Component(NETWORK_COMPONENT, handleManager.add(this, COMPONENT)),
 								   NetworkHandleObject(this),
 								   RakPeerInstance(peer),
 								   formatter(newFormatter) {
@@ -35,12 +37,12 @@ XLib::SharedPtr<StreamFormatter> NetworkComponent::getFormatter() const {
 }
 
 void NetworkComponent::addBitStream(XLib::SharedPtr<RakNet::BitStream> inBS) {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	inBitStreams.push_back(inBS);
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	inBitStreams.Add(inBS);
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 }
 
 XLib::Vector<XLib::SharedPtr<RakNet::BitStream>> NetworkComponent::getBitStreams() const {
@@ -48,21 +50,21 @@ XLib::Vector<XLib::SharedPtr<RakNet::BitStream>> NetworkComponent::getBitStreams
 }
 
 XLib::SharedPtr<RakNet::BitStream> NetworkComponent::popBitStream() {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	XLib::SharedPtr<RakNet::BitStream> ret = inBitStreams.back();
 	inBitStreams.pop_back();
 	return ret;
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	return inBitStreams.Pop();
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 }
 
 void NetworkComponent::clearBitStreams() {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	inBitStreams.clear();
 #endif
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	inBitStreams.Reset();
 #endif
 }

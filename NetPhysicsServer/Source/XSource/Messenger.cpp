@@ -1,8 +1,10 @@
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "NetPhysicsClient.h"
 #endif
 #include "Messenger.h"
 #include "HandleManager.h"
+
+using namespace NetPhysics;
 
 Messenger::Messenger(HandleManager &handleManager) {
 	handle = handleManager.add(this, MESSENGER);
@@ -10,7 +12,7 @@ Messenger::Messenger(HandleManager &handleManager) {
 
 void Messenger::postMessage(HandleManager &handleManager,
 							Message* msg) {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	auto range = subscribers.equal_range(msg->type);
 	if (range.first != subscribers.end() && range.second != subscribers.end()) {
 		for (auto iter = range.first; iter != range.second; iter++) {
@@ -21,33 +23,33 @@ void Messenger::postMessage(HandleManager &handleManager,
 				iter = subscribers.erase(iter);
 		}
 	}
-#endif /* SERVER */
+#endif /* NET_PHYSICS_SERVER */
 }
 
 void Messenger::receiveMessage(Message* msg) {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	inbox.push_back(msg);
-#endif /* SERVER */
+#endif /* NET_PHYSICS_SERVER */
 }
 
 XLib::Vector<Message*> Messenger::getInbox() {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	XLib::Vector<Message*> ret = inbox;
 	inbox.clear();
 	return ret;
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	XLib::Vector<Message*> ret = inbox;
 	inbox.Reset();
 	return ret;
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 }
 
 void Messenger::subscribe(Handle messengerHandle,
 						  const int messageType) {
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	subscribers.insert(std::make_pair(messageType, Subscriber(messengerHandle)));
-#endif /* SERVER */
+#endif /* NET_PHYSICS_SERVER */
 }
 
 Handle Messenger::getHandle() const {

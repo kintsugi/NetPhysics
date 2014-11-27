@@ -1,34 +1,35 @@
 #ifndef COMPONENT_H_INCLUDED
 #define COMPONENT_H_INCLUDED
 
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#undef COMPONENT_H_INCLUDED	
 	#pragma once
 	#include "NetPhysicsClient.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 #include "Handle.h"
 #include "ComponentHandle.h"
-
-class HandleManager;
 
 /*
 	Base class for game object components
 */
-class Component {
-public:
+namespace NetPhysics {
+	class HandleManager;
 
-	Component(const ComponentType type, 
-			  const Handle newHandle);
+	class Component {
+	public:
 
-	Handle getHandle() const;
-	Handle getOwner() const;
-	void setOwner(Handle ownerHandle);
-	void destroy(HandleManager &handleManager);
+		Component(const ComponentType type,
+				  const Handle newHandle);
 
-private:
+		Handle getHandle() const;
+		Handle getOwner() const;
+		void setOwner(Handle ownerHandle);
+		void destroy(HandleManager &handleManager);
 
-	const ComponentHandle handle;
-	Handle owner;
-};
+	private:
 
+		const ComponentHandle handle;
+		Handle owner;
+	};
+}
 #endif /* COMPONENT_H_INCLUDED */

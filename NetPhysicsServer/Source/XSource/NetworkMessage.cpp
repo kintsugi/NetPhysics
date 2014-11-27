@@ -1,15 +1,17 @@
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "NetPhysicsClient.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 #include "NetworkMessage.h"
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "AllowWindowsPlatformTypes.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 	#include "RakPeerInterface.h"
 	#include "BitStream.h"
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#include "HideWindowsPlatformTypes.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
+
+using namespace NetPhysics;
 
 NetworkMessage::Package::Package(RakNet::RakPeerInterface* peer,
 										RakNet::AddressOrGUID to /* = RakNet::AddressOrGUID() */,
@@ -48,7 +50,7 @@ int NetworkMessage::Send::networkComponentMessage(Package &package,
 	return package.send(bsForm);
 }
 
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 int NetworkMessage::Send::clientInit(Package &package,
 									 NetworkKey networkKey) {
 	//Construct a BitStream following order: MessageID, NetworkID

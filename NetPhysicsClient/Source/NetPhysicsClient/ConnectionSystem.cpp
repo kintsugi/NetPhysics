@@ -4,6 +4,17 @@
 	#include "RakPeerInterface.h"
 #include "HideWindowsPlatformTypes.h"
 
+using namespace NetPhysics;
+
+ConnectionSystem::~ConnectionSystem() {
+	RakNet::SystemAddress* remoteSystem = 0;
+	uint32* numberOfSystems = 0;
+	rakPeerInstance->GetConnectionList(remoteSystem, (unsigned short*)numberOfSystems);
+	for (uint32 i = 0; i < *numberOfSystems; i++) {
+		rakPeerInstance->CloseConnection(*(remoteSystem + i), true);
+	}
+}
+
 void ConnectionSystem::init() {
 	rakPeerInstance = RakNet::RakPeerInterface::GetInstance();
 	RakNet::SocketDescriptor sd;

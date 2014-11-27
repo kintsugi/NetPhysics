@@ -4,16 +4,19 @@
 #include "System.h"
 #include "GameObjectFilter.h"
 
-class ScriptSystem : public System {
-public:
+namespace NetPhysics {
+	class ScriptSystem : public System {
+	public:
 
-	ScriptSystem();
+		ScriptSystem();
 
-	void update(Register *engineRegister, 
-				const double dt);
+		void update(Register &engineRegister,
+					const double dt);
 
-private:
-	GameObjectFilter filter;
-};
+	private:
+
+		GameObjectFilter filter;
+	};
+}
 
 #endif /* SCRIPT_SYSTEM_H_INCLUDED */

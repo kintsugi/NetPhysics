@@ -5,6 +5,8 @@
 #include "PacketHandlerSystem.h"
 #include "ClientSystem.h"
 
+using namespace NetPhysics;
+
 void Engine::init() {
 	//Start the program clock.
 	currentTime = RakNet::GetTimeUS();

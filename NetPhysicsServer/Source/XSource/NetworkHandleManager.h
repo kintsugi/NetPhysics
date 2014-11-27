@@ -1,50 +1,52 @@
 #ifndef NETWORK_HANDLE_MANAGER_H_INCLUDED
 #define NETWORK_HANDLE_MANAGER_H_INCLUDED
 
-#ifdef CLIENT
+#ifdef NET_PHYSICS_CLIENT
 	#undef NETWORK_HANDLE_MANAGER_H_INCLUDED	
 	#pragma once
 	#include "NetPhysicsClient.h"
-#endif /* CLIENT */
+#endif /* NET_PHYSICS_CLIENT */
 #include "XLib.h"
 #include "NetworkHandleObject.h"
 
-class NetworkHandleManager {
-public:
+namespace NetPhysics {
+	class NetworkHandleManager {
+	public:
 
-	NetworkHandleManager() : nextAvailableKey(0) {}
+		NetworkHandleManager() : nextAvailableKey(0) {}
 
-	NetworkKey add(void* dataPtr, const NetworkHandleType type);
-	template<class T>
-	T* get(NetworkKey key);
-	bool remove(NetworkKey key);
+		NetworkKey add(void* dataPtr, const NetworkHandleType type);
+		template<class T>
+		T* get(NetworkKey key);
+		bool remove(NetworkKey key);
 
-private:
+	private:
 
-	NetworkKey nextAvailableKey;
-	struct NetworkHandleEntry {
-		NetworkHandleEntry(const NetworkHandleType newType, void* dataPtr) : type(newType), entry(dataPtr) {}
-		NetworkHandleType type;
-		void* entry;
+		NetworkKey nextAvailableKey;
+		struct NetworkHandleEntry {
+			NetworkHandleEntry(const NetworkHandleType newType, void* dataPtr) : type(newType), entry(dataPtr) {}
+			NetworkHandleType type;
+			void* entry;
+		};
+		NetworkKey generateKey();
+		XLib::UnorderedMap<NetworkKey, NetworkHandleEntry> entries;
 	};
-	NetworkKey generateKey();
-	XLib::UnorderedMap<NetworkKey, NetworkHandleEntry> entries;
-};
+}
 
 template<class T>
-T* NetworkHandleManager::get(NetworkKey key) {
+T* NetPhysics::NetworkHandleManager::get(NetworkKey key) {
 	//Attempt to find the value with the key handle.id
-#ifdef SERVER
+#ifdef NET_PHYSICS_SERVER
 	auto got = entries.find(key);
 
 	if(got != entries.end())
 		return (T*)got->second.entry;
-#endif /* SERVER */
-#ifdef CLIENT
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
 	NetworkHandleEntry* got = entries.Find(key);
 	if (got)
 		return (T*)got;
-#endif CLIENT
+#endif NET_PHYSICS_CLIENT
 	return false;
 }
 
