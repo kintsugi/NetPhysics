@@ -2,7 +2,7 @@
 #define TIMER_SYSTEM_H_INCLUDED
 
 #include "System.h"
-#include "GameObjectFilter.h"
+#include "ComponentList.h"
 
 namespace NetPhysics {
 	class TimerSystem : public System {
@@ -13,7 +13,7 @@ namespace NetPhysics {
 
 	private:
 
-		GameObjectFilter filter;
+		ComponentList componentList;
 	};
 }
 

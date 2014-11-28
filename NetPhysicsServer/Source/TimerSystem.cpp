@@ -12,12 +12,12 @@ using namespace NetPhysics;
 
 TimerSystem::TimerSystem() : 
 						 System(BOTH), 
-						 filter(TIMER_COMPONENT) {}
+						 componentList(TIMER_COMPONENT) {}
 
 void TimerSystem::update(Register &engineRegister, const double dt) {
 	HandleManager* handleManager = engineRegister.getHandleManager();
 	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
-	XLib::Vector<GameObject*> gameObjects = gameObjectManager->getGameObjects(filter);
+	XLib::Vector<GameObject*> gameObjects = gameObjectManager->getGameObjectsWithComponents(componentList);
 	TimerComponent* timerComponent;
 	for (auto iter = gameObjects.begin(); iter != gameObjects.end(); iter++) {
 		timerComponent = (*iter)->getComponent<TimerComponent>(*handleManager, TIMER_COMPONENT);

@@ -8,6 +8,7 @@
 #endif /* NET_PHYSICS_CLIENT */
 #include "Handle.h"
 #include "ComponentHandle.h"
+#include "Replica.h"
 
 /*
 	Base class for game object components
@@ -15,13 +16,14 @@
 namespace NetPhysics {
 	class HandleManager;
 
-	class Component {
+	class Component : public Replica {
 	public:
 
 		Component(const ComponentType type,
 				  const Handle newHandle);
 
 		Handle getHandle() const;
+		ComponentHandle getComponentHandle() const;
 		Handle getOwner() const;
 		void setOwner(Handle ownerHandle);
 		void destroy(HandleManager &handleManager);

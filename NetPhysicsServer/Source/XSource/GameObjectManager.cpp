@@ -38,17 +38,17 @@ GameObject* GameObjectManager::createGameObject(GameObject* gameObject) {
 #endif /* NET_PHYSICS_CLIENT */
 }
 
-XLib::Vector<GameObject*> GameObjectManager::getGameObjects(const GameObjectFilter filter) {
+XLib::Vector<GameObject*> GameObjectManager::getGameObjectsWithComponents(const ComponentList &componentList) {
 	XLib::Vector<GameObject*> ret;
 #ifdef NET_PHYSICS_SERVER
 	for (auto iter = container.begin(); iter != container.end();iter++) {
-		if ((*iter)->hasComponents(filter))
+		if ((*iter)->hasComponents(componentList))
 			ret.push_back(iter->get());
 	}
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
 	for (auto iter = container.CreateIterator(); iter; iter++) {
-		if ((*iter)->hasComponents(filter))
+		if ((*iter)->hasComponents(componentList))
 			ret.Add(iter->Get());
 	}
 #endif /* NET_PHYSICS_CLIENT */

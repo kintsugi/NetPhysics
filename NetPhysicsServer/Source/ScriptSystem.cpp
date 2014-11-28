@@ -12,13 +12,13 @@
 
 using namespace NetPhysics;
 
-ScriptSystem::ScriptSystem() : System(BOTH), filter(SCRIPT_COMPONENT) {}
+ScriptSystem::ScriptSystem() : System(BOTH), componentList(SCRIPT_COMPONENT) {}
 
 void ScriptSystem::update(Register &engineRegister, const double dt) {
 	//Get game objects that contain a script component and update it.
 	HandleManager* handleManager = engineRegister.getHandleManager();
 	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
-	XLib::Vector<GameObject*> gameObjects = gameObjectManager->getGameObjects(filter);
+	XLib::Vector<GameObject*> gameObjects = gameObjectManager->getGameObjectsWithComponents(componentList);
 	ScriptComponent* scriptComponent = NULL;
 	for (auto iter = gameObjects.begin(); iter != gameObjects.end(); iter++) {
 		scriptComponent = (*iter)->getComponent<ScriptComponent>(*handleManager, SCRIPT_COMPONENT);

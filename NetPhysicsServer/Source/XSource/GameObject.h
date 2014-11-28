@@ -10,10 +10,11 @@
 #include <string>
 #include "XLib.h"
 #include "ComponentHandle.h"
-#include "GameObjectFilter.h"
 #include "Messenger.h"
 
 namespace NetPhysics {
+	struct ComponentList;
+
 	/*
 	GameObject class encapsulates handles to components.
 	Access added components by using HandleManager::Get
@@ -53,7 +54,7 @@ namespace NetPhysics {
 		bool hasComponent(const ComponentType type);
 
 		//Returns true if all component specified in the filter exist.
-		bool hasComponents(const GameObjectFilter filter);
+		bool hasComponents(const ComponentList &componentList);
 
 		/*
 		Remove the handle of the object and all handles of its component from the handle manager

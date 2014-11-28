@@ -79,6 +79,15 @@
     <ClCompile Include="Source\TimerSystem.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\XSource\ReplicationComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\ReplicationSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\ReplicationManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ClientComponent.h">
@@ -165,9 +174,6 @@
     <ClInclude Include="Source\XSource\GameObject.h">
       <Filter>Game Object</Filter>
     </ClInclude>
-    <ClInclude Include="Source\XSource\GameObjectFilter.h">
-      <Filter>Game Object</Filter>
-    </ClInclude>
     <ClInclude Include="Source\XSource\GameObjectManager.h">
       <Filter>Game Object</Filter>
     </ClInclude>
@@ -188,6 +194,21 @@
     </ClInclude>
     <ClInclude Include="Source\TimerSystem.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\ReplicationComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\ComponentList.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\Replica.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\ReplicationSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\ReplicationManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

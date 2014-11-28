@@ -8,11 +8,11 @@
 #endif /* NET_PHYSICS_CLIENT */
 
 #include "XLib.h"
-#include "GameObjectFilter.h"
 
 namespace NetPhysics {
 	class HandleManager;
 	class GameObject;
+	struct ComponentList;
 
 	/*
 		Factory for GameObjects. Handles allocation, deletion, and retrieval.
@@ -38,7 +38,7 @@ namespace NetPhysics {
 		@param filter The GameObjectFilter describing the requirements of the returned object.
 		@return a vector of handles to the GameObjects that match the filter.
 		*/
-		XLib::Vector<GameObject*> getGameObjects(const GameObjectFilter filter);
+		XLib::Vector<GameObject*> getGameObjectsWithComponents(const ComponentList &componentList);
 
 	private:
 

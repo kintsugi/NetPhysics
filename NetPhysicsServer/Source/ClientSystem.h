@@ -3,7 +3,7 @@
 
 #include "System.h"
 #include "RakNetTypes.h"
-#include "GameObjectFilter.h"
+#include "ComponentList.h"
 #include "NetworkHandleManager.h"
 
 namespace NetPhysics {
@@ -33,7 +33,8 @@ namespace NetPhysics {
 						  NetworkKey networkID);
 
 	private:
-		GameObjectFilter filter;
+
+		ComponentList componentList;
 	};
 }
 

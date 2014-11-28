@@ -17,6 +17,10 @@ Handle Component::getHandle() const {
 	return handle;
 }
 
+ComponentHandle Component::getComponentHandle() const {
+	return handle;
+}
+
 Handle Component::getOwner() const {
 	return owner;
 }

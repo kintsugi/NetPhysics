@@ -4,12 +4,13 @@
 #include "GameObject.h"
 #include "HandleManager.h"
 #include "Component.h"
+#include "ComponentList.h"
 
 using namespace NetPhysics;
 
 GameObject::GameObject(HandleManager &handleManager) :
-								   handle(handleManager.add(this,
-														    GAME_OBJECT)) {}
+					   handle(handleManager.add(this,
+												GAME_OBJECT)) {}
 
 bool GameObject::addComponent(HandleManager &handleManager, const ComponentHandle componentHandle) {
 	//Game object cannot have two components of the same type.
@@ -21,7 +22,7 @@ bool GameObject::addComponent(HandleManager &handleManager, const ComponentHandl
 #ifdef NET_PHYSICS_CLIENT
 		components.Add(componentHandle.componentType, componentHandle);
 #endif /* NET_PHYSICS_CLIENT */
-		Component* component = (Component*)handleManager.get(componentHandle);
+		Component* component = static_cast<Component*>(handleManager.get(componentHandle));
 		component->setOwner(handle);
 		return true;
 	}
@@ -65,15 +66,14 @@ bool GameObject::hasComponent(const ComponentType type) {
 #endif /* NET_PHYSICS_CLIENT */
 }
 
-bool GameObject::hasComponents(const GameObjectFilter filter) {
-	XLib::Vector<ComponentType> filterList = filter.getFilterList();
+bool GameObject::hasComponents(const ComponentList &componentList) {
 #ifdef NET_PHYSICS_SERVER
-	for (auto iter = filterList.begin(); iter != filterList.end(); iter++) {
+	for (auto iter = componentList.list.begin(); iter != componentList.list.end(); iter++) {
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
-		for (auto iter = filterList.CreateIterator(); iter; iter++) {
+	for (auto iter = componentList.CreateIterator(); iter; iter++) {
 #endif /* NET_PHYSICS_CLIENT */
-		if (!hasComponent(*iter))
+		if (!hasComponent(iter->first))
 			return false;
 	}
 	return true;

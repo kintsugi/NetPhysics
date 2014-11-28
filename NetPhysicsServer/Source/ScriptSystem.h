@@ -2,7 +2,7 @@
 #define SCRIPT_SYSTEM_H_INCLUDED
 
 #include "System.h"
-#include "GameObjectFilter.h"
+#include "ComponentList.h"
 
 namespace NetPhysics {
 	class ScriptSystem : public System {
@@ -15,7 +15,7 @@ namespace NetPhysics {
 
 	private:
 
-		GameObjectFilter filter;
+		ComponentList componentList;
 	};
 }
 

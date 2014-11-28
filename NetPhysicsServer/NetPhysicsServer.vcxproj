@@ -194,6 +194,9 @@
     <ClCompile Include="Source\XSource\NetworkSystem.cpp" />
     <ClCompile Include="Source\XSource\PacketHandlerSystem.cpp" />
     <ClCompile Include="Source\XSource\PacketToBitStream.cpp" />
+    <ClCompile Include="Source\XSource\ReplicationComponent.cpp" />
+    <ClCompile Include="Source\XSource\ReplicationManager.cpp" />
+    <ClCompile Include="Source\XSource\ReplicationSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\BulletPhysicsObject.h" />
@@ -210,10 +213,10 @@
     <ClInclude Include="Source\TimerSystem.h" />
     <ClInclude Include="Source\XSource\Component.h" />
     <ClInclude Include="Source\XSource\ComponentHandle.h" />
+    <ClInclude Include="Source\XSource\ComponentList.h" />
     <ClInclude Include="Source\XSource\ComponentType.h" />
     <ClInclude Include="Source\XSource\ComponentManager.h" />
     <ClInclude Include="Source\XSource\GameObject.h" />
-    <ClInclude Include="Source\XSource\GameObjectFilter.h" />
     <ClInclude Include="Source\XSource\GameObjectManager.h" />
     <ClInclude Include="Source\XSource\Register.h" />
     <ClInclude Include="Source\XSource\Handle.h" />
@@ -226,6 +229,10 @@
     <ClInclude Include="Source\XSource\NetworkSystem.h" />
     <ClInclude Include="Source\XSource\PacketHandlerSystem.h" />
     <ClInclude Include="Source\XSource\PacketToBitStream.h" />
+    <ClInclude Include="Source\XSource\Replica.h" />
+    <ClInclude Include="Source\XSource\ReplicationComponent.h" />
+    <ClInclude Include="Source\XSource\ReplicationManager.h" />
+    <ClInclude Include="Source\XSource\ReplicationSystem.h" />
     <ClInclude Include="Source\XSource\Stream.h" />
     <ClInclude Include="Source\XSource\StreamFormatter.h" />
     <ClInclude Include="Source\XSource\Subscriber.h" />
