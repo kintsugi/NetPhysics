@@ -18,7 +18,9 @@ namespace NetPhysics {
 #endif /* NET_PHYSICS_SERVER */
 		NETWORK_COMPONENT,
 		REPLICATION_COMPONENT,
-		NUM_COMPONENT_TYPES
+		//Place NUM_COMPONENT_TYPES after all component entries.
+		NUM_COMPONENT_TYPES,
+		INVALID_COMPONENT,
 	};
 }
 

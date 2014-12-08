@@ -14,10 +14,13 @@
 */
 namespace NetPhysics {
 	struct ComponentHandle : public Handle {
-		ComponentHandle(const Handle handle,
-						const ComponentType type) :
-						Handle(handle),
-						componentType(type) {}
+		ComponentHandle(
+			const Handle handle,
+			const ComponentType type)
+			: Handle(handle)
+			, componentType(type)
+		{}
+
 		const ComponentType componentType;
 	};
 }

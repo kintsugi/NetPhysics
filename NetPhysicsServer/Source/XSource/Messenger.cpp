@@ -10,8 +10,10 @@ Messenger::Messenger(HandleManager &handleManager) {
 	handle = handleManager.add(this, MESSENGER);
 }
 
-void Messenger::postMessage(HandleManager &handleManager,
-							Message* msg) {
+void Messenger::postMessage(
+	HandleManager &handleManager,
+	Message* msg)
+{
 #ifdef NET_PHYSICS_SERVER
 	auto range = subscribers.equal_range(msg->type);
 	if (range.first != subscribers.end() && range.second != subscribers.end()) {
@@ -45,8 +47,10 @@ XLib::Vector<Message*> Messenger::getInbox() {
 #endif /* NET_PHYSICS_CLIENT */
 }
 
-void Messenger::subscribe(Handle messengerHandle,
-						  const int messageType) {
+void Messenger::subscribe(
+	Handle messengerHandle,
+	const int messageType)
+{
 #ifdef NET_PHYSICS_SERVER
 	subscribers.insert(std::make_pair(messageType, Subscriber(messengerHandle)));
 #endif /* NET_PHYSICS_SERVER */

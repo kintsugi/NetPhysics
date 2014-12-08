@@ -8,10 +8,11 @@
 //Container for bullet physics objects.
 namespace NetPhysics {
 	struct BulletPhysicsObject {
-		BulletPhysicsObject(btCollisionShape* newCollisionShape,
-							btDefaultMotionState* newMotionState,
-							btScalar &newMass,
-							btVector3 &newInertia);
+		BulletPhysicsObject(
+			btCollisionShape* newCollisionShape,
+			btDefaultMotionState* newMotionState,
+			btScalar &newMass,
+			btVector3 &newInertia);
 
 		BulletPhysicsObject(BulletPhysicsObject& copy);
 		XLib::SharedPtr<btCollisionShape> collisionShape;

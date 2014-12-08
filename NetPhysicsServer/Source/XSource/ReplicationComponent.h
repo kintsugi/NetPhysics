@@ -17,15 +17,18 @@ namespace NetPhysics {
 	public:
 
 		ReplicationComponent(HandleManager &handleManager);
-		ReplicationComponent(HandleManager &handleManager, 
-							 ReplicationManager &replicationManager);
-		ReplicationComponent(HandleManager &handleManager,
-							 ReplicationManager &replicationManager,
-							 ReplicaKey newKey);
+		ReplicationComponent(
+			HandleManager &handleManager,
+			ReplicationManager &replicationManager);
+		ReplicationComponent(
+			HandleManager &handleManager,
+			ReplicationManager &replicationManager,
+			ReplicaKey newKey);
 
 		void setReplicationManager(ReplicationManager &replicationManager);
-		void setReplicaKey(ReplicationManager &replicationManager,
-						   ReplicaKey newKey);
+		void setReplicaKey(
+			ReplicationManager &replicationManager,
+			ReplicaKey newKey);
 		ReplicaKey getReplicaKey();
 		ComponentList getComponentList();
 

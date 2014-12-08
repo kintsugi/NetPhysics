@@ -9,9 +9,11 @@
 
 using namespace NetPhysics;
 
-Component::Component(ComponentType type,
-					 Handle newHandle) : 
-					 handle(newHandle, type) {}
+Component::Component(
+	ComponentType type,
+	Handle newHandle)
+	: handle(newHandle, type) 
+{}
 
 Handle Component::getHandle() const {
 	return handle;

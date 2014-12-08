@@ -3,24 +3,19 @@
 
 //Inherits Component
 #include "Component.h"
-//Assigning handle
-#include "HandleManager.h"
+
 
 namespace NetPhysics {
+	class HandleManager;
+	class Register;
+
 	class ScriptComponent : public Component {
 	public:
 
-		ScriptComponent(HandleManager &handleManager, Register &engineRegister) :
-						Component(SCRIPT_COMPONENT,
-								  handleManager.add(this,
-													COMPONENT)),
-						engineRegister(&engineRegister) {
-			start();
-		}
-
-		~ScriptComponent() {
-			destroy();
-		}
+		ScriptComponent(
+			HandleManager &handleManager,
+			Register &engineRegister);
+		~ScriptComponent();
 
 		virtual void update(const double dt) = 0;
 		virtual void start() {}

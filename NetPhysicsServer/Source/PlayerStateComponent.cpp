@@ -4,10 +4,12 @@
 
 using namespace NetPhysics;
 
-PlayerStateComponent::PlayerStateComponent(HandleManager &handleManager,
-										   PlayerState initialState) : 
-										   Component(PLAYER_STATE_COMPONENT, handleManager.add(this, COMPONENT)),
-										   state(initialState) {}
+PlayerStateComponent::PlayerStateComponent(
+	HandleManager &handleManager,
+	PlayerState initialState)
+	: Component(PLAYER_STATE_COMPONENT, handleManager.add(this, COMPONENT))
+	, state(initialState)
+{}
 
 PlayerState PlayerStateComponent::getState() const {
 	return state;

@@ -9,9 +9,12 @@
 
 namespace NetPhysics {
 #ifdef NET_PHYSICS_SERVER
-	typedef unsigned int uint32;
+	typedef unsigned long long HandleKey;
 #endif /*  NET_PHYSICS_SERVER */
-	enum HandleType : uint32 {
+#ifdef NET_PHYSICS_CLIENT
+	typedef uint64_t HandleKey;
+#endif /* NET_PHYSICS_CLIENT */
+	enum HandleType {
 		UNASSIGNED_HANDLE,
 		GAME_OBJECT,
 		COMPONENT,
@@ -21,7 +24,12 @@ namespace NetPhysics {
 
 	struct Handle {
 		Handle() : key(0), type(UNASSIGNED_HANDLE) {}
-		Handle(const uint32 newKey, const HandleType newType) : key(newKey), type(newType) {}
+		Handle(
+			const HandleKey newKey,
+			const HandleType newType)
+			: key(newKey)
+			, type(newType) 
+		{}
 
 		bool operator==(const Handle& comp) {
 			if (comp.key == key && comp.type == type)
@@ -32,7 +40,8 @@ namespace NetPhysics {
 		bool operator!=(const Handle& comp) {
 			return !operator==(comp);
 		}
-		uint32 key;
+
+		HandleKey key;
 		HandleType type;
 	};
 }

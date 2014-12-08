@@ -17,7 +17,7 @@ namespace NetPhysics {
 	class PacketHandlerSystem : public System {
 	public:
 		void handle(Register &engineRegister,
-					XLib::Vector<PacketToBitStream> packets);
+			XLib::Vector<PacketToBitStream> packets);
 	};
 }
 

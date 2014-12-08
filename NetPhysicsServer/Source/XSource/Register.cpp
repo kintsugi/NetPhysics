@@ -126,8 +126,7 @@ System* Register::getSystem(SystemType type) {
 #endif /* NET_PHYSICS_CLIENT */
 }
 
-void Register::addSystem(System* newSystem,
-						 SystemType type) {
+void Register::addSystem(System* newSystem, SystemType type) {
 	newSystem->init();
 	systemContainer[type] = newSystem;
 }

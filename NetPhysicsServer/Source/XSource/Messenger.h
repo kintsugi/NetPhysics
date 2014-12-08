@@ -26,6 +26,7 @@ namespace NetPhysics{
 	*/
 	class Messenger {
 	public:
+
 		Messenger(HandleManager& handleManager);
 
 		/*
@@ -35,7 +36,7 @@ namespace NetPhysics{
 		@param msg the message being posted.
 		*/
 		void postMessage(HandleManager& handleManager,
-						 Message* msg);
+			Message* msg);
 
 		/*
 		Adds the message to the inbox container.
@@ -59,10 +60,12 @@ namespace NetPhysics{
 		@param messageType the type of message to subscribe to.
 		*/
 		void subscribe(Handle messengerHandle,
-					   const int messageType);
+			const int messageType);
 
 		Handle getHandle() const;
+
 	private:
+
 		Handle handle;
 		//Container for received messages.
 		XLib::Vector<Message*> inbox;

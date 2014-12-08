@@ -27,9 +27,10 @@ namespace NetPhysics {
 		@param peer pointer to the server instance of RakNet
 		@param manager pointer to a NetworkIDManager object for this object
 		*/
-		NetworkComponent(HandleManager &handleManager,
-						 NetworkHandleManager &networkHandleManager,
-						 RakNet::RakPeerInterface* peer);
+		NetworkComponent(
+			HandleManager &handleManager,
+			NetworkHandleManager &networkHandleManager,
+			RakNet::RakPeerInterface* peer);
 
 		/*
 		@param handleManager reference to a handleManager to manage this object
@@ -37,10 +38,11 @@ namespace NetPhysics {
 		@param manager pointer to a NetworkIDManager object for this object
 		@param formatter virtual class that determines how to format BitStreams. Uses default if NULL
 		*/
-		NetworkComponent(HandleManager& handleManager,
-						 NetworkHandleManager &networkHandleManager,
-						 RakNet::RakPeerInterface* peer,
-						 StreamFormatter* newFormatter);
+		NetworkComponent(
+			HandleManager& handleManager,
+			NetworkHandleManager &networkHandleManager,
+			RakNet::RakPeerInterface* peer,
+			StreamFormatter* newFormatter);
 
 		/*
 		Sets the formatter the object uses to format BitStreams.

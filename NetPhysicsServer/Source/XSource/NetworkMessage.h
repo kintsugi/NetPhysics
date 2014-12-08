@@ -44,13 +44,14 @@ namespace NetPhysics {
 
 		struct Package {
 
-			Package(RakNet::RakPeerInterface* peer,
-					RakNet::AddressOrGUID to = RakNet::AddressOrGUID(),
-					PacketPriority priority = HIGH_PRIORITY,
-					PacketReliability reliability = RELIABLE_ORDERED,
-					char orderingChannel = 0,
-					bool broadcast = false,
-					uint32_t forceReceiptNumber = 0);
+			Package(
+				RakNet::RakPeerInterface* peer,
+				RakNet::AddressOrGUID to = RakNet::AddressOrGUID(),
+				PacketPriority priority = HIGH_PRIORITY,
+				PacketReliability reliability = RELIABLE_ORDERED,
+				char orderingChannel = 0,
+				bool broadcast = false,
+				uint32_t forceReceiptNumber = 0);
 
 			RakNet::RakPeerInterface* peer;
 			PacketPriority priority;
@@ -63,13 +64,16 @@ namespace NetPhysics {
 		};
 
 		namespace Send {
-			int networkComponentMessage(Package &package,
-										RakNet::NetworkID networkID,
-										RakNet::BitStream &bsOut);
-			int clientInit(Package &package,
-						   NetworkKey networkKey);
-			int clientDisconnect(Package &package,
-								 NetworkKey networkKey);
+			int networkComponentMessage(
+				Package &package,
+				RakNet::NetworkID networkID,
+				RakNet::BitStream &bsOut);
+			int clientInit(
+				Package &package,
+				NetworkKey networkKey);
+			int clientDisconnect(
+				Package &package,
+				NetworkKey networkKey);
 		};
 	}
 }

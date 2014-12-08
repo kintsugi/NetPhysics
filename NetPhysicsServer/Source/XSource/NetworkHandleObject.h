@@ -7,6 +7,7 @@
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
 
+//deprecated
 namespace NetPhysics {
 	typedef unsigned long long NetworkKey;
 	class NetworkHandleManager;

@@ -18,7 +18,7 @@ namespace NetPhysics {
 	public:
 		NetworkSystem() {};
 		void sendToNetworkComponent(NetworkHandleManager &networkHandleManager,
-									PacketToBitStream& packet);
+			PacketToBitStream& packet);
 	};
 }
 

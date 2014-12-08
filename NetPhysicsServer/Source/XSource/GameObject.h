@@ -11,6 +11,7 @@
 #include "XLib.h"
 #include "ComponentHandle.h"
 #include "Messenger.h"
+#include "Family.h"
 
 namespace NetPhysics {
 	struct ComponentList;
@@ -31,8 +32,9 @@ namespace NetPhysics {
 		@return true if successfully added, false if componentHandle is an invalid
 		handle or if another component exists of that type.
 		*/
-		bool addComponent(HandleManager &handleManager,
-						  const ComponentHandle componentHandle);
+		bool addComponent(
+			HandleManager &handleManager,
+			const ComponentHandle componentHandle);
 
 		/*
 		Returns the component specified
@@ -41,14 +43,16 @@ namespace NetPhysics {
 		@return null if no component exists of that type.
 		*/
 		template<class T>
-		T* getComponent(HandleManager &handleManager,
-						const ComponentType type);
+		T* getComponent(
+			HandleManager &handleManager,
+			const ComponentType type);
 
 		/*
 		Destroys component of the specified type.
 		*/
-		void removeComponent(HandleManager &handleManager,
-							 const ComponentType type);
+		void removeComponent(
+			HandleManager &handleManager,
+			const ComponentType type);
 
 		//Returns true if a component of the specified type exists.
 		bool hasComponent(const ComponentType type);
@@ -62,31 +66,28 @@ namespace NetPhysics {
 		All subsequent calls to the data the handle pointed to will be null
 		*/
 		void destroy(HandleManager &handleManager);
-
-		bool addChild(Handle child);	//Returns false if already a child.
-		bool removeChild(Handle child); //Returns false if no match.
-		void removeChildren();
-		XLib::Vector<Handle> getChildren();
-		bool isChild(Handle child);
 		Handle getHandle() const;
 		XLib::String getTag();
+		Family* getFamily();
 		void setTag(XLib::String newTag);
 
 	protected:
+
 #ifdef NET_PHYSICS_CLIENT
 		//Client needs an empty default constructor for ActorGameObject inheritance
 		GameObject() {}
 #endif /* NET_PHYSICS_CLIENT */
 		Handle handle;
 		XLib::String tag;
-
-	private:
+		Family family;
 		XLib::UnorderedMap<ComponentType, ComponentHandle> components;
-		XLib::Vector<Handle> children;
 	};
 
 	template<class T>
-	T* GameObject::getComponent(HandleManager &handleManager, const ComponentType type) {
+	T* GameObject::getComponent(
+		HandleManager &handleManager,
+		const ComponentType type)
+	{
 #ifdef NET_PHYSICS_SERVER
 		auto got = components.find(type);
 		if (got != components.end()) {

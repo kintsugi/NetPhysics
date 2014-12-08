@@ -15,7 +15,8 @@
 using namespace NetPhysics;
 
 void PacketHandlerSystem::handle(Register &engineRegister,
-								 XLib::Vector<PacketToBitStream> packets) {
+	XLib::Vector<PacketToBitStream> packets)
+{
 #ifdef NET_PHYSICS_SERVER
 	//Get systems and managers needed from register
 	NetworkHandleManager* networkHandleManager = engineRegister.getNetworkHandleManager();

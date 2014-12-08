@@ -10,7 +10,8 @@
 using namespace NetPhysics;
 
 void NetworkSystem::sendToNetworkComponent(NetworkHandleManager &networkHandleManager,
-										   PacketToBitStream &packet) {
+	PacketToBitStream &packet)
+{
 	//Reset the read pointer and ignore the messageID
 	packet.bitStream->ResetReadPointer();
 	packet.bitStream->IgnoreBytes(sizeof(RakNet::MessageID));

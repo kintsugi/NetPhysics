@@ -10,9 +10,7 @@
 
 using namespace NetPhysics;
 
-TimerSystem::TimerSystem() : 
-						 System(BOTH), 
-						 componentList(TIMER_COMPONENT) {}
+TimerSystem::TimerSystem() : System(BOTH), componentList(TIMER_COMPONENT) {}
 
 void TimerSystem::update(Register &engineRegister, const double dt) {
 	HandleManager* handleManager = engineRegister.getHandleManager();

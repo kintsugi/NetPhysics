@@ -6,16 +6,15 @@
 
 using namespace NetPhysics;
 
-PhysicSystem::PhysicSystem() : 
-						   System(DELTA_TIME),
-						   broadphase(new btDbvtBroadphase()),
-						   collisionConfiguration(new btDefaultCollisionConfiguration()),
-						   dispatcher(new btCollisionDispatcher(collisionConfiguration)),
-						   solver(new btSequentialImpulseConstraintSolver()),
-						   dynamicsWorld(new btDiscreteDynamicsWorld(dispatcher,
-																	 broadphase,
-																	 solver,
-																	 collisionConfiguration)) {
+PhysicSystem::PhysicSystem()
+	: System(DELTA_TIME)
+	, broadphase(new btDbvtBroadphase())
+	, collisionConfiguration(new btDefaultCollisionConfiguration())
+	, dispatcher(new btCollisionDispatcher(collisionConfiguration))
+	, solver(new btSequentialImpulseConstraintSolver())
+	, dynamicsWorld(new btDiscreteDynamicsWorld(
+		dispatcher, broadphase, solver, collisionConfiguration))
+{
 	btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
 	dynamicsWorld->setGravity(btVector3(0, 0, 0)); //Zero gravity
 }

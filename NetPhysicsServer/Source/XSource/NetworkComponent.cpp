@@ -7,28 +7,35 @@
 
 using namespace NetPhysics;
 
-NetworkComponent::NetworkComponent(HandleManager &handleManager,
-								   NetworkHandleManager &networkHandleManager,
-								   RakNet::RakPeerInterface* peer) : 
-								   Component(NETWORK_COMPONENT, handleManager.add(this, COMPONENT)),
-								   NetworkHandleObject(this),
-								   RakPeerInstance(peer),
-								   formatter(NULL) {
+NetworkComponent::NetworkComponent(
+	HandleManager &handleManager,
+	NetworkHandleManager &networkHandleManager,
+	RakNet::RakPeerInterface* peer) 
+	: Component(NETWORK_COMPONENT
+	, handleManager.add(this, COMPONENT))
+	, NetworkHandleObject(this)
+	, RakPeerInstance(peer)
+	, formatter(NULL)
+{
 	setNetworkHandleManager(networkHandleManager);
 }
 
-NetworkComponent::NetworkComponent(HandleManager &handleManager,
-								   NetworkHandleManager &networkHandleManager,
-								   RakNet::RakPeerInterface* peer,
-								   StreamFormatter* newFormatter) : 
-								   Component(NETWORK_COMPONENT, handleManager.add(this, COMPONENT)),
-								   NetworkHandleObject(this),
-								   RakPeerInstance(peer),
-								   formatter(newFormatter) {
+NetworkComponent::NetworkComponent(
+	HandleManager &handleManager,
+	NetworkHandleManager &networkHandleManager,
+	RakNet::RakPeerInterface* peer,
+	StreamFormatter* newFormatter)
+	: Component(NETWORK_COMPONENT, handleManager.add(this, COMPONENT))
+	, NetworkHandleObject(this)
+	, RakPeerInstance(peer)
+	, formatter(newFormatter)
+{
 	setNetworkHandleManager(networkHandleManager);
 }
 
-void NetworkComponent::setFormatter(XLib::SharedPtr<StreamFormatter> newFormatter) {
+void NetworkComponent::setFormatter(
+	XLib::SharedPtr<StreamFormatter> newFormatter)
+{
 	formatter = newFormatter;
 }
 

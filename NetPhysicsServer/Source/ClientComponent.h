@@ -20,9 +20,10 @@ namespace NetPhysics {
 		@param peer the instance of RakNetInterface the client is connected to
 		@param newClientGUID the RakNetGUID of the client's system
 		*/
-		ClientComponent(HandleManager &handleManager,
-						RakNet::RakPeerInterface *peer,
-						const RakNet::RakNetGUID newClientGUID);
+		ClientComponent(
+			HandleManager &handleManager,
+			RakNet::RakPeerInterface *peer,
+			const RakNet::RakNetGUID newClientGUID);
 
 		//Returns the RakNetGUID of the client
 		RakNet::RakNetGUID getClientGUID() const;

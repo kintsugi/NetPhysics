@@ -7,9 +7,8 @@ using namespace NetPhysics;
 
 HandleManager::HandleManager() : nextAvailableKey(0) {}
 
-Handle HandleManager::add(void* dataPtr,
-						  const HandleType type) {
-	uint32 key = generateKey();
+Handle HandleManager::add(void* dataPtr, const HandleType type) {
+	HandleKey key = generateKey();
 #ifdef NET_PHYSICS_SERVER
 	entries.insert(std::make_pair(key, HandleEntry(type, dataPtr)));
 #endif /* NET_PHYSICS_SERVER */
@@ -19,8 +18,7 @@ Handle HandleManager::add(void* dataPtr,
 	return Handle(key, type);
 }
 
-bool HandleManager::update(const Handle handle,
-									   void* dataPtr) {
+bool HandleManager::update(const Handle handle, void* dataPtr) {
 #ifdef NET_PHYSICS_SERVER
 	//Attempt to find the value with the key handle.key
 	auto got = entries.find(handle.key);
@@ -87,8 +85,7 @@ void* HandleManager::get(const Handle handle) const {
 	return dataPtr;
 }
 
-bool HandleManager::get(const Handle handle,
-						void*& out) const {
+bool HandleManager::get(const Handle handle, void*& out) const {
 #ifdef NET_PHYSICS_SERVER
 	//Attempt to find the value with the key handle.id
 	auto got = entries.find(handle.key);
@@ -115,10 +112,17 @@ bool HandleManager::get(const Handle handle,
 	return false;
 }
 
-uint32 HandleManager::generateKey() {
+HandleKey HandleManager::generateKey() {
 	if (nextAvailableKey == 0) {
 		nextAvailableKey++;
 		return 0;
 	}
 	return nextAvailableKey++;
 }
+
+HandleManager::HandleEntry::HandleEntry(
+	const HandleType newType,
+	void* dataPtr)
+	: type(newType)
+	, entry(dataPtr)
+{}

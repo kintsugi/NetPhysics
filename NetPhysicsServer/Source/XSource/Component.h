@@ -19,8 +19,7 @@ namespace NetPhysics {
 	class Component : public Replica {
 	public:
 
-		Component(const ComponentType type,
-				  const Handle newHandle);
+		Component(const ComponentType type, const Handle newHandle);
 
 		Handle getHandle() const;
 		ComponentHandle getComponentHandle() const;

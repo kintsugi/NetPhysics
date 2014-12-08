@@ -8,11 +8,15 @@
 
 using namespace NetPhysics;
 
-GameObject::GameObject(HandleManager &handleManager) :
-					   handle(handleManager.add(this,
-												GAME_OBJECT)) {}
+GameObject::GameObject(HandleManager &handleManager)
+	: handle(handleManager.add(this, GAME_OBJECT))
+	, family(handle)
+{}
 
-bool GameObject::addComponent(HandleManager &handleManager, const ComponentHandle componentHandle) {
+bool GameObject::addComponent(
+	HandleManager &handleManager,
+	const ComponentHandle componentHandle)
+{
 	//Game object cannot have two components of the same type.
 	if (componentHandle.type == COMPONENT && !hasComponent(componentHandle.componentType)) {
 		//Insert into map and set the components owner.
@@ -29,8 +33,10 @@ bool GameObject::addComponent(HandleManager &handleManager, const ComponentHandl
 	return false;
 }
 
-void GameObject::removeComponent(HandleManager &handleManager,
-								 const ComponentType type) {
+void GameObject::removeComponent(
+	HandleManager &handleManager,
+	const ComponentType type)
+{
 	//Make sure the component of that type exists in this GameObject
 #ifdef NET_PHYSICS_SERVER
 	auto got = components.find(type);
@@ -96,63 +102,6 @@ void GameObject::destroy(HandleManager &handleManager) {
 	handleManager.remove(handle);
 }
 
-bool GameObject::addChild(Handle child) {
-	if (!isChild(child)) {
-#ifdef NET_PHYSICS_SERVER
-		children.push_back(child);
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-		children.Add(child);
-#endif /* NET_PHYSICS_CLIENT */
-	}
-	return false;
-}
-
-bool GameObject::removeChild(Handle child) {
-#ifdef NET_PHYSICS_SERVER
-	for (auto iter = children.begin(); iter != children.end(); iter++) {
-		if (child == *iter) {
-			children.erase(iter);
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-	for (auto iter = children.CreateIterator(); iter; iter++) {
-		if (child == *iter) {
-			children.RemoveAt(iter.GetIndex());
-#endif /* NET_PHYSICS_CLIENT */
-			return true;
-		}
-	}
-	return false;
-}
-
-void GameObject::removeChildren() {
-#ifdef NET_PHYSICS_SERVER
-	children.clear();
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-	children.Reset();
-#endif /* NET_PHYSICS_CLIENT */
-
-}
-
-XLib::Vector<Handle> GameObject::getChildren() {
-	return children;
-}
-
-bool GameObject::isChild(Handle child) {
-#ifdef NET_PHYSICS_SERVER
-	for (auto iter = children.begin(); iter != children.end(); iter++) {
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-	for (auto iter = children.CreateIterator(); iter; iter++) {
-#endif /* NET_PHYSICS_CLIENT */
-		if (child == *iter) {
-			return true;
-		}
-	}
-	return false;
-}
-
 Handle GameObject::getHandle() const {
 	return handle;
 }
@@ -160,6 +109,11 @@ Handle GameObject::getHandle() const {
 XLib::String GameObject::getTag() {
 	return tag;
 }
+
+Family* GameObject::getFamily() {
+	return &family;
+}
+
 void GameObject::setTag(XLib::String newTag) {
 	tag = newTag;
 }

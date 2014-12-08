@@ -88,6 +88,9 @@
     <ClCompile Include="Source\XSource\ReplicationManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ScriptComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ClientComponent.h">

@@ -5,12 +5,14 @@
 
 using namespace NetPhysics;
 
-PhysicComponent::PhysicComponent(HandleManager& handleManager,
-								 BulletPhysicsObject& obj) :
-								 bulletPhysicsObject(new BulletPhysicsObject(obj)),
-								 Component(PHYSICS_COMPONENT, handleManager.add(this, COMPONENT)),
-								 dynamicsWorld(NULL), 
-								 rigidBody(NULL) {
+PhysicComponent::PhysicComponent(
+	HandleManager& handleManager,
+	BulletPhysicsObject& obj)
+	: bulletPhysicsObject(new BulletPhysicsObject(obj))
+	, Component(PHYSICS_COMPONENT, handleManager.add(this, COMPONENT))
+	, dynamicsWorld(NULL)
+	, rigidBody(NULL)
+{
 	//Creates the RigidBody with the data stored in member physicsComponent
 	rigidBody = new btRigidBody(btRigidBody::btRigidBodyConstructionInfo(
 		*bulletPhysicsObject->mass,

@@ -7,7 +7,9 @@
 
 using namespace NetPhysics;
 
-ComponentManager::ComponentManager(const ComponentType type) : managerType(type) {}
+ComponentManager::ComponentManager(const ComponentType type)
+	: managerType(type)
+{}
 
 void ComponentManager::update(HandleManager &handleManager) {
 #ifdef NET_PHYSICS_SERVER
@@ -30,12 +32,16 @@ void ComponentManager::update(HandleManager &handleManager) {
 }
 
 ComponentHandle ComponentManager::createComponent(Component* component) {
+	if (component->getComponentHandle().componentType == managerType) {
 #ifdef NET_PHYSICS_SERVER
-	container.push_back(XLib::SharedPtr<Component>(component));
-	return ComponentHandle(container.back()->getHandle(), managerType);
+		container.push_back(XLib::SharedPtr<Component>(component));
+		return ComponentHandle(container.back()->getHandle(), managerType);
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
-	container.Add(XLib::SharedPtr<Component>(component));
-	return ComponentHandle(container.Last()->getHandle(), managerType);
+		container.Add(XLib::SharedPtr<Component>(component));
+		return ComponentHandle(container.Last()->getHandle(), managerType);
 #endif /* NET_PHYSICS_CLIENT */
+	}
+	//TODO: debug log this exception
+	return ComponentHandle(Handle(), INVALID_COMPONENT);
 }

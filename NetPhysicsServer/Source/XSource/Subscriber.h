@@ -11,7 +11,9 @@ namespace NetPhysics {
 	class Subscriber {
 	public:
 
-		Subscriber(const Handle newSubscriberHandle) : subscriberHandle(newSubscriberHandle) {}
+		Subscriber(const Handle newSubscriberHandle)
+			: subscriberHandle(newSubscriberHandle)
+		{}
 		Handle getSubscriberHandle() const { return subscriberHandle; }
 
 	private:

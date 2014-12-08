@@ -15,8 +15,7 @@ namespace NetPhysics {
 		//starts timer in stop watch mode
 		TimerComponent(HandleManager &handleManager);
 		//Starts timer in countdown mode
-		TimerComponent(HandleManager &handleManager,
-					   double timerLength);
+		TimerComponent(HandleManager &handleManager, double timerLength);
 
 		void tick(double dt);
 		void setMode(TimerMode timerMode);

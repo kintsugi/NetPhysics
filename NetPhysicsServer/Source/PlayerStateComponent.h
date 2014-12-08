@@ -17,8 +17,9 @@ namespace NetPhysics {
 		@param handleManager reference to a handleManager to manage this object
 		@param initialState the initial state of the player
 		*/
-		PlayerStateComponent(HandleManager &handleManager,
-							 PlayerState initialState);
+		PlayerStateComponent(
+			HandleManager &handleManager,
+			PlayerState initialState);
 
 		//Returns the player's state.
 		PlayerState getState() const;

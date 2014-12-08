@@ -176,12 +176,14 @@
     <ClCompile Include="Source\PhysicComponent.cpp" />
     <ClCompile Include="Source\PhysicSystem.cpp" />
     <ClCompile Include="Source\PlayerStateComponent.cpp" />
+    <ClCompile Include="Source\ScriptComponent.cpp" />
     <ClCompile Include="Source\ScriptSystem.cpp" />
     <ClCompile Include="Source\ServerSystem.cpp" />
     <ClCompile Include="Source\TimerComponent.cpp" />
     <ClCompile Include="Source\TimerSystem.cpp" />
     <ClCompile Include="Source\XSource\Component.cpp" />
     <ClCompile Include="Source\XSource\ComponentManager.cpp" />
+    <ClCompile Include="Source\XSource\Family.cpp" />
     <ClCompile Include="Source\XSource\GameObject.cpp" />
     <ClCompile Include="Source\XSource\GameObjectManager.cpp" />
     <ClCompile Include="Source\XSource\Register.cpp" />
@@ -216,6 +218,7 @@
     <ClInclude Include="Source\XSource\ComponentList.h" />
     <ClInclude Include="Source\XSource\ComponentType.h" />
     <ClInclude Include="Source\XSource\ComponentManager.h" />
+    <ClInclude Include="Source\XSource\Family.h" />
     <ClInclude Include="Source\XSource\GameObject.h" />
     <ClInclude Include="Source\XSource\GameObjectManager.h" />
     <ClInclude Include="Source\XSource\Register.h" />

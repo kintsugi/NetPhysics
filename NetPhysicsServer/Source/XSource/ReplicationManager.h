@@ -24,9 +24,9 @@ namespace NetPhysics {
 #endif /* NET_PHYSICS_SERVER */
 		bool remove(ReplicaKey key);
 		ReplicationComponent* get(ReplicaKey key,
-								  HandleManager &handleManager);
+			HandleManager &handleManager);
 		void set(ReplicationComponent* replicationComponent,
-				 ReplicaKey key);
+			ReplicaKey key);
 
 	private:
 

@@ -20,8 +20,8 @@ namespace NetPhysics {
 
 		ServerSystem() : System(NO_PARAMETERS) {}
 
-		void init() override;
-		void update() override;
+		void init();
+		void update();
 		void startServer(bool userInputDetails);
 		RakNet::RakPeerInterface* getRakPeerInstance();
 		//Gets the packets received since the last update

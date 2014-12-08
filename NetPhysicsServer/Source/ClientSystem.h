@@ -24,13 +24,13 @@ namespace NetPhysics {
 		@param clientSystemAddress the clients systemAddress.
 		*/
 		void initializeClient(Register &engineRegister,
-							  ::RakNet::RakNetGUID guid);
+			::RakNet::RakNetGUID guid);
 
 		/*
 		TEMP: removes the owning clients game object
 		*/
 		void removeClient(Register &engineRegister,
-						  NetworkKey networkID);
+			NetworkKey networkID);
 
 	private:
 

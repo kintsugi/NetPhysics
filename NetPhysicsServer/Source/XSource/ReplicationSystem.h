@@ -21,9 +21,9 @@ namespace NetPhysics {
 		void update(Register &engineRegister);
 
 		void addClient(ReplicationComponent* replicationComponent,
-					   RakNet::RakNetGUID clientGUID);
+			RakNet::RakNetGUID clientGUID);
 		void removeClient(ReplicationComponent* replicationComponent,
-						  RakNet::RakNetGUID clientGUID);
+			RakNet::RakNetGUID clientGUID);
 	private:
 
 		XLib::UnorderedMultiMap<ReplicaKey, RakNet::RakNetGUID> masterSlaveList;

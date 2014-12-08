@@ -12,7 +12,7 @@
 namespace NetPhysics {
 	struct ComponentList {
 		ComponentList() {}
-		ComponentList(ComponentType type) {add(type);}
+		ComponentList(ComponentType type) { add(type); }
 
 		void add(ComponentType type) {
 #ifdef NET_PHYSICS_SERVER

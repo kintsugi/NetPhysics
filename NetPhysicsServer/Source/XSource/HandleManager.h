@@ -21,8 +21,7 @@ namespace NetPhysics {
 		@param type an uint32 as a identifier of the type
 		@return the handle containing the the key value of the pointer
 		*/
-		Handle add(void* dataPtr,
-				   const HandleType type);
+		Handle add(void* dataPtr, const HandleType type);
 
 		/*
 		Updates the pointer at denoted by param handle. can not change types
@@ -30,8 +29,7 @@ namespace NetPhysics {
 		@param dataPtr a pointer to the data to be stored
 		@return whether the update was successful. fails if handle is invalid
 		*/
-		bool update(const Handle handle,
-					void* dataPtr);
+		bool update(const Handle handle, void* dataPtr);
 
 		/*
 		Erases the index denoted by the handle
@@ -53,23 +51,21 @@ namespace NetPhysics {
 		@param out a NULL pointer to be assign to a data pointer if handle is valid
 		@return whether the get was successful. false is handle is invalid
 		*/
-		bool get(const Handle handle,
-				 void*& out) const;
+		bool get(const Handle handle, void*& out) const;
 
 	private:
 
-		uint32 nextAvailableKey;
-		uint32 generateKey();
+		HandleKey nextAvailableKey;
+		HandleKey generateKey();
 		struct HandleEntry {
-			HandleEntry(const HandleType newType,
-						void* dataPtr) :
-						type(newType),
-						entry(dataPtr) {}
+			HandleEntry(
+				const HandleType newType,
+				void* dataPtr);
 
 			HandleType type;
 			void* entry;
 		};
-		XLib::UnorderedMap<uint32, HandleEntry> entries;
+		XLib::UnorderedMap<HandleKey, HandleEntry> entries;
 	};
 }
 

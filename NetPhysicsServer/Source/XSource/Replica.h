@@ -12,12 +12,13 @@ namespace RakNet {
 	class BitStream;
 }
 
+//wip
 namespace NetPhysics {
 	//template<class T>
 	class Replica {
 	public:
 
-		virtual XLib::SharedPtr<RakNet::BitStream> send() {return NULL;}
+		virtual XLib::SharedPtr<RakNet::BitStream> send() { return NULL; }
 		virtual void receive(XLib::SharedPtr<RakNet::BitStream>) {}
 		//void serialize(XLib::SharedPtr<T> newSerial) {lastSerial = newSerial;}
 

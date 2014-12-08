@@ -18,12 +18,15 @@
 
 using namespace NetPhysics;
 
-ClientSystem::ClientSystem() : System(REGISTER), componentList(CLIENT_COMPONENT) {}
+ClientSystem::ClientSystem() 
+	: System(REGISTER)
+	, componentList(CLIENT_COMPONENT)
+{}
 
 void ClientSystem::update(Register &engineRegister) {
 	HandleManager* handleManager = engineRegister.getHandleManager();
 	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
-	RakNet::RakPeerInterface *rakPeerInstance = engineRegister.getRakPeerInstance();
+	RakNet::RakPeerInterface* rakPeerInstance = engineRegister.getRakPeerInstance();
 
 	//Poll the connection state of the client, if it not a secure connection, destroy it.
 	std::vector<GameObject*> gameObjects = gameObjectManager->getGameObjectsWithComponents(componentList);
@@ -43,7 +46,8 @@ void ClientSystem::update(Register &engineRegister) {
 }
 
 void ClientSystem::initializeClient(Register &engineRegister,
-									RakNet::RakNetGUID guid) {
+	RakNet::RakNetGUID guid)
+{
 	//Set up managers from the register.
 	HandleManager* handleManager = engineRegister.getHandleManager();
 	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
@@ -65,7 +69,8 @@ void ClientSystem::initializeClient(Register &engineRegister,
 }
 
 void ClientSystem::removeClient(Register &engineRegister,
-								NetworkKey networkKey) {
+	NetworkKey networkKey)
+{
 	//Set up managers from the register.
 	HandleManager* handleManager = engineRegister.getHandleManager();
 	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
