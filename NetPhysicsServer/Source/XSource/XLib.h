@@ -34,7 +34,7 @@ namespace NetPhysics {
 			bool empty() const { return container.empty(); }
 			size_type size() const { return container.size(); }
 			size_type max_size() const { return container.max_size(); }
-			void reserve_X(size_type new_cap) { reserve(new_cap); }
+			void reserve(size_type new_cap) { container.reserve(new_cap); }
 			size_type capacity() const { return container.capacity(); }
 			void shrink_to_fit() { container.shrink_to_fit(); }
 			void clear() { container.clear(); }
@@ -72,22 +72,22 @@ namespace NetPhysics {
 			
 			}
 			std::vector<T>::iterator erase(std::vector<T>::iterator pos) {
-				container.erase(pos);
+				return container.erase(pos);
 			}
 			std::vector<T>::iterator erase(std::vector<T>::const_iterator pos) {
-				container.erase(pos);
+				return container.erase(pos);
 			}
 			std::vector<T>::iterator erase(
 				std::vector<T>::iterator first,
 				std::vector<T>::iterator last)
 			{
-				container.erase(first, last);
+				return container.erase(first, last);
 			}
 			std::vector<T>::iterator erase(
 				std::vector<T>::const_iterator first,
 				std::vector<T>::const_iterator last)
 			{
-				container.erase(first, last);
+				return container.erase(first, last);
 			}
 			void push_back(const T& value) { container.push_back(value); }
 			void push_back(T&& value) { container.push_back(value); }
@@ -145,35 +145,103 @@ namespace NetPhysics {
 
 	namespace XLib {
 
-		template <class T>
-		class Vector : public TArray<T> {
-		public:
-
-			ElementType& front_X() { return Last(Num() - 1); }
-			T& back_X() { return Last(); }
-			ElementType* data_X() { return GetData(); }
-			TIterator begin_X() { return CreateIterator(); }
-			TIterator end_X() { return CreateIterator() + (Num() - 1); }
-			bool empty_X() { return Num() == 0 ? true : false; }
-			int32 size_X() { return Num(); }
-			int32 max_size_X() { return Max(); }
-			void reserve_X(int32 new_cap) { Reserve(new_cap); }
-			uint32 capacity_X() { return GetAllocatedSize(); }
-			void shrink_to_fit_X() { Shrink(); }
-			void clear_X() { Empty(); }
-			TIterator insert_X(TIterator pos, const ElementType &value) { return CreateIterator() + Insert(pos.GetIndex(), value); }
-			TIterator erase_X(TIterator pos) {
-				RemoveAt(pos.GetIndex());
+		template <typename T>
+		struct Vector {
+			Vector<T>& operator=(const Vector<T> &comp) {
+				if (this != &comp)
+					container = comp.container;
+				return *this;
+			}
+			T& operator[](int32 pos) { return container[pos]; }
+			const T& operator[](int32 pos) const {
+				return const_cast<T&>(container[pos]);
+			}
+			T& front() { return container[0]; }
+			const T& front() const { return container[0]; }
+			T& back() { return container.Last(); }
+			const T& back() const { return container.Last(); }
+			T* data() { return container.GetData(); }
+			TIterator begin() {
+				return container.CreateIterator();
+			}
+			TConstIterator cbegin() {
+				return container.CreateConstIterator();
+			}
+			TIterator end() {
+				return container.CreateIterator() + container.Num();
+			}
+			TConstIterator cend() {
+				return container.CreateConstIterator() + container.Num();
+			}
+			bool empty() const { return container.Num == 0 ? true : false; }
+			int32 size() const { return container.Num(); }
+			int32 max_size() const { return container.Max(); }
+			void reserve(int32 new_cap) { container.Reserve(new_cap); }
+			uint32 capacity() const { return container.GetAllocatedSize(); }
+			void shrink_to_fit() { container.Shrink(); }
+			void clear() { container.Empty(); }
+			TIterator insert(
+				TIterator pos,
+				const T& value)
+			{
+				return begin() + container.Insert(pos.GetIndex(), value);
+			}
+			TIterator insert(
+				TConstIterator pos,
+				const T& value)
+			{
+				return begin() + container.Insert(pos.GetIndex(), value);
+			}
+			TIterator insert(
+				TConstIterator pos,
+				T&& value)
+			{
+				return container.Insert(pos.GetIndex(), value);
+			}
+			void insert(
+				TIterator pos,
+				int32 count,
+				const T& value)
+			{
+				TArray fill; fill.Init(value, count);
+				container.Insert(fill, pos.GetIndex());
+			}
+			TIterator insert(
+				TConstIterator pos,
+				int32 count,
+				const T& value)
+			{
+				TArray fill; fill.Init(value, count);
+				return begin() + container.Insert(fill, pos.GetIndex());
+			}
+			TIterator erase(TIterator pos) {
+				container.RemoveAt(pos.GetIndex());
 				return pos--;
 			}
-			TIterator erase_X(TIterator first, TIterator last) {
-				int32 count = last.GetIndex() - first.GetIndex();
-				RemoveAt(first, count);
-				return first--;
+			TIterator erase(TConstIterator pos) {
+				container.RemoveAt(pos.GetIndex());
+				return pos--;
 			}
-			void push_back_X(const ElementType& value) { Add(value); }
-			void push_back_X(T&& value) { Add(value); }
-			void pop_back_X() { Pop(); }
+			TIterator erase(
+				TIterator first,
+				TIterator last)
+			{
+				int32 count = last.GetIndex() - first.GetIndex();
+				container.RemoveAt(first.GetIndex(), count);
+				return last - count;
+			}
+			TIterator erase(
+				TConstIterator first,
+				TConstIterator last)
+			{
+				int32 count = last.GetIndex() - first.GetIndex();
+				container.RemoveAt(first.GetIndex(), count);
+				return last - count;
+			}
+			void push_back(const T& value) { container.Add(value); }
+			void push_back(T&& value) { container.Add(value); }
+			void pop_back() { container.RemoveAt(size() - 1); }
+			TArray<T> container;
 		};
 
 		template <class S, class T>
