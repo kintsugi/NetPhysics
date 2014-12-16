@@ -11,17 +11,17 @@ void Engine::init() {
 	//Start the program clock.
 	currentTime = RakNet::GetTimeUS();
 	//Init the register and add all systems.
-	engineRegister.init();
-	engineRegister.addSystem(new ServerSystem(), SERVER_SYSTEM);
-	engineRegister.addSystem(new NetworkSystem(), NETWORK_SYSTEM);
-	engineRegister.addSystem(new PacketHandlerSystem(), PACKET_HANDLER_SYSTEM);
-	engineRegister.addSystem(new ClientSystem(), CLIENT_SYSTEM);
+	reg.init();
+	reg.addSystem(new ServerSystem(), SERVER_SYSTEM);
+	reg.addSystem(new NetworkSystem(), NETWORK_SYSTEM);
+	reg.addSystem(new PacketHandlerSystem(), PACKET_HANDLER_SYSTEM);
+	reg.addSystem(new ClientSystem(), CLIENT_SYSTEM);
 
-	handleManager = engineRegister.getHandleManager();
-	networkHandleManager = engineRegister.getNetworkHandleManager();
-	gameObjectManager = engineRegister.getGameObjectManager();
-	serverSystem = dynamic_cast<ServerSystem*>(engineRegister.getSystem(SERVER_SYSTEM));
-	packetHandlerSystem = dynamic_cast<PacketHandlerSystem*>(engineRegister.getSystem(PACKET_HANDLER_SYSTEM));
+	handleManager = reg.getHandleManager();
+	networkHandleManager = reg.getNetworkHandleManager();
+	gameObjectManager = reg.getGameObjectManager();
+	serverSystem = dynamic_cast<ServerSystem*>(reg.getSystem(SERVER_SYSTEM));
+	packetHandlerSystem = dynamic_cast<PacketHandlerSystem*>(reg.getSystem(PACKET_HANDLER_SYSTEM));
 	
 	//Start the server!
 	serverSystem->startServer(false);
@@ -29,8 +29,8 @@ void Engine::init() {
 
 void Engine::update() {
 	dt = calculateDeltaTime();
-	engineRegister.update(dt);
-	packetHandlerSystem->handle(engineRegister, serverSystem->getPackets());
+	reg.update(dt);
+	packetHandlerSystem->handle(reg, serverSystem->getPackets());
 }
 
 double Engine::calculateDeltaTime() {

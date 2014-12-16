@@ -15,7 +15,7 @@ NetworkComponent::NetworkComponent(
 	, handleManager.add(this, COMPONENT))
 	, NetworkHandleObject(this)
 	, RakPeerInstance(peer)
-	, formatter(NULL)
+	, formatter(nullptr)
 {
 	setNetworkHandleManager(networkHandleManager);
 }

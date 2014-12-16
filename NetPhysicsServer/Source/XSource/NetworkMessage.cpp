@@ -30,7 +30,7 @@ NetworkMessage::Package::Package(
 	, forceReceiptNumber(forceReceiptNumber)
 {}
 
-int NetworkMessage::Package::send(RakNet::BitStream &bsOut) {
+uint32_t NetworkMessage::Package::send(RakNet::BitStream &bsOut) {
 	return peer->Send(
 		&bsOut,
 		priority,
@@ -41,7 +41,7 @@ int NetworkMessage::Package::send(RakNet::BitStream &bsOut) {
 		forceReceiptNumber);
 }
 
-int NetworkMessage::Send::networkComponentMessage(
+uint32_t NetworkMessage::Send::networkComponentMessage(
 	Package &package,
 	RakNet::NetworkID networkID,
 	RakNet::BitStream &bsOut)
@@ -56,7 +56,7 @@ int NetworkMessage::Send::networkComponentMessage(
 }
 
 #ifdef NET_PHYSICS_SERVER
-int NetworkMessage::Send::clientInit(
+uint32_t NetworkMessage::Send::clientInit(
 	Package &package,
 	NetworkKey networkKey)
 {

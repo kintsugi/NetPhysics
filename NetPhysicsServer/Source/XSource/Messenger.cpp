@@ -19,7 +19,7 @@ void Messenger::postMessage(
 	if (range.first != subscribers.end() && range.second != subscribers.end()) {
 		for (auto iter = range.first; iter != range.second; iter++) {
 			Messenger* subscriber = (Messenger*)handleManager.get(iter->second.getSubscriberHandle());
-			if (subscriber != NULL)
+			if (subscriber != nullptr)
 				subscriber->receiveMessage(msg);
 			else 
 				iter = subscribers.erase(iter);
@@ -49,7 +49,7 @@ XLib::Vector<Message*> Messenger::getInbox() {
 
 void Messenger::subscribe(
 	Handle messengerHandle,
-	const int messageType)
+	const uint32_t messageType)
 {
 #ifdef NET_PHYSICS_SERVER
 	subscribers.insert(std::make_pair(messageType, Subscriber(messengerHandle)));

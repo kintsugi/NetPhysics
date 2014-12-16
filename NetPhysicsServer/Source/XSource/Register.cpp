@@ -16,13 +16,13 @@ void Register::init() {
 	systemContainer.resize(NUM_SYSTEM_TYPES);
 
 	//initialize the component managers
-	for (unsigned int i = 0; i < NUM_COMPONENT_TYPES; i++) {
+	for (uint32_t i = 0; i < NUM_COMPONENT_TYPES; i++) {
 		componentManagerContainer.push_back(ComponentManager((ComponentType)i));
 	}
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
 	//initialize the component managers
-	for (unsigned int i = 0; i < NUM_COMPONENT_TYPES; i++) {
+	for (uint32_t i = 0; i < NUM_COMPONENT_TYPES; i++) {
 		componentManagerContainer.Add(ComponentManager((ComponentType)i));
 	}
 	systemContainer.InsertZeroed(0, NUM_SYSTEM_TYPES);
@@ -135,7 +135,7 @@ void Register::removeSystem(SystemType type) {
 #ifdef NET_PHYSICS_SERVER
 	if (systemContainer[type]) {
 		delete systemContainer[type];
-		systemContainer[type] = NULL;
+		systemContainer[type] = nullptr;
 	}
 #endif /* NET_PHYSICS_SERVER */
 }

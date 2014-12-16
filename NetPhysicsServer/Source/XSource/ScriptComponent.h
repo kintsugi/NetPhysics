@@ -3,18 +3,18 @@
 
 //Inherits Component
 #include "Component.h"
+#include "ComponentList.h"
 
 
 namespace NetPhysics {
 	class HandleManager;
 	class Register;
+	class GameObject;
 
 	class ScriptComponent : public Component {
 	public:
 
-		ScriptComponent(
-			HandleManager &handleManager,
-			Register &engineRegister);
+		ScriptComponent(Register &reg);
 		~ScriptComponent();
 
 		virtual void update(const double dt) = 0;
@@ -23,7 +23,12 @@ namespace NetPhysics {
 
 	protected:
 
-		Register* engineRegister;
+		Register* getRegister();
+		GameObject* getGameObject();
+
+	private:
+
+		Register* reg;
 	};
 }
 

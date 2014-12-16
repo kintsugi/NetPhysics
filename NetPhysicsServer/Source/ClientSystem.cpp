@@ -15,6 +15,7 @@
 //For checking the connection state of a client
 #include "RakPeerInterface.h"
 #include "TimerComponent.h"
+#include "GameObjectList.h"
 
 using namespace NetPhysics;
 
@@ -23,37 +24,38 @@ ClientSystem::ClientSystem()
 	, componentList(CLIENT_COMPONENT)
 {}
 
-void ClientSystem::update(Register &engineRegister) {
-	HandleManager* handleManager = engineRegister.getHandleManager();
-	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
-	RakNet::RakPeerInterface* rakPeerInstance = engineRegister.getRakPeerInstance();
+void ClientSystem::update(Register &reg) {
+	HandleManager* handleManager = reg.getHandleManager();
+	GameObjectManager* gameObjectManager = reg.getGameObjectManager();
+	RakNet::RakPeerInterface* rakPeerInstance = reg.getRakPeerInstance();
 
 	//Poll the connection state of the client, if it not a secure connection, destroy it.
-	std::vector<GameObject*> gameObjects = gameObjectManager->getGameObjectsWithComponents(componentList);
+	GameObjectList gameObjectList = gameObjectManager->getGameObjectsWithComponents(componentList);
+	GameObject* gameObject;
 	ClientComponent* clientComponent;
-	for (auto iter = gameObjects.begin(); iter != gameObjects.end(); iter++) {
-		clientComponent = (*iter)->getComponent<ClientComponent>(*handleManager, CLIENT_COMPONENT);
+	for (gameObject = gameObjectList.next(); gameObject; gameObject = gameObjectList.next()) {
+		clientComponent = gameObject->getComponent<ClientComponent>(*handleManager, CLIENT_COMPONENT);
 		if (clientComponent) {
 			RakNet::ConnectionState ret = rakPeerInstance->GetConnectionState(clientComponent->getClientGUID());
 			if (ret == RakNet::ConnectionState::IS_DISCONNECTED ||
 				ret == RakNet::ConnectionState::IS_DISCONNECTING ||
 				ret == RakNet::ConnectionState::IS_NOT_CONNECTED ||
 				ret == RakNet::ConnectionState::IS_SILENTLY_DISCONNECTING) {
-				(*iter)->destroy(*handleManager);
+				gameObject->destroy(*handleManager);
 			}
 		}
 	}
 }
 
-void ClientSystem::initializeClient(Register &engineRegister,
+void ClientSystem::initializeClient(Register &reg,
 	RakNet::RakNetGUID guid)
 {
 	//Set up managers from the register.
-	HandleManager* handleManager = engineRegister.getHandleManager();
-	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
-	ComponentManager* clientComponentManager = engineRegister.getComponentManager(CLIENT_COMPONENT);
-	ComponentManager* platerStateComponentManager = engineRegister.getComponentManager(PLAYER_STATE_COMPONENT);
-	RakNet::RakPeerInterface *rakPeerInstance = engineRegister.getRakPeerInstance();
+	HandleManager* handleManager = reg.getHandleManager();
+	GameObjectManager* gameObjectManager = reg.getGameObjectManager();
+	ComponentManager* clientComponentManager = reg.getComponentManager(CLIENT_COMPONENT);
+	ComponentManager* platerStateComponentManager = reg.getComponentManager(PLAYER_STATE_COMPONENT);
+	RakNet::RakPeerInterface *rakPeerInstance = reg.getRakPeerInstance();
 
 	//Create a new game object for the client.
 	GameObject* clientGameObject = new GameObject(*handleManager);
@@ -68,13 +70,13 @@ void ClientSystem::initializeClient(Register &engineRegister,
 	clientGameObject->addComponent(*handleManager, playerStateComponent);
 }
 
-void ClientSystem::removeClient(Register &engineRegister,
+void ClientSystem::removeClient(Register &reg,
 	NetworkKey networkKey)
 {
 	//Set up managers from the register.
-	HandleManager* handleManager = engineRegister.getHandleManager();
-	GameObjectManager* gameObjectManager = engineRegister.getGameObjectManager();
-	NetworkHandleManager* networkHandleManager = engineRegister.getNetworkHandleManager();
+	HandleManager* handleManager = reg.getHandleManager();
+	GameObjectManager* gameObjectManager = reg.getGameObjectManager();
+	NetworkHandleManager* networkHandleManager = reg.getNetworkHandleManager();
 
 	//Retrieve the base component class from the networkIDManager (NetworkComponent functionality not needed)
 	NetworkComponent* networkComponent = networkHandleManager->get<NetworkComponent>(networkKey);

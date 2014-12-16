@@ -144,6 +144,30 @@
     <ClInclude Include="..\..\Source\NetPhysicsClient\ActorGameObject.h">
       <Filter>Source\Game Object</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ReplicationSystem.h">
+      <Filter>Source\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ScriptSystem.h">
+      <Filter>Source\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Family.h">
+      <Filter>Source\Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ReplicationManager.h">
+      <Filter>Source\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ScriptComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ReplicationComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ComponentList.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\GameObjectList.h">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Build">
@@ -209,6 +233,27 @@
     </ClCompile>
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\GameObjectManager.cpp">
       <Filter>Source\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\ReplicationSystem.cpp">
+      <Filter>Source\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\ScriptSystem.cpp">
+      <Filter>Source\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\Family.cpp">
+      <Filter>Source\Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\ReplicationManager.cpp">
+      <Filter>Source\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\ScriptComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\ReplicationComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\GameObjectList.cpp">
+      <Filter>Source\Utility</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -176,8 +176,6 @@
     <ClCompile Include="Source\PhysicComponent.cpp" />
     <ClCompile Include="Source\PhysicSystem.cpp" />
     <ClCompile Include="Source\PlayerStateComponent.cpp" />
-    <ClCompile Include="Source\ScriptComponent.cpp" />
-    <ClCompile Include="Source\ScriptSystem.cpp" />
     <ClCompile Include="Source\ServerSystem.cpp" />
     <ClCompile Include="Source\TimerComponent.cpp" />
     <ClCompile Include="Source\TimerSystem.cpp" />
@@ -185,6 +183,7 @@
     <ClCompile Include="Source\XSource\ComponentManager.cpp" />
     <ClCompile Include="Source\XSource\Family.cpp" />
     <ClCompile Include="Source\XSource\GameObject.cpp" />
+    <ClCompile Include="Source\XSource\GameObjectList.cpp" />
     <ClCompile Include="Source\XSource\GameObjectManager.cpp" />
     <ClCompile Include="Source\XSource\Register.cpp" />
     <ClCompile Include="Source\XSource\HandleManager.cpp" />
@@ -199,6 +198,8 @@
     <ClCompile Include="Source\XSource\ReplicationComponent.cpp" />
     <ClCompile Include="Source\XSource\ReplicationManager.cpp" />
     <ClCompile Include="Source\XSource\ReplicationSystem.cpp" />
+    <ClCompile Include="Source\XSource\ScriptComponent.cpp" />
+    <ClCompile Include="Source\XSource\ScriptSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\BulletPhysicsObject.h" />
@@ -208,8 +209,6 @@
     <ClInclude Include="Source\PhysicComponent.h" />
     <ClInclude Include="Source\PhysicSystem.h" />
     <ClInclude Include="Source\PlayerStateComponent.h" />
-    <ClInclude Include="Source\ScriptComponent.h" />
-    <ClInclude Include="Source\ScriptSystem.h" />
     <ClInclude Include="Source\ServerSystem.h" />
     <ClInclude Include="Source\TimerComponent.h" />
     <ClInclude Include="Source\TimerSystem.h" />
@@ -220,6 +219,7 @@
     <ClInclude Include="Source\XSource\ComponentManager.h" />
     <ClInclude Include="Source\XSource\Family.h" />
     <ClInclude Include="Source\XSource\GameObject.h" />
+    <ClInclude Include="Source\XSource\GameObjectList.h" />
     <ClInclude Include="Source\XSource\GameObjectManager.h" />
     <ClInclude Include="Source\XSource\Register.h" />
     <ClInclude Include="Source\XSource\Handle.h" />
@@ -236,6 +236,8 @@
     <ClInclude Include="Source\XSource\ReplicationComponent.h" />
     <ClInclude Include="Source\XSource\ReplicationManager.h" />
     <ClInclude Include="Source\XSource\ReplicationSystem.h" />
+    <ClInclude Include="Source\XSource\ScriptComponent.h" />
+    <ClInclude Include="Source\XSource\ScriptSystem.h" />
     <ClInclude Include="Source\XSource\Stream.h" />
     <ClInclude Include="Source\XSource\StreamFormatter.h" />
     <ClInclude Include="Source\XSource\Subscriber.h" />

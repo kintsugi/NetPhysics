@@ -29,7 +29,7 @@ PhysicSystem::~PhysicSystem() {
 
 void PhysicSystem::update(float dt) {
 	//Bullet physics doc says timeStep < maxSubSteps * fixedTimeStep or the simulation is mathematically losing time.
-	int maxSubSteps = 1; float fixedTimeStep = 1 / 60.0f;
+	int32_t maxSubSteps = 1; float fixedTimeStep = 1 / 60.0f;
 	while (dt / fixedTimeStep > maxSubSteps)
 		maxSubSteps++;
 	dynamicsWorld->stepSimulation(dt, maxSubSteps);

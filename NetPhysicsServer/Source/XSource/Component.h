@@ -16,6 +16,8 @@
 namespace NetPhysics {
 	class HandleManager;
 
+	//Inherits replica as all components should have the ability to replicate
+	//to clients.
 	class Component : public Replica {
 	public:
 

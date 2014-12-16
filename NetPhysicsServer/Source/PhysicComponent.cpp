@@ -10,8 +10,8 @@ PhysicComponent::PhysicComponent(
 	BulletPhysicsObject& obj)
 	: bulletPhysicsObject(new BulletPhysicsObject(obj))
 	, Component(PHYSICS_COMPONENT, handleManager.add(this, COMPONENT))
-	, dynamicsWorld(NULL)
-	, rigidBody(NULL)
+	, dynamicsWorld(nullptr)
+	, rigidBody(nullptr)
 {
 	//Creates the RigidBody with the data stored in member physicsComponent
 	rigidBody = new btRigidBody(btRigidBody::btRigidBodyConstructionInfo(

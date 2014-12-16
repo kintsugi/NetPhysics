@@ -9,7 +9,7 @@ namespace NetPhysics {
 	public:
 
 		TimerSystem();
-		void update(Register &engineRegister, const double dt);
+		void update(Register &reg, const double dt);
 
 	private:
 

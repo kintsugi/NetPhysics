@@ -25,8 +25,8 @@ namespace NetPhysics {
 
 		void virtual init() {}
 		void virtual update() {}
-		void virtual update(Register &engineRegister, const double dt) {}
-		void virtual update(Register &engineRegister) {}
+		void virtual update(Register &reg, const double dt) {}
+		void virtual update(Register &reg) {}
 		void virtual update(const double dt) {}
 
 		UpdateMode mode;

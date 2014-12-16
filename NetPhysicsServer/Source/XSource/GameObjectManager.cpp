@@ -38,8 +38,8 @@ GameObject* GameObjectManager::createGameObject(GameObject* gameObject) {
 #endif /* NET_PHYSICS_CLIENT */
 }
 
-XLib::Vector<GameObject*> GameObjectManager::getGameObjectsWithComponents(
-	const ComponentList &componentList)
+GameObjectList GameObjectManager::getGameObjectsWithComponents(
+	ComponentList &componentList)
 {
 	XLib::Vector<GameObject*> ret;
 #ifdef NET_PHYSICS_SERVER
@@ -54,5 +54,5 @@ XLib::Vector<GameObject*> GameObjectManager::getGameObjectsWithComponents(
 			ret.Add(iter->Get());
 	}
 #endif /* NET_PHYSICS_CLIENT */
-	return ret;
+	return GameObjectList(ret);
 }

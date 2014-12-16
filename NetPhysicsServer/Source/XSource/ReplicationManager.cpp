@@ -40,23 +40,28 @@ bool ReplicationManager::remove(ReplicaKey key) {
 	return false;
 }
 
-ReplicationComponent* ReplicationManager::get(ReplicaKey key,
-											  HandleManager &handleManager) {
+ReplicationComponent* ReplicationManager::get(
+	ReplicaKey key,
+	HandleManager &handleManager)
+{
 #ifdef NET_PHYSICS_SERVER
 	auto got = entries.find(key);
 	if (got != entries.end()) {
+		return reinterpret_cast<ReplicationComponent*>(handleManager.get(got->second));
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
 	ComponentHandle* got = entries.Find(key);
 	if (got) {
+		return reinterpret_cast<ReplicationComponent*>(handleManager.get(*got));
 #endif /* NET_PHYSICS_CLIENT */
-		return static_cast<ReplicationComponent*>(handleManager.get(got->second));
 	}
-	return NULL;
+	return nullptr;
 }
 
-void ReplicationManager::set(ReplicationComponent* replicationComponent,
-							 ReplicaKey key) {
+void ReplicationManager::set(
+	ReplicationComponent* replicationComponent,
+	ReplicaKey key)
+{
 #ifdef NET_PHYSICS_SERVER
 	entries.insert(std::make_pair(key, replicationComponent->getComponentHandle()));
 #endif /* NET_PHYSICS_SERVER */

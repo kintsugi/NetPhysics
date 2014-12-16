@@ -43,5 +43,5 @@ ComponentHandle ComponentManager::createComponent(Component* component) {
 #endif /* NET_PHYSICS_CLIENT */
 	}
 	//TODO: debug log this exception
-	return ComponentHandle(Handle(), INVALID_COMPONENT);
+	return ComponentHandle(Handle(), NULL_COMPONENT);
 }

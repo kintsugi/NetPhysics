@@ -1,6 +1,8 @@
 #ifndef HANDLE_H_INCLUDED
 #define HANDLE_H_INCLUDED
 
+#include "XLib.h"
+
 #ifdef NET_PHYSICS_CLIENT
 	#undef HANDLE_H_INCLUDED	
 	#pragma once
@@ -9,7 +11,7 @@
 
 namespace NetPhysics {
 #ifdef NET_PHYSICS_SERVER
-	typedef unsigned long long HandleKey;
+	typedef uint64_t HandleKey;
 #endif /*  NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
 	typedef uint64_t HandleKey;

@@ -4,7 +4,6 @@
 #include "GameObject.h"
 #include "HandleManager.h"
 #include "Component.h"
-#include "ComponentList.h"
 
 using namespace NetPhysics;
 
@@ -32,6 +31,26 @@ bool GameObject::addComponent(
 	}
 	return false;
 }
+
+//Returns a ComponentList object that contains the component ptrs
+ComponentList GameObject::getComponents(HandleManager &handleManager) {
+	ComponentList componentList;
+#ifdef NET_PHYSICS_SERVER
+	for (auto iter = components.begin(); iter != components.end(); iter++) {
+		ComponentType componentType = iter->first;
+		Component* component = reinterpret_cast<Component*>(handleManager.get(iter->second));
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
+	for (auto iter = components.CreateIterator(); iter; iter.operator++()) {
+		ComponentType componentType = iter.Key();
+		Component* component = reinterpret_cast<Component*>(handleManager.get(iter.Value()));
+#endif /* NET_PHYSICS_CLIENT */
+		if (component)
+			componentList.add(componentType, component);
+	}
+	return componentList;
+}
+
 
 void GameObject::removeComponent(
 	HandleManager &handleManager,
@@ -68,19 +87,22 @@ bool GameObject::hasComponent(const ComponentType type) {
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
 	ComponentHandle* got = components.Find(type);
-	return got != NULL ? true : false;
+	return got != nullptr ? true : false;
 #endif /* NET_PHYSICS_CLIENT */
 }
 
-bool GameObject::hasComponents(const ComponentList &componentList) {
+bool GameObject::hasComponents(ComponentList &componentList) {
 #ifdef NET_PHYSICS_SERVER
-	for (auto iter = componentList.list.begin(); iter != componentList.list.end(); iter++) {
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-	for (auto iter = componentList.CreateIterator(); iter; iter++) {
-#endif /* NET_PHYSICS_CLIENT */
+	for (auto iter=componentList.components.begin(); iter != componentList.components.end(); iter++)
+	{
 		if (!hasComponent(iter->first))
 			return false;
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
+		for (auto iter = componentList.components.CreateIterator(); iter; iter.operator++()) {
+		if (!hasComponent(iter.Key()))
+			return false;
+#endif /* NET_PHYSICS_CLIENT */
 	}
 	return true;
 }
@@ -92,7 +114,7 @@ void GameObject::destroy(HandleManager &handleManager) {
 		Component* component = static_cast<Component*>(handleManager.get(iter->second));
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
-		for (auto iter = components.CreateIterator(); iter; ++iter) {
+		for (auto iter = components.CreateIterator(); iter; iter.operator++()) {
 			Component* component = static_cast<Component*>(handleManager.get(iter.Value()));
 #endif /* NET_PHYSICS_CLIENT */
 		if (component)

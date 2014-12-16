@@ -7,14 +7,12 @@
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
 
-#include <string>
 #include "XLib.h"
 #include "ComponentHandle.h"
-#include "Messenger.h"
 #include "Family.h"
+#include "ComponentList.h"
 
 namespace NetPhysics {
-	struct ComponentList;
 
 	/*
 	GameObject class encapsulates handles to components.
@@ -47,9 +45,15 @@ namespace NetPhysics {
 			HandleManager &handleManager,
 			const ComponentType type);
 
-		/*
-		Destroys component of the specified type.
-		*/
+		//Returns a ComponentList object that contains the component ptrs
+		ComponentList getComponents(HandleManager &handleManager);
+
+		//Returns the list of component according to the passed list.
+		ComponentList getComponent(
+			HandleManager &handleManager,
+			ComponentList componentList);
+
+		//Destroys component of the specified type.
 		void removeComponent(
 			HandleManager &handleManager,
 			const ComponentType type);
@@ -58,11 +62,13 @@ namespace NetPhysics {
 		bool hasComponent(const ComponentType type);
 
 		//Returns true if all component specified in the filter exist.
-		bool hasComponents(const ComponentList &componentList);
+		bool hasComponents(ComponentList &componentList);
 
 		/*
-		Remove the handle of the object and all handles of its component from the handle manager
-		Note: when a GameObject of component does not have a valid handle, its manager deletes it next update.
+		Remove the handle of the object and all handles of its component from
+		the handle manager./
+		Note: when a GameObject of component does not have a valid handle, its
+		manager deletes it next update.
 		All subsequent calls to the data the handle pointed to will be null
 		*/
 		void destroy(HandleManager &handleManager);
@@ -99,7 +105,7 @@ namespace NetPhysics {
 			return (T*)handleManager.get(*got);
 #endif /* NET_PHYSICS_CLIENT */
 		}
-		return NULL;
+		return nullptr;
 	}
 }
 #endif /* GAME_OBJECT_H_INCLUDED */

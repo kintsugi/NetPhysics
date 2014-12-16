@@ -16,34 +16,20 @@ namespace NetPhysics {
 	class Family {
 	public:
 
+		Family() {}
 		Family(Handle self);
 
-		struct Child {
-			Child(XLib::String tag, Handle handle);
-
-			XLib::String tag;
-			Handle handle;
-		};
-
 		void setParent(GameObject* parent, HandleManager &handleManager);
-		void removeParent();
+
+		bool removeParent(HandleManager &handleManager);
+
 		void addChild(GameObject* child);
-		XLib::Vector<Child> getChildren();
+
+		XLib::Vector<Handle> getChildren();
+
+		XLib::Vector<GameObject*> getChildrenGameObjects();
+
 		bool isChild(GameObject* gameObject);
-
-		/*
-		WithTag functions does not guarantee that child is unique.
-		Singular return functions retrieve the first match.
-		Multiple return functions use all matches.
-
-		Use WithHandle functions to guarantee the return child is unique
-		getWithHandle to get a handle of a child is useless because you
-		already have the handle.
-		use isChild() to verify if a GO is a child.
-		*/
-
-		//WithHandle functions
-		Child* getChildWithHandle(Handle childHandle);
 
 		bool removeChildWithHandle(Handle childHandle);
 
@@ -51,45 +37,17 @@ namespace NetPhysics {
 			Handle childHandle,
 			HandleManager &handleManager);
 
-		//WithTag functions
-		Child* getChildWithTag(XLib::String tag);
-
-		GameObject* getChildGameObjectWithTag(
-			XLib::String tag,
-			HandleManager &handleManager);
-
-		XLib::Vector<Child> getChildrenWithTag(XLib::String tag);
-
-		XLib::Vector<GameObject*> getChildrenGameObjectsWithTag(
-			XLib::String tag,
-			HandleManager &handleManager);
-
-		//Returns true if there are multiple children with that tag
-		bool removeChildWithTag(XLib::String tag);
-
-		void removeChildrenWithTag(XLib::String tag);
-
-		bool destroyChildWithTag(
-			XLib::String tag,
-			HandleManager &handleManager);
-
-		void destroyChildrenWithTag(
-			XLib::String tag, 
-			HandleManager &handleManager);
-
-		//checks if parent/children handles still exist. 
-		void updateFamily(HandleManager &handleManager);
+		//TODO add getComponentsInChild(ren)
 
 	private:
 
 		//returns index value. -1 on failed query
-		int findChild(Handle childHandle);
-		int findChild(XLib::String tag);
-		bool removeChildAtIndex(int index);
+		uint32_t findChild(Handle childHandle);
+		bool removeChildAtIndex(uint32_t index);
 
 		Handle selfHandle;
 		Handle parentHandle;
-		XLib::Vector<Child> children;
+		XLib::Vector<Handle> children;
 
 	};
 }

@@ -79,9 +79,9 @@ bool HandleManager::remove(const Handle handle) {
 
 void* HandleManager::get(const Handle handle) const {
 	//The pointer to return
-	void* dataPtr = NULL;
+	void* dataPtr = nullptr;
 	if (!get(handle, dataPtr))
-		return NULL;
+		return nullptr;
 	return dataPtr;
 }
 

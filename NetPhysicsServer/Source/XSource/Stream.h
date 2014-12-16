@@ -21,7 +21,7 @@ namespace NetPhysics {
 	class Stream {
 	public:
 
-		Stream() : streamPtr(NULL) {}
+		Stream() : streamPtr(nullptr) {}
 		Stream(
 			XLib::SharedPtr<RakNet::BitStream> inBitStream,
 			XLib::SharedPtr<StreamFormatter> formatter)

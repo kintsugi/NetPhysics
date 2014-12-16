@@ -12,7 +12,7 @@
 namespace NetPhysics {
 	class HandleManager;
 	class ReplicationComponent;
-	typedef unsigned int ReplicaKey;
+	typedef uint64_t ReplicaKey;
 
 	class ReplicationManager {
 	public:

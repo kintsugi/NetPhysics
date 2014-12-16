@@ -34,7 +34,7 @@ namespace NetPhysics {
 	private:
 
 		//Engine register to encapsulate RakNet, managers, and system
-		Register engineRegister;
+		Register reg;
 
 		//Ptrs to frequently used objects
 		HandleManager *handleManager;

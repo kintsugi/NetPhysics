@@ -1,6 +1,8 @@
 #ifndef NETWORK_HANDLE_OBJECT_H_INCLUDED
 #define NETWORK_HANDLE_OBJECT_H_INCLUDED
 
+#include "XLib.h"
+
 #ifdef NET_PHYSICS_CLIENT
 	#undef NETWORK_HANDLE_OBJECT_H_INCLUDED	
 	#pragma once
@@ -9,7 +11,7 @@
 
 //deprecated
 namespace NetPhysics {
-	typedef unsigned long long NetworkKey;
+	typedef uint64_t NetworkKey;
 	class NetworkHandleManager;
 
 	enum NetworkHandleType {

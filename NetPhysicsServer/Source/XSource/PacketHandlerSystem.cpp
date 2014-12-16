@@ -14,20 +14,20 @@
 
 using namespace NetPhysics;
 
-void PacketHandlerSystem::handle(Register &engineRegister,
+void PacketHandlerSystem::handle(Register &reg,
 	XLib::Vector<PacketToBitStream> packets)
 {
 #ifdef NET_PHYSICS_SERVER
 	//Get systems and managers needed from register
-	NetworkHandleManager* networkHandleManager = engineRegister.getNetworkHandleManager();
-	ClientSystem *clientSystem = (ClientSystem*)engineRegister.getSystem(CLIENT_SYSTEM);
-	NetworkSystem *networkSystem = (NetworkSystem*)engineRegister.getSystem(NETWORK_SYSTEM);
+	NetworkHandleManager* networkHandleManager = reg.getNetworkHandleManager();
+	ClientSystem *clientSystem = (ClientSystem*)reg.getSystem(CLIENT_SYSTEM);
+	NetworkSystem *networkSystem = (NetworkSystem*)reg.getSystem(NETWORK_SYSTEM);
 
 	for (auto iter = packets.begin(); iter != packets.end(); iter++) {
 		switch (iter->messageID) {
 			case ID_NEW_INCOMING_CONNECTION: {
 				std::cout << std::endl << "A client has connected. GUID: " << iter->guid.ToString();
-				clientSystem->initializeClient(engineRegister,
+				clientSystem->initializeClient(reg,
 											  iter->guid);
 				break;
 			}
@@ -40,7 +40,7 @@ void PacketHandlerSystem::handle(Register &engineRegister,
 				iter->bitStream->IgnoreBytes(sizeof(RakNet::MessageID));
 				NetworkKey networkKey;
 				iter->bitStream->Read(networkKey);
-				clientSystem->removeClient(engineRegister, networkKey);
+				clientSystem->removeClient(reg, networkKey);
 			}
 		}
 	}

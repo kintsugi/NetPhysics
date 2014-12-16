@@ -61,12 +61,6 @@
     <ClCompile Include="Source\XSource\GameObject.cpp">
       <Filter>Game Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\XSource\GameObjectManager.cpp">
-      <Filter>Game Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ScriptSystem.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\PhysicComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
@@ -88,8 +82,20 @@
     <ClCompile Include="Source\XSource\ReplicationManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ScriptComponent.cpp">
+    <ClCompile Include="Source\XSource\Family.cpp">
+      <Filter>Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\ScriptComponent.cpp">
       <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\ScriptSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\GameObjectManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XSource\GameObjectList.cpp">
+      <Filter>Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,15 +183,6 @@
     <ClInclude Include="Source\XSource\GameObject.h">
       <Filter>Game Object</Filter>
     </ClInclude>
-    <ClInclude Include="Source\XSource\GameObjectManager.h">
-      <Filter>Game Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ScriptComponent.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ScriptSystem.h">
-      <Filter>System</Filter>
-    </ClInclude>
     <ClInclude Include="Source\PhysicSystem.h">
       <Filter>System</Filter>
     </ClInclude>
@@ -212,6 +209,21 @@
     </ClInclude>
     <ClInclude Include="Source\XSource\ReplicationManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\Family.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\ScriptComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\ScriptSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\GameObjectManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\GameObjectList.h">
+      <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

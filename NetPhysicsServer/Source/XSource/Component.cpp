@@ -3,9 +3,8 @@
 #endif /* NET_PHYSICS_CLIENT */
 #include "Component.h"
 #include "HandleManager.h"
-#ifdef NET_PHYSICS_SERVER
-	#include "GameObject.h"
-#endif /* NET_PHYSICS_SERVER */
+#include "GameObject.h"
+
 
 using namespace NetPhysics;
 
@@ -32,12 +31,10 @@ void Component::setOwner(Handle ownerHandle) {
 }
 
 void Component::destroy(HandleManager &handleManager) {
-#ifdef NET_PHYSICS_SERVER
 	//Get the parent game object to remove the component from it.
 	GameObject *gameObject = (GameObject*)handleManager.get(owner);
 	if (gameObject) {
 		gameObject->removeComponent(handleManager, handle.componentType);
 	}
-#endif /* NET_PHYSICS_SERVER */
 	handleManager.remove(handle);
 }

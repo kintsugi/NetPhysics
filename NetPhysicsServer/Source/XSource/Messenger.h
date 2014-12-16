@@ -17,7 +17,7 @@ namespace NetPhysics{
 		integer that signifies it type as a tool of identification.
 	*/
 	struct Message {
-		int type;
+		uint32_t type;
 	};
 
 	/*
@@ -60,7 +60,7 @@ namespace NetPhysics{
 		@param messageType the type of message to subscribe to.
 		*/
 		void subscribe(Handle messengerHandle,
-			const int messageType);
+			const uint32_t messageType);
 
 		Handle getHandle() const;
 
@@ -70,7 +70,7 @@ namespace NetPhysics{
 		//Container for received messages.
 		XLib::Vector<Message*> inbox;
 		//Container for subscribers.
-		XLib::UnorderedMultiMap<int, Subscriber> subscribers;
+		XLib::UnorderedMultiMap<uint32_t, Subscriber> subscribers;
 	};
 }
 

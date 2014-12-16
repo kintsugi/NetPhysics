@@ -11,10 +11,10 @@
 	#include "AllowWindowsPlatformTypes.h"
 #endif /* NET_PHYSICS_CLIENT */
 	#include "BitStream.h"
+	#include "RakNetTypes.h"
 #ifdef NET_PHYSICS_CLIENT
 	#include "HideWindowsPlatformTypes.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "RakNetTypes.h"
 
 namespace NetPhysics {
 	struct PacketToBitStream {

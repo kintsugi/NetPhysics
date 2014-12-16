@@ -32,11 +32,11 @@ namespace NetPhysics {
 		//Pointer to the generated instance of RakPeerInterface
 		RakNet::RakPeerInterface *rakPeerInstance;
 		//What port the server runs on, only read at init, does not change during runtime
-		int port;
+		uint32_t port;
 		//Container for storing received packets.
 		XLib::Vector<PacketToBitStream> packetContainer;
 		//maximum number of clients, only read at init, does not change during runtime
-		int maxClients;
+		uint32_t maxClients;
 	};
 }
 

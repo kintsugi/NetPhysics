@@ -60,20 +60,21 @@ namespace NetPhysics {
 			RakNet::AddressOrGUID to;
 			bool broadcast;
 			uint32_t forceReceiptNumber;
-			int send(RakNet::BitStream &bsOut);
+			uint32_t send(RakNet::BitStream &bsOut);
 		};
 
 		namespace Send {
-			int networkComponentMessage(
+			uint32_t networkComponentMessage(
 				Package &package,
 				RakNet::NetworkID networkID,
 				RakNet::BitStream &bsOut);
-			int clientInit(
+			uint32_t clientInit(
 				Package &package,
 				NetworkKey networkKey);
-			int clientDisconnect(
+			uint32_t clientDisconnect(
 				Package &package,
 				NetworkKey networkKey);
+			uint32_t replicationMessage(Package &package);
 		};
 	}
 }

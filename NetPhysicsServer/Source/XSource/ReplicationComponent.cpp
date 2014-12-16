@@ -11,6 +11,7 @@ ReplicationComponent::ReplicationComponent(
 	: Component(REPLICATION_COMPONENT, handleManager.add(this, COMPONENT)) 
 {}
 
+#ifdef NET_PHYSICS_SERVER
 ReplicationComponent::ReplicationComponent(
 	HandleManager &handleManager, 
 	ReplicationManager &replicationManager)
@@ -18,6 +19,7 @@ ReplicationComponent::ReplicationComponent(
 {
 	setReplicationManager(replicationManager);
 }
+#endif /* NET_PHYSICS_SERVER */
 
 ReplicationComponent::ReplicationComponent(
 	HandleManager &handleManager,
@@ -28,11 +30,12 @@ ReplicationComponent::ReplicationComponent(
 	setReplicaKey(replicationManager, newKey);
 }
 
+#ifdef NET_PHYSICS_SERVER
 void ReplicationComponent::setReplicationManager(
-	ReplicationManager &replicationManager)
-{
+	ReplicationManager &replicationManager) {
 	key = replicationManager.add(this);
 }
+#endif /* NET_PHYSICS_SERVER */
 
 void ReplicationComponent::setReplicaKey(
 	ReplicationManager &replicationManager,

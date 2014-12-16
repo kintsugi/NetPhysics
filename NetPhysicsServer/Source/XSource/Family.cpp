@@ -8,49 +8,39 @@ using namespace NetPhysics;
 
 Family::Family(Handle self) : selfHandle(self) {}
 
-Family::Child::Child(
-	XLib::String tag,
-	Handle handle)
-	: tag(tag)
-	, handle(handle)
-{}
-
 void Family::setParent(GameObject* parent, HandleManager &handleManager) {
-	//If there is already a parent, remove this child.
-	if (parentHandle != Handle()) {
-		GameObject* previousParent = reinterpret_cast<GameObject*>(handleManager.get(parentHandle));
-		if (previousParent)
-			previousParent->getFamily()->removeChildWithHandle(selfHandle);
-	}
+	removeParent(handleManager);
 	parentHandle = parent->getHandle();
 }
 
-void Family::removeParent() {
-	parentHandle = Handle();
+bool Family::removeParent(HandleManager &handleManager) {
+	if (parentHandle != Handle()) {
+		GameObject* previousParent = reinterpret_cast<GameObject*>(handleManager.get(parentHandle));
+		if (previousParent) {
+			previousParent->getFamily()->removeChildWithHandle(selfHandle);
+			parentHandle = Handle();
+			return true;
+		}
+	}
+	return false;
 }
 
 void Family::addChild(GameObject* child) {
 #ifdef NET_PHYSICS_SERVER
-	children.push_back(Child(child->getTag(), child->getHandle()));
+	children.push_back(child->getHandle());
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
-	children.Add(Child(child->getTag(), child->getHandle()));
+	children.Add(child->getHandle());
 #endif /* NET_PHYSICS_CLIENT */
 }
 
-XLib::Vector<Family::Child> Family::getChildren() {
+XLib::Vector<Handle> Family::getChildren() {
 	return children;
 }
 
 bool Family::isChild(GameObject* gameObject) {
 	//Adds one because findChild returns -1 on failed query.
 	return findChild(gameObject->getHandle()) + 1 ? true : false;
-}
-
-Family::Child* Family::getChildWithHandle(Handle childHandle) {
-	int childIndex = findChild(childHandle);
-	Child* child = childIndex != -1 ? &children[childIndex] : NULL;
-	return child;
 }
 
 bool Family::removeChildWithHandle(Handle childHandle) {
@@ -71,46 +61,32 @@ bool Family::destroyChildWithHandle(
 	return false;
 }
 
-Family::Child* Family::getChildWithTag(XLib::String tag) {
-	int childIndex = findChild(tag);
-	Child* child = childIndex != -1 ? &children[childIndex] : NULL;
-	return child;
-}
 
-int Family::findChild(Handle childHandle) {
+
+uint32_t Family::findChild(Handle childHandle) {
 #ifdef NET_PHYSICS_SERVER
 	for (auto iter = children.begin(); iter != children.end(); iter++) {
-		if (iter->handle == childHandle)
-			return iter - children.begin();
+		if (*iter == childHandle)
+			return static_cast<uint32_t>(iter - children.begin());
 	}
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
 	for (auto iter = children.CreateIterator(); iter; iter++) {
-		if (iter->handle == childHandle)
-			return iter.GetIndex();
-	}
-#endif /* NET_PHYSICS_CLIENT */
-}
-
-int Family::findChild(XLib::String tag) {
-#ifdef NET_PHYSICS_SERVER
-	for (auto iter = children.begin(); iter != children.end(); iter++) {
-		if (iter->tag == tag)
-		return iter - children.begin();
-	}
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-	for (auto iter = children.CreateIterator(); iter; iter++) {
-		if (iter->tag == tag)
+		if (*iter == childHandle)
 			return iter.GetIndex();
 	}
 #endif /* NET_PHYSICS_CLIENT */
 	return -1;
 }
 
-bool Family::removeChildAtIndex(int index) {
+bool Family::removeChildAtIndex(uint32_t index) {
 	if (index != -1) {
+#ifdef NET_PHYSICS_SERVER
 		children.erase(children.begin() + index);
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
+		children.RemoveAt(index);
+#endif /* NET_PHYSICS_CLIENT */
 		return true;
 	} else
 		return false;

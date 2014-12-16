@@ -7,20 +7,26 @@
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
 
+
+
 namespace NetPhysics {
 	enum ComponentType {
+		NULL_COMPONENT,
 #ifdef NET_PHYSICS_SERVER
+		//Components defined for server only.
 		CLIENT_COMPONENT,
 		PHYSICS_COMPONENT,
 		PLAYER_STATE_COMPONENT,
 		TIMER_COMPONENT,
-		SCRIPT_COMPONENT,
 #endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
+		//Components defined for client only.
+#endif /* NET_PHYSICS_CLIENT */
+		//Components defined on both systems.
 		NETWORK_COMPONENT,
 		REPLICATION_COMPONENT,
-		//Place NUM_COMPONENT_TYPES after all component entries.
+		SCRIPT_COMPONENT,
 		NUM_COMPONENT_TYPES,
-		INVALID_COMPONENT,
 	};
 }
 

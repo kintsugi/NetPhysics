@@ -10,29 +10,44 @@
 #include "ComponentType.h"
 
 namespace NetPhysics {
+	class Component;
+
+	/*
+		Not used to store components or references to, used to easily a list of
+		components.
+	*/
 	struct ComponentList {
 		ComponentList() {}
 		ComponentList(ComponentType type) { add(type); }
 
 		void add(ComponentType type) {
 #ifdef NET_PHYSICS_SERVER
-			list.insert(std::make_pair(type, true));
+			components.insert(std::make_pair(type, nullptr));
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
-			list.Add(type, true);
+			components.Add(type, nullptr);
+#endif /* NET_PHYSICS_CLIENT */
+		}
+
+		void add(ComponentType type, Component* component) {
+#ifdef NET_PHYSICS_SERVER
+			components.insert(std::make_pair(type, component));
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
+			components.Add(type, component);
 #endif /* NET_PHYSICS_CLIENT */
 		}
 
 		void remove(ComponentType type) {
 #ifdef NET_PHYSICS_SERVER
-			list.erase(type);
+			components.erase(type);
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
-			list.Add(type, true);	//UE version of erase.
+			components.Remove(type);
 #endif /* NET_PHYSICS_CLIENT */
 		}
 
-		XLib::UnorderedMap<ComponentType, bool> list;
+		XLib::UnorderedMap<ComponentType, Component*> components;
 	};
 }
 

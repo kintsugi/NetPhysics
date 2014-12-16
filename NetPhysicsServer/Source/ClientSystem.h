@@ -16,20 +16,20 @@ namespace NetPhysics {
 	public:
 		ClientSystem();
 
-		void update(Register &engineRegister);
+		void update(Register &reg);
 
 		/*
 		Creates a GameObject with a client component containing
 		the client's, effectively adding him to the system.
 		@param clientSystemAddress the clients systemAddress.
 		*/
-		void initializeClient(Register &engineRegister,
+		void initializeClient(Register &reg,
 			::RakNet::RakNetGUID guid);
 
 		/*
 		TEMP: removes the owning clients game object
 		*/
-		void removeClient(Register &engineRegister,
+		void removeClient(Register &reg,
 			NetworkKey networkID);
 
 	private:
