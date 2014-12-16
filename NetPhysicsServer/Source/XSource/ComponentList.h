@@ -21,30 +21,16 @@ namespace NetPhysics {
 		ComponentList(ComponentType type) { add(type); }
 
 		void add(ComponentType type) {
-#ifdef NET_PHYSICS_SERVER
-			components.insert(std::make_pair(type, nullptr));
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-			components.Add(type, nullptr);
-#endif /* NET_PHYSICS_CLIENT */
+			Component* nullComponent = nullptr;
+			components.insert_X(type, nullComponent);
 		}
 
 		void add(ComponentType type, Component* component) {
-#ifdef NET_PHYSICS_SERVER
-			components.insert(std::make_pair(type, component));
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-			components.Add(type, component);
-#endif /* NET_PHYSICS_CLIENT */
+			components.insert_X(type, component);
 		}
 
 		void remove(ComponentType type) {
-#ifdef NET_PHYSICS_SERVER
-			components.erase(type);
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-			components.Remove(type);
-#endif /* NET_PHYSICS_CLIENT */
+			components.erase_X(type);
 		}
 
 		XLib::UnorderedMap<ComponentType, Component*> components;

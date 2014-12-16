@@ -9,29 +9,90 @@
 
 namespace NetPhysics {
 	namespace XLib {
-
 		template <typename T>
-		class Vector : public std::vector<T> {
-		public:
-
-			reference front_X() { return front(); }
-			reference back_X() { return back(); }
-			T* data_X() { return data(); }
-			iterator begin_X() { return begin(); }
-			iterator end_X() { return end(); }
-			bool empty_X() { return empty(); }
-			size_type size_X() const { return size(); }
-			size_type max_size_X() const { return max_size(); }
+		struct Vector {
+			Vector<T>& operator=(const Vector<T> &comp) {
+				if (this != &comp)
+					container = comp.container;
+				return *this;
+			}
+			T& operator[](std::size_t pos) { return container[pos]; }
+			const T& operator[](std::size_t pos) const {
+				return const_cast<T&>(container[pos]);
+			}
+			T& front() { return container.front(); }
+			const T& front() const { return container.front(); }
+			T& back() { return container.back(); }
+			const T& back() const { return container.back(); }
+			T* data() { return data(); }
+			std::vector<T>::iterator begin() { return container.begin(); }
+			std::vector<T>::const_iterator cbegin() {
+				return container.cbegin();
+			}
+			std::vector<T>::iterator end() { return container.end(); }
+			std::vector<T>::const_iterator cend() { return container.cend(); }
+			bool empty() const { return container.empty(); }
+			size_type size() const { return container.size(); }
+			size_type max_size() const { return container.max_size(); }
 			void reserve_X(size_type new_cap) { reserve(new_cap); }
-			size_type capacity_X() const { return capacity(); }
-			void shrink_to_fit_X() { shrink_to_fit(); }
-			void clear_X() { clear(); }
-			iterator insert_X(iterator pos, const T& value) { return insert(pos, value); }
-			iterator erase_X(iterator pos) { return erase(pos); }
-			iterator erase_X(iterator first, iterator last) { return erase(first, last); }
-			void push_back_X(const T& value) { push_back(value); }
-			void push_back_X(T&& value) { push_back(value); }
-			void pop_back_X() { pop_back(); }
+			size_type capacity() const { return container.capacity(); }
+			void shrink_to_fit() { container.shrink_to_fit(); }
+			void clear() { container.clear(); }
+			std::vector<T>::iterator insert(
+				std::vector<T>::iterator pos,
+				const T& value)
+			{
+				return container.insert(pos, value);
+			}
+			std::vector<T>::iterator insert(
+				std::vector<T>::const_iterator pos,
+				const T& value)
+			{
+				return container.insert(pos, value);
+			}
+			std::vector<T>::iterator insert(
+				std::vector<T>::const_iterator pos,
+				T&& value)
+			{
+				return container.insert(pos, value);
+			}
+			void insert(
+				std::vector<T>::iterator pos,
+				size_type count,
+				const T& value)
+			{
+				container.insert(pos, count, value);
+			}
+			std::vector<T>::iterator insert(
+				std::vector<T>::const_iterator pos,
+				size_type count,
+				const T& value) 
+			{
+				return container.insert(pos, count, value); 
+			
+			}
+			std::vector<T>::iterator erase(std::vector<T>::iterator pos) {
+				container.erase(pos);
+			}
+			std::vector<T>::iterator erase(std::vector<T>::const_iterator pos) {
+				container.erase(pos);
+			}
+			std::vector<T>::iterator erase(
+				std::vector<T>::iterator first,
+				std::vector<T>::iterator last)
+			{
+				container.erase(first, last);
+			}
+			std::vector<T>::iterator erase(
+				std::vector<T>::const_iterator first,
+				std::vector<T>::const_iterator last)
+			{
+				container.erase(first, last);
+			}
+			void push_back(const T& value) { container.push_back(value); }
+			void push_back(T&& value) { container.push_back(value); }
+			void pop_back() { container.pop_back(); }
+			std::vector<T> container;
 		};
 
 		
