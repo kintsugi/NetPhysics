@@ -29,6 +29,6 @@ XLib::Vector<PacketToBitStream> ConnectionSystem::getPackets() {
 	RakNet::Packet *packet;
 	XLib::Vector<PacketToBitStream> packetContainer;
 	for (packet = rakPeerInstance->Receive(); packet; rakPeerInstance->DeallocatePacket(packet), packet = rakPeerInstance->Receive())
-		packetContainer.Add(PacketToBitStream(packet));
+		packetContainer.push_back(PacketToBitStream(packet));
 	return packetContainer;
 }

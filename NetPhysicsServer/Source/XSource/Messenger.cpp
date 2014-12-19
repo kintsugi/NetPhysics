@@ -52,7 +52,7 @@ void Messenger::subscribe(
 	const uint32_t messageType)
 {
 #ifdef NET_PHYSICS_SERVER
-	subscribers.insert(std::make_pair(messageType, Subscriber(messengerHandle)));
+	subscribers.insert(messageType, Subscriber(messengerHandle));
 #endif /* NET_PHYSICS_SERVER */
 }
 

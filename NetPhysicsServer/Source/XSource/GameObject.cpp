@@ -20,7 +20,7 @@ bool GameObject::addComponent(
 	if (componentHandle.type == COMPONENT && !hasComponent(componentHandle.componentType)) {
 		//Insert into map and set the components owner.
 #ifdef NET_PHYSICS_SERVER
-		components.insert(std::make_pair(componentHandle.componentType, componentHandle));
+		components.insert(componentHandle.componentType, componentHandle);
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
 		components.Add(componentHandle.componentType, componentHandle);

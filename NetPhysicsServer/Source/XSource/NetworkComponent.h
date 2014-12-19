@@ -101,14 +101,8 @@ namespace NetPhysics {
 	XLib::Vector<Stream<T>> NetworkComponent::getStreams() const {
 		XLib::Vector<Stream<T>> ret;
 		if (formatter) {
-			for (auto iter = inBitStreams.begin(), iter != inBitStreams.end(); iter++) {
-#ifdef NET_PHYSICS_SERVER
+			for (auto iter = inBitStreams.begin(), iter != inBitStreams.end(); iter++)
 				ret.push_back(Stream<T>(*iter, formatter));
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-				ret.Add(Stream<T>(*iter, formatter));
-#endif /* NET_PHYSICS_CLIENT */
-			}
 		}
 		return ret;
 	}

@@ -10,7 +10,7 @@ HandleManager::HandleManager() : nextAvailableKey(0) {}
 Handle HandleManager::add(void* dataPtr, const HandleType type) {
 	HandleKey key = generateKey();
 #ifdef NET_PHYSICS_SERVER
-	entries.insert(std::make_pair(key, HandleEntry(type, dataPtr)));
+	entries.insert(key, HandleEntry(type, dataPtr));
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
 	entries.Add(key, HandleEntry(type, dataPtr));
@@ -77,7 +77,7 @@ bool HandleManager::remove(const Handle handle) {
 	return false;
 }
 
-void* HandleManager::get(const Handle handle) const {
+void* HandleManager::get(const Handle handle) {
 	//The pointer to return
 	void* dataPtr = nullptr;
 	if (!get(handle, dataPtr))
@@ -85,11 +85,11 @@ void* HandleManager::get(const Handle handle) const {
 	return dataPtr;
 }
 
-bool HandleManager::get(const Handle handle, void*& out) const {
+bool HandleManager::get(const Handle handle, void*& out) {
 #ifdef NET_PHYSICS_SERVER
 	//Attempt to find the value with the key handle.id
 	auto got = entries.find(handle.key);
-	if (got == entries.end())
+	if (got == entries.cend())
 		return false;
 	//If found and matches the handle.type, assign member entry to out
 	else if (got->second.type == handle.type) {

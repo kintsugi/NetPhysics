@@ -63,11 +63,7 @@ void ReplicationSystem::send(
 	ReplicationComponent* replicationComponent)
 {
 	//Find slaves(guid) to the master(replication component)
-	auto slaves = masterSlaveList.equal_range(replicationComponent->getReplicaKey());
-	if (slaves.first != masterSlaveList.end()) {
-		
-		
-	}
+	
 }
 
 #endif /* NET_PHYSICS_SERVER */

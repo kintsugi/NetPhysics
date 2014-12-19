@@ -9,7 +9,7 @@ NetworkKey NetworkHandleManager::add(void* dataPtr,
 									 const NetworkHandleType type) {
 	NetworkKey key = generateKey();
 #ifdef NET_PHYSICS_SERVER
-	entries.insert(std::make_pair(key, NetworkHandleEntry(type, dataPtr)));
+	entries.insert(key, NetworkHandleEntry(type, dataPtr));
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
 	entries.Add(key,NetworkHandleEntry(type, dataPtr));

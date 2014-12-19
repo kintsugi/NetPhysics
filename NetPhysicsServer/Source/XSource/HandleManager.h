@@ -43,7 +43,7 @@ namespace NetPhysics {
 		@param handle the handle containing the key value of the pointer
 		@return the stored pointer. NULL if handle is invalid
 		*/
-		void* get(const Handle handle) const;
+		void* get(const Handle handle);
 
 		/*
 		Assigns the data pointer denoted by handle to out
@@ -51,7 +51,7 @@ namespace NetPhysics {
 		@param out a NULL pointer to be assign to a data pointer if handle is valid
 		@return whether the get was successful. false is handle is invalid
 		*/
-		bool get(const Handle handle, void*& out) const;
+		bool get(const Handle handle, void*& out);
 
 	private:
 

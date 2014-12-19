@@ -21,16 +21,15 @@ namespace NetPhysics {
 		ComponentList(ComponentType type) { add(type); }
 
 		void add(ComponentType type) {
-			Component* nullComponent = nullptr;
-			components.insert_X(type, nullComponent);
+			components.insert(type, nullptr);
 		}
 
 		void add(ComponentType type, Component* component) {
-			components.insert_X(type, component);
+			components.insert(type, component);
 		}
 
 		void remove(ComponentType type) {
-			components.erase_X(type);
+			components.erase(type);
 		}
 
 		XLib::UnorderedMap<ComponentType, Component*> components;

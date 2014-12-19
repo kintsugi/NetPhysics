@@ -94,16 +94,9 @@ namespace NetPhysics {
 		HandleManager &handleManager,
 		const ComponentType type)
 	{
-#ifdef NET_PHYSICS_SERVER
-		auto got = components.find(type);
-		if (got != components.end()) {
-			return (T*)handleManager.get(got->second);
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-		ComponentHandle* got = components.Find(type);
+		ComponentHandle* got = components.find(type);
 		if (got) {
 			return (T*)handleManager.get(*got);
-#endif /* NET_PHYSICS_CLIENT */
 		}
 		return nullptr;
 	}
