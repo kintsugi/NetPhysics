@@ -36,17 +36,9 @@ namespace NetPhysics {
 template<class T>
 T* NetPhysics::NetworkHandleManager::get(NetworkKey key) {
 	//Attempt to find the value with the key handle.id
-#ifdef NET_PHYSICS_SERVER
-	auto got = entries.find(key);
-
-	if(got != entries.end())
-		return (T*)got->second.entry;
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-	NetworkHandleEntry* got = entries.Find(key);
+	NetworkHandleEntry* got = entries.find(key);
 	if (got)
 		return (T*)got;
-#endif NET_PHYSICS_CLIENT
 	return false;
 }
 

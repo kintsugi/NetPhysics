@@ -6,54 +6,41 @@
 
 using namespace NetPhysics;
 
-Messenger::Messenger(HandleManager &handleManager) {
-	handle = handleManager.add(this, MESSENGER);
-}
+Messenger::Messenger(HandleManager &handleManager)
+	: handle(handleManager.add(this, MESSENGER))
+{}
 
-void Messenger::postMessage(
-	HandleManager &handleManager,
-	Message* msg)
-{
+void Messenger::postMessage(HandleManager &handleManager, Message* msg) {
+	auto range = subscribers.find(msg->type);
+	for (auto iter = range.begin(); iter != range.end(); iter++) {
+		Messenger* subscriber = (Messenger*)handleManager.get((*iter)->getSubscriberHandle());
+		if (subscriber != nullptr)
+			subscriber->receiveMessage(msg);
+		else {
 #ifdef NET_PHYSICS_SERVER
-	auto range = subscribers.equal_range(msg->type);
-	if (range.first != subscribers.end() && range.second != subscribers.end()) {
-		for (auto iter = range.first; iter != range.second; iter++) {
-			Messenger* subscriber = (Messenger*)handleManager.get(iter->second.getSubscriberHandle());
-			if (subscriber != nullptr)
-				subscriber->receiveMessage(msg);
-			else 
-				iter = subscribers.erase(iter);
+			iter = range.erase(iter);
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
+			range.erase(iter);
+			iter--;
+#endif /* NET_PHYSICS_CLIENT */
+			subscribers.erase(msg->type);
 		}
 	}
-#endif /* NET_PHYSICS_SERVER */
 }
 
 void Messenger::receiveMessage(Message* msg) {
-#ifdef NET_PHYSICS_SERVER
 	inbox.push_back(msg);
-#endif /* NET_PHYSICS_SERVER */
 }
 
 XLib::Vector<Message*> Messenger::getInbox() {
-#ifdef NET_PHYSICS_SERVER
 	XLib::Vector<Message*> ret = inbox;
 	inbox.clear();
 	return ret;
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-	XLib::Vector<Message*> ret = inbox;
-	inbox.Reset();
-	return ret;
-#endif /* NET_PHYSICS_CLIENT */
 }
 
-void Messenger::subscribe(
-	Handle messengerHandle,
-	const uint32_t messageType)
-{
-#ifdef NET_PHYSICS_SERVER
+void Messenger::subscribe(Handle messengerHandle, const uint32_t messageType) {
 	subscribers.insert(messageType, Subscriber(messengerHandle));
-#endif /* NET_PHYSICS_SERVER */
 }
 
 Handle Messenger::getHandle() const {

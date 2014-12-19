@@ -11,7 +11,6 @@
 using namespace NetPhysics;
 
 void Register::init() {
-#ifdef NET_PHYSICS_SERVER
 	//Set max size for the system container
 	systemContainer.resize(NUM_SYSTEM_TYPES);
 
@@ -19,19 +18,10 @@ void Register::init() {
 	for (uint32_t i = 0; i < NUM_COMPONENT_TYPES; i++) {
 		componentManagerContainer.push_back(ComponentManager((ComponentType)i));
 	}
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-	//initialize the component managers
-	for (uint32_t i = 0; i < NUM_COMPONENT_TYPES; i++) {
-		componentManagerContainer.Add(ComponentManager((ComponentType)i));
-	}
-	systemContainer.InsertZeroed(0, NUM_SYSTEM_TYPES);
-#endif NET_PHYSICS_CLIENT /* NET_PHYSICS_CLIENT */
 }
 
 void Register::update(const double dt) {
 	//Update component managers and systems.
-#ifdef NET_PHYSICS_SERVER
 	for (auto iter = componentManagerContainer.begin(); iter != componentManagerContainer.end(); iter++) {
 		iter->update(handleManager);
 	}
@@ -53,31 +43,7 @@ void Register::update(const double dt) {
 			}
 		}
 	}
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-	for (auto iter = componentManagerContainer.CreateIterator(); iter; iter++) {
-		iter->update(handleManager);
-	}
 
-	for (auto iter = systemContainer.CreateIterator(); iter; iter++) {
-		if (*iter) {
-			switch ((*iter)->mode) {
-			case NO_PARAMETERS:
-				(*iter)->update();
-				break;
-			case DELTA_TIME:
-				(*iter)->update(dt);
-				break;
-			case REGISTER:
-				(*iter)->update(*this);
-				break;
-			case BOTH:
-				(*iter)->update(*this, dt);
-				break;
-			}
-		}
-	}
-#endif /* NET_PHYSICS_CLIENT */
 }
 
 HandleManager* Register::getHandleManager() {
@@ -118,12 +84,7 @@ ComponentManager* Register::getComponentManager(ComponentType type) {
 }
 
 System* Register::getSystem(SystemType type) {
-#ifdef NET_PHYSICS_SERVER
 	return systemContainer[type];
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-	return systemContainer[type];
-#endif /* NET_PHYSICS_CLIENT */
 }
 
 void Register::addSystem(System* newSystem, SystemType type) {
@@ -132,10 +93,8 @@ void Register::addSystem(System* newSystem, SystemType type) {
 }
 
 void Register::removeSystem(SystemType type) {
-#ifdef NET_PHYSICS_SERVER
 	if (systemContainer[type]) {
 		delete systemContainer[type];
 		systemContainer[type] = nullptr;
 	}
-#endif /* NET_PHYSICS_SERVER */
 }

@@ -14,12 +14,7 @@ GameObjectList::GameObjectList(XLib::Vector<GameObject*> gameObjects)
 {}
 
 GameObject* GameObjectList::next() {
-#ifdef NET_PHYSICS_SERVER
 	return index < gameObjects.size() ? step() : nullptr;
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-	return index < gameObjects.Num() ? step() : nullptr;
-#endif /* NET_PHYSICS_CLIENT */
 }
 
 void GameObjectList::reset() {

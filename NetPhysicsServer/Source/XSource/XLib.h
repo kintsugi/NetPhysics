@@ -92,10 +92,8 @@ namespace NetPhysics {
 			std::size_t size() const { return container.size(); }
 			std::size_t max_size() const { return container.max_size(); }
 			void clear() { container.clear(); }
-			iterator insert(const S &key, const T &value) {
-				std::pair<iterator, bool> ret = container.insert(
-					std::make_pair(key, value));
-				return ret.first;
+			void insert(const S &key, const T &value) {
+				 container.insert(std::make_pair(key, value));	
 			}
 			iterator erase(const_iterator pos){ return container.erase(pos); }
 			iterator erase(const_iterator first, const_iterator last) {
@@ -107,12 +105,15 @@ namespace NetPhysics {
 			std::size_t count(const S& key) const { return container.count(key); }
 			T* find(const S& key) {
 				auto got = container.find(key);
-				return &got->second;
+				return got != end() ? &got->second : nullptr;
 			}
 			const T* find(const S& key) const {
 				auto got = container.find(key);
-				return &got->second;
+				return got != end() ? &got->second : nullptr;
 			}
+			S& first(const_iterator iter) {	return iter->first; }
+			T& second(const_iterator iter) { return iter->second; }
+
 			std::unordered_map<S, T> container;
 		};
 
@@ -130,32 +131,35 @@ namespace NetPhysics {
 			iterator end() { return container.end(); }
 			const_iterator cend() { return container.cend(); }
 			bool empty() const { return container.empty(); }
-			int32_t size() const { return container.size(); }
-			int32_t max_size() const { return container.max_size(); }
+			std::size_t size() const { return container.size(); }
+			std::size_t max_size() const { return container.max_size(); }
 			void clear() { container.clear(); }
-			iterator insert(const S &key, const T &value) {
-				return container.insert(std::make_pair(key, value));
+			void insert(const S &key, const T &value) {
+				container.insert(std::make_pair(key, value));
 			}
 			iterator erase(const_iterator pos){ return container.erase(pos); }
 			iterator erase(const_iterator first, const_iterator last) {
 				return container.erase(first, last);
 			}
-			int32_t erase(const S &key) { return container.erase(key); }
-			int32_t count(const S &key) const { return container.count(key); }
+			std::size_t erase(const S &key) { return container.erase(key); }
+			std::size_t count(const S &key) const { return container.count(key); }
 			Vector<T*> find(const S &key) {
 				std::size_t bucket = container.bucket(key);
 				Vector<T*> ret;
 				for (auto iter = container.begin(bucket); iter != container.end(bucket); ++iter)
-					ret.push_back(&*iter);
+					ret.push_back(&iter->second);
 				return ret;
 			}
 			Vector<const T*> find(const S &key) const {
 				std::size_t bucket = container.bucket(key);
 				Vector<const T*> ret;
 				for (auto iter = container.cbegin(bucket); iter != container.cend(bucket); ++iter)
-					ret.push_back(const_cast<T*>(&*iter));
+					ret.push_back(const_cast<T*>(&iter->second));
 				return ret;
 			}
+			S& first(const_iterator iter) { return iter->first; }
+			T& second(const_iterator iter) { return iter->second; }
+
 			std::unordered_multimap<S, T> container;
 		};
 
@@ -192,11 +196,11 @@ namespace NetPhysics {
 			T& back() { return container.Last(); }
 			const T& back() const { return container[container.Num() - 1]; }
 			T* data() { return GetData(); }
-			iterator begin() { return container.CreateIterator() }
+			iterator begin() { return container.CreateIterator(); }
 			const_iterator cbegin() {
 				return container.CreateConstIterator();
 			}
-			iterator end() { return begin + (size() - 1); }
+			iterator end() { return begin() + (size() - 1); }
 			const_iterator cend() { return cbegin + (size() - 1); }
 			bool empty() const { return size() == 0 ? true : false; }
 			int32_t size() const { return container.Num(); }
@@ -278,6 +282,18 @@ namespace NetPhysics {
 		};
 
 		template <typename S, typename T>
+		class MapBaseIterator : public TMapBase<S, T, false>::TIterator {
+		public:
+			MapBaseIterator& operator=(const MapBaseIterator& comp) {
+				if (this != &comp) {
+					
+				}
+				return *this;
+			}
+
+		};
+
+		template <typename S, typename T>
 		struct UnorderedMap {
 			typedef typename TMapBase<S, T, false>::TIterator iterator;
 			typedef typename TMapBase<S, T, false>::TConstIterator const_iterator;
@@ -287,20 +303,28 @@ namespace NetPhysics {
 					container = comp.container;
 				return *this;
 			}
-			iterator begin() { return container.CreateIterator() }
+			iterator begin() { return container.CreateIterator(); }
 			const_iterator cbegin() {
 				return container.CreateConstIterator();
 			}
-			iterator end() { return begin + (size() - 1); }
-			const_iterator cend() { return cbegin + (size() - 1); }
+			iterator end() {
+				auto iter = begin();
+				for (uint32 i = 0; i < size() - 1; i++)
+					iter++;
+				return iter;
+			}
+			const_iterator cend() {
+				auto iter = cbegin();
+				for (uint32 i = 0; i < size() - 1; i++)
+					iter++;
+				return iter;
+			}
 			bool empty() const { return size() == 0 ? true : false; }
 			int32_t size() const { return container.Num(); }
 			int32_t max_size() const { return container.Max(); }
 			void clear() { container.Empty(); }
-			iterator insert(const S &key, const T &value) {
+			void insert(const S &key, const T &value) {
 				container.Add(key, value);
-				iterator ret = container.CreateKeyIterator(key);
-				return begin() + ret.GetIndex();
 			}
 			iterator erase(iterator pos){
 				pos.RemoveCurrent();
@@ -313,17 +337,17 @@ namespace NetPhysics {
 						first.RemoveCurrent();
 						++first;
 					}
-					return begin() + first.GetIndex() < end() ? begin() + first.GetIndex() : end();
+					return iterator(container, first.GetIndex()) < end() ? iterator(container, first.GetIndex()) : end();
 				} else if (first > last) {
 					auto ret = last - 1;
 					while (last <= first) {
 						last.RemoveCurrent();
 						++last;
 					}
-					return begin() + first.GetIndex() < end() ? begin() + first.GetIndex() : end();
+					return iterator(container, last.GetIndex()) < end() ? iterator(container, last.GetIndex()) : end();
 				} else {
 					first.RemoveCurrent();
-					return return begin() + first.GetIndex() < end() ? begin() + first.GetIndex() : end();
+					return iterator(container, first.GetIndex()) < end() ? iterator(container, first.GetIndex()) : end();
 				}
 			}
 			int32_t erase(const S& key) { return container.Remove(key); }
@@ -331,11 +355,13 @@ namespace NetPhysics {
 			T& operator[](S &&key) { return container[key]; }
 			int32_t count(const S& key) const { return container.GetKeys(key); }
 			T* find(const S& key) {
-				return &*container.CreateKeyIterator(key);
+				return &container.CreateKeyIterator(key).Value();
 			}
 			const T* find(const S& key) const {
-				return &*container.CreateConstKeyIterator(key);
+				return &container.CreateConstKeyIterator(key).Value();
 			}
+			S& first(iterator iter) { return iter.Key(); }
+			T& second(iterator iter) { return iter.Value(); }
 			TMapBase<S, T, false> container;
 		};
 
@@ -352,16 +378,14 @@ namespace NetPhysics {
 			const_iterator cbegin() {
 				return container.CreateConstIterator();
 			}
-			iterator end() { return begin + (size() - 1); }
-			const_iterator cend() { return cbegin + (size() - 1); }
+			iterator end() { return container.end(); }
+			const_iterator cend() { return iterator(container, size()); }
 			bool empty() const { return size() == 0 ? true : false; }
 			int32_t size() const { return container.Num(); }
 			int32_t max_size() const { return container.Max(); }
 			void clear() { container.Empty(); }
-			iterator insert(const S &key, const T &value) {
+			void insert(const S &key, const T &value) {
 				container.Add(key, value);
-				iterator ret = container.CreateKeyIterator(key);
-				return begin() + ret.GetIndex();
 			}
 			iterator erase(iterator pos){
 				pos.RemoveCurrent();
@@ -374,33 +398,35 @@ namespace NetPhysics {
 						first.RemoveCurrent();
 						++first;
 					}
-					return begin() + first.GetIndex() < end() ? begin() + first.GetIndex() : end();
+					return iterator(container, first.GetIndex()) < end() ? iterator(container, first.GetIndex()) : end();
 				} else if (first > last) {
 					auto ret = last - 1;
 					while (last <= first) {
 						last.RemoveCurrent();
 						++last;
 					}
-					return begin() + first.GetIndex() < end() ? begin() + first.GetIndex() : end();
+					return iterator(container, last.GetIndex()) < end() ? iterator(container, last.GetIndex()) : end();
 				} else {
 					first.RemoveCurrent();
-					return return begin() + first.GetIndex() < end() ? begin() + first.GetIndex() : end();
+					return iterator(container, first.GetIndex()) < end() ? iterator(container, first.GetIndex()) : end();
 				}
 			}
 			int32_t erase(const S& key) { return container.Remove(key); }
 			int32_t count(const S& key) const { return container.GetKeys(key); }
 			Vector<T*> find(const S &key) {
 				Vector<T*> ret;
-				for (auto iter = container.CreateKeyIterator(key); iter; iter++)
-					ret.push_back(&*iter);
+				for (auto iter = container.CreateKeyIterator(key); iter; ++iter)
+					ret.push_back(&iter.Value());
 				return ret;
 			}
 			Vector<const T*> find(const S &key) const {
 				Vector<const T*> ret;
-				for (auto iter = container.CreateKeyIterator(key); iter; iter++)
-					ret.push_back(const_cast<T*>(&*iter));
+				for (auto iter = container.CreateKeyIterator(key); iter; ++iter)
+					ret.push_back(const_cast<T*>(&iter->Value()));
 				return ret;
 			}
+			S& first(iterator iter) { return &iter.Key(); }
+			T& second(iterator iter) { return &iter.Value(); }
 
 			TMultiMap<S, T> container;
 		};

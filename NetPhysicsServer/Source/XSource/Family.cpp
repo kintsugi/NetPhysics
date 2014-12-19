@@ -26,12 +26,7 @@ bool Family::removeParent(HandleManager &handleManager) {
 }
 
 void Family::addChild(GameObject* child) {
-#ifdef NET_PHYSICS_SERVER
 	children.push_back(child->getHandle());
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-	children.Add(child->getHandle());
-#endif /* NET_PHYSICS_CLIENT */
 }
 
 XLib::Vector<Handle> Family::getChildren() {
@@ -64,29 +59,22 @@ bool Family::destroyChildWithHandle(
 
 
 uint32_t Family::findChild(Handle childHandle) {
-#ifdef NET_PHYSICS_SERVER
 	for (auto iter = children.begin(); iter != children.end(); iter++) {
-		if (*iter == childHandle)
+		if (*iter == childHandle) {
+#ifdef NET_PHYSICS_SERVER
 			return static_cast<uint32_t>(iter - children.begin());
-	}
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
-	for (auto iter = children.CreateIterator(); iter; iter++) {
-		if (*iter == childHandle)
 			return iter.GetIndex();
-	}
 #endif /* NET_PHYSICS_CLIENT */
+		}
+	}
 	return -1;
 }
 
 bool Family::removeChildAtIndex(uint32_t index) {
 	if (index != -1) {
-#ifdef NET_PHYSICS_SERVER
 		children.erase(children.begin() + index);
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-		children.RemoveAt(index);
-#endif /* NET_PHYSICS_CLIENT */
 		return true;
 	} else
 		return false;

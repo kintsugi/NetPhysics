@@ -4,6 +4,8 @@
 #include "NetworkSystem.h"
 #include "PacketHandlerSystem.h"
 #include "ClientSystem.h"
+#include "GameObject.h"
+#include "PlayerStateComponent.h"
 
 using namespace NetPhysics;
 
@@ -25,6 +27,11 @@ void Engine::init() {
 	
 	//Start the server!
 	serverSystem->startServer(false);
+	GameObject* testObj = gameObjectManager->createGameObject(new GameObject(*handleManager));
+	ComponentManager* test = reg.getComponentManager(PLAYER_STATE_COMPONENT);
+	ComponentHandle testComp = test->createComponent(new PlayerStateComponent(*handleManager, UNINITIALIZED));
+	testObj->addComponent(*handleManager, testComp);
+	
 }
 
 void Engine::update() {

@@ -12,24 +12,17 @@ ReplicationManager::ReplicationManager() : nextAvailableKey(0) {}
 #ifdef NET_PHYSICS_SERVER
 ReplicaKey ReplicationManager::add(ReplicationComponent* replicationComponent) {
 	ReplicaKey key = generateKey();
-#ifdef NET_PHYSICS_SERVER
 	entries.insert(key, replicationComponent->getComponentHandle());
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-	entries.Add(key, replicationComponent->getComponentHandle());
-#endif /* NET_PHYSICS_CLIENT */
 	return key;
 }
 #endif /* NET_PHYSICS_SERVER */
 
 bool ReplicationManager::remove(ReplicaKey key) {
-
 	ComponentHandle* got = entries.find(key);
 	if (got) {
 		entries.erase(key);
 		return true;
 	}
-
 	return false;
 }
 
@@ -38,10 +31,8 @@ ReplicationComponent* ReplicationManager::get(
 	HandleManager &handleManager)
 {
 	ComponentHandle* got = entries.find(key);
-	if (got) {
+	if (got)
 		return reinterpret_cast<ReplicationComponent*>(handleManager.get(*got));
-
-	}
 	return nullptr;
 }
 
@@ -49,9 +40,7 @@ void ReplicationManager::set(
 	ReplicationComponent* replicationComponent,
 	ReplicaKey key)
 {
-
 	entries.insert(key, replicationComponent->getComponentHandle());
-
 }
 
 ReplicaKey ReplicationManager::generateKey() {
