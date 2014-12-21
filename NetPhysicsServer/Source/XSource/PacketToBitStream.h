@@ -6,7 +6,6 @@
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "XLib.h"
 #ifdef NET_PHYSICS_CLIENT
 	#include "AllowWindowsPlatformTypes.h"
 #endif /* NET_PHYSICS_CLIENT */
@@ -15,13 +14,14 @@
 #ifdef NET_PHYSICS_CLIENT
 	#include "HideWindowsPlatformTypes.h"
 #endif /* NET_PHYSICS_CLIENT */
+#include <memory>
 
 namespace NetPhysics {
 	struct PacketToBitStream {
 		PacketToBitStream(RakNet::Packet* packet);
 		RakNet::RakNetGUID guid;
 		RakNet::MessageID messageID;
-		XLib::SharedPtr<RakNet::BitStream> bitStream;
+		std::shared_ptr<RakNet::BitStream> bitStream;
 	};
 }
 

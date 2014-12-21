@@ -6,7 +6,8 @@
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif
-#include "XLib.h"
+#include <stdint.h>
+#include <vector>
 
 namespace NetPhysics {
 	class GameObject;
@@ -15,16 +16,16 @@ namespace NetPhysics {
 	public:
 
 		GameObjectList();
-		GameObjectList(XLib::Vector<GameObject*> gameObjects);
+		GameObjectList(std::vector<GameObject*> gameObjects);
 
 		GameObject* next();
 		void reset();
-		XLib::Vector<GameObject*> get();
+		std::vector<GameObject*> get();
 
 	private:
 
 		int32_t index;
-		XLib::Vector<GameObject*> gameObjects;
+		std::vector<GameObject*> gameObjects;
 
 		GameObject* step();
 	};

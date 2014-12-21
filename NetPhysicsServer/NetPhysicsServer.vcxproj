@@ -221,6 +221,7 @@
     <ClInclude Include="Source\XSource\GameObject.h" />
     <ClInclude Include="Source\XSource\GameObjectList.h" />
     <ClInclude Include="Source\XSource\GameObjectManager.h" />
+    <ClInclude Include="Source\XSource\Logger.h" />
     <ClInclude Include="Source\XSource\Register.h" />
     <ClInclude Include="Source\XSource\Handle.h" />
     <ClInclude Include="Source\XSource\HandleManager.h" />

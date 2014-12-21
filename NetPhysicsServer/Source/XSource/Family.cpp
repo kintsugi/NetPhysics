@@ -3,6 +3,7 @@
 #endif /* NET_PHYSICS_CLIENT */
 #include "Family.h"
 #include "GameObject.h"
+#include "Logger.h"
 
 using namespace NetPhysics;
 
@@ -22,6 +23,7 @@ bool Family::removeParent(HandleManager &handleManager) {
 			return true;
 		}
 	}
+	DEBUG_LOG(WARNING_MSG, "attempting to remove parent that does not exist");
 	return false;
 }
 
@@ -29,7 +31,7 @@ void Family::addChild(GameObject* child) {
 	children.push_back(child->getHandle());
 }
 
-XLib::Vector<Handle> Family::getChildren() {
+std::vector<Handle> Family::getChildren() {
 	return children;
 }
 
@@ -60,14 +62,8 @@ bool Family::destroyChildWithHandle(
 
 uint32_t Family::findChild(Handle childHandle) {
 	for (auto iter = children.begin(); iter != children.end(); iter++) {
-		if (*iter == childHandle) {
-#ifdef NET_PHYSICS_SERVER
+		if (*iter == childHandle)
 			return static_cast<uint32_t>(iter - children.begin());
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-			return iter.GetIndex();
-#endif /* NET_PHYSICS_CLIENT */
-		}
 	}
 	return -1;
 }
@@ -76,6 +72,8 @@ bool Family::removeChildAtIndex(uint32_t index) {
 	if (index != -1) {
 		children.erase(children.begin() + index);
 		return true;
-	} else
+	} else {
+		DEBUG_LOG(WARNING_MSG, "attempting to remove child that does not exist");
 		return false;
+	}
 }

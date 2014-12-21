@@ -6,8 +6,9 @@
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
+#include <unordered_map>
 #include "Handle.h"
-#include "XLib.h"
+
  
 namespace NetPhysics {
 	class HandleManager {
@@ -65,7 +66,7 @@ namespace NetPhysics {
 			HandleType type;
 			void* entry;
 		};
-		XLib::UnorderedMap<HandleKey, HandleEntry> entries;
+		std::unordered_map<HandleKey, HandleEntry> entries;
 	};
 }
 

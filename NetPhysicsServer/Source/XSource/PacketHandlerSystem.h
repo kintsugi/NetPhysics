@@ -6,8 +6,7 @@
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
-
-#include "XLib.h"
+#include <vector>
 #include "System.h"
 #include "PacketToBitStream.h"
 
@@ -17,7 +16,7 @@ namespace NetPhysics {
 	class PacketHandlerSystem : public System {
 	public:
 		void handle(Register &reg,
-			XLib::Vector<PacketToBitStream> packets);
+			std::vector<PacketToBitStream> packets);
 	};
 }
 

@@ -156,9 +156,6 @@
     <ClInclude Include="Source\TimerComponent.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="Source\XSource\XLib.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Source\XSource\ComponentType.h">
       <Filter>Component</Filter>
     </ClInclude>
@@ -223,6 +220,12 @@
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="Source\XSource\GameObjectList.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\XLib.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\Logger.h">
       <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>

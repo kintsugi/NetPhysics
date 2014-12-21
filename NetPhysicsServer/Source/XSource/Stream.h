@@ -6,7 +6,7 @@
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "XLib.h"
+
 #ifdef NET_PHYSICS_CLIENT
 	#include "AllowWindowsPlatformTypes.h"
 #endif /* NET_PHYSICS_CLIENT */
@@ -23,16 +23,16 @@ namespace NetPhysics {
 
 		Stream() : streamPtr(nullptr) {}
 		Stream(
-			XLib::SharedPtr<RakNet::BitStream> inBitStream,
-			XLib::SharedPtr<StreamFormatter> formatter)
+			std::shared_ptr<RakNet::BitStream> inBitStream,
+			std::shared_ptr<StreamFormatter> formatter)
 			: streamPtr((T*)formatter->format(inBitStream))
 		{}
 
-		XLib::SharedPtr<T> getStream();
+		std::shared_ptr<T> getStream();
 
 	private:
 
-		XLib::SharedPtr<T> streamPtr;
+		std::shared_ptr<T> streamPtr;
 	};
 }
 

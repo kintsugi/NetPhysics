@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "HandleManager.h"
 #include "Component.h"
+#include "Logger.h"
 
 using namespace NetPhysics;
 
@@ -19,11 +20,12 @@ bool GameObject::addComponent(
 	//Game object cannot have two components of the same type.
 	if (componentHandle.type == COMPONENT && !hasComponent(componentHandle.componentType)) {
 		//Insert into map and set the components owner.
-		components.insert(componentHandle.componentType, componentHandle);
+		components.insert(std::make_pair(componentHandle.componentType, componentHandle));
 		Component* component = static_cast<Component*>(handleManager.get(componentHandle));
 		component->setOwner(handle);
 		return true;
 	}
+	DEBUG_LOG(ERROR_MSG, "attempting to add a component which handle is not a valid type");
 	return false;
 }
 
@@ -31,8 +33,8 @@ bool GameObject::addComponent(
 ComponentList GameObject::getComponents(HandleManager &handleManager) {
 	ComponentList componentList;
 	for (auto iter = components.begin(); iter != components.end(); ++iter) {
-		ComponentType componentType = components.first(iter);
-		Component* component = reinterpret_cast<Component*>(handleManager.get(components.second(iter)));
+		ComponentType componentType = iter->first;
+		Component* component = reinterpret_cast<Component*>(handleManager.get(iter->second));
 		if (component)
 			componentList.add(componentType, component);
 	}
@@ -45,9 +47,9 @@ void GameObject::removeComponent(
 	const ComponentType type)
 {
 	//Make sure the component of that type exists in this GameObject
-	ComponentHandle* got = components.find(type);
-	if (got) {
-		Component* component = static_cast<Component*>(handleManager.get(*got));
+	auto got = components.find(type);
+	if (got != components.end()) {
+		Component* component = static_cast<Component*>(handleManager.get(got->second));
 		//If the component still exists in memory, call Component::destroy()
 		if (component)
 			component->destroy(handleManager);
@@ -57,14 +59,13 @@ void GameObject::removeComponent(
 }
 
 bool GameObject::hasComponent(const ComponentType type) {
-
-	ComponentHandle* got = components.find(type);
-	return got != nullptr ? true : false;
+	auto got = components.find(type);
+	return got != components.end() ? true : false;
 }
 
 bool GameObject::hasComponents(ComponentList &componentList) {
 	for (auto iter = componentList.components.begin(); iter != componentList.components.end(); ++iter) {
-		if (!hasComponent(componentList.components.first(iter)))
+		if (!hasComponent(iter->first))
 			return false;
 	}
 	return true;
@@ -73,7 +74,7 @@ bool GameObject::hasComponents(ComponentList &componentList) {
 void GameObject::destroy(HandleManager &handleManager) {
 	//Call Component::destroy for all components
 	for (auto iter = components.begin(); iter != components.end(); ++iter) {
-		Component* component = static_cast<Component*>(handleManager.get(components.second(iter)));
+		Component* component = static_cast<Component*>(handleManager.get(iter->second));
 		if (component)
 			component->destroy(handleManager);
 	}
@@ -85,7 +86,7 @@ Handle GameObject::getHandle() const {
 	return handle;
 }
 
-XLib::String GameObject::getTag() {
+std::string GameObject::getTag() {
 	return tag;
 }
 
@@ -93,6 +94,6 @@ Family* GameObject::getFamily() {
 	return &family;
 }
 
-void GameObject::setTag(XLib::String newTag) {
+void GameObject::setTag(std::string newTag) {
 	tag = newTag;
 }

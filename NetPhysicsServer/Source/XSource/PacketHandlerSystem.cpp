@@ -11,11 +11,12 @@
 #include "NetworkMessage.h"
 #include "NetworkSystem.h"
 #include "NetworkHandleManager.h"
+#include "Logger.h"
 
 using namespace NetPhysics;
 
 void PacketHandlerSystem::handle(Register &reg,
-	XLib::Vector<PacketToBitStream> packets)
+	std::vector<PacketToBitStream> packets)
 {
 #ifdef NET_PHYSICS_SERVER
 	//Get systems and managers needed from register
@@ -26,7 +27,7 @@ void PacketHandlerSystem::handle(Register &reg,
 	for (auto iter = packets.begin(); iter != packets.end(); iter++) {
 		switch (iter->messageID) {
 			case ID_NEW_INCOMING_CONNECTION: {
-				std::cout << std::endl << "A client has connected. GUID: " << iter->guid.ToString();
+				LOG(LOG_MSG, "A client has connected. GUID: " + std::string(iter->guid.ToString()));
 				clientSystem->initializeClient(reg,
 											  iter->guid);
 				break;

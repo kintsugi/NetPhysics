@@ -6,7 +6,7 @@
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "XLib.h"
+#include <unordered_map>
 #include "NetworkHandleObject.h"
 
 namespace NetPhysics {
@@ -29,17 +29,17 @@ namespace NetPhysics {
 			void* entry;
 		};
 		NetworkKey generateKey();
-		XLib::UnorderedMap<NetworkKey, NetworkHandleEntry> entries;
+		std::unordered_map<NetworkKey, NetworkHandleEntry> entries;
 	};
 }
 
 template<class T>
 T* NetPhysics::NetworkHandleManager::get(NetworkKey key) {
 	//Attempt to find the value with the key handle.id
-	NetworkHandleEntry* got = entries.find(key);
-	if (got)
-		return (T*)got;
-	return false;
+	//NetworkHandleEntry* got = entries.find(key);
+	//if (got)
+	//	return (T*)got;
+	return nullptr;
 }
 
 #endif

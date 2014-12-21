@@ -17,6 +17,7 @@
 	#include "HideWindowsPlatformTypes.h"
 #endif /* NET_PHYSICS_CLIENT */
 #include "NetworkHandleManager.h"
+#include "ReplicationManager.h"
 
 namespace RakNet {
 	class RakPeerInterface;
@@ -40,6 +41,8 @@ namespace NetPhysics {
 			//Sent from client to server when then client willfully disconnects.
 			//RakNet::MessageID, RakNet::NetworkID
 			CLIENT_DISCONNECT,
+			//Denotes a message to a replica object
+			REPLICATION_MESSAGE,
 		};
 
 		struct Package {
@@ -74,7 +77,10 @@ namespace NetPhysics {
 			uint32_t clientDisconnect(
 				Package &package,
 				NetworkKey networkKey);
-			uint32_t replicationMessage(Package &package);
+			uint32_t replicationMessage(
+				Package &package,
+				ReplicaKey key,
+				RakNet::BitStream &bsOut);
 		};
 	}
 }

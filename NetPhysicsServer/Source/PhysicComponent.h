@@ -1,7 +1,6 @@
 #ifndef PHYSICS_COMPONENT_H_INCLUDED
 #define PHYSICS_COMPONENT_H_INCLUDED
 
-#include "XLib.h"
 #include "Component.h"
 #include "Handle.h"
 #include "bulletphysicsobject.h"
@@ -25,7 +24,7 @@ namespace NetPhysics {
 
 	private:
 
-		XLib::SharedPtr<BulletPhysicsObject> bulletPhysicsObject;
+		std::shared_ptr<BulletPhysicsObject> bulletPhysicsObject;
 		btRigidBody* rigidBody;
 		btDiscreteDynamicsWorld* dynamicsWorld;
 	};

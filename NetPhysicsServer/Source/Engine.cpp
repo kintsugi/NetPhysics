@@ -6,6 +6,7 @@
 #include "ClientSystem.h"
 #include "GameObject.h"
 #include "PlayerStateComponent.h"
+#include "Logger.h"
 
 using namespace NetPhysics;
 
@@ -24,14 +25,8 @@ void Engine::init() {
 	gameObjectManager = reg.getGameObjectManager();
 	serverSystem = dynamic_cast<ServerSystem*>(reg.getSystem(SERVER_SYSTEM));
 	packetHandlerSystem = dynamic_cast<PacketHandlerSystem*>(reg.getSystem(PACKET_HANDLER_SYSTEM));
-	
 	//Start the server!
 	serverSystem->startServer(false);
-	GameObject* testObj = gameObjectManager->createGameObject(new GameObject(*handleManager));
-	ComponentManager* test = reg.getComponentManager(PLAYER_STATE_COMPONENT);
-	ComponentHandle testComp = test->createComponent(new PlayerStateComponent(*handleManager, UNINITIALIZED));
-	testObj->addComponent(*handleManager, testComp);
-	
 }
 
 void Engine::update() {

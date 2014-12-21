@@ -84,6 +84,7 @@
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\GameObjectManager.h" />
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Handle.h" />
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\HandleManager.h" />
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Logger.h" />
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Messenger.h" />
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkComponent.h" />
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkHandleManager.h" />

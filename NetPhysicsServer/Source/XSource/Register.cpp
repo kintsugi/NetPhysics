@@ -15,9 +15,8 @@ void Register::init() {
 	systemContainer.resize(NUM_SYSTEM_TYPES);
 
 	//initialize the component managers
-	for (uint32_t i = 0; i < NUM_COMPONENT_TYPES; i++) {
+	for (uint32_t i = 0; i < NUM_COMPONENT_TYPES; i++)
 		componentManagerContainer.push_back(ComponentManager((ComponentType)i));
-	}
 }
 
 void Register::update(const double dt) {

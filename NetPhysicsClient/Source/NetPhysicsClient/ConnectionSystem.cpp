@@ -25,9 +25,9 @@ RakNet::RakPeerInterface* ConnectionSystem::getRakPeerInstance() {
 	return rakPeerInstance;
 }
 
-XLib::Vector<PacketToBitStream> ConnectionSystem::getPackets() {
+std::vector<PacketToBitStream> ConnectionSystem::getPackets() {
 	RakNet::Packet *packet;
-	XLib::Vector<PacketToBitStream> packetContainer;
+	std::vector<PacketToBitStream> packetContainer;
 	for (packet = rakPeerInstance->Receive(); packet; rakPeerInstance->DeallocatePacket(packet), packet = rakPeerInstance->Receive())
 		packetContainer.push_back(PacketToBitStream(packet));
 	return packetContainer;

@@ -6,7 +6,7 @@
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "XLib.h"
+
 
 namespace RakNet {
 	class BitStream;
@@ -16,7 +16,7 @@ namespace NetPhysics {
 	class StreamFormatter {
 	public:
 
-		virtual void* format(XLib::SharedPtr<RakNet::BitStream> inStream) = 0;
+		virtual void* format(std::shared_ptr<RakNet::BitStream> inStream) = 0;
 	};
 }
 

@@ -63,7 +63,10 @@ void ReplicationSystem::send(
 	ReplicationComponent* replicationComponent)
 {
 	//Find slaves(guid) to the master(replication component)
-	
+	auto range = masterSlaveList.equal_range(replicationComponent->getReplicaKey());
+	for (auto iter = range.first; iter != range.second; ++iter) {
+
+	}
 }
 
 #endif /* NET_PHYSICS_SERVER */

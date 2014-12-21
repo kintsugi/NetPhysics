@@ -23,23 +23,17 @@ void GameObjectManager::update(HandleManager &handleManager) {
 }
 
 GameObject* GameObjectManager::createGameObject(GameObject* gameObject) {
-	container.push_back(XLib::SharedPtr<GameObject>(gameObject));
+	container.push_back(std::shared_ptr<GameObject>(gameObject));
 	return &*container.back();
 }
 
 GameObjectList GameObjectManager::getGameObjectsWithComponents(
 	ComponentList &componentList)
 {
-	XLib::Vector<GameObject*> ret;
+	std::vector<GameObject*> ret;
 	for (auto iter = container.begin(); iter != container.end();iter++) {
-		if ((*iter)->hasComponents(componentList)) {
-#ifdef NET_PHYSICS_SERVER
+		if ((*iter)->hasComponents(componentList))
 			ret.push_back(iter->get());
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-			ret.push_back(iter->Get());
-#endif /* NET_PHYSICS_CLIENT */
-		}
 	}
 	return GameObjectList(ret);
 }

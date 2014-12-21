@@ -1,9 +1,9 @@
 #ifndef SERVER_SYSTEM_H_INCLUDED
 #define SERVER_SYSTEM_H_INCLUDED
 
+#include <vector>
 #include <iostream>
 #include "System.h"
-#include "XLib.h"
 #include "RakPeerInterface.h"
 #include "GetTime.h"
 #include "packettobitstream.h"
@@ -25,7 +25,7 @@ namespace NetPhysics {
 		void startServer(bool userInputDetails);
 		RakNet::RakPeerInterface* getRakPeerInstance();
 		//Gets the packets received since the last update
-		XLib::Vector<PacketToBitStream> getPackets();
+		std::vector<PacketToBitStream> getPackets();
 
 	private:
 
@@ -34,7 +34,7 @@ namespace NetPhysics {
 		//What port the server runs on, only read at init, does not change during runtime
 		uint32_t port;
 		//Container for storing received packets.
-		XLib::Vector<PacketToBitStream> packetContainer;
+		std::vector<PacketToBitStream> packetContainer;
 		//maximum number of clients, only read at init, does not change during runtime
 		uint32_t maxClients;
 	};

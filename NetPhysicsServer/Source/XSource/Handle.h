@@ -1,13 +1,11 @@
 #ifndef HANDLE_H_INCLUDED
 #define HANDLE_H_INCLUDED
-
-#include "XLib.h"
-
 #ifdef NET_PHYSICS_CLIENT
 	#undef HANDLE_H_INCLUDED	
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
+#include <stdint.h>
 
 namespace NetPhysics {
 #ifdef NET_PHYSICS_SERVER

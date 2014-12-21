@@ -9,20 +9,20 @@ HandleManager::HandleManager() : nextAvailableKey(0) {}
 
 Handle HandleManager::add(void* dataPtr, const HandleType type) {
 	HandleKey key = generateKey();
-	entries.insert(key, HandleEntry(type, dataPtr));
+	entries.insert(std::make_pair(key, HandleEntry(type, dataPtr)));
 	return Handle(key, type);
 }
 
 bool HandleManager::update(const Handle handle, void* dataPtr) {
 
 	//Attempt to find the value with the key handle.key
-	HandleEntry* got = entries.find(handle.key);
+	auto got = entries.find(handle.key);
 	//If not found, return false
-	if (!got)
+	if (got != entries.end())
 		return false;
 	//If found and matches the handle.type, update dataPtr and return true
-	else if (got->type == handle.type) {
-		got->entry = dataPtr;
+	else if (got->second.type == handle.type) {
+		got->second.entry = dataPtr;
 		return true;
 	}
 	//This point is reached if there were non matching types
@@ -31,13 +31,13 @@ bool HandleManager::update(const Handle handle, void* dataPtr) {
 
 bool HandleManager::remove(const Handle handle) {
 	//Attempt to find the value with the key handle.key
-	HandleEntry* got = entries.find(handle.key);
+	auto got = entries.find(handle.key);
 	//If not found, return false
-	if (!got)
+	if (got != entries.end())
 		return false;
 	//If found and matches the handle.type, erase the value.
-	else if (got->type == handle.type) {
-		entries.erase(handle.key);
+	else if (got->second.type == handle.type) {
+		entries.erase(got);
 		return true;
 	}
 	//This point is reached if there were non matching types
@@ -54,12 +54,12 @@ void* HandleManager::get(const Handle handle) {
 
 bool HandleManager::get(const Handle handle, void*& out) {
 	//Attempt to find the value with the key handle.id
-	const HandleEntry* got = entries.find(handle.key);
-	if (!got)
+	auto got = entries.find(handle.key);
+	if (got == entries.end())
 		return false;
 	//If found and matches the handle.type, assign member entry to out
-	else if (got->type == handle.type) {
-		out = got->entry;
+	else if (got->second.type == handle.type) {
+		out = got->second.entry;
 		return true;
 	}
 	//This point is reached if there were non matching types

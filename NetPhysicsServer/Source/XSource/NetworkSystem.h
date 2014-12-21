@@ -6,7 +6,6 @@
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
-
 #include "System.h"
 
 namespace NetPhysics {

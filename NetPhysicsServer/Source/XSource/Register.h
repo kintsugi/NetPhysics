@@ -13,7 +13,7 @@
 #ifdef NET_PHYSICS_CLIENT
 #include "Engine/World.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "XLib.h"
+
 #include "HandleManager.h"
 #include "NetworkHandleManager.h"
 #include "GameObjectManager.h"
@@ -89,8 +89,8 @@ namespace NetPhysics {
 		//Game Object Manager
 		GameObjectManager gameObjectManager;
 		//Abstract base class containers for components and systems.
-		XLib::Vector<ComponentManager> componentManagerContainer;
-		XLib::Vector<System*> systemContainer;
+		std::vector<ComponentManager> componentManagerContainer;
+		std::vector<System*> systemContainer;
 	};
 }
 

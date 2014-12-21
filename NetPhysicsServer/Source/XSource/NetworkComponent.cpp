@@ -34,27 +34,26 @@ NetworkComponent::NetworkComponent(
 }
 
 void NetworkComponent::setFormatter(
-	XLib::SharedPtr<StreamFormatter> newFormatter)
+	std::shared_ptr<StreamFormatter> newFormatter)
 {
 	formatter = newFormatter;
 }
 
-XLib::SharedPtr<StreamFormatter> NetworkComponent::getFormatter() const {
+std::shared_ptr<StreamFormatter> NetworkComponent::getFormatter() const {
 	return formatter;
 }
 
-void NetworkComponent::addBitStream(XLib::SharedPtr<RakNet::BitStream> inBS) {
+void NetworkComponent::addBitStream(std::shared_ptr<RakNet::BitStream> inBS) {
 	inBitStreams.push_back(inBS);
 }
 
-XLib::Vector<XLib::SharedPtr<RakNet::BitStream>> NetworkComponent::getBitStreams() const {
+std::vector<std::shared_ptr<RakNet::BitStream>> NetworkComponent::getBitStreams() const {
 	return inBitStreams;
 }
 
-XLib::SharedPtr<RakNet::BitStream> NetworkComponent::popBitStream() {
-	XLib::SharedPtr<RakNet::BitStream> ret(new RakNet::BitStream());
-	RakNet::BitStream* back = &*inBitStreams.back();
-	ret->Write(back, inBitStreams.back()->GetNumberOfBytesUsed());
+std::shared_ptr<RakNet::BitStream> NetworkComponent::popBitStream() {
+	std::shared_ptr<RakNet::BitStream> ret(new RakNet::BitStream());
+	ret->Write(inBitStreams.back().get(), inBitStreams.back()->GetNumberOfBytesUsed());
 	inBitStreams.pop_back();
 	return ret;
 }

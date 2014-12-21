@@ -7,7 +7,6 @@
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
 #include "System.h"
-#include "XLib.h"
 #ifdef NET_PHYSICS_CLIENT
 	#include "AllowWindowsPlatformTypes.h"
 #endif /* NET_PHYSICS_CLIENT */
@@ -45,7 +44,7 @@ namespace NetPhysics {
 			GameObject* gameObject,
 			ReplicationComponent* replicationComponent);
 
-		XLib::UnorderedMultiMap<ReplicaKey, RakNet::RakNetGUID> masterSlaveList;
+		std::unordered_multimap<ReplicaKey, RakNet::RakNetGUID> masterSlaveList;
 #endif /* NET_PHYSICS_SERVER */
 		ComponentList componentList;
 	};

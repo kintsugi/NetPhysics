@@ -6,7 +6,7 @@
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "XLib.h"
+#include <unordered_map>
 #include "ComponentType.h"
 
 namespace NetPhysics {
@@ -21,18 +21,18 @@ namespace NetPhysics {
 		ComponentList(ComponentType type) { add(type); }
 
 		void add(ComponentType type) {
-			components.insert(type, nullptr);
+			components.insert(std::make_pair(type, nullptr));
 		}
 
 		void add(ComponentType type, Component* component) {
-			components.insert(type, component);
+			components.insert(std::make_pair(type, component));
 		}
 
 		void remove(ComponentType type) {
 			components.erase(type);
 		}
 
-		XLib::UnorderedMap<ComponentType, Component*> components;
+		std::unordered_map<ComponentType, Component*> components;
 	};
 }
 

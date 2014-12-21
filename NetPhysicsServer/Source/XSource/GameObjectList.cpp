@@ -8,7 +8,7 @@ using namespace NetPhysics;
 GameObjectList::GameObjectList() : index(0)
 {}
 
-GameObjectList::GameObjectList(XLib::Vector<GameObject*> gameObjects)
+GameObjectList::GameObjectList(std::vector<GameObject*> gameObjects)
 	: gameObjects(gameObjects)
 	, index(0)
 {}
@@ -21,7 +21,7 @@ void GameObjectList::reset() {
 	index = 0;
 }
 
-XLib::Vector<GameObject*> GameObjectList::get() {
+std::vector<GameObject*> GameObjectList::get() {
 	return gameObjects;
 }
 

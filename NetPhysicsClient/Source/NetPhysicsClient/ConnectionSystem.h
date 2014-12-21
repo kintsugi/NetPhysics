@@ -1,6 +1,6 @@
 #pragma once
+#include <vector>
 #include "NetPhysicsClient.h"
-#include "XSource/XLib.h"
 #include "XSource/System.h"
 #include "XSource/PacketToBitStream.h"
 
@@ -16,7 +16,7 @@ namespace NetPhysics {
 
 		void init();
 		RakNet::RakPeerInterface* getRakPeerInstance();
-		XLib::Vector<PacketToBitStream> getPackets();
+		std::vector<PacketToBitStream> getPackets();
 
 	private:
 

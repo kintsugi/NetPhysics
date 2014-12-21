@@ -7,7 +7,7 @@
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
 
-#include "XLib.h"
+#include <memory>
 #include "GameObjectList.h"
 
 namespace NetPhysics {
@@ -44,7 +44,7 @@ namespace NetPhysics {
 
 	private:
 
-		XLib::Vector<XLib::SharedPtr<GameObject>> container;
+		std::vector<std::shared_ptr<GameObject>> container;
 	};
 }
 

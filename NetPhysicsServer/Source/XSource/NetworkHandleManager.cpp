@@ -8,16 +8,16 @@ using namespace NetPhysics;
 NetworkKey NetworkHandleManager::add(void* dataPtr,
 									 const NetworkHandleType type) {
 	NetworkKey key = generateKey();
-	entries.insert(key, NetworkHandleEntry(type, dataPtr));
+	//entries.insert(key, NetworkHandleEntry(type, dataPtr));
 	return key;
 }
 
 bool NetworkHandleManager::remove(NetworkKey key) {
-	NetworkHandleEntry* got = entries.find(key);
+	/*NetworkHandleEntry* got = entries.find(key);
 	if (got) {
 		entries.erase(key);
 		return true;
-	}
+	}*/
 	return false;
 }
 

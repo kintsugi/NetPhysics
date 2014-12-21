@@ -6,7 +6,6 @@
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "XLib.h"
 #include "HandleManager.h"
 #include "Handle.h"
 
@@ -25,9 +24,9 @@ namespace NetPhysics {
 
 		void addChild(GameObject* child);
 
-		XLib::Vector<Handle> getChildren();
+		std::vector<Handle> getChildren();
 
-		XLib::Vector<GameObject*> getChildrenGameObjects();
+		std::vector<GameObject*> getChildrenGameObjects();
 
 		bool isChild(GameObject* gameObject);
 
@@ -37,7 +36,7 @@ namespace NetPhysics {
 			Handle childHandle,
 			HandleManager &handleManager);
 
-		//TODO add getComponentsInChild(ren)
+		//TODO add getComponentsInChild(reg)
 
 	private:
 
@@ -47,7 +46,7 @@ namespace NetPhysics {
 
 		Handle selfHandle;
 		Handle parentHandle;
-		XLib::Vector<Handle> children;
+		std::vector<Handle> children;
 
 	};
 }

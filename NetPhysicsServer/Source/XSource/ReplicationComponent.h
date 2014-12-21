@@ -8,7 +8,7 @@
 #endif /* NET_PHYSICS_CLIENT */
 #include "Component.h"
 #include "ComponentList.h"
-#include "XLib.h"
+
 #ifdef NET_PHYSICS_CLIENT
 	#include "AllowWindowsPlatformTypes.h"
 #endif /* NET_PHYSICS_CLIENT */
@@ -40,7 +40,7 @@ namespace NetPhysics {
 			ReplicationManager &replicationManager,
 			ReplicaKey newKey);
 		ReplicaKey getReplicaKey();
-		ComponentList getComponentList();
+		ComponentList* getComponentList();
 
 	private:
 

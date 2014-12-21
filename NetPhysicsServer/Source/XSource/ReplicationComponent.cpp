@@ -50,5 +50,5 @@ ReplicaKey ReplicationComponent::getReplicaKey() {
 }
 
 ComponentList ReplicationComponent::getComponentList() {
-	return componentList;
+	return &componentList;
 }

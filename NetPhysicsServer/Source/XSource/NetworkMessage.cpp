@@ -68,4 +68,16 @@ uint32_t NetworkMessage::Send::clientInit(
 	//Send
 	return package.send(bsOut);
 }
+
+uint32_t NetworkMessage::Send::replicationMessage(
+	Package &package,
+	ReplicaKey key,
+	RakNet::BitStream &bsOut)
+{
+	RakNet::BitStream bsForm;
+	bsForm.Write((RakNet::MessageID)(REPLICATION_MESSAGE));
+	bsForm.Write(key);
+	bsForm.Write(bsOut);
+	package.send(bsForm);
+}
 #endif

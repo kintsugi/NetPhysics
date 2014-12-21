@@ -4,6 +4,8 @@
 #include "Component.h"
 #include "ComponentManager.h"
 #include "HandleManager.h"
+#include "Logger.h"
+#include <string>
 
 using namespace NetPhysics;
 
@@ -24,9 +26,13 @@ void ComponentManager::update(HandleManager &handleManager) {
 
 ComponentHandle ComponentManager::createComponent(Component* component) {
 	if (component->getComponentHandle().componentType == managerType) {
-		container.push_back(XLib::SharedPtr<Component>(component));
+		container.push_back(std::shared_ptr<Component>(component));
 		return ComponentHandle(container.back()->getHandle(), managerType);
 	}
 	//TODO: debug log this exception
+	DEBUG_LOG(ERROR_MSG,
+		"attempted to create component type enum #" +
+		std::to_string(component->getComponentHandle().componentType) +
+		" with invalid manager type enum #" + std::to_string(managerType));
 	return ComponentHandle(Handle(), NULL_COMPONENT);
 }

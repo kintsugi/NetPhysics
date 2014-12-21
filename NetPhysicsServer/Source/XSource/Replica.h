@@ -6,7 +6,7 @@
 #pragma once
 #include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "XLib.h"
+#include <memory>
 
 namespace RakNet {
 	class BitStream;
@@ -18,17 +18,17 @@ namespace NetPhysics {
 	class Replica {
 	public:
 
-		virtual XLib::SharedPtr<RakNet::BitStream> send() { return XLib::SharedPtr<RakNet::BitStream>(nullptr); }
-		virtual void receive(XLib::SharedPtr<RakNet::BitStream>) {}
-		//void serialize(XLib::SharedPtr<T> newSerial) {lastSerial = newSerial;}
+		virtual std::shared_ptr<RakNet::BitStream> send() { return std::shared_ptr<RakNet::BitStream>(nullptr); }
+		virtual void receive(std::shared_ptr<RakNet::BitStream>) {}
+		//void serialize(std::shared_ptr<T> newSerial) {lastSerial = newSerial;}
 
 	protected:
 
-		//XLib::SharedPtr<T> getLastSerial();
+		//std::shared_ptr<T> getLastSerial();
 
 	private:
 
-		//XLib::SharedPtr<T> lastSerial
+		//std::shared_ptr<T> lastSerial
 	};
 }
 

@@ -6,9 +6,8 @@
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
-
-
-#include "XLib.h"					
+#include <memory>
+#include <vector>				
 #include "Component.h"				
 #include "NetworkHandleObject.h"	
 #include "Stream.h"					
@@ -48,22 +47,22 @@ namespace NetPhysics {
 		Sets the formatter the object uses to format BitStreams.
 		@param newFormatter pointer to either a StreamFormatter base or abstract class
 		*/
-		void setFormatter(const XLib::SharedPtr<StreamFormatter> newFormatter);
+		void setFormatter(const std::shared_ptr<StreamFormatter> newFormatter);
 
 		//Returns a pointer to the StreamFormatter of this object. NULL if it has not been set.
-		XLib::SharedPtr<StreamFormatter> getFormatter() const;
+		std::shared_ptr<StreamFormatter> getFormatter() const;
 
 		/*
 		Adds a BitStream to the container.
 		@param inBS the BitStream to add.
 		*/
-		void addBitStream(XLib::SharedPtr<RakNet::BitStream> inBS);
+		void addBitStream(std::shared_ptr<RakNet::BitStream> inBS);
 
 		//Returns the inBitStreams vector.
-		XLib::Vector<XLib::SharedPtr<RakNet::BitStream>> getBitStreams() const;
+		std::vector<std::shared_ptr<RakNet::BitStream>> getBitStreams() const;
 
 		//Returns the last index of the inBitStreams vector and removes it. NULL if empty. 
-		XLib::SharedPtr<RakNet::BitStream> popBitStream();
+		std::shared_ptr<RakNet::BitStream> popBitStream();
 
 		//Clears the inBitStreams vector.
 		void clearBitStreams();
@@ -74,7 +73,7 @@ namespace NetPhysics {
 		inBitStreams has size 0 or if the StreamFormatter has not been set.
 		*/
 		template<class T>
-		XLib::Vector<Stream<T>> getStreams() const;
+		std::vector<Stream<T>> getStreams() const;
 
 		/*
 		Returns a Stream object specialized to type T using the StreamFormatter
@@ -93,13 +92,13 @@ namespace NetPhysics {
 		//pointer to the server instance of RakPeerInterface
 		RakNet::RakPeerInterface* RakPeerInstance;
 		//pointer to the formatter used to format BitStreams into Streams
-		XLib::SharedPtr<StreamFormatter> formatter;
-		XLib::Vector<XLib::SharedPtr<RakNet::BitStream>> inBitStreams;
+		std::shared_ptr<StreamFormatter> formatter;
+		std::vector<std::shared_ptr<RakNet::BitStream>> inBitStreams;
 	};
 
 	template<class T>
-	XLib::Vector<Stream<T>> NetworkComponent::getStreams() const {
-		XLib::Vector<Stream<T>> ret;
+	std::vector<Stream<T>> NetworkComponent::getStreams() const {
+		std::vector<Stream<T>> ret;
 		if (formatter) {
 			for (auto iter = inBitStreams.begin(), iter != inBitStreams.end(); iter++)
 				ret.push_back(Stream<T>(*iter, formatter));

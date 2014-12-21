@@ -6,7 +6,8 @@
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "XLib.h"
+#include <memory>
+#include <vector>
 #include "ComponentHandle.h"
 
 namespace NetPhysics {
@@ -27,7 +28,7 @@ namespace NetPhysics {
 	private:
 
 		const ComponentType managerType;
-		XLib::Vector<XLib::SharedPtr<Component>> container;
+		std::vector<std::shared_ptr<Component>> container;
 	};
 }
 

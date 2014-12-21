@@ -12,6 +12,7 @@
 #include "HideWindowsPlatformTypes.h"
 #include "XSource/GameObject.h"
 #include "XSource/GameObjectManager.h"
+#include "XSource/Logger.h"
 
 using namespace NetPhysics;
 
@@ -26,6 +27,7 @@ void ClientEngine::init(UWorld* world) {
 	networkHandleManager = engineRegister.getNetworkHandleManager();
 	connectionSystem = (ConnectionSystem*)engineRegister.getSystem(CONNECTION_SYSTEM);
 	packetHandlerSystem = (PacketHandlerSystem*)engineRegister.getSystem(PACKET_HANDLER_SYSTEM);
+	DEBUG_LOG(LOG_MSG, "RakNet attempting to connect to localhost on port 60000");
 	connectionSystem->getRakPeerInstance()->Connect("localhost", 60000, 0, 0);
 }
 

@@ -7,7 +7,8 @@
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
 
-#include "XLib.h"
+#include <string>
+#include <unordered_map>
 #include "ComponentHandle.h"
 #include "Family.h"
 #include "ComponentList.h"
@@ -73,9 +74,9 @@ namespace NetPhysics {
 		*/
 		void destroy(HandleManager &handleManager);
 		Handle getHandle() const;
-		XLib::String getTag();
+		std::string getTag();
 		Family* getFamily();
-		void setTag(XLib::String newTag);
+		void setTag(std::string newTag);
 
 	protected:
 
@@ -84,9 +85,9 @@ namespace NetPhysics {
 		GameObject() {}
 #endif /* NET_PHYSICS_CLIENT */
 		Handle handle;
-		XLib::String tag;
+		std::string tag;
 		Family family;
-		XLib::UnorderedMap<ComponentType, ComponentHandle> components;
+		std::unordered_map<ComponentType, ComponentHandle> components;
 	};
 
 	template<class T>
@@ -94,10 +95,9 @@ namespace NetPhysics {
 		HandleManager &handleManager,
 		const ComponentType type)
 	{
-		ComponentHandle* got = components.find(type);
-		if (got) {
-			return (T*)handleManager.get(*got);
-		}
+		auto got = components.find(type);
+		if (got != components.end())
+			return (T*)handleManager.get(got->second);
 		return nullptr;
 	}
 }

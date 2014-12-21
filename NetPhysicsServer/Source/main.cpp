@@ -5,7 +5,6 @@
 
 
 int main(int argc, char* argv[]) {
-
 	NetPhysics::Engine engine;
 	engine.init();
 	while (1) {

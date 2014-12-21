@@ -6,8 +6,8 @@
 #pragma once
 #include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "XLib.h"
 #include "ComponentHandle.h"
+#include <unordered_map>
 
 namespace NetPhysics {
 	class HandleManager;
@@ -31,7 +31,7 @@ namespace NetPhysics {
 	private:
 
 		ReplicaKey nextAvailableKey;
-		XLib::UnorderedMap<ReplicaKey, ComponentHandle> entries;
+		std::unordered_map<ReplicaKey, ComponentHandle> entries;
 		ReplicaKey generateKey();
 	};
 }

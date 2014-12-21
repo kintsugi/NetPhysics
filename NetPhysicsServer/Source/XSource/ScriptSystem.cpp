@@ -2,7 +2,7 @@
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
 #include "ScriptSystem.h"
-#include "XLib.h"
+
 //Identifying filter type
 #include "ComponentType.h"
 //Register & Manager includes

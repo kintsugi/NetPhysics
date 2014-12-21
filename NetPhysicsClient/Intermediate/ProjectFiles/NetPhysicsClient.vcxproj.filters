@@ -168,6 +168,9 @@
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\GameObjectList.h">
       <Filter>Source\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Logger.h">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Build">

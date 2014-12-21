@@ -6,7 +6,8 @@
 	#pragma once
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "XLib.h"
+#include <unordered_map>
+#include <vector>
 #include "subscriber.h"
 
 namespace NetPhysics{
@@ -48,7 +49,7 @@ namespace NetPhysics{
 		Returns and clears the inbox container.
 		@return the message container.
 		*/
-		XLib::Vector<Message*> getInbox();
+		std::vector<Message*> getInbox();
 
 		/*
 		Adds the messenger object described by subscriber to the subscriber list.
@@ -68,9 +69,9 @@ namespace NetPhysics{
 
 		Handle handle;
 		//Container for received messages.
-		XLib::Vector<Message*> inbox;
+		std::vector<Message*> inbox;
 		//Container for subscribers.
-		XLib::UnorderedMultiMap<uint32_t, Subscriber> subscribers;
+		std::unordered_multimap<uint32_t, Subscriber> subscribers;
 	};
 }
 
