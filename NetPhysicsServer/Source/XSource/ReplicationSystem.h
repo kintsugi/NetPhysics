@@ -37,6 +37,13 @@ namespace NetPhysics {
 		void getClient(ReplicaKey);
 
 	private:
+		std::vector<RakNet::RakNetGUID> getSlaves(ReplicaKey key);
+		void applyDifferential(
+			Register &reg,
+			GameObject* gameObject,
+			ReplicationComponent* replicationComponent);
+
+
 
 		void processSends(Register &reg);
 		void send(

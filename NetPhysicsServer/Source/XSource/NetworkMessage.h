@@ -41,8 +41,13 @@ namespace NetPhysics {
 			//Sent from client to server when then client willfully disconnects.
 			//RakNet::MessageID, RakNet::NetworkID
 			CLIENT_DISCONNECT,
-			//Denotes a message to a replica object
-			REPLICATION_MESSAGE,
+			//Sent from server to a client to consruct a component for a G.O.
+			//RakNet::MessageID, ReplicaKey, ComponentType, <Constructor Params>...
+			REPLICATION_CREATE_COMPONENT,
+			//Sent from server to a client to destroy a component of a G.O.
+			//RakNet::MessageID, ReplicaKey, ComponentType
+			REPLICATION_DESROY_COMPONENT
+
 		};
 
 		struct Package {
@@ -77,10 +82,15 @@ namespace NetPhysics {
 			uint32_t clientDisconnect(
 				Package &package,
 				NetworkKey networkKey);
-			uint32_t replicationMessage(
+			uint32_t createComponent(
+				Package &package, 
+				ReplicaKey key, 
+				ComponentType type, 
+				RakNet::BitStream &constructorParams);
+			uint32_t destroyComponent(
 				Package &package,
 				ReplicaKey key,
-				RakNet::BitStream &bsOut);
+				ComponentType type);
 		};
 	}
 }

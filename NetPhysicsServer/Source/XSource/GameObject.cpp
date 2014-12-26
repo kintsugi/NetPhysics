@@ -29,6 +29,13 @@ bool GameObject::addComponent(
 	return false;
 }
 
+Component* GameObject::getComponent(
+	HandleManager &handleManager,
+	const ComponentType type)
+{
+	return getComponent<Component>(handleManager, type);
+}
+
 //Returns a ComponentList object that contains the component ptrs
 ComponentList GameObject::getComponents(HandleManager &handleManager) {
 	ComponentList componentList;
@@ -41,6 +48,16 @@ ComponentList GameObject::getComponents(HandleManager &handleManager) {
 	return componentList;
 }
 
+//Returns the list of component according to the passed list.
+void GameObject::getComponents(
+	HandleManager &handleManager,
+	ComponentList &componentList)
+{
+	ComponentList ret;
+	for (auto iter = componentList.components.begin(); iter != componentList.components.end(); ++iter) {
+
+	}
+}
 
 void GameObject::removeComponent(
 	HandleManager &handleManager,

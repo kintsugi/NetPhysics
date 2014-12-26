@@ -18,7 +18,7 @@ namespace NetPhysics {
 
 	//Inherits replica as all components should have the ability to replicate
 	//to clients.
-	class Component : public Replica {
+	class Component {
 	public:
 
 		Component(const ComponentType type, const Handle newHandle);
@@ -28,6 +28,15 @@ namespace NetPhysics {
 		Handle getOwner() const;
 		void setOwner(Handle ownerHandle);
 		void destroy(HandleManager &handleManager);
+
+		//Component Replication virtual functions.
+		virtual std::shared_ptr<RakNet::BitStream> send() { return nullptr; }
+		virtual void receive(RakNet::BitStream &bsIn) {}
+		virtual std::shared_ptr<RakNet::BitStream> construct(
+			RakNet::BitStream *bsIn = NULL)
+		{
+			return nullptr;
+		}
 
 	private:
 

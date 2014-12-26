@@ -69,15 +69,28 @@ uint32_t NetworkMessage::Send::clientInit(
 	return package.send(bsOut);
 }
 
-uint32_t NetworkMessage::Send::replicationMessage(
+uint32_t NetworkMessage::Send::createComponent(
 	Package &package,
 	ReplicaKey key,
-	RakNet::BitStream &bsOut)
+	ComponentType type,
+	RakNet::BitStream &constructorParams)
 {
-	RakNet::BitStream bsForm;
-	bsForm.Write((RakNet::MessageID)(REPLICATION_MESSAGE));
-	bsForm.Write(key);
-	bsForm.Write(bsOut);
-	package.send(bsForm);
+	RakNet::BitStream bsOut;
+	bsOut.Write((RakNet::MessageID)(REPLICATION_CREATE_COMPONENT));
+	bsOut.Write(key);
+	bsOut.Write(type);
+	bsOut.Write(constructorParams);
+	package.send(bsOut);
+}
+uint32_t NetworkMessage::Send::destroyComponent(
+	Package &package,
+	ReplicaKey key,
+	ComponentType type)
+{
+	RakNet::BitStream bsOut;
+	bsOut.Write((RakNet::MessageID)(REPLICATION_DESROY_COMPONENT));
+	bsOut.Write(key);
+	bsOut.Write(type);
+	package.send(bsOut);
 }
 #endif

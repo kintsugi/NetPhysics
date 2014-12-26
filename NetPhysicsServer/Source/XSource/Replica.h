@@ -19,7 +19,7 @@ namespace NetPhysics {
 	public:
 
 		virtual std::shared_ptr<RakNet::BitStream> send() { return std::shared_ptr<RakNet::BitStream>(nullptr); }
-		virtual void receive(std::shared_ptr<RakNet::BitStream>) {}
+		virtual void receive(RakNet::BitStream & bsIn) {}
 		//void serialize(std::shared_ptr<T> newSerial) {lastSerial = newSerial;}
 
 	protected:

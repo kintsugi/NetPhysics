@@ -35,6 +35,10 @@ namespace NetPhysics {
 			HandleManager &handleManager,
 			const ComponentHandle componentHandle);
 
+		Component* getComponent(
+			HandleManager &handleManager,
+			const ComponentType type);
+
 		/*
 		Returns the component specified
 		@param handleManager pointer to engine instance of HandleManager
@@ -49,8 +53,8 @@ namespace NetPhysics {
 		//Returns a ComponentList object that contains the component ptrs
 		ComponentList getComponents(HandleManager &handleManager);
 
-		//Returns the list of component according to the passed list.
-		ComponentList getComponent(
+		//populates the component list with component ptrs if they exist, nullptr if not.
+		void getComponents(
 			HandleManager &handleManager,
 			ComponentList componentList);
 
@@ -97,7 +101,7 @@ namespace NetPhysics {
 	{
 		auto got = components.find(type);
 		if (got != components.end())
-			return (T*)handleManager.get(got->second);
+			return reinterpret_cast<T*>(handleManager.get(got->second));
 		return nullptr;
 	}
 }

@@ -49,6 +49,25 @@ ReplicaKey ReplicationComponent::getReplicaKey() {
 	return key;
 }
 
-ComponentList ReplicationComponent::getComponentList() {
-	return &componentList;
+std::vector<ComponentType> ReplicationComponent::getComponents(){
+	std::vector<ComponentType> ret;
+	for (auto iter = componentList.components.begin(); iter != componentList.components.end(); iter++)
+		ret.push_back(iter->first);
+	return ret;
+}
+
+void ReplicationComponent::addComponent(ComponentType type) {
+	componentList.add(type);
+	componentDifferential.insert(std::make_pair(type, true));
+}
+
+void ReplicationComponent::removeComponent(ComponentType type) {
+	componentList.remove(type);
+	componentDifferential.insert(std::make_pair(type, false));
+}
+
+std::unordered_map<ComponentType, bool> ReplicationComponent::getDifferential() {
+	std::unordered_map<ComponentType, bool> ret = componentDifferential;
+	componentDifferential.clear();
+	return ret;
 }

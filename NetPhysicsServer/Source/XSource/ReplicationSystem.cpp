@@ -20,7 +20,16 @@ ReplicationSystem::ReplicationSystem()
 void ReplicationSystem::update(Register &reg) {
 	//TODO call each replication component send functions, apply component list changes, check from deleted replication components
 #ifdef NET_PHYSICS_SERVER
-	processSends(reg);
+	GameObjectList gameObjectList = reg.getGameObjectManager()->getGameObjectsWithComponents(componentList);
+	GameObject* gameObject;
+	ReplicationComponent* replicationComponent;
+	for (gameObject = gameObjectList.next(); gameObject; gameObject = gameObjectList.next()) {
+		replicationComponent = gameObject->getComponent<ReplicationComponent>(*reg.getHandleManager(), REPLICATION_COMPONENT);
+		if (replicationComponent) {
+			applyDifferential(reg, replicationComponent);
+
+		}
+	}
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
 
@@ -35,6 +44,28 @@ void ReplicationSystem::addClient(ReplicationComponent* replicationComponent,
 void ReplicationSystem::removeClient(ReplicationComponent* replicationComponent,
 	RakNet::RakNetGUID clientGUID) {
 	//message client to delete game object and remove it from the list
+}
+
+std::vector<RakNet::RakNetGUID> ReplicationSystem::getSlaves(ReplicaKey key) {
+	std::vector<RakNet::RakNetGUID> ret;
+	auto range = masterSlaveList.equal_range(key);
+	for (auto iter = range.first; iter != range.second; ++iter)
+		ret.push_back(iter->second);
+	return ret;
+}
+
+void ReplicationSystem::applyDifferential(
+	Register &reg,
+	GameObject* gameObject,
+	ReplicationComponent* replicationComponent)
+{
+	auto differential = replicationComponent->getDifferential();
+	auto slaves = getSlaves(replicationComponent->getReplicaKey());
+	for (auto iter = differential.begin(); iter != differential.end(); ++iter) {
+		if (iter->second) {
+			Component* component = gameObject->getComponent()
+		}
+	}
 }
 
 void ReplicationSystem::processSends(Register &reg) {
