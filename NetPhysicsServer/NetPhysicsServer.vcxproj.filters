@@ -4,9 +4,6 @@
     <ClCompile Include="Source\ClientComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ClientSystem.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\XSource\Component.cpp">
       <Filter>Component</Filter>
     </ClCompile>
@@ -79,9 +76,6 @@
     <ClCompile Include="Source\XSource\ReplicationSystem.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\XSource\ReplicationManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Source\XSource\Family.cpp">
       <Filter>Game Object</Filter>
     </ClCompile>
@@ -97,13 +91,13 @@
     <ClCompile Include="Source\XSource\GameObjectList.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
+    <ClCompile Include="Source\XSource\ReplicaKeyManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ClientComponent.h">
       <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ClientSystem.h">
-      <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="Source\XSource\Component.h">
       <Filter>Component</Filter>
@@ -204,9 +198,6 @@
     <ClInclude Include="Source\XSource\ReplicationSystem.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="Source\XSource\ReplicationManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Source\XSource\Family.h">
       <Filter>Game Object</Filter>
     </ClInclude>
@@ -227,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="Source\XSource\Logger.h">
       <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XSource\ReplicaKeyManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

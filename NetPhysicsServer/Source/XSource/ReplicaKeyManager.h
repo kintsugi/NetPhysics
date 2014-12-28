@@ -14,10 +14,10 @@ namespace NetPhysics {
 	class ReplicationComponent;
 	typedef uint64_t ReplicaKey;
 
-	class ReplicationManager {
+	class ReplicaKeyManager {
 	public:
 
-		ReplicationManager();
+		ReplicaKeyManager();
 
 #ifdef NET_PHYSICS_SERVER
 		ReplicaKey add(ReplicationComponent* replicationComponent);

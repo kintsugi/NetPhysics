@@ -56,7 +56,7 @@ namespace NetPhysics {
 		//populates the component list with component ptrs if they exist, nullptr if not.
 		void getComponents(
 			HandleManager &handleManager,
-			ComponentList componentList);
+			ComponentList &out);
 
 		//Destroys component of the specified type.
 		void removeComponent(
@@ -75,6 +75,7 @@ namespace NetPhysics {
 		Note: when a GameObject of component does not have a valid handle, its
 		manager deletes it next update.
 		All subsequent calls to the data the handle pointed to will be null
+		NOT Replication safe.
 		*/
 		void destroy(HandleManager &handleManager);
 		Handle getHandle() const;

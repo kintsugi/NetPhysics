@@ -170,7 +170,6 @@
   <ItemGroup>
     <ClCompile Include="Source\BulletPhysicsObject.cpp" />
     <ClCompile Include="Source\ClientComponent.cpp" />
-    <ClCompile Include="Source\ClientSystem.cpp" />
     <ClCompile Include="Source\Engine.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\PhysicComponent.cpp" />
@@ -196,7 +195,7 @@
     <ClCompile Include="Source\XSource\PacketHandlerSystem.cpp" />
     <ClCompile Include="Source\XSource\PacketToBitStream.cpp" />
     <ClCompile Include="Source\XSource\ReplicationComponent.cpp" />
-    <ClCompile Include="Source\XSource\ReplicationManager.cpp" />
+    <ClCompile Include="Source\XSource\ReplicaKeyManager.cpp" />
     <ClCompile Include="Source\XSource\ReplicationSystem.cpp" />
     <ClCompile Include="Source\XSource\ScriptComponent.cpp" />
     <ClCompile Include="Source\XSource\ScriptSystem.cpp" />
@@ -204,7 +203,6 @@
   <ItemGroup>
     <ClInclude Include="Source\BulletPhysicsObject.h" />
     <ClInclude Include="Source\ClientComponent.h" />
-    <ClInclude Include="Source\ClientSystem.h" />
     <ClInclude Include="Source\Engine.h" />
     <ClInclude Include="Source\PhysicComponent.h" />
     <ClInclude Include="Source\PhysicSystem.h" />
@@ -235,7 +233,7 @@
     <ClInclude Include="Source\XSource\PacketToBitStream.h" />
     <ClInclude Include="Source\XSource\Replica.h" />
     <ClInclude Include="Source\XSource\ReplicationComponent.h" />
-    <ClInclude Include="Source\XSource\ReplicationManager.h" />
+    <ClInclude Include="Source\XSource\ReplicaKeyManager.h" />
     <ClInclude Include="Source\XSource\ReplicationSystem.h" />
     <ClInclude Include="Source\XSource\ScriptComponent.h" />
     <ClInclude Include="Source\XSource\ScriptSystem.h" />

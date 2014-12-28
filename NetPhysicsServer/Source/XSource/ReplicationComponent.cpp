@@ -14,7 +14,7 @@ ReplicationComponent::ReplicationComponent(
 #ifdef NET_PHYSICS_SERVER
 ReplicationComponent::ReplicationComponent(
 	HandleManager &handleManager, 
-	ReplicationManager &replicationManager)
+	ReplicaKeyManager &replicationManager)
 	: Component(REPLICATION_COMPONENT, handleManager.add(this, COMPONENT))
 {
 	setReplicationManager(replicationManager);
@@ -23,7 +23,7 @@ ReplicationComponent::ReplicationComponent(
 
 ReplicationComponent::ReplicationComponent(
 	HandleManager &handleManager,
-	ReplicationManager &replicationManager,
+	ReplicaKeyManager &replicationManager,
 	ReplicaKey newKey)
 	: Component(REPLICATION_COMPONENT, handleManager.add(this, COMPONENT))
 {
@@ -32,13 +32,13 @@ ReplicationComponent::ReplicationComponent(
 
 #ifdef NET_PHYSICS_SERVER
 void ReplicationComponent::setReplicationManager(
-	ReplicationManager &replicationManager) {
+	ReplicaKeyManager &replicationManager) {
 	key = replicationManager.add(this);
 }
 #endif /* NET_PHYSICS_SERVER */
 
 void ReplicationComponent::setReplicaKey(
-	ReplicationManager &replicationManager,
+	ReplicaKeyManager &replicationManager,
 	ReplicaKey newKey)
 {
 	replicationManager.set(this, newKey);
@@ -49,7 +49,11 @@ ReplicaKey ReplicationComponent::getReplicaKey() {
 	return key;
 }
 
-std::vector<ComponentType> ReplicationComponent::getComponents(){
+ComponentList ReplicationComponent::getComponentList() {
+	return componentList;
+}
+
+std::vector<ComponentType> ReplicationComponent::getTypes(){
 	std::vector<ComponentType> ret;
 	for (auto iter = componentList.components.begin(); iter != componentList.components.end(); iter++)
 		ret.push_back(iter->first);

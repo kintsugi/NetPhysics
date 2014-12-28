@@ -7,12 +7,13 @@
 	#include "NetPhysicsClient.h"
 #endif /* NET_PHYSICS_CLIENT */
 #include <unordered_map>
+#include "Register.h"
 #include "Component.h"
 #include "ComponentList.h"
 #ifdef NET_PHYSICS_CLIENT
 	#include "AllowWindowsPlatformTypes.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "ReplicationManager.h"
+#include "ReplicaKeyManager.h"
 #include "RakNetTypes.h"
 #ifdef NET_PHYSICS_CLIENT
 	#include "HideWindowsPlatformTypes.h"
@@ -28,21 +29,22 @@ namespace NetPhysics {
 #ifdef NET_PHYSICS_SERVER
 		ReplicationComponent(
 			HandleManager &handleManager,
-			ReplicationManager &replicationManager);
+			ReplicaKeyManager &replicationManager);
 #endif /* NET_PHYSICS_SERVER */
 		ReplicationComponent(
 			HandleManager &handleManager,
-			ReplicationManager &replicationManager,
+			ReplicaKeyManager &replicationManager,
 			ReplicaKey newKey);
 
 #ifdef NET_PHYSICS_SERVER
-		void setReplicationManager(ReplicationManager &replicationManager);
+		void setReplicationManager(ReplicaKeyManager &replicationManager);
 #endif /* NET_PHYSICS_SERVER */
 		void setReplicaKey(
-			ReplicationManager &replicationManager,
+			ReplicaKeyManager &replicationManager,
 			ReplicaKey newKey);
 		ReplicaKey getReplicaKey();
-		std::vector<ComponentType> getComponents();
+		ComponentList getComponentList();
+		std::vector<ComponentType> getTypes();
 		void addComponent(ComponentType type);
 		void removeComponent(ComponentType type);
 		std::unordered_map<ComponentType, bool> getDifferential();
@@ -54,5 +56,6 @@ namespace NetPhysics {
 	};
 }
 
+#define NEW_REPLICATION_COMPONENT(rComp) NEW_COMPONENT(NetPhysics::ComponentType::REPLICATION_COMPONENT, rComp)
 
 #endif /* REPLICATION_COMPONENT_H_INCLUDED */

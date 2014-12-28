@@ -10,12 +10,14 @@
 #ifdef NET_PHYSICS_CLIENT
 	#include "AllowWindowsPlatformTypes.h"
 #endif /* NET_PHYSICS_CLIENT */
-#include "ReplicationManager.h"
+#include "ReplicaKeyManager.h"
 #include "RakNetTypes.h"
 #ifdef NET_PHYSICS_CLIENT
 	#include "HideWindowsPlatformTypes.h"
 #endif /* NET_PHYSICS_CLIENT */
 #include "ComponentList.h"
+#include "NetworkMessage.h"
+#include <set>
 
 namespace NetPhysics {
 	class GameObject;
@@ -28,25 +30,23 @@ namespace NetPhysics {
 		void update(Register &reg);
 
 #ifdef NET_PHYSICS_SERVER
-		void addClient(ReplicationComponent* replicationComponent,
+		bool ReplicationSystem::addSlave(
+			Register &reg,
+			GameObject* gameObject,
 			RakNet::RakNetGUID clientGUID);
-		void removeClient(ReplicationComponent* replicationComponent,
+		bool removeSlave(
+			Register &reg, 
+			GameObject* gameObject,
 			RakNet::RakNetGUID clientGUID);
-
-		//TODO returns array of guids that use that key
-		void getClient(ReplicaKey);
+		std::vector<RakNet::RakNetGUID> getSlaves(ReplicaKey key);
 
 	private:
-		std::vector<RakNet::RakNetGUID> getSlaves(ReplicaKey key);
+
 		void applyDifferential(
 			Register &reg,
 			GameObject* gameObject,
 			ReplicationComponent* replicationComponent);
-
-
-
-		void processSends(Register &reg);
-		void send(
+		void applyComponentReplication(
 			Register &reg,
 			GameObject* gameObject,
 			ReplicationComponent* replicationComponent);
@@ -55,6 +55,31 @@ namespace NetPhysics {
 #endif /* NET_PHYSICS_SERVER */
 		ComponentList componentList;
 	};
+
+	namespace NetworkMessage {
+		namespace Send {
+			uint32_t createGameObject(
+				Package &package,
+				ReplicaKey key);
+			uint32_t destroyGameObject(
+				Package &package,
+				ReplicaKey key);
+			uint32_t createComponent(
+				Package &package,
+				ReplicaKey key,
+				ComponentType type,
+				RakNet::BitStream &constructorParams);
+			uint32_t destroyComponent(
+				Package &package,
+				ReplicaKey key,
+				ComponentType type);
+			uint32_t messageComponent(
+				Package &package,
+				ReplicaKey key,
+				ComponentType type,
+				RakNet::BitStream &bsOut);
+		}
+	}
 }
 
 #endif /* REPLICATION_SYSTEM_H_INCLUDED */

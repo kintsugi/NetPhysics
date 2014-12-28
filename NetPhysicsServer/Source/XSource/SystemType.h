@@ -24,6 +24,7 @@ namespace NetPhysics {
 		//Shared Systems
 		PACKET_HANDLER_SYSTEM,
 		NETWORK_SYSTEM,
+		REPLICATION_SYSTEM,
 		NUM_SYSTEM_TYPES,
 	};
 }

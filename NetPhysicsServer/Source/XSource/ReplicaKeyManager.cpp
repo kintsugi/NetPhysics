@@ -1,23 +1,23 @@
 #ifdef NET_PHYSICS_CLIENT
 	#include "NetPhysicsClient.h"
 #endif
-#include "ReplicationManager.h"
+#include "ReplicaKeyManager.h"
 #include "HandleManager.h"
 #include "ReplicationComponent.h"
 
 using namespace NetPhysics;
 
-ReplicationManager::ReplicationManager() : nextAvailableKey(0) {}
+ReplicaKeyManager::ReplicaKeyManager() : nextAvailableKey(0) {}
 
 #ifdef NET_PHYSICS_SERVER
-ReplicaKey ReplicationManager::add(ReplicationComponent* replicationComponent) {
+ReplicaKey ReplicaKeyManager::add(ReplicationComponent* replicationComponent) {
 	ReplicaKey key = generateKey();
 	entries.insert(std::make_pair(key, replicationComponent->getComponentHandle()));
 	return key;
 }
 #endif /* NET_PHYSICS_SERVER */
 
-bool ReplicationManager::remove(ReplicaKey key) {
+bool ReplicaKeyManager::remove(ReplicaKey key) {
 	auto got = entries.find(key);
 	if (got != entries.end()) {
 		entries.erase(got);
@@ -26,7 +26,7 @@ bool ReplicationManager::remove(ReplicaKey key) {
 	return false;
 }
 
-ReplicationComponent* ReplicationManager::get(
+ReplicationComponent* ReplicaKeyManager::get(
 	ReplicaKey key,
 	HandleManager &handleManager)
 {
@@ -36,14 +36,14 @@ ReplicationComponent* ReplicationManager::get(
 	return nullptr;
 }
 
-void ReplicationManager::set(
+void ReplicaKeyManager::set(
 	ReplicationComponent* replicationComponent,
 	ReplicaKey key)
 {
 	entries.insert(std::make_pair(key, replicationComponent->getComponentHandle()));
 }
 
-ReplicaKey ReplicationManager::generateKey() {
+ReplicaKey ReplicaKeyManager::generateKey() {
 	if (nextAvailableKey == 0) {
 		nextAvailableKey++;
 		return 0;

@@ -20,6 +20,7 @@
 #include "ComponentManager.h"
 #include "ComponentType.h"
 #include "SystemType.h"
+#include "ReplicaKeyManager.h"
 
 
 namespace RakNet { 
@@ -47,6 +48,9 @@ namespace NetPhysics {
 
 		//Returns the engine instance of the network handle manager
 		NetworkHandleManager* getNetworkHandleManager();
+
+		//Returns the engine instance of the Replica Key Manager
+		ReplicaKeyManager* getReplicaKeyManager();
 
 		//Returns the engine instance of the game object manager
 		GameObjectManager* getGameObjectManager();
@@ -86,6 +90,7 @@ namespace NetPhysics {
 		//"Data Indexers" for local and network data
 		HandleManager handleManager;
 		NetworkHandleManager networkHandleManager;
+		ReplicaKeyManager replicaKeyManager;
 		//Game Object Manager
 		GameObjectManager gameObjectManager;
 		//Abstract base class containers for components and systems.
@@ -93,5 +98,17 @@ namespace NetPhysics {
 		std::vector<System*> systemContainer;
 	};
 }
+
+NetPhysics::HandleManager* hManagerMacro(NetPhysics::Register &reg);
+#define HANDLE_MANAGER *hManagerMacro(reg)
+
+NetPhysics::GameObject* createGameObjectMacro(NetPhysics::Register &reg);
+#define NEW_GAME_OBJECT createGameObjectMacro(reg);
+
+NetPhysics::Component* createComponentMacro(
+	NetPhysics::Register &reg,
+	NetPhysics::ComponentType type,
+	NetPhysics::Component* component);
+#define NEW_COMPONENT(type, component) createComponentMacro(reg, type, component)
 
 #endif /* REGISTER_H_INCLUDED */

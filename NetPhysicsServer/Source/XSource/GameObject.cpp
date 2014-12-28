@@ -36,7 +36,6 @@ Component* GameObject::getComponent(
 	return getComponent<Component>(handleManager, type);
 }
 
-//Returns a ComponentList object that contains the component ptrs
 ComponentList GameObject::getComponents(HandleManager &handleManager) {
 	ComponentList componentList;
 	for (auto iter = components.begin(); iter != components.end(); ++iter) {
@@ -48,14 +47,15 @@ ComponentList GameObject::getComponents(HandleManager &handleManager) {
 	return componentList;
 }
 
-//Returns the list of component according to the passed list.
 void GameObject::getComponents(
 	HandleManager &handleManager,
-	ComponentList &componentList)
+	ComponentList &out)
 {
-	ComponentList ret;
-	for (auto iter = componentList.components.begin(); iter != componentList.components.end(); ++iter) {
-
+	//Use key value in out to look for components in the game object.
+	for (auto iter = out.components.begin(); iter != out.components.end(); ++iter) {
+		auto got = components.find(iter->first);
+		if (got != components.end())
+			iter->second = reinterpret_cast<Component*>(handleManager.get(got->second));
 	}
 }
 

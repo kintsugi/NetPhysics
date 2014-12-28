@@ -7,6 +7,7 @@
 #include "ServerSystem.h"
 #endif /* NET_PHYSICS_SERVER */
 #include "System.h"
+#include "GameObject.h"
 
 using namespace NetPhysics;
 
@@ -53,6 +54,10 @@ NetworkHandleManager* Register::getNetworkHandleManager() {
 	return &networkHandleManager;
 }
 
+//Returns the engine instance of the Replica Key Manager
+ReplicaKeyManager* Register::getReplicaKeyManager() {
+	return &replicaKeyManager;
+}
 
 GameObjectManager* Register::getGameObjectManager() {
 	return &gameObjectManager;
@@ -96,4 +101,20 @@ void Register::removeSystem(SystemType type) {
 		delete systemContainer[type];
 		systemContainer[type] = nullptr;
 	}
+}
+
+NetPhysics::HandleManager* hManagerMacro(NetPhysics::Register &reg) {
+	return reg.getHandleManager();
+}
+
+NetPhysics::GameObject* createGameObjectMacro(NetPhysics::Register &reg) {
+	return reg.getGameObjectManager()->createGameObject(new GameObject(HANDLE_MANAGER));
+}
+
+NetPhysics::Component* createComponentMacro(
+	NetPhysics::Register &reg,
+	NetPhysics::ComponentType type,
+	NetPhysics::Component* component)
+{
+	reg.getComponentManager(type)->createComponent(component);
 }
