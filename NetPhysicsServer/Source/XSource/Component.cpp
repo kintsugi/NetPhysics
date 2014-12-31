@@ -9,10 +9,13 @@
 using namespace NetPhysics;
 
 Component::Component(
-	ComponentType type,
-	Handle newHandle)
-	: handle(newHandle, type) 
+	ComponentType type) 
+	: type(type)
 {}
+
+ComponentType Component::getType() {
+	return type;
+}
 
 Handle Component::getHandle() const {
 	return handle;

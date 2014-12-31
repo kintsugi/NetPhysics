@@ -16,7 +16,7 @@
 	#include "HideWindowsPlatformTypes.h"
 #endif /* NET_PHYSICS_CLIENT */
 #include "ComponentList.h"
-#include "NetworkMessage.h"
+#include "StreamFormatter.h"
 #include <set>
 
 namespace NetPhysics {
@@ -26,17 +26,26 @@ namespace NetPhysics {
 	class ReplicationSystem : public System {
 	public:
 
+		enum ReplicationMessageType {
+			CREATE_GAME_OBJECT,
+			DESTROY_GAME_OBJECT,
+			COMPONENT_MESSAGE,
+			CREATE_COMPONENT,
+			DESTROY_COMPONENT,
+		};
+
 		ReplicationSystem();
 		void update(Register &reg);
-
+		//Processes incoming Replication messages.
+		void receive(Register &reg, RakNet::BitStream &bsIn);
 #ifdef NET_PHYSICS_SERVER
 		bool ReplicationSystem::addSlave(
 			Register &reg,
-			GameObject* gameObject,
+			GameObject *gameObject,
 			RakNet::RakNetGUID clientGUID);
 		bool removeSlave(
 			Register &reg, 
-			GameObject* gameObject,
+			GameObject *gameObject,
 			RakNet::RakNetGUID clientGUID);
 		std::vector<RakNet::RakNetGUID> getSlaves(ReplicaKey key);
 
@@ -45,41 +54,31 @@ namespace NetPhysics {
 		void applyDifferential(
 			Register &reg,
 			GameObject* gameObject,
-			ReplicationComponent* replicationComponent);
+			ReplicationComponent *replicationComponent);
 		void applyComponentReplication(
 			Register &reg,
-			GameObject* gameObject,
-			ReplicationComponent* replicationComponent);
+			GameObject *gameObject,
+			ReplicationComponent *replicationComponent);
 
 		std::unordered_multimap<ReplicaKey, RakNet::RakNetGUID> masterSlaveList;
 #endif /* NET_PHYSICS_SERVER */
+
+		struct ReplicationMessage {
+			ReplicationMessage(ReplicationMessageType type, ReplicaKey key);
+			ReplicationMessageType type;
+			ReplicaKey key;
+			ComponentType compType;
+			RakNet::BitStream *bsOut;
+		};
+
+		
+		class ReplicationStreamFormatter : public StreamFormatter<ReplicationMessage> {
+		public:
+			ReplicationMessage* format(RakNet::BitStream &bsIn);
+		};
+
 		ComponentList componentList;
 	};
-
-	namespace NetworkMessage {
-		namespace Send {
-			uint32_t createGameObject(
-				Package &package,
-				ReplicaKey key);
-			uint32_t destroyGameObject(
-				Package &package,
-				ReplicaKey key);
-			uint32_t createComponent(
-				Package &package,
-				ReplicaKey key,
-				ComponentType type,
-				RakNet::BitStream &constructorParams);
-			uint32_t destroyComponent(
-				Package &package,
-				ReplicaKey key,
-				ComponentType type);
-			uint32_t messageComponent(
-				Package &package,
-				ReplicaKey key,
-				ComponentType type,
-				RakNet::BitStream &bsOut);
-		}
-	}
 }
 
 #endif /* REPLICATION_SYSTEM_H_INCLUDED */

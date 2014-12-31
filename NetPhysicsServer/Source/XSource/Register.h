@@ -102,13 +102,26 @@ namespace NetPhysics {
 NetPhysics::HandleManager* hManagerMacro(NetPhysics::Register &reg);
 #define HANDLE_MANAGER *hManagerMacro(reg)
 
+NetPhysics::ReplicaKeyManager* rManagerMacro(NetPhysics::Register &reg);
+#define REPLICA_KEY_MANAGER *rManagerMacro(reg)
+
+NetPhysics::GameObjectManager* gObjManagerMacro(NetPhysics::Register &reg);
+#define GAME_OBJECT_MANAGER gObjManagerMacro(reg)
+
+RakNet::RakPeerInterface* rakPeerInterfaceMacro(NetPhysics::Register &reg);
+#define RAK_PEER_INTERFACE rakPeerInterfaceMacro(reg)
+
 NetPhysics::GameObject* createGameObjectMacro(NetPhysics::Register &reg);
-#define NEW_GAME_OBJECT createGameObjectMacro(reg);
+#define NEW_GAME_OBJECT createGameObjectMacro(reg)
 
 NetPhysics::Component* createComponentMacro(
 	NetPhysics::Register &reg,
-	NetPhysics::ComponentType type,
 	NetPhysics::Component* component);
-#define NEW_COMPONENT(type, component) createComponentMacro(reg, type, component)
+#define NEW_COMPONENT(component) createComponentMacro(reg, component)
+
+NetPhysics::GameObjectList getGameObjectsWithMacro(
+	NetPhysics::Register &reg, 
+	NetPhysics::ComponentList list);
+#define GET_GAME_OBJECTS_WITH(list) getGameObjectsWithMacro(reg, list)
 
 #endif /* REGISTER_H_INCLUDED */

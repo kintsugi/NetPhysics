@@ -13,13 +13,13 @@ void NetworkSystem::sendToNetworkComponent(NetworkHandleManager &networkHandleMa
 	PacketToBitStream &packet)
 {
 	//Reset the read pointer and ignore the messageID
-	packet.bitStream->ResetReadPointer();
-	packet.bitStream->IgnoreBytes(sizeof(RakNet::MessageID));
+	packet.bsIn->ResetReadPointer();
+	packet.bsIn->IgnoreBytes(sizeof(RakNet::MessageID));
 	NetworkKey networkKey;
-	packet.bitStream->Read(networkKey);
+	packet.bsIn->Read(networkKey);
 	//Validate the handle and then retrieve the object from the HandleManager.
 	NetworkComponent* netComp = networkHandleManager.get<NetworkComponent>(networkKey);
 	//Add the BitStream to the component.
 	if (netComp)
-		netComp->addBitStream(packet.bitStream);
+		netComp->addBitStream(packet.bsIn);
 }

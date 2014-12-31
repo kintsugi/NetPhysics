@@ -32,7 +32,9 @@ namespace NetPhysics {
 		@param gameObject a pointer to the object to be stored
 		@return a pointer to the newly stored GameObject
 		*/
-		GameObject* createGameObject(GameObject* gameObject);
+		GameObject* createGameObject(
+			HandleManager &handleManager,
+			GameObject* gameObject);
 
 		/*
 		Filters through container, returning a vector of the GameObject that meet the requirements.

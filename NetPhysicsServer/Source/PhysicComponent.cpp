@@ -6,10 +6,9 @@
 using namespace NetPhysics;
 
 PhysicComponent::PhysicComponent(
-	HandleManager& handleManager,
 	BulletPhysicsObject& obj)
 	: bulletPhysicsObject(new BulletPhysicsObject(obj))
-	, Component(PHYSICS_COMPONENT, handleManager.add(this, COMPONENT))
+	, Component(PHYSICS_COMPONENT)
 	, dynamicsWorld(nullptr)
 	, rigidBody(nullptr)
 {

@@ -9,22 +9,21 @@ using namespace NetPhysics;
 
 void GameObjectManager::update(HandleManager &handleManager) {
 	for (auto iter = container.begin(); iter != container.end();) {
-		if (!handleManager.get((*iter)->getHandle())) {
-#ifdef NET_PHYSICS_SERVER
+		if (!handleManager.get((*iter)->getHandle()))
 			iter = container.erase(iter);
-#endif /* NET_PHYSICS_SERVER */
-#ifdef NET_PHYSICS_CLIENT
-			container.erase(iter);
-			iter--;
-#endif /* NET_PHYSICS_CLIENT */
-		} else
+		else
 			iter++;
 	}
 }
 
-GameObject* GameObjectManager::createGameObject(GameObject* gameObject) {
+GameObject* GameObjectManager::createGameObject(
+	HandleManager &handleManager, 
+	GameObject* gameObject)
+{
+	Handle handle = handleManager.add(gameObject, GAME_OBJECT);
+	gameObject->handle = handle;
 	container.push_back(std::shared_ptr<GameObject>(gameObject));
-	return &*container.back();
+	return container.back().get();
 }
 
 GameObjectList GameObjectManager::getGameObjectsWithComponents(

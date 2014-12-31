@@ -18,7 +18,7 @@ bool Family::removeParent(HandleManager &handleManager) {
 	if (parentHandle != Handle()) {
 		GameObject* previousParent = reinterpret_cast<GameObject*>(handleManager.get(parentHandle));
 		if (previousParent) {
-			previousParent->getFamily()->removeChildWithHandle(selfHandle);
+			//previousParent->getFamily()->removeChildWithHandle(selfHandle);
 			parentHandle = Handle();
 			return true;
 		}

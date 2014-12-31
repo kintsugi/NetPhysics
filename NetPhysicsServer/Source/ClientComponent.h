@@ -21,7 +21,6 @@ namespace NetPhysics {
 		@param newClientGUID the RakNetGUID of the client's system
 		*/
 		ClientComponent(
-			HandleManager &handleManager,
 			RakNet::RakPeerInterface *peer,
 			const RakNet::RakNetGUID newClientGUID);
 

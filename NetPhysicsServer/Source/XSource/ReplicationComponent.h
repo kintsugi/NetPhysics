@@ -25,14 +25,11 @@ namespace NetPhysics {
 		/*
 		 * Describes which components the client side G.O. should contain.
 		 */
-		ReplicationComponent(HandleManager &handleManager);
+		ReplicationComponent();
 #ifdef NET_PHYSICS_SERVER
-		ReplicationComponent(
-			HandleManager &handleManager,
-			ReplicaKeyManager &replicationManager);
+		ReplicationComponent(ReplicaKeyManager &replicationManager);
 #endif /* NET_PHYSICS_SERVER */
 		ReplicationComponent(
-			HandleManager &handleManager,
 			ReplicaKeyManager &replicationManager,
 			ReplicaKey newKey);
 
@@ -48,6 +45,7 @@ namespace NetPhysics {
 		void addComponent(ComponentType type);
 		void removeComponent(ComponentType type);
 		std::unordered_map<ComponentType, bool> getDifferential();
+		void clearDifferential();
 	private:
 
 		ReplicaKey key;
@@ -55,7 +53,5 @@ namespace NetPhysics {
 		ComponentList componentList;
 	};
 }
-
-#define NEW_REPLICATION_COMPONENT(rComp) NEW_COMPONENT(NetPhysics::ComponentType::REPLICATION_COMPONENT, rComp)
 
 #endif /* REPLICATION_COMPONENT_H_INCLUDED */

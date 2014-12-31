@@ -41,6 +41,8 @@ namespace NetPhysics {
 			//Sent from client to server when then client willfully disconnects.
 			//RakNet::MessageID, RakNet::NetworkID
 			CLIENT_DISCONNECT,
+			//Message for the Replication System
+			REPLICATION_MESSAGE,
 			//Sent from server to a client to construct a gameobject
 			//RakNet::MessageID, ReplicaKey
 			REPLICATION_CREATE_GAME_OBJECT,
@@ -80,6 +82,7 @@ namespace NetPhysics {
 		};
 
 		namespace Send {
+			uint32_t message(Package &package, ID id, RakNet::BitStream &bsOut);
 			uint32_t networkComponentMessage(
 				Package &package,
 				RakNet::NetworkID networkID,
@@ -90,11 +93,9 @@ namespace NetPhysics {
 			uint32_t clientDisconnect(
 				Package &package,
 				NetworkKey networkKey);
-			
-
-			namespace Receive {
-
-			}
+			uint32_t replicationMessage(
+				Package &package,
+				RakNet::BitStream &bsOut);
 		};
 	}
 }

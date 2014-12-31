@@ -5,9 +5,8 @@
 using namespace NetPhysics;
 
 PlayerStateComponent::PlayerStateComponent(
-	HandleManager &handleManager,
 	PlayerState initialState)
-	: Component(PLAYER_STATE_COMPONENT, handleManager.add(this, COMPONENT))
+	: Component(PLAYER_STATE_COMPONENT)
 	, state(initialState)
 {}
 

@@ -21,7 +21,7 @@ namespace NetPhysics {
 		PacketToBitStream(RakNet::Packet* packet);
 		RakNet::RakNetGUID guid;
 		RakNet::MessageID messageID;
-		std::shared_ptr<RakNet::BitStream> bitStream;
+		std::shared_ptr<RakNet::BitStream> bsIn;
 	};
 }
 

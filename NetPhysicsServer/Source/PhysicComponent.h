@@ -14,7 +14,7 @@ namespace NetPhysics {
 	friend class PhysicSystem;
 	public:
 
-		PhysicComponent(HandleManager& handleManager, BulletPhysicsObject& obj);
+		PhysicComponent(BulletPhysicsObject& obj);
 		~PhysicComponent();
 
 		//@return pointer to the rigidbody in the simulation

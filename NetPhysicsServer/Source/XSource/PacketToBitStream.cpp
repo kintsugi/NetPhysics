@@ -6,9 +6,9 @@
 using namespace NetPhysics;
 
 PacketToBitStream::PacketToBitStream(RakNet::Packet* packet)
-	: bitStream(new RakNet::BitStream(packet->data, packet->length, true))
+	: bsIn(new RakNet::BitStream(packet->data, packet->length, true))
 	, guid(packet->guid)
 {
-	bitStream->Read(messageID);
-	bitStream->ResetReadPointer();
+	bsIn->Read(messageID);
+	bsIn->ResetReadPointer();
 }

@@ -8,11 +8,9 @@
 using namespace NetPhysics;
 
 NetworkComponent::NetworkComponent(
-	HandleManager &handleManager,
 	NetworkHandleManager &networkHandleManager,
 	RakNet::RakPeerInterface* peer) 
-	: Component(NETWORK_COMPONENT
-	, handleManager.add(this, COMPONENT))
+	: Component(NETWORK_COMPONENT)
 	, NetworkHandleObject(this)
 	, RakPeerInstance(peer)
 	, formatter(nullptr)
@@ -21,11 +19,10 @@ NetworkComponent::NetworkComponent(
 }
 
 NetworkComponent::NetworkComponent(
-	HandleManager &handleManager,
 	NetworkHandleManager &networkHandleManager,
 	RakNet::RakPeerInterface* peer,
 	StreamFormatter* newFormatter)
-	: Component(NETWORK_COMPONENT, handleManager.add(this, COMPONENT))
+	: Component(NETWORK_COMPONENT)
 	, NetworkHandleObject(this)
 	, RakPeerInstance(peer)
 	, formatter(newFormatter)

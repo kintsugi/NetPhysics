@@ -19,10 +19,10 @@ namespace NetPhysics {
 	//Inherits replica as all components should have the ability to replicate
 	//to clients.
 	class Component {
+	friend class ComponentManager;
 	public:
-
-		Component(const ComponentType type, const Handle newHandle);
-
+		Component(ComponentType type);
+		ComponentType getType();
 		Handle getHandle() const;
 		ComponentHandle getComponentHandle() const;
 		Handle getOwner() const;
@@ -40,7 +40,8 @@ namespace NetPhysics {
 
 	private:
 
-		const ComponentHandle handle;
+		ComponentType type;
+		ComponentHandle handle;
 		Handle owner;
 	};
 }

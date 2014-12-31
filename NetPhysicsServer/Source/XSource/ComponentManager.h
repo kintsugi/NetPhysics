@@ -23,7 +23,9 @@ namespace NetPhysics {
 
 		void update(HandleManager &handleManager);
 		ComponentType getManagerType() const;
-		ComponentHandle createComponent(Component* component);
+		ComponentHandle createComponent(
+			HandleManager &handleManager,
+			Component* component);
 
 	private:
 

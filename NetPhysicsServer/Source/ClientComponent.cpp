@@ -12,10 +12,9 @@
 using namespace NetPhysics;
 
 ClientComponent::ClientComponent(
-	HandleManager &handleManager,
 	RakNet::RakPeerInterface *peer, 
 	const RakNet::RakNetGUID newClientGUID)
-	: Component(CLIENT_COMPONENT, handleManager.add(this, COMPONENT))
+	: Component(CLIENT_COMPONENT)
 	, RakPeerInstance(peer)
 	, clientGUID(newClientGUID) 
 {}

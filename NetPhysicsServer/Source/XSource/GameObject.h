@@ -22,9 +22,9 @@ namespace NetPhysics {
 	A GameObject cannot have multiple of the same component, or things get weird.
 	*/
 	class GameObject {
+	friend class GameObjectManager;
 	public:
 
-		GameObject(HandleManager& handleManager);
 		/*
 		Adds the component that Handle points to to the game object.
 		@param handle the handle of the components
@@ -34,6 +34,8 @@ namespace NetPhysics {
 		bool addComponent(
 			HandleManager &handleManager,
 			const ComponentHandle componentHandle);
+
+		bool addComponent(Component* component);
 
 		Component* getComponent(
 			HandleManager &handleManager,
@@ -80,7 +82,7 @@ namespace NetPhysics {
 		void destroy(HandleManager &handleManager);
 		Handle getHandle() const;
 		std::string getTag();
-		Family* getFamily();
+		//Family* getFamily();
 		void setTag(std::string newTag);
 
 	protected:
@@ -91,7 +93,7 @@ namespace NetPhysics {
 #endif /* NET_PHYSICS_CLIENT */
 		Handle handle;
 		std::string tag;
-		Family family;
+		//Family family;
 		std::unordered_map<ComponentType, ComponentHandle> components;
 	};
 

@@ -8,6 +8,7 @@
 #endif /* NET_PHYSICS_SERVER */
 #include "System.h"
 #include "GameObject.h"
+#include "Component.h"
 
 using namespace NetPhysics;
 
@@ -107,14 +108,29 @@ NetPhysics::HandleManager* hManagerMacro(NetPhysics::Register &reg) {
 	return reg.getHandleManager();
 }
 
+NetPhysics::ReplicaKeyManager* rManagerMacro(NetPhysics::Register &reg) {
+	return reg.getReplicaKeyManager();
+}
+
+NetPhysics::GameObjectManager* gObjManagerMacro(NetPhysics::Register &reg) {
+	return reg.getGameObjectManager();
+}
+
 NetPhysics::GameObject* createGameObjectMacro(NetPhysics::Register &reg) {
-	return reg.getGameObjectManager()->createGameObject(new GameObject(HANDLE_MANAGER));
+	return reg.getGameObjectManager()->createGameObject(HANDLE_MANAGER, new GameObject());
 }
 
 NetPhysics::Component* createComponentMacro(
 	NetPhysics::Register &reg,
-	NetPhysics::ComponentType type,
 	NetPhysics::Component* component)
 {
-	reg.getComponentManager(type)->createComponent(component);
+	reg.getComponentManager(component->getType())->createComponent(HANDLE_MANAGER, component);
+	return component;
+}
+
+NetPhysics::GameObjectList getGameObjectsWithMacro(
+	NetPhysics::Register &reg,
+	NetPhysics::ComponentList list)
+{
+	return reg.getGameObjectManager()->getGameObjectsWithComponents(list);
 }

@@ -23,9 +23,9 @@ namespace NetPhysics {
 
 		Stream() : streamPtr(nullptr) {}
 		Stream(
-			std::shared_ptr<RakNet::BitStream> inBitStream,
-			std::shared_ptr<StreamFormatter> formatter)
-			: streamPtr((T*)formatter->format(inBitStream))
+			RakNet::BitStream &inBitStream,
+			StreamFormatter &formatter)
+			: streamPtr(formatter.format(inBitStream))
 		{}
 
 		std::shared_ptr<T> getStream();

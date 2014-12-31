@@ -4,8 +4,8 @@
 
 using namespace NetPhysics;
 
-TimerComponent::TimerComponent(HandleManager &handleManager)
-	: Component(TIMER_COMPONENT, handleManager.add(this, COMPONENT))
+TimerComponent::TimerComponent()
+	: Component(TIMER_COMPONENT)
 	, mode(STOP_WATCH)
 	, length(0)
 	, elapsed(0)
@@ -13,9 +13,8 @@ TimerComponent::TimerComponent(HandleManager &handleManager)
 {}
 
 TimerComponent::TimerComponent(
-	HandleManager &handleManager,
 	double timerLength)
-	: Component(TIMER_COMPONENT, handleManager.add(this, COMPONENT))
+	: Component(TIMER_COMPONENT)
 	, mode(COUNT_DOWN)
 	, elapsed(0)
 	, isPaused(true)

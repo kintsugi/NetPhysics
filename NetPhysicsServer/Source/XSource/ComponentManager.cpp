@@ -24,10 +24,17 @@ void ComponentManager::update(HandleManager &handleManager) {
 	}
 }
 
-ComponentHandle ComponentManager::createComponent(Component* component) {
-	if (component->getComponentHandle().componentType == managerType) {
+ComponentHandle ComponentManager::createComponent(
+	HandleManager &handleManager, 
+	Component* component)
+{
+	if (component->getType() == managerType) {
+		ComponentHandle compHandle(
+			handleManager.add(component, COMPONENT),
+			managerType);
+		component->handle = compHandle;
 		container.push_back(std::shared_ptr<Component>(component));
-		return ComponentHandle(container.back()->getHandle(), managerType);
+		return compHandle;
 	}
 	//TODO: debug log this exception
 	DEBUG_LOG(ERROR_MSG,

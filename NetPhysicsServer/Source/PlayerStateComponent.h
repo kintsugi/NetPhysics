@@ -18,7 +18,6 @@ namespace NetPhysics {
 		@param initialState the initial state of the player
 		*/
 		PlayerStateComponent(
-			HandleManager &handleManager,
 			PlayerState initialState);
 
 		//Returns the player's state.

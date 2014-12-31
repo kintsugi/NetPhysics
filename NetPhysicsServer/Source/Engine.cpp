@@ -30,16 +30,11 @@ void Engine::init() {
 	serverSystem->startServer(false);
 	//Testing
 	GameObject* testObject = NEW_GAME_OBJECT;
-	ComponentManager* rCompM = reg.getComponentManager(REPLICATION_COMPONENT);
-	ReplicationComponent* rComp = 
-		new ReplicationComponent(*handleManager, *reg.getReplicaKeyManager());
-
-
+	auto* rComp = new ReplicationComponent(REPLICA_KEY_MANAGER);
+	testObject->addComponent(NEW_COMPONENT(rComp));
 }
 
 void Engine::update() {
-	static unsigned long long numIterations;
-	static double time;
 	dt = calculateDeltaTime();
 	reg.update(dt);
 	packetHandlerSystem->handle(reg, serverSystem->getPackets());

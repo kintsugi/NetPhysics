@@ -13,10 +13,11 @@ namespace RakNet {
 }
 
 namespace NetPhysics {
+	template <class T>
 	class StreamFormatter {
 	public:
 
-		virtual void* format(std::shared_ptr<RakNet::BitStream> inStream) = 0;
+		virtual T* format(RakNet::BitStream &inStream) = 0;
 	};
 }
 

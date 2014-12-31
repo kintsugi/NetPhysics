@@ -8,11 +8,6 @@
 
 using namespace NetPhysics;
 
-GameObject::GameObject(HandleManager &handleManager)
-	: handle(handleManager.add(this, GAME_OBJECT))
-	, family(handle)
-{}
-
 bool GameObject::addComponent(
 	HandleManager &handleManager,
 	const ComponentHandle componentHandle)
@@ -22,6 +17,19 @@ bool GameObject::addComponent(
 		//Insert into map and set the components owner.
 		components.insert(std::make_pair(componentHandle.componentType, componentHandle));
 		Component* component = static_cast<Component*>(handleManager.get(componentHandle));
+		component->setOwner(handle);
+		return true;
+	}
+	DEBUG_LOG(ERROR_MSG, "attempting to add a component which handle is not a valid type");
+	return false;
+}
+
+bool GameObject::addComponent(Component* component){
+	//Game object cannot have two components of the same type.
+	ComponentHandle componentHandle = component->getComponentHandle();
+	if (componentHandle.type == COMPONENT && !hasComponent(componentHandle.componentType)) {
+		//Insert into map and set the components owner.
+		components.insert(std::make_pair(componentHandle.componentType, componentHandle));
 		component->setOwner(handle);
 		return true;
 	}
@@ -107,9 +115,9 @@ std::string GameObject::getTag() {
 	return tag;
 }
 
-Family* GameObject::getFamily() {
-	return &family;
-}
+//Family* GameObject::getFamily() {
+//	return &family;
+//}
 
 void GameObject::setTag(std::string newTag) {
 	tag = newTag;

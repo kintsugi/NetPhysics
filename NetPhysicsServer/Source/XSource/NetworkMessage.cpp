@@ -41,6 +41,17 @@ uint32_t NetworkMessage::Package::send(RakNet::BitStream &bsOut) {
 		forceReceiptNumber);
 }
 
+uint32_t NetworkMessage::Send::message(
+	Package &package, 
+	ID id,
+	RakNet::BitStream &bsOut)
+{
+	RakNet::BitStream bsForm;
+	bsForm.Write((RakNet::MessageID)(id));
+	bsForm.Write(bsOut);
+	return package.send(bsForm);
+}
+
 uint32_t NetworkMessage::Send::networkComponentMessage(
 	Package &package,
 	RakNet::NetworkID networkID,
@@ -67,5 +78,15 @@ uint32_t NetworkMessage::Send::clientInit(
 	bsOut.Write(bsOut);
 	//Send
 	return package.send(bsOut);
+}
+
+uint32_t NetworkMessage::Send::replicationMessage(
+	Package &package,
+	RakNet::BitStream &bsOut)
+{
+	RakNet::BitStream bsForm;
+	bsForm.Write((RakNet::MessageID)(REPLICATION_MESSAGE));
+	bsForm.Write(bsOut);
+	return package.send(bsForm);
 }
 #endif

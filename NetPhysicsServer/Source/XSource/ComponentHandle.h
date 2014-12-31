@@ -14,6 +14,7 @@
 */
 namespace NetPhysics {
 	struct ComponentHandle : public Handle {
+		ComponentHandle() {}
 		ComponentHandle(
 			const Handle handle,
 			const ComponentType type)
@@ -21,7 +22,7 @@ namespace NetPhysics {
 			, componentType(type)
 		{}
 
-		const ComponentType componentType;
+		ComponentType componentType;
 	};
 }
 #endif /* COMPONENT_HANDLE_H_INCLUDED */

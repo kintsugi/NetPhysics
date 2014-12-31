@@ -6,26 +6,22 @@
 
 using namespace NetPhysics;
 
-ReplicationComponent::ReplicationComponent(
-	HandleManager &handleManager)
-	: Component(REPLICATION_COMPONENT, handleManager.add(this, COMPONENT)) 
+ReplicationComponent::ReplicationComponent() : Component(REPLICATION_COMPONENT)
 {}
 
 #ifdef NET_PHYSICS_SERVER
 ReplicationComponent::ReplicationComponent(
-	HandleManager &handleManager, 
 	ReplicaKeyManager &replicationManager)
-	: Component(REPLICATION_COMPONENT, handleManager.add(this, COMPONENT))
+	: Component(REPLICATION_COMPONENT)
 {
 	setReplicationManager(replicationManager);
 }
 #endif /* NET_PHYSICS_SERVER */
 
 ReplicationComponent::ReplicationComponent(
-	HandleManager &handleManager,
 	ReplicaKeyManager &replicationManager,
 	ReplicaKey newKey)
-	: Component(REPLICATION_COMPONENT, handleManager.add(this, COMPONENT))
+	: Component(REPLICATION_COMPONENT)
 {
 	setReplicaKey(replicationManager, newKey);
 }
@@ -71,7 +67,9 @@ void ReplicationComponent::removeComponent(ComponentType type) {
 }
 
 std::unordered_map<ComponentType, bool> ReplicationComponent::getDifferential() {
-	std::unordered_map<ComponentType, bool> ret = componentDifferential;
+	return componentDifferential;
+}
+
+void ReplicationComponent::clearDifferential() {
 	componentDifferential.clear();
-	return ret;
 }

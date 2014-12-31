@@ -9,7 +9,7 @@
 using namespace NetPhysics;
 
 ScriptComponent::ScriptComponent(Register &reg)
-	: Component(SCRIPT_COMPONENT, reg.getHandleManager()->add(this, COMPONENT))
+	: Component(SCRIPT_COMPONENT)
 	, reg(&reg)
 {
 	start();
