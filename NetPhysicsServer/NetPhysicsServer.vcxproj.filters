@@ -19,9 +19,6 @@
     <ClCompile Include="Source\XSource\Messenger.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Source\XSource\NetworkComponent.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
     <ClCompile Include="Source\XSource\NetworkHandleManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -30,9 +27,6 @@
     </ClCompile>
     <ClCompile Include="Source\XSource\NetworkMessage.cpp">
       <Filter>Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\XSource\NetworkSystem.cpp">
-      <Filter>System</Filter>
     </ClCompile>
     <ClCompile Include="Source\XSource\PacketHandlerSystem.cpp">
       <Filter>System</Filter>
@@ -76,9 +70,6 @@
     <ClCompile Include="Source\XSource\ReplicationSystem.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\XSource\Family.cpp">
-      <Filter>Game Object</Filter>
-    </ClCompile>
     <ClCompile Include="Source\XSource\ScriptComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
@@ -113,9 +104,6 @@
     </ClInclude>
     <ClInclude Include="Source\XSource\Messenger.h">
       <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\XSource\NetworkComponent.h">
-      <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Source\XSource\NetworkHandleManager.h">
       <Filter>Manager</Filter>
@@ -168,9 +156,6 @@
     <ClInclude Include="Source\XSource\Register.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Source\XSource\NetworkSystem.h">
-      <Filter>System</Filter>
-    </ClInclude>
     <ClInclude Include="Source\XSource\GameObject.h">
       <Filter>Game Object</Filter>
     </ClInclude>
@@ -197,9 +182,6 @@
     </ClInclude>
     <ClInclude Include="Source\XSource\ReplicationSystem.h">
       <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\XSource\Family.h">
-      <Filter>Game Object</Filter>
     </ClInclude>
     <ClInclude Include="Source\XSource\ScriptComponent.h">
       <Filter>Component</Filter>

@@ -3,7 +3,6 @@
 
 //System includes
 #include "ConnectionSystem.h"
-#include "XSource/NetworkSystem.h"
 #include "XSource/PacketHandlerSystem.h"
 
 //Test includes
@@ -20,7 +19,6 @@ void ClientEngine::init(UWorld* world) {
 	engineRegister.init();
 	engineRegister.setWorld(world);
 	engineRegister.addSystem(new ConnectionSystem(), CONNECTION_SYSTEM);
-	engineRegister.addSystem(new NetworkSystem(), NETWORK_SYSTEM);
 	engineRegister.addSystem(new PacketHandlerSystem(), PACKET_HANDLER_SYSTEM);
 
 	handleManager = engineRegister.getHandleManager();

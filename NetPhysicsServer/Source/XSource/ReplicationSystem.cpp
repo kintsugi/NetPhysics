@@ -7,6 +7,7 @@
 #include "GameObjectList.h"
 #include "GameObject.h"
 #include "ReplicationComponent.h"
+#include "ReplicaKeyManager.h"
 #include "NetworkMessage.h"
 #include "BitStream.h"
 #include "Stream.h"
@@ -46,11 +47,40 @@ void ReplicationSystem::update(Register &reg) {
 #endif /* NET_PHYSICS_SERVER */
 #ifdef NET_PHYSICS_CLIENT
 		//TODO Client implementation.
-#endif /*  */
+#endif /* NET_PHYSICS_CLIENT */
 }
 
 void ReplicationSystem::receive(Register &reg, RakNet::BitStream& bsIn) {
-	Stream<ReplicationMessage> streamIn(bsIn, ReplicationStreamFormatter());
+	Stream<ReplicationMessage> in(bsIn, &ReplicationStreamFormatter());
+	auto* message = in.streamPtr.get();
+	switch (message->type) {
+		case COMPONENT_MESSAGE: {
+			componentMessageResponse(reg, *message);
+			break;
+		}
+		//The client should be the only system receiving these messages
+#ifdef NET_PHYSICS_CLIENT
+		case CREATE_GAME_OBJECT: {
+			createGameObjectResponse(reg, *message);
+			break;
+		}
+		case DESTROY_GAME_OBJECT: {
+			destroyGameObjectResponse(reg, *message);
+			break;
+		}
+		case CREATE_COMPONENT: {
+			createComponentResponse(reg, *message);
+			break;
+		}
+		case DESTROY_COMPONENT: {
+			destroyComponentResponse(reg, *message);
+			break;
+		}
+#endif /* NET_PHYSICS_CLIENT */
+		default: {
+			DEBUG_LOG(WARNING_MSG, "Invalid message type.");
+		}
+	}
 }
 
 #ifdef NET_PHYSICS_SERVER
@@ -66,7 +96,7 @@ bool ReplicationSystem::addSlave(
 	if (rComp) {
 		ReplicaKey key = rComp->getReplicaKey();
 		masterSlaveList.insert(std::make_pair(key, clientGUID));
-		NetworkMessage::Package client(reg.getRakPeerInstance(), clientGUID);
+		NetworkMessage::Package client(RAK_PEER_INTERFACE, clientGUID);
 		RakNet::BitStream bsOut;
 		bsOut.Write(CREATE_GAME_OBJECT);
 		bsOut.Write(key);
@@ -95,7 +125,7 @@ bool ReplicationSystem::removeSlave(
 			if (clientGUID == iter->second) {
 				masterSlaveList.erase(iter);
 				NetworkMessage::Package client(
-					reg.getRakPeerInstance(),
+					RAK_PEER_INTERFACE,
 					clientGUID);
 				RakNet::BitStream bsOut;
 				bsOut.Write(DESTROY_GAME_OBJECT);
@@ -195,7 +225,9 @@ void ReplicationSystem::applyComponentReplication(
 					slaveIter != slaves.end();
 					++slaveIter)
 				{
-					NetworkMessage::Package client(RAK_PEER_INTERFACE, *slaveIter);
+					NetworkMessage::Package client(
+						RAK_PEER_INTERFACE,
+						*slaveIter);
 					RakNet::BitStream bsOut;
 					bsOut.Write(CREATE_COMPONENT);	//ReplicationMessageType
 					bsOut.Write(key);	//ReplicaKey
@@ -217,6 +249,69 @@ ReplicationSystem::ReplicationMessage::ReplicationMessage(
 	, compType(NULL_COMPONENT)
 	, bsOut(nullptr)
 {}
+
+void ReplicationSystem::componentMessageResponse(
+	Register &reg,
+	ReplicationMessage &msg)
+{
+	//Send message to owning game object's component
+	ReplicaKeyManager* rManager = &REPLICA_KEY_MANAGER;
+	GameObject* gameObject = rManager->getGameObject(
+		msg.key,
+		HANDLE_MANAGER);
+	Component* comp = gameObject->getComponent(
+		HANDLE_MANAGER,
+		msg.compType);
+	comp->receive(*msg.bsOut);
+}
+
+#ifdef NET_PHYSICS_CLIENT
+void ReplicationSystem::createGameObjectResponse(
+	Register &reg,
+	ReplicationMessage &msg)
+{
+	GameObject *gameObject = NEW_GAME_OBJECT;
+	auto* rComp = new ReplicationComponent(REPLICA_KEY_MANAGER, msg.key);
+	gameObject->addComponent(NEW_COMPONENT(rComp));
+}
+
+void ReplicationSystem::destroyGameObjectResponse(
+	Register &reg,
+	ReplicationMessage &msg)
+{
+	//Remove from rManager, remove from mem
+	ReplicaKeyManager* rManager = &REPLICA_KEY_MANAGER;
+	GameObject* gameObject = rManager->getGameObject(
+		msg.key,
+		HANDLE_MANAGER);
+	rManager->remove(msg.key);
+	gameObject->destroy(HANDLE_MANAGER);
+}
+
+void ReplicationSystem::createComponentResponse(
+	Register &reg,
+	ReplicationMessage &msg)
+{
+	
+}
+
+void ReplicationSystem::destroyComponentResponse(
+	Register &reg,
+	ReplicationMessage &msg)
+{
+	//Send message to owning game object's component
+	ReplicaKeyManager* rManager = &REPLICA_KEY_MANAGER;
+	GameObject* gameObject = rManager->getGameObject(
+		msg.key,
+		HANDLE_MANAGER);
+	if (msg.compType != REPLICATION_COMPONENT)
+		gameObject->removeComponent(HANDLE_MANAGER, msg.compType);
+	else {
+		std::string err("cannot remove replication comp with key: " + key);
+		DEBUG_LOG(WARNING_MSG, err);
+	}
+}
+#endif /* NET_PHYSICS_CLIENT */
 
 ReplicationSystem::ReplicationMessage* ReplicationSystem::ReplicationStreamFormatter::format(
 	RakNet::BitStream &inStream) 
@@ -246,6 +341,6 @@ ReplicationSystem::ReplicationMessage* ReplicationSystem::ReplicationStreamForma
 			inStream.Read(ret->compType);
 		}
 #endif /* NET_PHYSICS_CLIENT */
-		return ret;
 	}
+	return ret;
 }

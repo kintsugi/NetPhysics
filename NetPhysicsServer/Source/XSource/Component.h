@@ -32,11 +32,18 @@ namespace NetPhysics {
 		//Component Replication virtual functions.
 		virtual std::shared_ptr<RakNet::BitStream> send() { return nullptr; }
 		virtual void receive(RakNet::BitStream &bsIn) {}
-		virtual std::shared_ptr<RakNet::BitStream> construct(
-			RakNet::BitStream *bsIn = NULL)
+#ifdef NET_PHYSICS_SERVER
+		virtual std::shared_ptr<RakNet::BitStream> construct()
 		{
 			return nullptr;
 		}
+#endif /* NET_PHYSICS_SERVER */
+#ifdef NET_PHYSICS_CLIENT
+		virtual Component* construct(RakNet::BitStream &bsIn)
+		{
+			return nullptr;
+		}
+#endif /* NET_PHYSICS_CLIENT */
 
 	private:
 

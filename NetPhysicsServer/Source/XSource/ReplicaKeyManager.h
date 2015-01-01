@@ -12,6 +12,7 @@
 namespace NetPhysics {
 	class HandleManager;
 	class ReplicationComponent;
+	class GameObject;
 	typedef uint64_t ReplicaKey;
 
 	class ReplicaKeyManager {
@@ -23,9 +24,14 @@ namespace NetPhysics {
 		ReplicaKey add(ReplicationComponent* replicationComponent);
 #endif /* NET_PHYSICS_SERVER */
 		bool remove(ReplicaKey key);
-		ReplicationComponent* get(ReplicaKey key,
+		ReplicationComponent* get(
+			ReplicaKey key,
 			HandleManager &handleManager);
-		void set(ReplicationComponent* replicationComponent,
+		GameObject* getGameObject(
+			ReplicaKey key,
+			HandleManager &handleManager);
+		void set(
+			ReplicationComponent* replicationComponent,
 			ReplicaKey key);
 
 	private:

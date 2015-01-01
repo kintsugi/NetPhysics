@@ -8,7 +8,6 @@
 #include "Register.h"
 #include "MessageIdentifiers.h"
 #include "NetworkMessage.h"
-#include "NetworkSystem.h"
 #include "NetworkHandleManager.h"
 #include "Logger.h"
 
@@ -20,7 +19,6 @@ void PacketHandlerSystem::handle(Register &reg,
 #ifdef NET_PHYSICS_SERVER
 	//Get systems and managers needed from register
 	NetworkHandleManager* networkHandleManager = reg.getNetworkHandleManager();
-	NetworkSystem *networkSystem = (NetworkSystem*)reg.getSystem(NETWORK_SYSTEM);
 
 	for (auto iter = packets.begin(); iter != packets.end(); iter++) {
 		switch (iter->messageID) {
@@ -29,7 +27,6 @@ void PacketHandlerSystem::handle(Register &reg,
 				break;
 			}
 			case NetworkMessage::ID::NETWORK_COMPONENT_MESSAGE: {
-				networkSystem->sendToNetworkComponent(*networkHandleManager, *iter);
 				break;
 			}
 			case NetworkMessage::CLIENT_DISCONNECT: {

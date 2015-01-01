@@ -17,7 +17,7 @@ namespace NetPhysics {
 	class StreamFormatter {
 	public:
 
-		virtual T* format(RakNet::BitStream &inStream) = 0;
+		virtual T* format(RakNet::BitStream &bsIn) = 0;
 	};
 }
 

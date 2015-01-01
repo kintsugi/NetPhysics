@@ -87,9 +87,6 @@
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Messenger.h">
       <Filter>Source\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkComponent.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkHandleManager.h">
       <Filter>Source\Managers</Filter>
     </ClInclude>
@@ -98,9 +95,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkMessage.h">
       <Filter>Source\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkSystem.h">
-      <Filter>Source\Systems</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\PacketHandlerSystem.h">
       <Filter>Source\Systems</Filter>
@@ -150,12 +144,6 @@
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ScriptSystem.h">
       <Filter>Source\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Family.h">
-      <Filter>Source\Game Object</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ReplicationManager.h">
-      <Filter>Source\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ScriptComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
@@ -170,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\Logger.h">
       <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NetPhysicsServer\Source\XSource\ReplicaKeyManager.h">
+      <Filter>Source\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -204,9 +195,6 @@
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\Messenger.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkHandleManager.cpp">
       <Filter>Source\Managers</Filter>
     </ClCompile>
@@ -215,9 +203,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkMessage.cpp">
       <Filter>Source\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\NetworkSystem.cpp">
-      <Filter>Source\Systems</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\PacketHandlerSystem.cpp">
       <Filter>Source\Systems</Filter>
@@ -246,9 +231,6 @@
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\Family.cpp">
       <Filter>Source\Game Object</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\ReplicationManager.cpp">
-      <Filter>Source\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\ScriptComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
@@ -257,6 +239,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\GameObjectList.cpp">
       <Filter>Source\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NetPhysicsServer\Source\XSource\ReplicaKeyManager.cpp">
+      <Filter>Source\Managers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

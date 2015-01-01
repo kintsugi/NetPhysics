@@ -71,7 +71,15 @@ namespace NetPhysics {
 			RakNet::BitStream *bsOut;
 		};
 
-		
+		void componentMessageResponse(Register &reg, ReplicationMessage &msg);
+#ifdef NET_PHYSICS_CLIENT
+		void createGameObjectResponse(Register &reg, ReplicationMessage &msg);
+		void destroyGameObjectResponse(Register &reg, ReplicationMessage &msg);
+		void createComponentResponse(Register &reg, ReplicationMessage &msg);
+		void destroyComponentResponse(Register &reg, ReplicationMessage &msg);
+#endif /* NET_PHYSICS_CLIENT */
+
+
 		class ReplicationStreamFormatter : public StreamFormatter<ReplicationMessage> {
 		public:
 			ReplicationMessage* format(RakNet::BitStream &bsIn);

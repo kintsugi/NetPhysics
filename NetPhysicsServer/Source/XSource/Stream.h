@@ -17,21 +17,14 @@
 #include "StreamFormatter.h"
 
 namespace NetPhysics {
-	template<class T>
-	class Stream {
-	public:
-
+	template<typename T>
+	struct Stream {
 		Stream() : streamPtr(nullptr) {}
 		Stream(
 			RakNet::BitStream &inBitStream,
-			StreamFormatter &formatter)
-			: streamPtr(formatter.format(inBitStream))
+			StreamFormatter<T> *formatter)
+			: streamPtr(formatter->format(inBitStream))
 		{}
-
-		std::shared_ptr<T> getStream();
-
-	private:
-
 		std::shared_ptr<T> streamPtr;
 	};
 }

@@ -10,11 +10,10 @@
 #include <string>
 #include <unordered_map>
 #include "ComponentHandle.h"
-#include "Family.h"
 #include "ComponentList.h"
 
 namespace NetPhysics {
-
+	class HandleManager;
 	/*
 	GameObject class encapsulates handles to components.
 	Access added components by using HandleManager::Get
@@ -86,11 +85,6 @@ namespace NetPhysics {
 		void setTag(std::string newTag);
 
 	protected:
-
-#ifdef NET_PHYSICS_CLIENT
-		//Client needs an empty default constructor for ActorGameObject inheritance
-		GameObject() {}
-#endif /* NET_PHYSICS_CLIENT */
 		Handle handle;
 		std::string tag;
 		//Family family;

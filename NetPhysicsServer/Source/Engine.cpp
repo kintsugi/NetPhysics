@@ -2,7 +2,6 @@
 #include "Logger.h"
 //System includes
 #include "ServerSystem.h"
-#include "NetworkSystem.h"
 #include "PacketHandlerSystem.h"
 #include "GameObject.h"
 #include "PlayerStateComponent.h"
@@ -17,7 +16,6 @@ void Engine::init() {
 	//Init the register and add all systems.
 	reg.init();
 	reg.addSystem(new ServerSystem(), SERVER_SYSTEM);
-	reg.addSystem(new NetworkSystem(), NETWORK_SYSTEM);
 	reg.addSystem(new PacketHandlerSystem(), PACKET_HANDLER_SYSTEM);
 	reg.addSystem(new ReplicationSystem, REPLICATION_SYSTEM);
 

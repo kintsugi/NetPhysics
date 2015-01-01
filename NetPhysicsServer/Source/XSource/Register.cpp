@@ -116,6 +116,10 @@ NetPhysics::GameObjectManager* gObjManagerMacro(NetPhysics::Register &reg) {
 	return reg.getGameObjectManager();
 }
 
+RakNet::RakPeerInterface* rakPeerInterfaceMacro(NetPhysics::Register &reg) {
+	return reg.getRakPeerInstance();
+}
+
 NetPhysics::GameObject* createGameObjectMacro(NetPhysics::Register &reg) {
 	return reg.getGameObjectManager()->createGameObject(HANDLE_MANAGER, new GameObject());
 }
